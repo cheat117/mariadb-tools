@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-stat" href="mariadb-stat.html" />
     <link rel="prev" title="mariadb-schema-change" href="mariadb-schema-change.html" /> 
@@ -172,10 +174,10 @@
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mariadb</span><span class="o">-</span><span class="n">stacktrace</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="n">FILES</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">stacktrace</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="n">FILES</span><span class="p">]</span>
 </pre></div>
 </div>
-<p><strong class="program">mariadb-stacktrace</strong> is a poor man&#8217;s profiler, inspired by <a class="reference external" href="http://poormansprofiler.org">http://poormansprofiler.org</a>.
+<p><strong class="program">mariadb-stacktrace</strong> is a poor man’s profiler, inspired by <a class="reference external" href="http://poormansprofiler.org">http://poormansprofiler.org</a>.
 It can create and summarize full stack traces of processes on Linux.
 Summaries of stack traces can be an invaluable tool for diagnosing what
 a process is waiting for.</p>
@@ -187,9 +189,9 @@ a process is waiting for.</p>
 but all database tools can pose a risk to the system and the database
 server.  Before using this tool, please:</p>
 <ul class="simple">
-<li>Read the tool&#8217;s documentation</li>
-<li>Test the tool on a non-production server</li>
-<li>Backup your production server and verify the backups</li>
+<li><p>Read the tool’s documentation</p></li>
+<li><p>Test the tool on a non-production server</p></li>
+<li><p>Backup your production server and verify the backups</p></li>
 </ul>
 </div>
 <div class="section" id="description">
@@ -205,7 +207,7 @@ and counts how many of each one there are, then sorts them most-frequent first.<
 attaching GDB to the program and printing stack traces from all threads. This
 will freeze the program for some period of time, ranging from a second or so to
 much longer on very busy systems with a lot of memory and many threads in the
-program.  In the tool&#8217;s default usage as a MariaDB profiling tool, this means that
+program.  In the tool’s default usage as a MariaDB profiling tool, this means that
 MariaDB will be unresponsive while the tool runs, although if you are using the
 tool to diagnose an unresponsive server, there is really no reason not to do
 this.  In addition to freezing the server, there is also some risk of the server
@@ -213,57 +215,57 @@ crashing or performing badly after GDB detaches from it.</p>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<dl class="option">
-<dt id="cmdoption-mariadb-stacktrace--binary">
-<tt class="descname">--binary</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stacktrace--binary" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stacktrace-binary">
+<code class="sig-name descname">--binary</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stacktrace-binary" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -b; type: string; default: mysqld</p>
 <p>Which binary to trace.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stacktrace--help">
-<tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stacktrace--help" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stacktrace-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stacktrace-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stacktrace--interval">
-<tt class="descname">--interval</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stacktrace--interval" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stacktrace-interval">
+<code class="sig-name descname">--interval</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stacktrace-interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -s; type: int; default: 0</p>
-<p>Number of seconds to sleep between <a class="reference internal" href="#cmdoption-mariadb-stacktrace--iterations"><em class="xref std std-option">--iterations</em></a>.</p>
+<p>Number of seconds to sleep between <a class="reference internal" href="#cmdoption-mariadb-stacktrace-iterations"><code class="xref std std-option docutils literal notranslate"><span class="pre">--iterations</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stacktrace--iterations">
-<tt class="descname">--iterations</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stacktrace--iterations" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stacktrace-iterations">
+<code class="sig-name descname">--iterations</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stacktrace-iterations" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -i; type: int; default: 1</p>
 <p>How many traces to gather and aggregate.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stacktrace--lines">
-<tt class="descname">--lines</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stacktrace--lines" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stacktrace-lines">
+<code class="sig-name descname">--lines</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stacktrace-lines" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -l; type: int; default: 0</p>
 <p>Aggregate only first specified number of many functions; 0=infinity.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stacktrace--pid">
-<tt class="descname">--pid</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stacktrace--pid" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stacktrace-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stacktrace-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: int</p>
-<p>Process ID of the process to trace; overrides <a class="reference internal" href="#cmdoption-mariadb-stacktrace--binary"><em class="xref std std-option">--binary</em></a>.</p>
+<p>Process ID of the process to trace; overrides <a class="reference internal" href="#cmdoption-mariadb-stacktrace-binary"><code class="xref std std-option docutils literal notranslate"><span class="pre">--binary</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stacktrace--save-samples">
-<tt class="descname">--save-samples</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stacktrace--save-samples" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stacktrace-save-samples">
+<code class="sig-name descname">--save-samples</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stacktrace-save-samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -k; type: string</p>
 <p>Keep the raw traces in this file after aggregation.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stacktrace--version">
-<tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stacktrace--version" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stacktrace-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stacktrace-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
@@ -285,7 +287,7 @@ on the command line.</p>
 <div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
-Percona Toolkit&#8217;s pt-pmp in August, 2019. Percona Toolkit was forked from two
+Percona Toolkit’s pt-pmp in August, 2019. Percona Toolkit was forked from two
 projects in June, 2011: Maatkit and Aspersa.  Those projects were created by
 Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 </div>
@@ -293,13 +295,13 @@ Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
 <p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
-<p>THIS PROGRAM IS PROVIDED &#8220;AS IS&#8221; AND WITHOUT ANY EXPRESS OR IMPLIED
+<p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
 <p>This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
-systems, you can issue `man perlgpl&#8217; or `man perlartistic&#8217; to read these
+systems, you can issue `man perlgpl’ or `man perlartistic’ to read these
 licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -307,7 +309,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </div>
 <div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-stacktrace</strong> 6.0.2</p>
+<p><strong class="program">mariadb-stacktrace</strong> 6.0.2.1</p>
 </div>
 </div>
 
@@ -378,7 +380,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -400,5 +402,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
-
 

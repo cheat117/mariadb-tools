@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-stat-browser" href="mariadb-stat-browser.html" />
     <link rel="prev" title="mariadb-stacktrace" href="mariadb-stacktrace.html" /> 
@@ -172,7 +174,7 @@
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mariadb</span><span class="o">-</span><span class="n">stat</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">stat</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><strong class="program">mariadb-stat</strong> waits for a trigger condition to occur, then collects data
@@ -188,18 +190,18 @@ collect data on demand without waiting for the trigger to occur.</p>
 but all database tools can pose a risk to the system and the database
 server.  Before using this tool, please:</p>
 <ul class="simple">
-<li>Read the tool&#8217;s documentation</li>
-<li>Review the tool&#8217;s known &#8220;BUGS&#8221;</li>
-<li>Test the tool on a non-production server</li>
-<li>Backup your production server and verify the backups</li>
+<li><p>Read the tool’s documentation</p></li>
+<li><p>Review the tool’s known “BUGS”</p></li>
+<li><p>Test the tool on a non-production server</p></li>
+<li><p>Backup your production server and verify the backups</p></li>
 </ul>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes a problem happens infrequently and for a short time, giving you no
 chance to see the system when it happens. How do you solve intermittent MariaDB
-problems when you can&#8217;t observe them? That&#8217;s why <strong class="program">mariadb-stat</strong> exists. In addition to
-using it when there&#8217;s a known problem on your servers, it is a good idea to run
+problems when you can’t observe them? That’s why <strong class="program">mariadb-stat</strong> exists. In addition to
+using it when there’s a known problem on your servers, it is a good idea to run
 <strong class="program">mariadb-stat</strong> all the time, even when you think nothing is wrong.  You will
 appreciate the data it collects when a problem occurs, because problems such as
 MariaDB lockups or spikes in activity typically leave no evidence to use in root
@@ -207,58 +209,58 @@ cause analysis.</p>
 <p><strong class="program">mariadb-stat</strong> does two things: it watches a MariaDB server and waits for a trigger
 condition to occur, and it collects diagnostic data when that trigger occurs.
 To avoid false-positives caused by short-lived problems, the trigger condition
-must be true at least <a class="reference internal" href="#cmdoption-mariadb-stat--cycles"><em class="xref std std-option">--cycles</em></a> times before a <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a> is triggered.</p>
+must be true at least <a class="reference internal" href="#cmdoption-mariadb-stat-cycles"><code class="xref std std-option docutils literal notranslate"><span class="pre">--cycles</span></code></a> times before a <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a> is triggered.</p>
 <p>To use <strong class="program">mariadb-stat</strong> effectively, you need to define a good trigger.  A good trigger
-is sensitive enough to fire reliably when a problem occurs, so that you don&#8217;t
-miss a chance to solve problems.  On the other hand, a good trigger isn&#8217;t
-prone to false positives, so you don&#8217;t gather information when the server
+is sensitive enough to fire reliably when a problem occurs, so that you don’t
+miss a chance to solve problems.  On the other hand, a good trigger isn’t
+prone to false positives, so you don’t gather information when the server
 is functioning normally.</p>
 <p>The most reliable triggers for MariaDB tend to be the number of connections to the
 server, and the number of queries running concurrently. These are available in
 the SHOW GLOBAL STATUS command as Threads_connected and Threads_running.
 Sometimes Threads_connected is not a reliable indicator of trouble, but
-Threads_running usually is.  Your job, as the tool&#8217;s user, is to define an
+Threads_running usually is.  Your job, as the tool’s user, is to define an
 appropriate trigger condition for the tool.  Choose carefully, because the
 quality of your results will depend on the trigger you choose.</p>
-<p>You define the trigger with the <a class="reference internal" href="#cmdoption-mariadb-stat--function"><em class="xref std std-option">--function</em></a>, <a class="reference internal" href="#cmdoption-mariadb-stat--variable"><em class="xref std std-option">--variable</em></a>,
-<a class="reference internal" href="#cmdoption-mariadb-stat--threshold"><em class="xref std std-option">--threshold</em></a>, and <a class="reference internal" href="#cmdoption-mariadb-stat--cycles"><em class="xref std std-option">--cycles</em></a> options.  The default values
+<p>You define the trigger with the <a class="reference internal" href="#cmdoption-mariadb-stat-function"><code class="xref std std-option docutils literal notranslate"><span class="pre">--function</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-stat-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">--variable</span></code></a>,
+<a class="reference internal" href="#cmdoption-mariadb-stat-threshold"><code class="xref std std-option docutils literal notranslate"><span class="pre">--threshold</span></code></a>, and <a class="reference internal" href="#cmdoption-mariadb-stat-cycles"><code class="xref std std-option docutils literal notranslate"><span class="pre">--cycles</span></code></a> options.  The default values
 for these options define a reasonable trigger, but you should adjust
 or change them to suite your particular system and needs.</p>
 <p>By default, <strong class="program">mariadb-stat</strong> tool watches MariaDB forever until the trigger occurs,
 then it collects diagnostic data for a while, and sleeps afterwards to avoid
 repeatedly collecting data if the trigger remains true.  The general order of
 operations is:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="k">while </span><span class="nb">true</span>; <span class="k">do</span>
-<span class="k">   if</span> --variable from --function &gt; --threshold; <span class="k">then</span>
-<span class="k">      </span>cycles_true++
-      <span class="k">if </span>cycles_true &gt;<span class="o">=</span> --cycles; <span class="k">then</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
+   <span class="k">if</span> --variable from --function &gt; --threshold<span class="p">;</span> <span class="k">then</span>
+      cycles_true++
+      <span class="k">if</span> cycles_true &gt;<span class="o">=</span> --cycles<span class="p">;</span> <span class="k">then</span>
          --notify-by-email
-         <span class="k">if</span> --collect; <span class="k">then</span>
-<span class="k">            if</span> --disk-bytes-free and --disk-pct-free ok; <span class="k">then</span>
-               <span class="o">(</span>--collect <span class="k">for</span> --run-time seconds<span class="o">)</span> &amp;
+         <span class="k">if</span> --collect<span class="p">;</span> <span class="k">then</span>
+            <span class="k">if</span> --disk-bytes-free and --disk-pct-free ok<span class="p">;</span> <span class="k">then</span>
+               <span class="o">(</span>--collect <span class="k">for</span> --run-time seconds<span class="o">)</span> <span class="p">&amp;</span>
             <span class="k">fi</span>
-<span class="k">            </span>rm files in --dest older than --retention-time
+            rm files in --dest older than --retention-time
          <span class="k">fi</span>
-<span class="k">         </span>iter++
-         <span class="nv">cycles_true</span><span class="o">=</span>0
+         iter++
+         <span class="nv">cycles_true</span><span class="o">=</span><span class="m">0</span>
       <span class="k">fi</span>
-<span class="k">      if </span>iter &lt; --iterations; <span class="k">then</span>
-<span class="k">         </span>sleep --sleep seconds
+      <span class="k">if</span> iter &lt; --iterations<span class="p">;</span> <span class="k">then</span>
+         sleep --sleep seconds
       <span class="k">else</span>
-<span class="k">         </span><span class="nb">break</span>
-<span class="nb">      </span><span class="k">fi</span>
-<span class="k">   else</span>
-<span class="k">      if </span>iter &lt; --iterations; <span class="k">then</span>
-<span class="k">         </span>sleep --interval seconds
+         <span class="nb">break</span>
+      <span class="k">fi</span>
+   <span class="k">else</span>
+      <span class="k">if</span> iter &lt; --iterations<span class="p">;</span> <span class="k">then</span>
+         sleep --interval seconds
       <span class="k">else</span>
-<span class="k">         </span><span class="nb">break</span>
-<span class="nb">      </span><span class="k">fi</span>
-<span class="k">   fi</span>
+         <span class="nb">break</span>
+      <span class="k">fi</span>
+   <span class="k">fi</span>
 <span class="k">done</span>
 rm old --dest files older than --retention-time
-<span class="k">if</span> --collect process are still running; <span class="k">then</span>
-<span class="k">   </span><span class="nb">wait </span>up to --run-time * 3 seconds
-   <span class="nb">kill </span>any remaining --collect processes
+<span class="k">if</span> --collect process are still running<span class="p">;</span> <span class="k">then</span>
+   <span class="nb">wait</span> up to --run-time * <span class="m">3</span> seconds
+   <span class="nb">kill</span> any remaining --collect processes
 <span class="k">fi</span>
 </pre></div>
 </div>
@@ -268,8 +270,8 @@ multiple times.  The pt-sift tool is designed to help you browse and analyze
 the resulting data samples.</p>
 <p>Although this sounds simple enough, in practice there are a number of
 subtleties, such as detecting when the disk is beginning to fill up so that the
-tool doesn&#8217;t cause the server to run out of disk space.  This tool handles these
-types of potential problems, so it&#8217;s a good idea to use this tool instead of
+tool doesn’t cause the server to run out of disk space.  This tool handles these
+types of potential problems, so it’s a good idea to use this tool instead of
 writing something from scratch and possibly experiencing some of the hazards
 this tool is designed to avoid.</p>
 </div>
@@ -278,36 +280,36 @@ this tool is designed to avoid.</p>
 <p>You can use standard MariaDB tool configuration files to set command line
 options.</p>
 <p>You will probably want to run the tool as a daemon and customize at least the
-<a class="reference internal" href="#cmdoption-mariadb-stat--threshold"><em class="xref std std-option">--threshold</em></a>.  Here&#8217;s a sample configuration file for triggering when
+<a class="reference internal" href="#cmdoption-mariadb-stat-threshold"><code class="xref std std-option docutils literal notranslate"><span class="pre">--threshold</span></code></a>.  Here’s a sample configuration file for triggering when
 there are more than 20 queries running at once:</p>
-<div class="highlight-bash"><div class="highlight"><pre>daemonize
-<span class="nv">threshold</span><span class="o">=</span>20
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>daemonize
+<span class="nv">threshold</span><span class="o">=</span><span class="m">20</span>
 </pre></div>
 </div>
-<p>If you don&#8217;t run the tool as root, then you will need specify several options,
-such as <a class="reference internal" href="#cmdoption-mariadb-stat--pid"><em class="xref std std-option">--pid</em></a>, <a class="reference internal" href="#cmdoption-mariadb-stat--log"><em class="xref std std-option">--log</em></a>, and <a class="reference internal" href="#cmdoption-mariadb-stat--dest"><em class="xref std std-option">--dest</em></a>, else the tool will probably
+<p>If you don’t run the tool as root, then you will need specify several options,
+such as <a class="reference internal" href="#cmdoption-mariadb-stat-pid"><code class="xref std std-option docutils literal notranslate"><span class="pre">--pid</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-stat-log"><code class="xref std std-option docutils literal notranslate"><span class="pre">--log</span></code></a>, and <a class="reference internal" href="#cmdoption-mariadb-stat-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a>, else the tool will probably
 fail to start.</p>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--ask-pass">
-<tt class="descname">--ask-pass</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--ask-pass" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--collect">
-<tt class="descname">--collect</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--collect" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-collect">
+<code class="sig-name descname">--collect</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes; negatable: yes</p>
-<p>Collect diagnostic data when the trigger occurs.  Specify <tt class="docutils literal"><span class="pre">--no-collect</span></tt>
+<p>Collect diagnostic data when the trigger occurs.  Specify <code class="docutils literal notranslate"><span class="pre">--no-collect</span></code>
 to make the tool watch the system but not collect data.</p>
-<p>See also <a class="reference internal" href="#cmdoption-mariadb-stat--stalk"><em class="xref std std-option">--stalk</em></a>.</p>
+<p>See also <a class="reference internal" href="#cmdoption-mariadb-stat-stalk"><code class="xref std std-option docutils literal notranslate"><span class="pre">--stalk</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--collect-gdb">
-<tt class="descname">--collect-gdb</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--collect-gdb" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-collect-gdb">
+<code class="sig-name descname">--collect-gdb</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-collect-gdb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect GDB stacktraces.  This is achieved by attaching to MariaDB and printing
 stack traces from all threads. This will freeze the server for some period of
 time, ranging from a second or so to much longer on very busy systems with a lot
@@ -319,231 +321,232 @@ for diagnosis.</p>
 crashing or performing badly after GDB detaches from it.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--collect-oprofile">
-<tt class="descname">--collect-oprofile</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--collect-oprofile" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-collect-oprofile">
+<code class="sig-name descname">--collect-oprofile</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-collect-oprofile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect oprofile data.  This is achieved by starting an oprofile session,
 letting it run for the collection time, and then stopping and saving the
-resulting profile data in the system&#8217;s default location.  Please read your
-system&#8217;s oprofile documentation to learn more about this.</p>
+resulting profile data in the system’s default location.  Please read your
+system’s oprofile documentation to learn more about this.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--collect-strace">
-<tt class="descname">--collect-strace</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--collect-strace" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-collect-strace">
+<code class="sig-name descname">--collect-strace</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-collect-strace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect strace data. This is achieved by attaching strace to the server, which
 will make it run very slowly until strace detaches.  The same cautions apply as
-those listed in &#8211;collect-gdb.  You should not enable this option together with
-&#8211;collect-gdb, because GDB and strace can&#8217;t attach to the server process
+those listed in –collect-gdb.  You should not enable this option together with
+–collect-gdb, because GDB and strace can’t attach to the server process
 simultaneously.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--collect-tcpdump">
-<tt class="descname">--collect-tcpdump</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--collect-tcpdump" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-collect-tcpdump">
+<code class="sig-name descname">--collect-tcpdump</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-collect-tcpdump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect tcpdump data. This option causes tcpdump to capture all traffic on all
 interfaces for the port on which MariaDB is listening.  You can later use
 pt-query-digest to decode the MariaDB protocol and extract a log of query traffic
 from it.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--config">
-<tt class="descname">--config</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--config" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Read this comma-separated list of config files.  If specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--cycles">
-<tt class="descname">--cycles</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--cycles" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-cycles">
+<code class="sig-name descname">--cycles</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-cycles" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 5</p>
-<p>How many times <a class="reference internal" href="#cmdoption-mariadb-stat--variable"><em class="xref std std-option">--variable</em></a> must be greater than <a class="reference internal" href="#cmdoption-mariadb-stat--threshold"><em class="xref std std-option">--threshold</em></a> before triggering <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a>.  This helps prevent false positives, and makes
+<p>How many times <a class="reference internal" href="#cmdoption-mariadb-stat-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">--variable</span></code></a> must be greater than <a class="reference internal" href="#cmdoption-mariadb-stat-threshold"><code class="xref std std-option docutils literal notranslate"><span class="pre">--threshold</span></code></a> before triggering <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a>.  This helps prevent false positives, and makes
 the trigger condition less likely to fire when the problem recovers quickly.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--daemonize">
-<tt class="descname">--daemonize</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--daemonize" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-daemonize">
+<code class="sig-name descname">--daemonize</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-daemonize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Daemonize the tool.  This causes the tool to fork into the background and log
-its output as specified in &#8211;log.</p>
+its output as specified in –log.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--defaults-file">
-<tt class="descname">--defaults-file</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--defaults-file" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read mariadb options from the given file.  You must give an absolute
 pathname.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--dest">
-<tt class="descname">--dest</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--dest" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-dest">
+<code class="sig-name descname">--dest</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-dest" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: /var/lib/mariadb-stat</p>
-<p>Where to save diagnostic data from <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a>.  Each time the tool
+<p>Where to save diagnostic data from <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a>.  Each time the tool
 collects data, it writes to a new set of files, which are named with the
 current system timestamp.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--disk-bytes-free">
-<tt class="descname">--disk-bytes-free</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--disk-bytes-free" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-disk-bytes-free">
+<code class="sig-name descname">--disk-bytes-free</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-disk-bytes-free" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: size; default: 100M</p>
-<p>Do not <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a> if the disk has less than this much free space.
+<p>Do not <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a> if the disk has less than this much free space.
 This prevents the tool from filling up the disk with diagnostic data.</p>
-<p>If the <a class="reference internal" href="#cmdoption-mariadb-stat--dest"><em class="xref std std-option">--dest</em></a> directory contains a previously captured sample of data,
+<p>If the <a class="reference internal" href="#cmdoption-mariadb-stat-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a> directory contains a previously captured sample of data,
 the tool will measure its size and use that as an estimate of how much data is
 likely to be gathered this time, too.  It will then be even more pessimistic,
 and will refuse to collect data unless the disk has enough free space to hold
 the sample and still have the desired amount of free space.  For example, if
-you&#8217;d like 100MB of free space and the previous diagnostic sample consumed
-100MB, the tool won&#8217;t collect any data unless the disk has 200MB free.</p>
+you’d like 100MB of free space and the previous diagnostic sample consumed
+100MB, the tool won’t collect any data unless the disk has 200MB free.</p>
 <p>Valid size value suffixes are k, M, G, and T.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--disk-pct-free">
-<tt class="descname">--disk-pct-free</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--disk-pct-free" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-disk-pct-free">
+<code class="sig-name descname">--disk-pct-free</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-disk-pct-free" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 5</p>
-<p>Do not <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a> if the disk has less than this percent free space.
+<p>Do not <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a> if the disk has less than this percent free space.
 This prevents the tool from filling up the disk with diagnostic data.</p>
-<p>This option works similarly to <a class="reference internal" href="#cmdoption-mariadb-stat--disk-bytes-free"><em class="xref std std-option">--disk-bytes-free</em></a> but specifies a
+<p>This option works similarly to <a class="reference internal" href="#cmdoption-mariadb-stat-disk-bytes-free"><code class="xref std std-option docutils literal notranslate"><span class="pre">--disk-bytes-free</span></code></a> but specifies a
 percentage margin of safety instead of a bytes margin of safety.
 The tool honors both options, and will not collect any data unless both
 margins are satisfied.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--function">
-<tt class="descname">--function</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--function" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-function">
+<code class="sig-name descname">--function</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-function" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: status</p>
 <p>What to watch for the trigger.  The default value watches
-<tt class="docutils literal"><span class="pre">SHOW</span> <span class="pre">GLOBAL</span> <span class="pre">STATUS</span></tt>, but you can also watch <tt class="docutils literal"><span class="pre">SHOW</span> <span class="pre">PROCESSLIST</span></tt> and specify
+<code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">GLOBAL</span> <span class="pre">STATUS</span></code>, but you can also watch <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">PROCESSLIST</span></code> and specify
 a file with your own custom code.  This function supplies the value of
-<a class="reference internal" href="#cmdoption-mariadb-stat--variable"><em class="xref std std-option">--variable</em></a>, which is then compared against <a class="reference internal" href="#cmdoption-mariadb-stat--threshold"><em class="xref std std-option">--threshold</em></a> to see if the
+<a class="reference internal" href="#cmdoption-mariadb-stat-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">--variable</span></code></a>, which is then compared against <a class="reference internal" href="#cmdoption-mariadb-stat-threshold"><code class="xref std std-option docutils literal notranslate"><span class="pre">--threshold</span></code></a> to see if the
 the trigger condition is met.  Additional options may be required as
 well; see below. Possible values are:</p>
 <ul class="simple">
-<li>status</li>
+<li><p>status</p></li>
 </ul>
 <blockquote>
-<div>Watch <tt class="docutils literal"><span class="pre">SHOW</span> <span class="pre">GLOBAL</span> <span class="pre">STATUS</span></tt> for the trigger.  The value of
-<a class="reference internal" href="#cmdoption-mariadb-stat--variable"><em class="xref std std-option">--variable</em></a> then defines which status counter is the trigger.</div></blockquote>
+<div><p>Watch <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">GLOBAL</span> <span class="pre">STATUS</span></code> for the trigger.  The value of
+<a class="reference internal" href="#cmdoption-mariadb-stat-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">--variable</span></code></a> then defines which status counter is the trigger.</p>
+</div></blockquote>
 <ul class="simple">
-<li>processlist</li>
+<li><p>processlist</p></li>
 </ul>
 <blockquote>
-<div><p>Watch <tt class="docutils literal"><span class="pre">SHOW</span> <span class="pre">FULL</span> <span class="pre">PROCESSLIST</span></tt> for the trigger.  The trigger
-value is the count of processes whose <a class="reference internal" href="#cmdoption-mariadb-stat--variable"><em class="xref std std-option">--variable</em></a> column matches the
-<a class="reference internal" href="#cmdoption-mariadb-stat--match"><em class="xref std std-option">--match</em></a> option.  For example, to trigger <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a> when more than
-10 processes are in the &#8220;statistics&#8221; state, specify:</p>
-<div class="highlight-bash"><div class="highlight"><pre>--function processlist <span class="se">\</span>
+<div><p>Watch <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">FULL</span> <span class="pre">PROCESSLIST</span></code> for the trigger.  The trigger
+value is the count of processes whose <a class="reference internal" href="#cmdoption-mariadb-stat-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">--variable</span></code></a> column matches the
+<a class="reference internal" href="#cmdoption-mariadb-stat-match"><code class="xref std std-option docutils literal notranslate"><span class="pre">--match</span></code></a> option.  For example, to trigger <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a> when more than
+10 processes are in the “statistics” state, specify:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--function processlist <span class="se">\</span>
 --variable State       <span class="se">\</span>
 --match statistics     <span class="se">\</span>
---threshold 10
+--threshold <span class="m">10</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p>In addition, you can specify a file that contains your custom trigger
 function, written in Unix shell script.  This can be a wrapper that executes
-anything you wish.  If the argument to <a class="reference internal" href="#cmdoption-mariadb-stat--function"><em class="xref std std-option">--function</em></a> is a file, then it
+anything you wish.  If the argument to <a class="reference internal" href="#cmdoption-mariadb-stat-function"><code class="xref std std-option docutils literal notranslate"><span class="pre">--function</span></code></a> is a file, then it
 takes precedence over built-in functions, so if there is a file in the working
-directory named &#8220;status&#8221; or &#8220;processlist&#8221; then the tool will use that file
+directory named “status” or “processlist” then the tool will use that file
 even though are valid built-in values.</p>
-<p>The file works by providing a function called <tt class="docutils literal"><span class="pre">trg_plugin</span></tt>, and the tool
+<p>The file works by providing a function called <code class="docutils literal notranslate"><span class="pre">trg_plugin</span></code>, and the tool
 simply sources the file and executes the function.  For example, the file
 might contain:</p>
-<div class="highlight-bash"><div class="highlight"><pre>trg_plugin<span class="o">()</span> <span class="o">{</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>trg_plugin<span class="o">()</span> <span class="o">{</span>
    mysql <span class="nv">$EXT_ARGV</span> -e <span class="s2">&quot;SHOW ENGINE INNODB STATUS&quot;</span> <span class="se">\</span>
-     | grep -c <span class="s2">&quot;has waited at&quot;</span>
+     <span class="p">|</span> grep -c <span class="s2">&quot;has waited at&quot;</span>
 <span class="o">}</span>
 </pre></div>
 </div>
 <p>This snippet will count the number of mutex waits inside InnoDB.  It
 illustrates the general principle: the function must output a number, which is
-then compared to <a class="reference internal" href="#cmdoption-mariadb-stat--threshold"><em class="xref std std-option">--threshold</em></a> as usual.  The <tt class="docutils literal"><span class="pre">$EXT_ARGV</span></tt> variable
-contains the MariaDB options mentioned in the &#8220;SYNOPSIS&#8221; above.</p>
-<p>The file should not alter the tool&#8217;s existing global variables.  Prefix any
-file-specific global variables with &#8220;<a href="#id1"><span class="problematic" id="id2">PLUGIN_</span></a>&#8221; or make them local.</p>
+then compared to <a class="reference internal" href="#cmdoption-mariadb-stat-threshold"><code class="xref std std-option docutils literal notranslate"><span class="pre">--threshold</span></code></a> as usual.  The <code class="docutils literal notranslate"><span class="pre">$EXT_ARGV</span></code> variable
+contains the MariaDB options mentioned in the “SYNOPSIS” above.</p>
+<p>The file should not alter the tool’s existing global variables.  Prefix any
+file-specific global variables with “<a href="#id1"><span class="problematic" id="id2">PLUGIN_</span></a>” or make them local.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--help">
-<tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--help" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print help and exit.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--host">
-<tt class="descname">--host</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--host" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Host to connect to.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--interval">
-<tt class="descname">--interval</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--interval" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-interval">
+<code class="sig-name descname">--interval</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 1</p>
 <p>How often to check the if trigger is true, in seconds.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--iterations">
-<tt class="descname">--iterations</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--iterations" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-iterations">
+<code class="sig-name descname">--iterations</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-iterations" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
-<p>How many times to <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a> diagnostic data.  By default, the tool
+<p>How many times to <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a> diagnostic data.  By default, the tool
 runs forever and collects data every time the trigger occurs.
-Specify <a class="reference internal" href="#cmdoption-mariadb-stat--iterations"><em class="xref std std-option">--iterations</em></a> to collect data a limited number of times.
-This option is also useful with <tt class="docutils literal"><span class="pre">--no-stalk</span></tt> to collect data once and
+Specify <a class="reference internal" href="#cmdoption-mariadb-stat-iterations"><code class="xref std std-option docutils literal notranslate"><span class="pre">--iterations</span></code></a> to collect data a limited number of times.
+This option is also useful with <code class="docutils literal notranslate"><span class="pre">--no-stalk</span></code> to collect data once and
 exit, for example.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--log">
-<tt class="descname">--log</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--log" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-log">
+<code class="sig-name descname">--log</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-log" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: /var/log/mariadb-stat.log</p>
 <p>Print all output to this file when daemonized.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--match">
-<tt class="descname">--match</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--match" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-match">
+<code class="sig-name descname">--match</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-match" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
-<p>The pattern to use when watching SHOW PROCESSLIST.  See <a class="reference internal" href="#cmdoption-mariadb-stat--function"><em class="xref std std-option">--function</em></a>
+<p>The pattern to use when watching SHOW PROCESSLIST.  See <a class="reference internal" href="#cmdoption-mariadb-stat-function"><code class="xref std std-option docutils literal notranslate"><span class="pre">--function</span></code></a>
 for details.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--notify-by-email">
-<tt class="descname">--notify-by-email</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--notify-by-email" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-notify-by-email">
+<code class="sig-name descname">--notify-by-email</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-notify-by-email" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
-<p>Send an email to these addresses for every <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a>.</p>
+<p>Send an email to these addresses for every <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--password">
-<tt class="descname">--password</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--password" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
-If password contains commas they must be escaped with a backslash: &#8220;exam,ple&#8221;</p>
+If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--pid">
-<tt class="descname">--pid</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--pid" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: /var/run/mariadb-stat.pid</p>
-<p>Create the given PID file.  The tool won&#8217;t start if the PID file already
+<p>Create the given PID file.  The tool won’t start if the PID file already
 exists and the PID it contains is different than the current PID.  However,
 if the PID file exists and the PID it contains is no longer running, the
 tool will overwrite the PID file with the current PID.  The PID file is
 removed automatically when the tool exits.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--plugin">
-<tt class="descname">--plugin</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--plugin" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-plugin">
+<code class="sig-name descname">--plugin</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-plugin" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Load a plugin to hook into the tool and extend is functionality.
 The specified file does not need to be executable, nor does its first line
@@ -551,214 +554,220 @@ need to be shebang line.  It only needs to define one or more of these
 Bash functions:</p>
 <p>before_stalk</p>
 <blockquote>
-<div>Called before stalking.</div></blockquote>
+<div><p>Called before stalking.</p>
+</div></blockquote>
 <p>before_collect</p>
 <blockquote>
-<div>Called when the trigger occurs, before running a <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a>
-subprocesses in the background.</div></blockquote>
+<div><p>Called when the trigger occurs, before running a <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a>
+subprocesses in the background.</p>
+</div></blockquote>
 <p>after_collect</p>
 <blockquote>
-<div>Called after running a collector process.  The PID of the collector process
+<div><p>Called after running a collector process.  The PID of the collector process
 is passed as the first argument.  This hook is called before
-<tt class="docutils literal"><span class="pre">after_collect_sleep</span></tt>.</div></blockquote>
+<code class="docutils literal notranslate"><span class="pre">after_collect_sleep</span></code>.</p>
+</div></blockquote>
 <p>after_collect_sleep</p>
 <blockquote>
-<div>Called after sleeping <a class="reference internal" href="#cmdoption-mariadb-stat--sleep"><em class="xref std std-option">--sleep</em></a> seconds for the collector process to finish.
-This hook is called after <tt class="docutils literal"><span class="pre">after_collect</span></tt>.</div></blockquote>
+<div><p>Called after sleeping <a class="reference internal" href="#cmdoption-mariadb-stat-sleep"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sleep</span></code></a> seconds for the collector process to finish.
+This hook is called after <code class="docutils literal notranslate"><span class="pre">after_collect</span></code>.</p>
+</div></blockquote>
 <p>after_interval_sleep</p>
 <blockquote>
-<div>Called after sleeping <a class="reference internal" href="#cmdoption-mariadb-stat--interval"><em class="xref std std-option">--interval</em></a> seconds after each trigger check.</div></blockquote>
+<div><p>Called after sleeping <a class="reference internal" href="#cmdoption-mariadb-stat-interval"><code class="xref std std-option docutils literal notranslate"><span class="pre">--interval</span></code></a> seconds after each trigger check.</p>
+</div></blockquote>
 <p>after_stalk</p>
 <blockquote>
-<div>Called after stalking.  Since <strong class="program">mariadb-stat</strong> stalks forever by default,
-this hook is only called if <a class="reference internal" href="#cmdoption-mariadb-stat--iterations"><em class="xref std std-option">--iterations</em></a> is specified.</div></blockquote>
-<p>For example, a very simple plugin that touches a file when <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a>
+<div><p>Called after stalking.  Since <strong class="program">mariadb-stat</strong> stalks forever by default,
+this hook is only called if <a class="reference internal" href="#cmdoption-mariadb-stat-iterations"><code class="xref std std-option docutils literal notranslate"><span class="pre">--iterations</span></code></a> is specified.</p>
+</div></blockquote>
+<p>For example, a very simple plugin that touches a file when <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a>
 is triggered:</p>
-<div class="highlight-bash"><div class="highlight"><pre>before_collect<span class="o">()</span> <span class="o">{</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>before_collect<span class="o">()</span> <span class="o">{</span>
    touch /tmp/foo
 <span class="o">}</span>
 </pre></div>
 </div>
-<p>Since the plugin is completely sourced (imported) into the tool&#8217;s namespace,
+<p>Since the plugin is completely sourced (imported) into the tool’s namespace,
 be careful not to define other functions or global variables that already
 exist in the tool.  You should prefix all plugin-specific functions and
-global variables with <tt class="docutils literal"><span class="pre">plugin_</span></tt> or <tt class="docutils literal"><span class="pre">PLUGIN_</span></tt>.</p>
+global variables with <code class="docutils literal notranslate"><span class="pre">plugin_</span></code> or <code class="docutils literal notranslate"><span class="pre">PLUGIN_</span></code>.</p>
 <p>Plugins have access to all command line options but they should not modify
-them.  Each option is a global variable like <tt class="docutils literal"><span class="pre">$OPT_DEST</span></tt> which corresponds
-to <a class="reference internal" href="#cmdoption-mariadb-stat--dest"><em class="xref std std-option">--dest</em></a>.  Therefore, the global variable for each command line option
-is <tt class="docutils literal"><span class="pre">OPT_</span></tt> plus the option name in all caps with hyphens replaced by
+them.  Each option is a global variable like <code class="docutils literal notranslate"><span class="pre">$OPT_DEST</span></code> which corresponds
+to <a class="reference internal" href="#cmdoption-mariadb-stat-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a>.  Therefore, the global variable for each command line option
+is <code class="docutils literal notranslate"><span class="pre">OPT_</span></code> plus the option name in all caps with hyphens replaced by
 underscores.</p>
-<p>Plugins can stop the tool by setting the global variable <tt class="docutils literal"><span class="pre">OKTORUN</span></tt>
-to <tt class="docutils literal"><span class="pre">1</span></tt>.  In this case, the global variable <tt class="docutils literal"><span class="pre">EXIT_REASON</span></tt> should also
+<p>Plugins can stop the tool by setting the global variable <code class="docutils literal notranslate"><span class="pre">OKTORUN</span></code>
+to <code class="docutils literal notranslate"><span class="pre">1</span></code>.  In this case, the global variable <code class="docutils literal notranslate"><span class="pre">EXIT_REASON</span></code> should also
 be set to indicate why the tool was stopped.</p>
 <p>Plugin writers should keep in mind that the file destination prefix currently
-in use should be accessed through the <tt class="docutils literal"><span class="pre">$prefix</span></tt> variable, rather than
-<tt class="docutils literal"><span class="pre">$OPT_PREFIX</span></tt>.</p>
+in use should be accessed through the <code class="docutils literal notranslate"><span class="pre">$prefix</span></code> variable, rather than
+<code class="docutils literal notranslate"><span class="pre">$OPT_PREFIX</span></code>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--mariadb-only">
-<tt class="descname">--mariadb-only</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--mariadb-only" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-mariadb-only">
+<code class="sig-name descname">--mariadb-only</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-mariadb-only" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trigger only MariaDB related captures, ignoring all others. The only not MariaDB related
 value being collected is the disk space, because it is needed to calculate the
 available free disk space to write the result files.
 This option is useful for RDS instances.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--port">
-<tt class="descname">--port</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--port" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--prefix">
-<tt class="descname">--prefix</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--prefix" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-prefix">
+<code class="sig-name descname">--prefix</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>The filename prefix for diagnostic samples.  By default, all files created
-by the same <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a> instance have a timestamp prefix based on the current
-local time, like <tt class="docutils literal"><span class="pre">2011_12_06_14_02_02</span></tt>, which is December 6, 2011 at 14:02:02.</p>
+by the same <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a> instance have a timestamp prefix based on the current
+local time, like <code class="docutils literal notranslate"><span class="pre">2011_12_06_14_02_02</span></code>, which is December 6, 2011 at 14:02:02.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--retention-count">
-<tt class="descname">--retention-count</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--retention-count" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-retention-count">
+<code class="sig-name descname">--retention-count</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-retention-count" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 0</p>
 <p>Keep the data for the last N runs. If N &gt; 0, the program will keep the data for the last
 N runs and will delete the older data.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--retention-size">
-<tt class="descname">--retention-size</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--retention-size" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-retention-size">
+<code class="sig-name descname">--retention-size</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-retention-size" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 0</p>
-<p>Keep up to &#8211;retention-size MB of data. It will keep at least 1 run even if the size is bigger
+<p>Keep up to –retention-size MB of data. It will keep at least 1 run even if the size is bigger
 than the specified in this parameter</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--retention-time">
-<tt class="descname">--retention-time</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--retention-time" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-retention-time">
+<code class="sig-name descname">--retention-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-retention-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 30</p>
 <p>Number of days to retain collected samples.  Any samples that are older will be
 purged.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--run-time">
-<tt class="descname">--run-time</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--run-time" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-run-time">
+<code class="sig-name descname">--run-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-run-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 30</p>
-<p>How long to <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a> diagnostic data when the trigger occurs.
-The value is in seconds and should not be longer than <a class="reference internal" href="#cmdoption-mariadb-stat--sleep"><em class="xref std std-option">--sleep</em></a>.  It is
-usually not necessary to change this; if the default 30 seconds doesn&#8217;t
+<p>How long to <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a> diagnostic data when the trigger occurs.
+The value is in seconds and should not be longer than <a class="reference internal" href="#cmdoption-mariadb-stat-sleep"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sleep</span></code></a>.  It is
+usually not necessary to change this; if the default 30 seconds doesn’t
 collect enough data, running longer is not likely to help because the system
 or MariaDB server is probably too busy to respond.  In fact, in many cases a
 shorter collection period is appropriate.</p>
 <p>This value is used two other times.  After collecting, the collect subprocess
-will wait another <a class="reference internal" href="#cmdoption-mariadb-stat--run-time"><em class="xref std std-option">--run-time</em></a> seconds for its commands to finish.  Some
+will wait another <a class="reference internal" href="#cmdoption-mariadb-stat-run-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--run-time</span></code></a> seconds for its commands to finish.  Some
 commands can take awhile if the system is running very slowly (which can
 likely be the case given that a collection was triggered).  Since empty files
 are deleted, the extra wait gives commands time to finish and write their
 data.  The value is potentially used again just before the tool exits to wait
-again for any collect subprocesses to finish.  In most cases this won&#8217;t
+again for any collect subprocesses to finish.  In most cases this won’t
 happen because of the aforementioned extra wait.  If it happens, the tool
-will log &#8220;Waiting up to N seconds for subprocesses to finish...&#8221; where N is
-three times <a class="reference internal" href="#cmdoption-mariadb-stat--run-time"><em class="xref std std-option">--run-time</em></a>.  In both cases, after waiting, the tool kills
+will log “Waiting up to N seconds for subprocesses to finish…” where N is
+three times <a class="reference internal" href="#cmdoption-mariadb-stat-run-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--run-time</span></code></a>.  In both cases, after waiting, the tool kills
 all of its subprocesses.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--sleep">
-<tt class="descname">--sleep</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--sleep" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-sleep">
+<code class="sig-name descname">--sleep</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-sleep" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 300</p>
-<p>How long to sleep after <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a>.  This prevents the tool
+<p>How long to sleep after <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a>.  This prevents the tool
 from triggering continuously, which might be a problem if the collection process is intrusive.
 It also prevents filling up the disk or gathering too much data to analyze
 reasonably.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--sleep-collect">
-<tt class="descname">--sleep-collect</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--sleep-collect" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-sleep-collect">
+<code class="sig-name descname">--sleep-collect</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-sleep-collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 1</p>
 <p>How long to sleep between collection loop cycles.  This is useful with
-<tt class="docutils literal"><span class="pre">--no-stalk</span></tt> to do long collections.  For example, to collect data every
-minute for an hour, specify: <tt class="docutils literal"><span class="pre">--no-stalk</span> <span class="pre">--run-time</span> <span class="pre">3600</span> <span class="pre">--sleep-collect</span> <span class="pre">60</span></tt>.</p>
+<code class="docutils literal notranslate"><span class="pre">--no-stalk</span></code> to do long collections.  For example, to collect data every
+minute for an hour, specify: <code class="docutils literal notranslate"><span class="pre">--no-stalk</span> <span class="pre">--run-time</span> <span class="pre">3600</span> <span class="pre">--sleep-collect</span> <span class="pre">60</span></code>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--socket">
-<tt class="descname">--socket</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--socket" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--stalk">
-<tt class="descname">--stalk</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--stalk" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-stalk">
+<code class="sig-name descname">--stalk</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-stalk" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes; negatable: yes</p>
-<p>Watch the server and wait for the trigger to occur.  Specify <tt class="docutils literal"><span class="pre">--no-stalk</span></tt>
+<p>Watch the server and wait for the trigger to occur.  Specify <code class="docutils literal notranslate"><span class="pre">--no-stalk</span></code>
 to collect diagnostic data immediately, that is, without waiting for the
 trigger to occur.  You probably also want to specify values for
-<a class="reference internal" href="#cmdoption-mariadb-stat--interval"><em class="xref std std-option">--interval</em></a>, <a class="reference internal" href="#cmdoption-mariadb-stat--iterations"><em class="xref std std-option">--iterations</em></a>, and <a class="reference internal" href="#cmdoption-mariadb-stat--sleep"><em class="xref std std-option">--sleep</em></a>.  For example, to
+<a class="reference internal" href="#cmdoption-mariadb-stat-interval"><code class="xref std std-option docutils literal notranslate"><span class="pre">--interval</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-stat-iterations"><code class="xref std std-option docutils literal notranslate"><span class="pre">--iterations</span></code></a>, and <a class="reference internal" href="#cmdoption-mariadb-stat-sleep"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sleep</span></code></a>.  For example, to
 immediately collect data for 1 minute then exit, specify:</p>
-<div class="highlight-bash"><div class="highlight"><pre>--no-stalk --run-time 60 --iterations 1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--no-stalk --run-time <span class="m">60</span> --iterations <span class="m">1</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#cmdoption-mariadb-stat--cycles"><em class="xref std std-option">--cycles</em></a>, <a class="reference internal" href="#cmdoption-mariadb-stat--daemonize"><em class="xref std std-option">--daemonize</em></a>, <a class="reference internal" href="#cmdoption-mariadb-stat--log"><em class="xref std std-option">--log</em></a> and <a class="reference internal" href="#cmdoption-mariadb-stat--pid"><em class="xref std std-option">--pid</em></a> have no effect
-with <tt class="docutils literal"><span class="pre">--no-stalk</span></tt>.  Safeguard options, like <a class="reference internal" href="#cmdoption-mariadb-stat--disk-bytes-free"><em class="xref std std-option">--disk-bytes-free</em></a> and
-<a class="reference internal" href="#cmdoption-mariadb-stat--disk-pct-free"><em class="xref std std-option">--disk-pct-free</em></a>, are still respected.</p>
-<p>See also <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a>.</p>
+<p><a class="reference internal" href="#cmdoption-mariadb-stat-cycles"><code class="xref std std-option docutils literal notranslate"><span class="pre">--cycles</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-stat-daemonize"><code class="xref std std-option docutils literal notranslate"><span class="pre">--daemonize</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-stat-log"><code class="xref std std-option docutils literal notranslate"><span class="pre">--log</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-stat-pid"><code class="xref std std-option docutils literal notranslate"><span class="pre">--pid</span></code></a> have no effect
+with <code class="docutils literal notranslate"><span class="pre">--no-stalk</span></code>.  Safeguard options, like <a class="reference internal" href="#cmdoption-mariadb-stat-disk-bytes-free"><code class="xref std std-option docutils literal notranslate"><span class="pre">--disk-bytes-free</span></code></a> and
+<a class="reference internal" href="#cmdoption-mariadb-stat-disk-pct-free"><code class="xref std std-option docutils literal notranslate"><span class="pre">--disk-pct-free</span></code></a>, are still respected.</p>
+<p>See also <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--threshold">
-<tt class="descname">--threshold</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--threshold" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-threshold">
+<code class="sig-name descname">--threshold</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-threshold" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 25</p>
-<p>The maximum acceptable value for <a class="reference internal" href="#cmdoption-mariadb-stat--variable"><em class="xref std std-option">--variable</em></a>.  <a class="reference internal" href="#cmdoption-mariadb-stat--collect"><em class="xref std std-option">--collect</em></a> is
-triggered when the value of <a class="reference internal" href="#cmdoption-mariadb-stat--variable"><em class="xref std std-option">--variable</em></a> is greater than <a class="reference internal" href="#cmdoption-mariadb-stat--threshold"><em class="xref std std-option">--threshold</em></a>
-for <a class="reference internal" href="#cmdoption-mariadb-stat--cycles"><em class="xref std std-option">--cycles</em></a> many times.  Currently, there is no way to define a lower
-threshold to check for a <a class="reference internal" href="#cmdoption-mariadb-stat--variable"><em class="xref std std-option">--variable</em></a> value that is too low.</p>
-<p>See also <a class="reference internal" href="#cmdoption-mariadb-stat--function"><em class="xref std std-option">--function</em></a>.</p>
+<p>The maximum acceptable value for <a class="reference internal" href="#cmdoption-mariadb-stat-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">--variable</span></code></a>.  <a class="reference internal" href="#cmdoption-mariadb-stat-collect"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect</span></code></a> is
+triggered when the value of <a class="reference internal" href="#cmdoption-mariadb-stat-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">--variable</span></code></a> is greater than <a class="reference internal" href="#cmdoption-mariadb-stat-threshold"><code class="xref std std-option docutils literal notranslate"><span class="pre">--threshold</span></code></a>
+for <a class="reference internal" href="#cmdoption-mariadb-stat-cycles"><code class="xref std std-option docutils literal notranslate"><span class="pre">--cycles</span></code></a> many times.  Currently, there is no way to define a lower
+threshold to check for a <a class="reference internal" href="#cmdoption-mariadb-stat-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">--variable</span></code></a> value that is too low.</p>
+<p>See also <a class="reference internal" href="#cmdoption-mariadb-stat-function"><code class="xref std std-option docutils literal notranslate"><span class="pre">--function</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--user">
-<tt class="descname">--user</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--user" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--variable">
-<tt class="descname">--variable</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--variable" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-variable">
+<code class="sig-name descname">--variable</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: Threads_running</p>
-<p>The variable to compare against <a class="reference internal" href="#cmdoption-mariadb-stat--threshold"><em class="xref std std-option">--threshold</em></a>.  See also <a class="reference internal" href="#cmdoption-mariadb-stat--function"><em class="xref std std-option">--function</em></a>.</p>
+<p>The variable to compare against <a class="reference internal" href="#cmdoption-mariadb-stat-threshold"><code class="xref std std-option docutils literal notranslate"><span class="pre">--threshold</span></code></a>.  See also <a class="reference internal" href="#cmdoption-mariadb-stat-function"><code class="xref std std-option docutils literal notranslate"><span class="pre">--function</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--verbose">
-<tt class="descname">--verbose</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--verbose" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-verbose">
+<code class="sig-name descname">--verbose</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-verbose" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 2</p>
 <p>Print more or less information while running.  Since the tool is designed
 to be a long-running daemon, the default verbosity level only prints the
 most important information.  If you run the tool interactively, you may
 want to use a higher verbosity level.</p>
-<div class="highlight-bash"><div class="highlight"><pre>LEVEL <span class="nv">PRINTS</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>LEVEL <span class="nv">PRINTS</span>
 <span class="o">=====</span> <span class="o">=====================================</span>
-0     Errors
-1     Warnings
-2     Matching triggers and collection info
-3     Non-matching triggers
+<span class="m">0</span>     Errors
+<span class="m">1</span>     Warnings
+<span class="m">2</span>     Matching triggers and collection info
+<span class="m">3</span>     Non-matching triggers
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-stat--version">
-<tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-stat--version" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print tool&#8217;s version and exit.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-stat-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-stat-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print tool’s version and exit.</p>
 </dd></dl>
 
 </div>
@@ -784,21 +793,21 @@ be used in most cases.</p>
 <p>For example, during collection iostat is called with a -dx argument, but
 because you have an NFS partition, you also need the -n flag there.  Instead
 of editing the source, you can call <strong class="program">mariadb-stat</strong> as</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">CMD_IOSTAT</span><span class="o">=</span><span class="s2">&quot;iostat -n&quot;</span> mariadb-stat ...
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CMD_IOSTAT</span><span class="o">=</span><span class="s2">&quot;iostat -n&quot;</span> mariadb-stat ...
 </pre></div>
 </div>
 <p>which will do exactly what you need.  Combined with the plugin hooks, this
 gives you a fine-grained control of what the tool does.</p>
-<p>It is possible to enable <tt class="docutils literal"><span class="pre">debug</span></tt> mode in mysqladmin specifying:</p>
-<p><tt class="docutils literal"><span class="pre">CMD_MYSQLADMIN='mysqladmin</span> <span class="pre">debug'</span> <span class="pre">:program:`mariadb-stat`</span> <span class="pre">params</span> <span class="pre">...</span></tt></p>
+<p>It is possible to enable <code class="docutils literal notranslate"><span class="pre">debug</span></code> mode in mysqladmin specifying:</p>
+<p><code class="docutils literal notranslate"><span class="pre">CMD_MYSQLADMIN='mysqladmin</span> <span class="pre">debug'</span> <span class="pre">:program:`mariadb-stat`</span> <span class="pre">params</span> <span class="pre">...</span></code></p>
 </div>
 <div class="section" id="system-requirements">
 <h2>SYSTEM REQUIREMENTS<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>This tool requires Bash v3 or newer.  Certain options require other programs:</p>
-<p><a class="reference internal" href="#cmdoption-mariadb-stat--collect-gdb"><em class="xref std std-option">--collect-gdb</em></a> requires <tt class="docutils literal"><span class="pre">gdb</span></tt></p>
-<p><a class="reference internal" href="#cmdoption-mariadb-stat--collect-oprofile"><em class="xref std std-option">--collect-oprofile</em></a> requires <tt class="docutils literal"><span class="pre">opcontrol</span></tt> and <tt class="docutils literal"><span class="pre">opreport</span></tt></p>
-<p><a class="reference internal" href="#cmdoption-mariadb-stat--collect-strace"><em class="xref std std-option">--collect-strace</em></a> requires <tt class="docutils literal"><span class="pre">strace</span></tt></p>
-<p><a class="reference internal" href="#cmdoption-mariadb-stat--collect-tcpdump"><em class="xref std std-option">--collect-tcpdump</em></a> requires <tt class="docutils literal"><span class="pre">tcpdump</span></tt></p>
+<p><a class="reference internal" href="#cmdoption-mariadb-stat-collect-gdb"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect-gdb</span></code></a> requires <code class="docutils literal notranslate"><span class="pre">gdb</span></code></p>
+<p><a class="reference internal" href="#cmdoption-mariadb-stat-collect-oprofile"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect-oprofile</span></code></a> requires <code class="docutils literal notranslate"><span class="pre">opcontrol</span></code> and <code class="docutils literal notranslate"><span class="pre">opreport</span></code></p>
+<p><a class="reference internal" href="#cmdoption-mariadb-stat-collect-strace"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect-strace</span></code></a> requires <code class="docutils literal notranslate"><span class="pre">strace</span></code></p>
+<p><a class="reference internal" href="#cmdoption-mariadb-stat-collect-tcpdump"><code class="xref std std-option docutils literal notranslate"><span class="pre">--collect-tcpdump</span></code></a> requires <code class="docutils literal notranslate"><span class="pre">tcpdump</span></code></p>
 </div>
 <div class="section" id="authors">
 <h2>AUTHORS<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
@@ -808,7 +817,7 @@ and Brian Fraser</p>
 <div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
-Percona Toolkit&#8217;s pt-stalk in August, 2019. Percona Toolkit was forked from two
+Percona Toolkit’s pt-stalk in August, 2019. Percona Toolkit was forked from two
 projects in June, 2011: Maatkit and Aspersa.  Those projects were created by
 Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 </div>
@@ -816,13 +825,13 @@ Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
 <p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
-<p>THIS PROGRAM IS PROVIDED &#8220;AS IS&#8221; AND WITHOUT ANY EXPRESS OR IMPLIED
+<p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
 <p>This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
-systems, you can issue `man perlgpl&#8217; or `man perlartistic&#8217; to read these
+systems, you can issue `man perlgpl’ or `man perlartistic’ to read these
 licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -830,7 +839,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </div>
 <div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-stat</strong> 6.0.2</p>
+<p><strong class="program">mariadb-stat</strong> 6.0.2.1</p>
 </div>
 </div>
 
@@ -902,7 +911,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -924,5 +933,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
-
 

@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-query-digest" href="mariadb-query-digest.html" />
     <link rel="prev" title="mariadb-kill" href="mariadb-kill.html" /> 
@@ -170,35 +172,35 @@
 </div>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Create weekly partitions for the next quarter to test.part_table</span>
-mariadb-parted --add --interval w +1q <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span><span class="nb">test</span>,t<span class="o">=</span>part_table
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create weekly partitions for the next quarter to test.part_table</span>
+mariadb-parted --add --interval w +1q <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span>test,t<span class="o">=</span>part_table
 
-<span class="c"># Create daily partitions for the next 2 weeks</span>
-<span class="c"># starting exactly at the beginning of every day</span>
-mariadb-parted --add --interval d +2w.startof <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span><span class="nb">test</span>,t<span class="o">=</span>part_table
+<span class="c1"># Create daily partitions for the next 2 weeks</span>
+<span class="c1"># starting exactly at the beginning of every day</span>
+mariadb-parted --add --interval d +2w.startof <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span>test,t<span class="o">=</span>part_table
 
-<span class="c"># Email ops@example.com about partitions added</span>
+<span class="c1"># Email ops@example.com about partitions added</span>
 mariadb-parted --add --email-activity --email-to ops@example.com <span class="se">\</span>
-           --interval d +4w <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span><span class="nb">test</span>,t<span class="o">=</span>part_table
+           --interval d +4w <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span>test,t<span class="o">=</span>part_table
 
-<span class="c"># Drop partitions older than 8 weeks</span>
-mariadb-parted --drop -8w <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span><span class="nb">test</span>,t<span class="o">=</span>part_table
+<span class="c1"># Drop partitions older than 8 weeks</span>
+mariadb-parted --drop -8w <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span>test,t<span class="o">=</span>part_table
 
-<span class="c"># Drop partitions older than Dec 20th, 2010, but only 5 of them.</span>
-mariadb-parted --drop --limit 5 <span class="s1">&#39;2010-12-20 00:00:00&#39;</span> <span class="se">\</span>
-           <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span><span class="nb">test</span>,t<span class="o">=</span>part_table
+<span class="c1"># Drop partitions older than Dec 20th, 2010, but only 5 of them.</span>
+mariadb-parted --drop --limit <span class="m">5</span> <span class="s1">&#39;2010-12-20 00:00:00&#39;</span> <span class="se">\</span>
+           <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span>test,t<span class="o">=</span>part_table
 
-<span class="c"># Drop and archive partitions older than 2 quarters ago.</span>
+<span class="c1"># Drop and archive partitions older than 2 quarters ago.</span>
 mariadb-parted --drop --archive --archive-path /backups -2q <span class="se">\</span>
-           <span class="nv">h</span><span class="o">=</span>locahost,D<span class="o">=</span><span class="nb">test</span>,t<span class="o">=</span>part_table
+           <span class="nv">h</span><span class="o">=</span>locahost,D<span class="o">=</span>test,t<span class="o">=</span>part_table
 
-<span class="c"># Same as above, but archived to a separate database.</span>
+<span class="c1"># Same as above, but archived to a separate database.</span>
 mariadb-parted --drop --archive --archive-database <span class="nv">h</span><span class="o">=</span>remotehost,D<span class="o">=</span>test_archives,t<span class="o">=</span>part_table -2q <span class="se">\</span>
-           <span class="nv">h</span><span class="o">=</span>locahost,D<span class="o">=</span><span class="nb">test</span>,t<span class="o">=</span>part_table
+           <span class="nv">h</span><span class="o">=</span>locahost,D<span class="o">=</span>test,t<span class="o">=</span>part_table
 
-<span class="c"># Logging to syslog</span>
+<span class="c1"># Logging to syslog</span>
 mariadb-parted --logfile syslog:LOCAL0 --add --interval d 1y <span class="se">\</span>
-           <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span><span class="nb">test</span>,t<span class="o">=</span>part_table
+           <span class="nv">h</span><span class="o">=</span>localhost,D<span class="o">=</span>test,t<span class="o">=</span>part_table
 </pre></div>
 </div>
 </div>
@@ -207,14 +209,14 @@ mariadb-parted --logfile syslog:LOCAL0 --add --interval d 1y <span class="se">\<
 <p><strong class="program">mariadb-parted</strong> [options] ACTION TIMESPEC DSN</p>
 <p>This tool assists in the creation of partitions in regular intervals.
 It creates partitions in regular intervals up to some maximum future date.</p>
-<div class="highlight-bash"><div class="highlight"><pre>--help,          -h   This help. See C&lt;perldoc mariadb-parted&gt; <span class="k">for </span>full docs.
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--help,          -h   This help. See C&lt;perldoc mariadb-parted&gt; <span class="k">for</span> full docs.
 --dryrun,        -n   Report on actions without taking them.
 --logfile,       -L   Direct output to given logfile. Default: none.
 
 --email-activity      Send a brief email report of actions taken.
                       The email is sent to --email-to.
 --use-hours          Use hours instead of days when checking partitions.
---partcol-integer     Assume no partitioning <span class="nb">time </span>or date <span class="k">function </span>in use
+--partcol-integer     Assume no partitioning <span class="nb">time</span> or date <span class="k">function</span> in use
 --email-to,      -E   Where to send activity and failure emails.
                       Default: none.
 
@@ -227,22 +229,22 @@ It creates partitions in regular intervals up to some maximum future date.</p>
                       Default: none
 
 --limit,         -m   Limit the number of actions to be performed.
-                      Default: 0 <span class="o">(</span>unlimited<span class="o">)</span>
+                      Default: <span class="m">0</span> <span class="o">(</span>unlimited<span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="action">
 <h2>ACTION<a class="headerlink" href="#action" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre>--add   Add partitions.
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--add   Add partitions.
 --drop  Remove partitions.
 </pre></div>
 </div>
 </div>
 <div class="section" id="timespec">
 <h2>TIMESPEC<a class="headerlink" href="#timespec" title="Permalink to this headline">¶</a></h2>
-<p>A timespec is a &#8220;natural&#8221; string to specify how far in advance to create
+<p>A timespec is a “natural” string to specify how far in advance to create
 partitions. A sampling of possible timespecs:</p>
-<div class="highlight-bash"><div class="highlight"><pre>1w <span class="o">(</span>create partitions one week in advance<span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>1w <span class="o">(</span>create partitions one week in advance<span class="o">)</span>
 1m <span class="o">(</span>one month<span class="o">)</span>
 2q <span class="o">(</span>two quarters<span class="o">)</span>
 5h <span class="o">(</span>five hours<span class="o">)</span>
@@ -253,210 +255,198 @@ partitions. A sampling of possible timespecs:</p>
 <div class="section" id="dsn">
 <h2>DSN<a class="headerlink" href="#dsn" title="Permalink to this headline">¶</a></h2>
 <p>DSNs, such as those passed as option values, or arguments to a program
-are of the format: <tt class="docutils literal"><span class="pre">({key}={value}(,{key}={value})*</span></tt>. That is, a <tt class="docutils literal"><span class="pre">key=value</span></tt> pair, followed
-by a comma, followed by any number of additional <tt class="docutils literal"><span class="pre">key=value</span></tt> pairs separated by
+are of the format: <code class="docutils literal notranslate"><span class="pre">({key}={value}(,{key}={value})*</span></code>. That is, a <code class="docutils literal notranslate"><span class="pre">key=value</span></code> pair, followed
+by a comma, followed by any number of additional <code class="docutils literal notranslate"><span class="pre">key=value</span></code> pairs separated by
 commas.</p>
 <div class="section" id="id1">
 <h3>Examples<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">h</span><span class="o">=</span>testdb1,u<span class="o">=</span>pdb,p<span class="o">=</span>frogs
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">h</span><span class="o">=</span>testdb1,u<span class="o">=</span>pdb,p<span class="o">=</span>frogs
 <span class="nv">h</span><span class="o">=</span>localhost,S<span class="o">=</span>/tmp/mysql.sock,u<span class="o">=</span>root,F<span class="o">=</span>/root/my.cnf
 </pre></div>
 </div>
-<p>Where &#8216;h&#8217; is a hostname, &#8216;S&#8217; is a socket path, &#8216;u&#8217; is a user, &#8216;F&#8217; is a path
-to a defaults file, and &#8216;p&#8217; is a password. These are non-exhaustive examples.</p>
+<p>Where ‘h’ is a hostname, ‘S’ is a socket path, ‘u’ is a user, ‘F’ is a path
+to a defaults file, and ‘p’ is a password. These are non-exhaustive examples.</p>
 </div>
 </div>
 <div class="section" id="id2">
 <h2>TIMESPEC<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>A timespec is one of:</p>
-<div class="highlight-bash"><div class="highlight"><pre>A modifier to current <span class="nb">local time</span>,
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>A modifier to current <span class="nb">local</span> time,
 A unix timestamp <span class="o">(</span>assumed in UTC<span class="o">)</span>,
-The string <span class="s1">&#39;now&#39;</span> to refer to current <span class="nb">local time</span>,
-An absolute <span class="nb">time </span>in <span class="s1">&#39;YYYY-MM-DD HH:MM:SS&#39;</span> format,
-An absolute <span class="nb">time </span>in <span class="s1">&#39;YYYY-MD-DD HH:MM:SS TIMEZONE&#39;</span> format.
+The string <span class="s1">&#39;now&#39;</span> to refer to current <span class="nb">local</span> time,
+An absolute <span class="nb">time</span> in <span class="s1">&#39;YYYY-MM-DD HH:MM:SS&#39;</span> format,
+An absolute <span class="nb">time</span> in <span class="s1">&#39;YYYY-MD-DD HH:MM:SS TIMEZONE&#39;</span> format.
 </pre></div>
 </div>
 <p>For the purposes of this module, TIMEZONE refers to zone names
 created and maintained by the zoneinfo database.
 See <a class="reference external" href="http://en.wikipedia.org/wiki/Tz_database">http://en.wikipedia.org/wiki/Tz_database</a> for more information.
 Commonly used zone names are: Etc/UTC, US/Pacific and US/Eastern.</p>
-<p>Since the last four aren&#8217;t very complicated, this section describes
+<p>Since the last four aren’t very complicated, this section describes
 what the modifiers are.</p>
 <p>A modifer is, an optional plus or minus sign followed by a number,
 and then one of:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">y</span> <span class="o">=</span> year, <span class="nv">q</span> <span class="o">=</span> quarter , <span class="nv">m</span> <span class="o">=</span> month, <span class="nv">w</span> <span class="o">=</span> week, <span class="nv">d</span> <span class="o">=</span> day, <span class="nv">h</span> <span class="o">=</span> hour
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">y</span> <span class="o">=</span> year, <span class="nv">q</span> <span class="o">=</span> quarter , <span class="nv">m</span> <span class="o">=</span> month, <span class="nv">w</span> <span class="o">=</span> week, <span class="nv">d</span> <span class="o">=</span> day, <span class="nv">h</span> <span class="o">=</span> hour
 </pre></div>
 </div>
-<p>Followed optionally by a space or a period and &#8216;startof&#8217;.
+<p>Followed optionally by a space or a period and ‘startof’.
 Which is described in the next section.</p>
 <p>Some examples (the time is assumed to be 00:00:00):</p>
-<div class="highlight-bash"><div class="highlight"><pre>-1y         <span class="o">(</span>2010-11-01 -&gt; 2009-11-01<span class="o">)</span>
- 5d         <span class="o">(</span>2010-12-10 -&gt; 2010-12-15<span class="o">)</span>
--1w         <span class="o">(</span>2010-12-13 -&gt; 2010-12-07<span class="o">)</span>
--1q startof <span class="o">(</span>2010-05-01 -&gt; 2010-01-01<span class="o">)</span>
- 1q.startof <span class="o">(</span>2010-05-01 -&gt; 2010-07-01<span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-1y         <span class="o">(</span><span class="m">2010</span>-11-01 -&gt; <span class="m">2009</span>-11-01<span class="o">)</span>
+ 5d         <span class="o">(</span><span class="m">2010</span>-12-10 -&gt; <span class="m">2010</span>-12-15<span class="o">)</span>
+-1w         <span class="o">(</span><span class="m">2010</span>-12-13 -&gt; <span class="m">2010</span>-12-07<span class="o">)</span>
+-1q startof <span class="o">(</span><span class="m">2010</span>-05-01 -&gt; <span class="m">2010</span>-01-01<span class="o">)</span>
+ 1q.startof <span class="o">(</span><span class="m">2010</span>-05-01 -&gt; <span class="m">2010</span>-07-01<span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="startof">
 <h2>startof<a class="headerlink" href="#startof" title="Permalink to this headline">¶</a></h2>
-<p>The &#8216;startof&#8217; modifier for timespecs is a little confusing,
+<p>The ‘startof’ modifier for timespecs is a little confusing,
 but, is the only sane way to achieve latching like behavior.
 It adjusts the reference time so that it starts at the beginning
-of the requested type of interval. So, if you specify <tt class="docutils literal"><span class="pre">-1h</span> <span class="pre">startof</span></tt>,
-and the current time is: <tt class="docutils literal"><span class="pre">2010-12-03</span> <span class="pre">04:33:56</span></tt>, first the calculation
-throws away <tt class="docutils literal"><span class="pre">33:56</span></tt> to get: <tt class="docutils literal"><span class="pre">2010-12-03</span> <span class="pre">04:00:00</span></tt>, and then subtracts
-one hour to yield: <tt class="docutils literal"><span class="pre">2010-12-03</span> <span class="pre">03:00:00</span></tt>.</p>
-<p>Diagram of the &#8216;startof&#8217; operator for timespec <tt class="docutils literal"><span class="pre">-1q</span> <span class="pre">startof</span></tt>,
-given the date <tt class="docutils literal"><span class="pre">2010-05-01</span> <span class="pre">00:00</span></tt>.</p>
-<div class="highlight-bash"><div class="highlight"><pre>        R P   C
+of the requested type of interval. So, if you specify <code class="docutils literal notranslate"><span class="pre">-1h</span> <span class="pre">startof</span></code>,
+and the current time is: <code class="docutils literal notranslate"><span class="pre">2010-12-03</span> <span class="pre">04:33:56</span></code>, first the calculation
+throws away <code class="docutils literal notranslate"><span class="pre">33:56</span></code> to get: <code class="docutils literal notranslate"><span class="pre">2010-12-03</span> <span class="pre">04:00:00</span></code>, and then subtracts
+one hour to yield: <code class="docutils literal notranslate"><span class="pre">2010-12-03</span> <span class="pre">03:00:00</span></code>.</p>
+<p>Diagram of the ‘startof’ operator for timespec <code class="docutils literal notranslate"><span class="pre">-1q</span> <span class="pre">startof</span></code>,
+given the date <code class="docutils literal notranslate"><span class="pre">2010-05-01</span> <span class="pre">00:00</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>        R P   C
         v v   v
- ---.---.---.---.---.--- Dec 2010
+ ---.---.---.---.---.--- Dec <span class="m">2010</span>
  ^   ^   ^   ^   ^   ^
  Jul Oct Jan Apr Jul Oct
-2009    2010
+<span class="m">2009</span>    <span class="m">2010</span>
 
 . <span class="o">=</span> quarter separator
 <span class="nv">C</span> <span class="o">=</span> current quarter
 <span class="nv">P</span> <span class="o">=</span> previous quarter
-<span class="nv">R</span> <span class="o">=</span> Resultant <span class="nb">time</span> <span class="o">(</span>2010-01-01 00:00:00<span class="o">)</span>
+<span class="nv">R</span> <span class="o">=</span> Resultant <span class="nb">time</span> <span class="o">(</span><span class="m">2010</span>-01-01 <span class="m">00</span>:00:00<span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">--help</span>, <span class="option">-h</span></kbd></td>
-<td>This help.</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--dryrun</span>, <span class="option">-n</span></kbd></td>
-<td><p class="first">Report on actions that would be taken. Works best with the <tt class="docutils literal"><span class="pre">Pdb_DEBUG</span></tt> environment variable set to true.</p>
-<p class="last">See also: ENVIRONMENT</p>
-</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--logfile</span>, <span class="option">-L</span></kbd></td>
-<td><p class="first">Path to a file for logging, or, <tt class="docutils literal"><span class="pre">syslog:&lt;facility&gt;</span></tt>
-Where <tt class="docutils literal"><span class="pre">&lt;facility&gt;</span></tt> is a pre-defined logging facility for this machine.</p>
-<p class="last">See also: syslog(3), syslogd(8), syslog.conf(5)</p>
-</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--email-to</span>, <span class="option">-E</span></kbd></td>
-<td><p class="first">Where to send emails.</p>
-<p class="last">This tool can send emails on failure, and whenever it adds, drops, or archive partitions.
+<dl class="option-list">
+<dt><kbd><span class="option">--help</span>, <span class="option">-h</span></kbd></dt>
+<dd><p>This help.</p>
+</dd>
+<dt><kbd><span class="option">--dryrun</span>, <span class="option">-n</span></kbd></dt>
+<dd><p>Report on actions that would be taken. Works best with the <code class="docutils literal notranslate"><span class="pre">Pdb_DEBUG</span></code> environment variable set to true.</p>
+<p>See also: ENVIRONMENT</p>
+</dd>
+<dt><kbd><span class="option">--logfile</span>, <span class="option">-L</span></kbd></dt>
+<dd><p>Path to a file for logging, or, <code class="docutils literal notranslate"><span class="pre">syslog:&lt;facility&gt;</span></code>
+Where <code class="docutils literal notranslate"><span class="pre">&lt;facility&gt;</span></code> is a pre-defined logging facility for this machine.</p>
+<p>See also: syslog(3), syslogd(8), syslog.conf(5)</p>
+</dd>
+<dt><kbd><span class="option">--email-to</span>, <span class="option">-E</span></kbd></dt>
+<dd><p>Where to send emails.</p>
+<p>This tool can send emails on failure, and whenever it adds, drops, or archive partitions.
 Ordinarily, it will only send emails on failure.</p>
-</td></tr>
-</tbody>
-</table>
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--email-activity">
-<tt class="descname">--email-activity</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--email-activity" title="Permalink to this definition">¶</a></dt>
+</dd>
+</dl>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-email-activity">
+<code class="sig-name descname">--email-activity</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-email-activity" title="Permalink to this definition">¶</a></dt>
 <dd><p>If this flag is present, then this will make the tool also email
 whenver it adds, drops, or archives a partition.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--use-hours">
-<tt class="descname">--use-hours</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--use-hours" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-use-hours">
+<code class="sig-name descname">--use-hours</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-use-hours" title="Permalink to this definition">¶</a></dt>
 <dd><p>If this flag is present, then partitions will be checked on the hour and not on the day.
 Useful when you need to partition by hour.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--partcol-integer">
-<tt class="descname">--partcol-integer</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--partcol-integer" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-partcol-integer">
+<code class="sig-name descname">--partcol-integer</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-partcol-integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>If this flag is present, then the tool will assume there is no partitioning function
 defined, e.g. if you are storing your date into an integer column</p>
 </dd></dl>
 
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">--prefix</span>, <span class="option">-P</span></kbd></td>
-<td>Prefix for partition names. Partitions are always named like: &lt;prefix&gt;N.
-Where N is a number. Default is &#8216;p&#8217;, which was observed to be the most common prefix.</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--interval</span>, <span class="option">-i</span></kbd></td>
-<td><p class="first">type: string one of: d w m y</p>
-<p class="last">Specifies the size of the each partition for the &#8211;add action.
-&#8216;d&#8217; is day, &#8216;w&#8217; is week, &#8216;m&#8217; is month, and &#8216;y&#8217; is year.</p>
-</td></tr>
-</tbody>
-</table>
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--limit">
-<tt class="descname">--limit</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--limit" title="Permalink to this definition">¶</a></dt>
+<dl class="option-list">
+<dt><kbd><span class="option">--prefix</span>, <span class="option">-P</span></kbd></dt>
+<dd><p>Prefix for partition names. Partitions are always named like: &lt;prefix&gt;N.
+Where N is a number. Default is ‘p’, which was observed to be the most common prefix.</p>
+</dd>
+<dt><kbd><span class="option">--interval</span>, <span class="option">-i</span></kbd></dt>
+<dd><p>type: string one of: d w m y</p>
+<p>Specifies the size of the each partition for the –add action.
+‘d’ is day, ‘w’ is week, ‘m’ is month, and ‘y’ is year.</p>
+</dd>
+</dl>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-limit">
+<code class="sig-name descname">--limit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specifies a limit to the number of partitions to add, drop, or archive.
 By default this is unlimited (0), so, for testing one usually wishes to set
 this to 1.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--archive">
-<tt class="descname">--archive</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--archive" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-archive">
+<code class="sig-name descname">--archive</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-archive" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean</p>
 <p>mysqldump partitions to files <strong>in the current directory</strong> named like &lt;host&gt;.&lt;schema&gt;.&lt;table&gt;.&lt;partition_name&gt;.sql</p>
 <p>There is not currently a way to archive without dropping a partition.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--archive-path">
-<tt class="descname">--archive-path</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--archive-path" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-archive-path">
+<code class="sig-name descname">--archive-path</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-archive-path" title="Permalink to this definition">¶</a></dt>
 <dd><p>What directory to place the SQL dumps of partition data in.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--archive-database">
-<tt class="descname">--archive-database</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--archive-database" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-archive-database">
+<code class="sig-name descname">--archive-database</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-archive-database" title="Permalink to this definition">¶</a></dt>
 <dd><p>What database to place the archived partitions in.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="actions">
 <h2>ACTIONS<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h2>
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--add">
-<tt class="descname">--add</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--add" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds partitions till there are at least TIMESPEC &#8211;interval sized future buckets.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-add">
+<code class="sig-name descname">--add</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds partitions till there are at least TIMESPEC –interval sized future buckets.</p>
 <p>The adding of partitions is not done blindly. This will only add new partitions
 if there are fewer than TIMESPEC future partitions. For example:</p>
-<div class="highlight-bash"><div class="highlight"><pre>Given: --interval d, today is: 2011-01-15, TIMESPEC is: +1w,
-       last partition <span class="o">(</span>p5<span class="o">)</span> is <span class="k">for </span>2011-01-16;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Given: --interval d, today is: <span class="m">2011</span>-01-15, TIMESPEC is: +1w,
+       last partition <span class="o">(</span>p5<span class="o">)</span> is <span class="k">for</span> <span class="m">2011</span>-01-16<span class="p">;</span>
 
 Result:
-  Parted will add 6 partitions to make the last partition 2011-01-22 <span class="o">(</span>p11<span class="o">)</span>.
+  Parted will add <span class="m">6</span> partitions to make the last partition <span class="m">2011</span>-01-22 <span class="o">(</span>p11<span class="o">)</span>.
 
 Before:
- |---+|
+ <span class="p">|</span>---+<span class="p">|</span>
 p0  p5
 
 After:
- |---+-----|
+ <span class="p">|</span>---+-----<span class="p">|</span>
 p0  p5    p11
 </pre></div>
 </div>
-<p>You can think of <tt class="docutils literal"><span class="pre">--add</span></tt> as specifying a required minimum safety zone.</p>
+<p>You can think of <code class="docutils literal notranslate"><span class="pre">--add</span></code> as specifying a required minimum safety zone.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-parted--drop">
-<tt class="descname">--drop</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-parted--drop" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-parted-drop">
+<code class="sig-name descname">--drop</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-parted-drop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Drops partitions strictly older than TIMESPEC.
 The partitions are not renumbered to start with p0 again.</p>
-<div class="highlight-bash"><div class="highlight"><pre>Given: today is: 2011-01-15, TIMESPEC is: -1w,
-       first partition <span class="o">(</span>p0<span class="o">)</span> is <span class="k">for </span>2011-01-06
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Given: today is: <span class="m">2011</span>-01-15, TIMESPEC is: -1w,
+       first partition <span class="o">(</span>p0<span class="o">)</span> is <span class="k">for</span> <span class="m">2011</span>-01-06
 
-Result: 2 partitions will be dropped.
+Result: <span class="m">2</span> partitions will be dropped.
 
-Before: |-----+--|
-        0     6  9
-After : |---+--|
-        2   6  9
+Before: <span class="p">|</span>-----+--<span class="p">|</span>
+        <span class="m">0</span>     <span class="m">6</span>  <span class="m">9</span>
+After : <span class="p">|</span>---+--<span class="p">|</span>
+        <span class="m">2</span>   <span class="m">6</span>  <span class="m">9</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -464,7 +454,7 @@ After : |---+--|
 </div>
 <div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
-<p>Due to legacy reasons, this tool respond to the environment variable <tt class="docutils literal"><span class="pre">Pdb_DEBUG</span></tt>
+<p>Due to legacy reasons, this tool respond to the environment variable <code class="docutils literal notranslate"><span class="pre">Pdb_DEBUG</span></code>
 instead of PTDEBUG. This variable, when set to true, enables additional (very
 verbose) output from the tool.</p>
 </div>
@@ -476,19 +466,19 @@ installed in any reasonably new version of Perl.</p>
 <div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
-PalominoDB&#8217;s pdb-parted in 2019.</p>
+PalominoDB’s pdb-parted in 2019.</p>
 </div>
 <div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
 <p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2009-2013 PalominoDB, Inc.</p>
-<p>THIS PROGRAM IS PROVIDED &#8220;AS IS&#8221; AND WITHOUT ANY EXPRESS OR IMPLIED
+<p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
 <p>This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
-systems, you can issue `man perlgpl&#8217; or `man perlartistic&#8217; to read these
+systems, you can issue `man perlgpl’ or `man perlartistic’ to read these
 licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -496,7 +486,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </div>
 <div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-parted</strong> 6.0.2</p>
+<p><strong class="program">mariadb-parted</strong> 6.0.2.1</p>
 </div>
 </div>
 
@@ -571,7 +561,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -593,5 +583,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
-
 
