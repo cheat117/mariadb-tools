@@ -17,23 +17,31 @@ allows you to manage and/or schedule any of them to your liking.
 
 Backup manager currently supports the following backup tools:
 
-- mariabackup (binary backup)
+*
 
-- xtrabackup (binary backup)
+ mariabackup (binary backup)
 
-- mydumper (logical backup)
+*
 
-- mysqldump (logical backup, either all schemas or selected schemas)
+ xtrabackup (binary backup)
 
-- binlogs (backup of binary logs)
+*
 
-Backup manager uses a configuration file called *backup_manager.cnf* and located
+ mydumper (logical backup)
+
+*
+
+ mysqldump (logical backup, either all schemas or selected schemas)
+
+*
+
+ binlogs (backup of binary logs)
+
+Backup manager uses a configuration file called *backup_manager.cnf* and located 
 in */etc/mariadb*. You can generate a template file (with comments) by running 
 the following command:
 
-.. code-block:: shell
-
-    mariadb-backup-manager build-config
+*backup_manager build-config*
 
 The tool will create the config file for you, that will need to be adjusted
 according to your configuration.
@@ -45,13 +53,13 @@ both binary and logical backups by specifying them at different times, eg. the
 following crontab file will take a full binary backup every night at midnight, 
 incrementals every hour at the half hour, and a logical backup on mondays at 5am:
 
-0 0 * * * root /usr/local/sbin/mariadb-backup-manager backup mariabackup full
+0 0 * * * root /usr/local/sbin/backup_manager backup mariabackup full
 
-30 * * * * root /usr/local/sbin/mariadb-backup-manager backup mariabackup incr
+30 * * * * root /usr/local/sbin/backup_manager backup mariabackup incr
 
-0 5 * * 1 root /usr/local/sbin/mariadb-backup-manager backup mysqldump
+0 5 * * 1 root /usr/local/sbin/backup_manager backup mysqldump
 
-0 4 * * * root /usr/local/sbin/mariadb-backup-manager purge
+0 4 * * * root /usr/local/sbin/backup_manager purge
 
 Backup retention is automatically handled by running the purge command nightly.
 You can specify the desired retention by configuring the *purge_days* option, this will 
@@ -78,9 +86,7 @@ TAKING BACKUPS
 
 To manually perform a backup, just run:
 
-.. code-block:: shell
-
-    mariadb-backup-manager backup <backup_tool> <level>
+*backup_manager backup <backup_tool> <level>*
 
 where *backup_tool* is one of the supported backup tools (see above) and *level* is
 either ``full`` or ``incr``. Please be aware that only binary backups support incremental 
@@ -88,9 +94,7 @@ backups.
 
 To backup binary logs for the server, just run the following
 
-.. code-block:: shell
-
-    mariadb-backup-manager backup binlogs
+*backup_manager backup binlogs*
 
 The above requires that you have run at least one full backup in order to work. After 
 that, it will keep track of which binlogs have been already backed up and only 
@@ -101,9 +105,7 @@ BROWSING BACKUPS
 
 To browse the inventory of available backups, and see their <backup_id>,  you can run:
 
-.. code-block:: shell
-
-    mariadb-backup-manager inventory pretty* (can be abbreviated *inv pretty*
+*backup_manager inventory pretty* (can be abbreviated *inv pretty*)
 
 If you omit the *pretty* option, script will show more inventory details including 
 compression and encryption used by each backup, actual paths to files, etcetera.
@@ -111,41 +113,29 @@ compression and encryption used by each backup, actual paths to files, etcetera.
 You can see the point in time of each backup piece and binlogs related information
 by running:
 
-.. code-block:: shell
-
-    mariadb-backup-manager list binlogs
+*backup_manager list binlogs*
 
 RESTORING BACKUPS
 =================
 
 To perform a restore, just run:
 
-.. code-block:: shell
-
-    mariadb-backup-manager restore <backup_id> <target_dir>
+*backup_manager restore <backup_id> <target_dir>*
 
 Make sure you have enough disk space on the *target_dir* filesystem first!
 These are the possible restore options:
 
 * 	classic restore to a destination folder:
-.. code-block:: shell
-
-     mariadb-backup-manager restore <backup_id> <target_dir>
+	*backup_manager restore <backup_id> <target_dir>*
 
 * 	performing an automatic restore test:
-.. code-block:: shell
-
-     mariadb-backup-manager restore test
+	*backup_manager restore test*
 
 * 	streaming a restore to stdout (notice the final "-"):
-.. code-block:: shell
-
-     mariadb-backup-manager restore <backup_id> -
+	*backup_manager restore <backup_id> -*
 
 * 	restoring to a specified point in time:
-.. code-block:: shell
-
-     mariadb-backup-manager restore <backup_id> <target_dir> <point-in-time>
+	*backup_manager restore <backup_id> <target_dir> <point-in-time>*
 
 This script supports performing an automatic restore test, that can be run regularly 
 from crontab to ensure that the backup can actually be restored without issues; it
@@ -158,9 +148,7 @@ It is also possible to stream the (binary) backup instead of restoring to a
 When this option is used only the full backup is restored, even if there are available 
 incrementals.  Example of streaming-restore a mariabackup:
 
-.. code-block:: shell
-
-    mariadb-backup-manager restore <backup_id> - | ssh anotherhost * *mbstream -x ...
+*backup_manager restore <backup_id> - | ssh anotherhost mbstream -x ...*
 
 You can restore to a specific point in time if you are taking backups of binary logs.
 The requested point in time can be specified either as *file:position* or as a timestamp
@@ -170,7 +158,7 @@ to prevent the shell from eating the whitespace).
 The result of a restore of a binary backup to a folder will be a prepared datadir 
 that can be used to start a MariaDB server (remember to change ownership of the files
 before starting). When restoring a logical backup taken with mysqldump, you need 
-to pipe the output of :program:`mariadb-backup-manager to the mysql command line client using the 
+to pipe the output of backup_manager to the mysql command line client using the 
 appropriate options. When restoring a logical backup taken with mydumper, you are 
 left with a manual task due to the way this backup tool works; just use myloader 
 and give *target_dir* as source directory.
@@ -186,14 +174,10 @@ When using mysqldump as the backup tool it is possible to either dump the entire
 alternatively perform a dump of selected schemas.
 
 * to dump all schemas:
-.. code-block:: shell
-
-    mariadb-backup-manager backup mysqldump
+*backup_manager backup mysqldump*
 
 * to dump *schema1* and *schema2* only:
-.. code-block:: shell
-
-    mariadb-backup-manager backup mysqldump schema1,schema2
+*backup_manager backup mysqldump schema1,schema2*
 
 PURGING BACKUPS
 ===============
@@ -201,30 +185,22 @@ PURGING BACKUPS
 To purge old backups, just run one of the following:
 
 * to purge any expired backup based on the configured retention:
-.. code-block:: shell
-
-    mariadb-backup-manager purge
+*backup_manager purge*
 
 * to purge the specified *backup_id* only:
-.. code-block:: shell
-
-    mariadb-backup-manager purge <backup_id>
+*backup_manager purge <backup_id>*
 
 To see what would be purged by the configured retention without actually purging 
 anything, you can run:
 
-.. code-block:: shell
-
-    mariadb-backup-manager purge dry-run
+*backup_manager purge dry-run*
 
 LOGGING
 =======
 
 To see logfiles for a specific backup id just run the following command:
 
-.. code-block:: shell
-
-    mariadb-backup-manager logs <backup_id>
+*backup_manager logs <backup_id>*
 
 If the backup is still running this command will automatically tail the log end, so it can 
 be used to watch progress.
@@ -236,9 +212,7 @@ You can use backup manager to automatically build another slave server, includin
 setup (new slave will have same master as backup server).
 The syntax is as follows:
 
-.. code-block:: shell
-
-    mariadb-backup-manager build-slave <target_server> <target_directory>
+*backup_manager build-slave <target_server> <target_directory>*
 
 The new slave will be build using the most recent available binary full backup.
 *target_server* must be the hostname or IP address of a running server and *target_directory* 
@@ -312,23 +286,19 @@ Example:
 3.
 
  Create a random key and save it to a file, eg:
-.. code-block:: shell
-
-     openssl rand -base64 32 > /etc/backup.key
+ *openssl rand -base64 32 > /etc/backup.key*
 
 4.
 
  Run the secure backup by connecting via ssh to the backup server:
-.. code-block:: shell
-
-    enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server 
-    /usr/local/sbin/mariadb-backup-manager backup mariabackup full
+ *enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server *
+ */usr/local/sbin/backup_manager backup mariabackup full*
 
 Example of restoring an encrypted backup (assumes key is still in the above file):
-.. code-block:: shell
 
-    /enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server 
-    /usr/local/sbin/mariadb-backup-manager restore <backup_id> <target_dir>
+
+ *enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server *
+ */usr/local/sbin/backup_manager restore <backup_id> <target_dir>*
 
 AUTHOR
 ======
@@ -343,7 +313,7 @@ This tool is part of MariaDB client tools.
 COPYRIGHT, LICENSE, AND WARRANTY
 ================================
 
-This program is copyright 2019-2021 MariaDB Corporation and/or its affiliates.
+This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates.
 THIS PROGRAM IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -359,5 +329,5 @@ Place, Suite 330, Boston, MA  02111-1307  USA.
 VERSION
 =======
 
-mariadb-backup-manager v6.0.1rc
+:program:`mariadb-backup-manager` 6.0.2.1
 

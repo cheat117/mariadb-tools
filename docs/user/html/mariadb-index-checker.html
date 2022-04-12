@@ -23,24 +23,20 @@
     </style>
     <title>mariadb-index-checker &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,15 +164,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="mariadb-index-checker">
+  <div class="section" id="mariadb-index-checker">
 <h1><strong class="program">mariadb-index-checker</strong><a class="headerlink" href="#mariadb-index-checker" title="Permalink to this headline">¶</a></h1>
-<section id="name">
+<div class="section" id="name">
 <h2>NAME<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-index-checker</strong> - Find duplicate indexes and foreign keys on MariaDB tables.</p>
-</section>
-<section id="synopsis">
+</div>
+<div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<section id="usage">
+<div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">index</span><span class="o">-</span><span class="n">checker</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="n">DSN</span><span class="p">]</span>
 </pre></div>
@@ -186,9 +182,9 @@ indexes and foreign keys.  Connection options are read from MariaDB option files
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-index-checker --host host1
 </pre></div>
 </div>
-</section>
-</section>
-<section id="risks">
+</div>
+</div>
+<div class="section" id="risks">
 <h2>RISKS<a class="headerlink" href="#risks" title="Permalink to this headline">¶</a></h2>
 <p>MariaDB Tools is mature, proven in the real world, and well tested,
 but all database tools can pose a risk to the system and the database
@@ -199,8 +195,8 @@ server.  Before using this tool, please:</p>
 <li><p>Test the tool on a non-production server</p></li>
 <li><p>Backup your production server and verify the backups</p></li>
 </ul>
-</section>
-<section id="description">
+</div>
+<div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>This program examines the output of SHOW CREATE TABLE on MariaDB tables, and if
 it finds indexes that cover the same columns as another index in the same
@@ -214,28 +210,28 @@ table.</p>
 <p>The output ends with a short summary that includes an estimate of the total
 size, in bytes, that the duplicate indexes are using. This is calculated by
 multiplying the index length by the number of rows in their respective tables.</p>
-</section>
-<section id="options">
+</div>
+<div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>This tool accepts additional command-line arguments.  Refer to the
 “SYNOPSIS” and usage information for details.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-all-structs">
-<span class="sig-name descname"><span class="pre">--all-structs</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-all-structs" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-all-structs">
+<code class="sig-name descname">--all-structs</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-all-structs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare indexes with different structs (BTREE, HASH, etc).</p>
 <p>By default this is disabled, because a BTREE index that covers the same columns
 as a FULLTEXT index is not really a duplicate, for example.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-ask-pass">
-<span class="sig-name descname"><span class="pre">--ask-pass</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-ask-pass" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-charset">
-<span class="sig-name descname"><span class="pre">--charset</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-charset" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-charset">
+<code class="sig-name descname">--charset</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -A; type: string</p>
 <p>Default character set.  If the value is utf8, sets Perl’s binmode on
 STDOUT to utf8, passes the mysql_enable_utf8 option to DBD::mysql, and runs SET
@@ -244,8 +240,8 @@ without the utf8 layer, and runs SET NAMES after connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-no-clustered">
-<span class="sig-name descname"><span class="pre">--[no]clustered</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-no-clustered" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-no-clustered">
+<code class="sig-name descname">--[no]clustered</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-no-clustered" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>PK columns appended to secondary key is duplicate.</p>
 <p>Detects when a suffix of a secondary key is a leftmost prefix of the primary
@@ -278,93 +274,93 @@ keys, you should run the tool again.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-config">
-<span class="sig-name descname"><span class="pre">--config</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-config" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Read this comma-separated list of config files; if specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-databases">
-<span class="sig-name descname"><span class="pre">--databases</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-databases" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-databases">
+<code class="sig-name descname">--databases</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-databases" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -d; type: hash</p>
 <p>Check only this comma-separated list of databases.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-defaults-file">
-<span class="sig-name descname"><span class="pre">--defaults-file</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-defaults-file" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read mysql options from the given file.  You must give an absolute pathname.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-engines">
-<span class="sig-name descname"><span class="pre">--engines</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-engines" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-engines">
+<code class="sig-name descname">--engines</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-engines" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -e; type: hash</p>
 <p>Check only tables whose storage engine is in this comma-separated list.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-help">
-<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-help" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-host">
-<span class="sig-name descname"><span class="pre">--host</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-host" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Connect to host.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-ignore-databases">
-<span class="sig-name descname"><span class="pre">--ignore-databases</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-ignore-databases" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-ignore-databases">
+<code class="sig-name descname">--ignore-databases</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-ignore-databases" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Hash</p>
 <p>Ignore this comma-separated list of databases.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-ignore-engines">
-<span class="sig-name descname"><span class="pre">--ignore-engines</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-ignore-engines" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-ignore-engines">
+<code class="sig-name descname">--ignore-engines</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-ignore-engines" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Hash</p>
 <p>Ignore this comma-separated list of storage engines.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-ignore-order">
-<span class="sig-name descname"><span class="pre">--ignore-order</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-ignore-order" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-ignore-order">
+<code class="sig-name descname">--ignore-order</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-ignore-order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ignore index order so KEY(a,b) duplicates KEY(b,a).</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-ignore-tables">
-<span class="sig-name descname"><span class="pre">--ignore-tables</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-ignore-tables" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-ignore-tables">
+<code class="sig-name descname">--ignore-tables</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-ignore-tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Hash</p>
 <p>Ignore this comma-separated list of tables.  Table names may be qualified with
 the database name.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-key-types">
-<span class="sig-name descname"><span class="pre">--key-types</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-key-types" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-key-types">
+<code class="sig-name descname">--key-types</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-key-types" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: fk</p>
 <p>Check for duplicate f=foreign keys, k=keys or fk=both.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-password">
-<span class="sig-name descname"><span class="pre">--password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
 If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-pid">
-<span class="sig-name descname"><span class="pre">--pid</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-pid" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create the given PID file.  The tool won’t start if the PID file already
 exists and the PID it contains is different than the current PID.  However,
@@ -374,15 +370,15 @@ removed automatically when the tool exits.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-port">
-<span class="sig-name descname"><span class="pre">--port</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-port" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-set-vars">
-<span class="sig-name descname"><span class="pre">--set-vars</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-set-vars" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-set-vars">
+<code class="sig-name descname">--set-vars</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-set-vars" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Set the MariaDB variables in this comma-separated list of <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> pairs.</p>
 <p>By default, the tool sets:</p>
@@ -395,15 +391,15 @@ example, specifying <code class="docutils literal notranslate"><span class="pre"
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-socket">
-<span class="sig-name descname"><span class="pre">--socket</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-socket" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-no-sql">
-<span class="sig-name descname"><span class="pre">--[no]sql</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-no-sql" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-no-sql">
+<code class="sig-name descname">--[no]sql</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-no-sql" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Print DROP KEY statement for each duplicate key.  By default an ALTER TABLE
 DROP KEY statement is printed below each duplicate key so that, if you want to
@@ -412,42 +408,42 @@ remove the duplicate key, you can copy-paste the statement into MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-no-summary">
-<span class="sig-name descname"><span class="pre">--[no]summary</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-no-summary" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-no-summary">
+<code class="sig-name descname">--[no]summary</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-no-summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Print summary of indexes at end of output.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-tables">
-<span class="sig-name descname"><span class="pre">--tables</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-tables" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-tables">
+<code class="sig-name descname">--tables</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -t; type: hash</p>
 <p>Check only this comma-separated list of tables.</p>
 <p>Table names may be qualified with the database name.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-user">
-<span class="sig-name descname"><span class="pre">--user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-verbose">
-<span class="sig-name descname"><span class="pre">--verbose</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-verbose" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-verbose">
+<code class="sig-name descname">--verbose</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-verbose" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -v</p>
 <p>Output all keys and/or foreign keys found, not just redundant ones.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-index-checker-version">
-<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-index-checker-version" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-index-checker-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-index-checker-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
-</section>
-<section id="dsn-options">
+</div>
+<div class="section" id="dsn-options">
 <h2>DSN OPTIONS<a class="headerlink" href="#dsn-options" title="Permalink to this headline">¶</a></h2>
 <p>These DSN options are used to create a DSN.  Each option is given like
 <code class="docutils literal notranslate"><span class="pre">option=value</span></code>.  The options are case-sensitive, so P and p are not the
@@ -511,31 +507,31 @@ If password contains commas they must be escaped with a backslash: “exam,ple�
 <div><p>dsn: user; copy: yes</p>
 <p>User for login if not current user.</p>
 </div></blockquote>
-</section>
-<section id="environment">
+</div>
+<div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
 <p>This tool does not use any environment variables.</p>
-</section>
-<section id="system-requirements">
+</div>
+<div class="section" id="system-requirements">
 <h2>SYSTEM REQUIREMENTS<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>You need Perl, and some core packages that ought to be installed in any
 reasonably new version of Perl.</p>
-</section>
-<section id="authors">
+</div>
+<div class="section" id="authors">
 <h2>AUTHORS<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Cole Busby, Baron Schwartz, Brian Fraser, and Daniel Nichter</p>
-</section>
-<section id="about-this-mariadb-tool">
+</div>
+<div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
 Percona Toolkit’s pt-duplicate-key-checker in October, 2021. Percona Toolkit
 was forked from two projects in June, 2011: Maatkit and Aspersa.
 Those projects were created by Baron Schwartz and primarily developed by him
 and Daniel Nichter.</p>
-</section>
-<section id="copyright-license-and-warranty">
+</div>
+<div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
-<p>This program is copyright 2021 MariaDB Corporation and/or its affiliates,
+<p>This program is copyright 2021-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
 <p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
@@ -548,12 +544,12 @@ licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA  02111-1307  USA.</p>
-</section>
-<section id="version">
+</div>
+<div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-index-checker</strong> 6.0.1rc</p>
-</section>
-</section>
+<p><strong class="program">mariadb-index-checker</strong> 6.0.2.1</p>
+</div>
+</div>
 
 
           </div>
@@ -623,7 +619,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 

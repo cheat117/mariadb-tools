@@ -331,7 +331,7 @@ PalominoDB's pdb-parted in 2019.
 COPYRIGHT, LICENSE, AND WARRANTY
 ================================
 
-This program is copyright 2019-2021 MariaDB Corporation and/or its affiliates,
+This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2009-2013 PalominoDB, Inc.
 
 THIS PROGRAM IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
@@ -351,5 +351,5 @@ Place, Suite 330, Boston, MA  02111-1307  USA.
 VERSION
 =======
 
-:program:`mariadb-parted` 6.0.1rc
+:program:`mariadb-parted` 6.0.2.1
 

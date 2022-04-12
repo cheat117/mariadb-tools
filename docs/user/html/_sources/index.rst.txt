@@ -57,7 +57,6 @@ Troubleshooting
    :maxdepth: 1
 
    locale_issues
-   centos_install_issues
 
 Miscellaneous
 =============

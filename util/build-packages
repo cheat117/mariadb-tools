@@ -383,7 +383,7 @@ build_rpm() {
       die "RPMS/$ARCH/$PKG-1.$ARCH.rpm did not build"
    fi
    mv "RPMS/$ARCH/$PKG-1.$ARCH.rpm" $RELEASE_DIR/RPM
-   rm -rf $RELEASE_DIR/rpm
+#   rm -rf $RELEASE_DIR/rpm
 
    echo "OK"
 }

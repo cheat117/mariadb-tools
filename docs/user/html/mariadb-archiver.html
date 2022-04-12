@@ -23,24 +23,20 @@
     </style>
     <title>mariadb-archiver &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,15 +164,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="mariadb-archiver">
+  <div class="section" id="mariadb-archiver">
 <h1><strong class="program">mariadb-archiver</strong><a class="headerlink" href="#mariadb-archiver" title="Permalink to this headline">¶</a></h1>
-<section id="name">
+<div class="section" id="name">
 <h2>NAME<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-archiver</strong> - Archive rows from a MariaDB table into another table or a file.</p>
-</section>
-<section id="synopsis">
+</div>
+<div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<section id="usage">
+<div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">archiver</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="o">--</span><span class="n">source</span> <span class="n">DSN</span> <span class="o">--</span><span class="n">where</span> <span class="n">WHERE</span>
 </pre></div>
@@ -184,8 +180,8 @@
 <p><strong class="program">mariadb-archiver</strong> nibbles records from a MariaDB table.  The –source and –dest
 arguments use DSN syntax; if COPY is yes, –dest defaults to the key’s value
 from –source.</p>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <p>Archive all rows from oltp_server to olap_server and to a file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-archiver --source <span class="nv">h</span><span class="o">=</span>oltp_server,D<span class="o">=</span>test,t<span class="o">=</span>tbl --dest <span class="nv">h</span><span class="o">=</span>olap_server <span class="se">\</span>
@@ -198,9 +194,9 @@ from –source.</p>
   --where <span class="s1">&#39;NOT EXISTS(SELECT * FROM parent WHERE col=child.col)&#39;</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="risks">
+</div>
+</div>
+<div class="section" id="risks">
 <h2>RISKS<a class="headerlink" href="#risks" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-archiver</strong> is mature, proven in the real world, and well tested,
 but all database tools can pose a risk to the system and the database
@@ -211,8 +207,8 @@ server.  Before using this tool, please:</p>
 <li><p>Test the tool on a non-production server</p></li>
 <li><p>Backup your production server and verify the backups</p></li>
 </ul>
-</section>
-<section id="description">
+</div>
+<div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-archiver</strong> is the tool I use to archive tables as described in
 <a class="reference external" href="http://tinyurl.com/mysql-archiving">http://tinyurl.com/mysql-archiving</a>.  The goal is a low-impact, forward-only
@@ -242,8 +238,8 @@ beginning of the index it chooses and scan it forward-only.  This might result
 in long table scans if you’re trying to nibble from the end of the table by an
 index other than the one it prefers.  See <a class="reference internal" href="#cmdoption-mariadb-archiver-source"><code class="xref std std-option docutils literal notranslate"><span class="pre">--source</span></code></a> and read the
 documentation on the <code class="docutils literal notranslate"><span class="pre">i</span></code> part if this applies to you.</p>
-</section>
-<section id="mariadb-galera-cluster">
+</div>
+<div class="section" id="mariadb-galera-cluster">
 <h2>MariaDB Galera Cluster<a class="headerlink" href="#mariadb-galera-cluster" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-archiver</strong> works with MariaDB Galera Cluster 10.1 and newer,
 but there are three limitations you should consider before archiving on
@@ -273,8 +269,8 @@ tables are usually InnoDB, but InnoDB doesn’t support <code class="docutils li
 the tool does not check them, therefore you should test archiving on a test
 cluster before archiving on your real cluster.</p>
 </div></blockquote>
-</section>
-<section id="output">
+</div>
+<div class="section" id="output">
 <h2>OUTPUT<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>If you specify <a class="reference internal" href="#cmdoption-mariadb-archiver-progress"><code class="xref std std-option docutils literal notranslate"><span class="pre">--progress</span></code></a>, the output is a header row, plus status output
 at intervals.  Each row in the status output lists the current date and time,
@@ -283,8 +279,8 @@ archived.</p>
 <p>If you specify <a class="reference internal" href="#cmdoption-mariadb-archiver-statistics"><code class="xref std std-option docutils literal notranslate"><span class="pre">--statistics</span></code></a>, <strong class="program">mariadb-archiver</strong> outputs timing and other
 information to help you identify which part of your archiving process takes the
 most time.</p>
-</section>
-<section id="error-handling">
+</div>
+<div class="section" id="error-handling">
 <h2>ERROR-HANDLING<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-archiver</strong> tries to catch signals and exit gracefully; for example, if you
 send it SIGTERM (Ctrl-C on UNIX-ish systems), it will catch the signal, print a
@@ -294,8 +290,8 @@ It will run all other code normally, including calling after_finish() on any
 plugins (see “EXTENDING”).</p>
 <p>In other words, a signal, if caught, will break out of the main archiving
 loop and skip optimize/analyze.</p>
-</section>
-<section id="options">
+</div>
+<div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>Specify at least one of <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a>, or <a class="reference internal" href="#cmdoption-mariadb-archiver-purge"><code class="xref std std-option docutils literal notranslate"><span class="pre">--purge</span></code></a>.</p>
 <p><a class="reference internal" href="#cmdoption-mariadb-archiver-ignore"><code class="xref std std-option docutils literal notranslate"><span class="pre">--ignore</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-archiver-replace"><code class="xref std std-option docutils literal notranslate"><span class="pre">--replace</span></code></a> are mutually exclusive.</p>
@@ -306,8 +302,8 @@ loop and skip optimize/analyze.</p>
 <p><a class="reference internal" href="#cmdoption-mariadb-archiver-no-ascend"><code class="xref std std-option docutils literal notranslate"><span class="pre">--no-ascend</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-archiver-no-delete"><code class="xref std std-option docutils literal notranslate"><span class="pre">--no-delete</span></code></a> are mutually exclusive.</p>
 <p>DSN values in <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a> default to values from <a class="reference internal" href="#cmdoption-mariadb-archiver-source"><code class="xref std std-option docutils literal notranslate"><span class="pre">--source</span></code></a> if COPY is yes.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-analyze">
-<span class="sig-name descname"><span class="pre">--analyze</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-analyze" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-analyze">
+<code class="sig-name descname">--analyze</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-analyze" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Run ANALYZE TABLE afterwards on <a class="reference internal" href="#cmdoption-mariadb-archiver-source"><code class="xref std std-option docutils literal notranslate"><span class="pre">--source</span></code></a> and/or <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a>.</p>
 <p>Runs ANALYZE TABLE after finishing.  The argument is an arbitrary string.  If it
@@ -322,8 +318,8 @@ TABLE.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-ascend-first">
-<span class="sig-name descname"><span class="pre">--ascend-first</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-ascend-first" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-ascend-first">
+<code class="sig-name descname">--ascend-first</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-ascend-first" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ascend only first column of index.</p>
 <p>If you do want to use the ascending index optimization (see <a class="reference internal" href="#cmdoption-mariadb-archiver-no-ascend"><code class="xref std std-option docutils literal notranslate"><span class="pre">--no-ascend</span></code></a>),
 but do not want to incur the overhead of ascending a large multi-column index,
@@ -335,14 +331,14 @@ index.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-ask-pass">
-<span class="sig-name descname"><span class="pre">--ask-pass</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-ask-pass" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-buffer">
-<span class="sig-name descname"><span class="pre">--buffer</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-buffer" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-buffer">
+<code class="sig-name descname">--buffer</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-buffer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Buffer output to <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a> and flush at commit.</p>
 <p>Disables autoflushing to <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a> and flushes <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a> to disk only when a
 transaction commits.  This typically means the file is block-flushed by the
@@ -354,8 +350,8 @@ percent.  Your mileage may vary.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-bulk-delete">
-<span class="sig-name descname"><span class="pre">--bulk-delete</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-bulk-delete" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-bulk-delete">
+<code class="sig-name descname">--bulk-delete</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-bulk-delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete each chunk with a single statement (implies <a class="reference internal" href="#cmdoption-mariadb-archiver-commit-each"><code class="xref std std-option docutils literal notranslate"><span class="pre">--commit-each</span></code></a>).</p>
 <p>Delete each chunk of rows in bulk with a single <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> statement.  The
 statement deletes every row between the first and last row of the chunk,
@@ -374,8 +370,8 @@ it will still be deleted by the bulk delete!</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-no-bulk-delete-limit">
-<span class="sig-name descname"><span class="pre">--[no]bulk-delete-limit</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-no-bulk-delete-limit" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-no-bulk-delete-limit">
+<code class="sig-name descname">--[no]bulk-delete-limit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-no-bulk-delete-limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Add <a class="reference internal" href="#cmdoption-mariadb-archiver-limit"><code class="xref std std-option docutils literal notranslate"><span class="pre">--limit</span></code></a> to <a class="reference internal" href="#cmdoption-mariadb-archiver-bulk-delete"><code class="xref std std-option docutils literal notranslate"><span class="pre">--bulk-delete</span></code></a> statement.</p>
 <p>This is an advanced option and you should not disable it unless you know what
@@ -386,8 +382,8 @@ specified.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-bulk-insert">
-<span class="sig-name descname"><span class="pre">--bulk-insert</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-bulk-insert" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-bulk-insert">
+<code class="sig-name descname">--bulk-insert</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-bulk-insert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Insert each chunk with LOAD DATA INFILE (implies <a class="reference internal" href="#cmdoption-mariadb-archiver-bulk-delete"><code class="xref std std-option docutils literal notranslate"><span class="pre">--bulk-delete</span></code></a> <a class="reference internal" href="#cmdoption-mariadb-archiver-commit-each"><code class="xref std std-option docutils literal notranslate"><span class="pre">--commit-each</span></code></a>).</p>
 <p>Insert each chunk of rows with <code class="docutils literal notranslate"><span class="pre">LOAD</span> <span class="pre">DATA</span> <span class="pre">LOCAL</span> <span class="pre">INFILE</span></code>.  This may be much
 faster than inserting a row at a time with <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> statements.  It is
@@ -406,8 +402,8 @@ for the <code class="docutils literal notranslate"><span class="pre">L</span></c
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-channel">
-<span class="sig-name descname"><span class="pre">--channel</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-channel" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-channel">
+<code class="sig-name descname">--channel</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-channel" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Channel name used when connected to a server using replication channels.
 Suppose you have two masters, master_a at port 12345, master_b at port 1236 and
@@ -419,8 +415,8 @@ the channel name to use in the SHOW SLAVE STATUS command.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-charset">
-<span class="sig-name descname"><span class="pre">--charset</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-charset" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-charset">
+<code class="sig-name descname">--charset</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -A; type: string</p>
 <p>Default character set.  If the value is utf8, sets Perl’s binmode on
 STDOUT to utf8, passes the mysql_enable_utf8 option to DBD::mysql, and runs SET
@@ -432,8 +428,8 @@ without the utf8 layer, and runs SET NAMES after connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-no-check-charset">
-<span class="sig-name descname"><span class="pre">--[no]check-charset</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-no-check-charset" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-no-check-charset">
+<code class="sig-name descname">--[no]check-charset</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-no-check-charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Ensure connection and table character sets are the same.  Disabling this check
 may cause text to be erroneously converted from one character set to another
@@ -443,8 +439,8 @@ intended.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-no-check-columns">
-<span class="sig-name descname"><span class="pre">--[no]check-columns</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-no-check-columns" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-no-check-columns">
+<code class="sig-name descname">--[no]check-columns</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-no-check-columns" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Ensure <a class="reference internal" href="#cmdoption-mariadb-archiver-source"><code class="xref std std-option docutils literal notranslate"><span class="pre">--source</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a> have same columns.</p>
 <p>Enabled by default; causes <strong class="program">mariadb-archiver</strong> to check that the source and destination
@@ -456,8 +452,8 @@ error.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-check-interval">
-<span class="sig-name descname"><span class="pre">--check-interval</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-check-interval" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-check-interval">
+<code class="sig-name descname">--check-interval</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-check-interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; default: 1s</p>
 <dl class="simple">
 <dt>If <a class="reference internal" href="#cmdoption-mariadb-archiver-check-slave-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--check-slave-lag</span></code></a> is given, this defines how long the tool pauses each</dt><dd><p>time it discovers that a slave is lagging.
@@ -467,16 +463,16 @@ This check is performed every 100 rows.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-check-slave-lag">
-<span class="sig-name descname"><span class="pre">--check-slave-lag</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-check-slave-lag" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-check-slave-lag">
+<code class="sig-name descname">--check-slave-lag</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-check-slave-lag" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; repeatable: yes</p>
 <p>Pause archiving until the specified DSN’s slave lag is less than <a class="reference internal" href="#cmdoption-mariadb-archiver-max-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-lag</span></code></a>.
 This option can be specified multiple times for checking more than one slave.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-columns">
-<span class="sig-name descname"><span class="pre">--columns</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-columns" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-columns">
+<code class="sig-name descname">--columns</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-columns" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -c; type: array</p>
 <p>Comma-separated list of columns to archive.</p>
 <p>Specify a comma-separated list of columns to fetch, write to the file, and
@@ -489,8 +485,8 @@ them to plugins.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-commit-each">
-<span class="sig-name descname"><span class="pre">--commit-each</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-commit-each" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-commit-each">
+<code class="sig-name descname">--commit-each</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-commit-each" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commit each set of fetched and archived rows (disables <a class="reference internal" href="#cmdoption-mariadb-archiver-txn-size"><code class="xref std std-option docutils literal notranslate"><span class="pre">--txn-size</span></code></a>).</p>
 <p>Commits transactions and flushes <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a> after each set of rows has been
 archived, before fetching the next set of rows, and before sleeping if
@@ -508,31 +504,31 @@ determine it is finished anyway.  You can use <a class="reference internal" href
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-config">
-<span class="sig-name descname"><span class="pre">--config</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-config" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Read this comma-separated list of config files; if specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-database">
-<span class="sig-name descname"><span class="pre">--database</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-database" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-database">
+<code class="sig-name descname">--database</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-database" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -D; type: string</p>
 <p>Connect to this database.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-delayed-insert">
-<span class="sig-name descname"><span class="pre">--delayed-insert</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-delayed-insert" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-delayed-insert">
+<code class="sig-name descname">--delayed-insert</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-delayed-insert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the DELAYED modifier to INSERT statements.</p>
 <p>Adds the DELAYED modifier to INSERT or REPLACE statements.  See
 <a class="reference external" href="https://mariadb.com/kb/en/library/insert/">https://mariadb.com/kb/en/library/insert/</a> for details.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-dest">
-<span class="sig-name descname"><span class="pre">--dest</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-dest" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-dest">
+<code class="sig-name descname">--dest</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-dest" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN</p>
 <p>DSN specifying the table to archive to.</p>
 <p>This item specifies a table into which <strong class="program">mariadb-archiver</strong> will insert rows
@@ -554,16 +550,16 @@ connects to <a class="reference internal" href="#cmdoption-mariadb-archiver-dest
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-dry-run">
-<span class="sig-name descname"><span class="pre">--dry-run</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-dry-run" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-dry-run">
+<code class="sig-name descname">--dry-run</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-dry-run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print queries and exit without doing anything.</p>
 <p>Causes <strong class="program">mariadb-archiver</strong> to exit after printing the filename and SQL statements
 it will use.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-file">
-<span class="sig-name descname"><span class="pre">--file</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-file" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-file">
+<code class="sig-name descname">--file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>File to archive to, with DATE_FORMAT()-like formatting.</p>
 <p>Filename to write archived rows to.  A subset of MariaDB’s DATE_FORMAT()
@@ -595,15 +591,15 @@ is auto-flushed by default; see <a class="reference internal" href="#cmdoption-m
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-for-update">
-<span class="sig-name descname"><span class="pre">--for-update</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-for-update" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-for-update">
+<code class="sig-name descname">--for-update</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-for-update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds the FOR UPDATE modifier to SELECT statements.</p>
 <p>For details, see <a class="reference external" href="http://dev.mysql.com/doc/en/innodb-locking-reads.html">http://dev.mysql.com/doc/en/innodb-locking-reads.html</a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-header">
-<span class="sig-name descname"><span class="pre">--header</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-header" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-header">
+<code class="sig-name descname">--header</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print column header at top of <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a>.</p>
 <p>Writes column names as the first line in the file given by <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a>.  If the
 file exists, does not write headers; this keeps the file loadable with LOAD
@@ -611,35 +607,35 @@ DATA INFILE in case you append more output to it.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-help">
-<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-help" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-high-priority-select">
-<span class="sig-name descname"><span class="pre">--high-priority-select</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-high-priority-select" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-high-priority-select">
+<code class="sig-name descname">--high-priority-select</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-high-priority-select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds the HIGH_PRIORITY modifier to SELECT statements.</p>
 <p>See <a class="reference external" href="https://mariadb.com/kb/en/library/select/">https://mariadb.com/kb/en/library/select/</a> for details.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-host">
-<span class="sig-name descname"><span class="pre">--host</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-host" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Connect to host.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-ignore">
-<span class="sig-name descname"><span class="pre">--ignore</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-ignore" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-ignore">
+<code class="sig-name descname">--ignore</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-ignore" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use IGNORE for INSERT statements.</p>
 <p>Causes INSERTs into <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a> to be INSERT IGNORE.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-limit">
-<span class="sig-name descname"><span class="pre">--limit</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-limit" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-limit">
+<code class="sig-name descname">--limit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 1</p>
 <p>Number of rows to fetch and archive per statement.</p>
 <p>Limits the number of rows returned by the SELECT statements that retrieve rows
@@ -651,30 +647,30 @@ storage engine, transaction isolation level, and options such as
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-local">
-<span class="sig-name descname"><span class="pre">--local</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-local" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-local">
+<code class="sig-name descname">--local</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-local" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do not write OPTIMIZE or ANALYZE queries to binlog.</p>
 <p>Adds the NO_WRITE_TO_BINLOG modifier to ANALYZE and OPTIMIZE queries.  See
 <a class="reference internal" href="#cmdoption-mariadb-archiver-analyze"><code class="xref std std-option docutils literal notranslate"><span class="pre">--analyze</span></code></a> for details.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-low-priority-delete">
-<span class="sig-name descname"><span class="pre">--low-priority-delete</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-low-priority-delete" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-low-priority-delete">
+<code class="sig-name descname">--low-priority-delete</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-low-priority-delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds the LOW_PRIORITY modifier to DELETE statements.</p>
 <p>See <a class="reference external" href="https://mariadb.com/kb/en/library/delete/">https://mariadb.com/kb/en/library/delete/</a> for details.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-low-priority-insert">
-<span class="sig-name descname"><span class="pre">--low-priority-insert</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-low-priority-insert" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-low-priority-insert">
+<code class="sig-name descname">--low-priority-insert</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-low-priority-insert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds the LOW_PRIORITY modifier to INSERT or REPLACE statements.</p>
 <p>See <a class="reference external" href="https://mariadb.com/kb/en/library/insert/">https://mariadb.com/kb/en/library/insert/</a> for details.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-max-flow-ctl">
-<span class="sig-name descname"><span class="pre">--max-flow-ctl</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-max-flow-ctl" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-max-flow-ctl">
+<code class="sig-name descname">--max-flow-ctl</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-max-flow-ctl" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float</p>
 <p>Somewhat similar to –max-lag but for Galera clusters.
 Check average time cluster spent pausing for Flow Control and make tool pause if
@@ -684,8 +680,8 @@ This option is available for Galera versions 5.6 or higher.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-max-lag">
-<span class="sig-name descname"><span class="pre">--max-lag</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-max-lag" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-max-lag">
+<code class="sig-name descname">--max-lag</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-max-lag" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; default: 1s</p>
 <p>Pause archiving if the slave given by <a class="reference internal" href="#cmdoption-mariadb-archiver-check-slave-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--check-slave-lag</span></code></a> lags.</p>
 <p>This option causes <strong class="program">mariadb-archiver</strong> to look at the slave every time it’s about
@@ -697,8 +693,8 @@ until the slave is caught up, then proceeds to fetch and archive the row.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-no-ascend">
-<span class="sig-name descname"><span class="pre">--no-ascend</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-no-ascend" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-no-ascend">
+<code class="sig-name descname">--no-ascend</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-no-ascend" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do not use ascending index optimization.</p>
 <p>The default ascending-index optimization causes <strong class="program">mariadb-archiver</strong> to optimize
 repeated <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> queries so they seek into the index where the previous query
@@ -728,8 +724,8 @@ interacts with plugins.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-no-delete">
-<span class="sig-name descname"><span class="pre">--no-delete</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-no-delete" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-no-delete">
+<code class="sig-name descname">--no-delete</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-no-delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do not delete archived rows.</p>
 <p>Causes <strong class="program">mariadb-archiver</strong> not to delete rows after processing them.  This disallows
 <a class="reference internal" href="#cmdoption-mariadb-archiver-no-ascend"><code class="xref std std-option docutils literal notranslate"><span class="pre">--no-ascend</span></code></a>, because enabling them both would cause an infinite loop.</p>
@@ -739,8 +735,8 @@ anyway, even though <strong class="program">mariadb-archiver</strong> will not e
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-optimize">
-<span class="sig-name descname"><span class="pre">--optimize</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-optimize" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-optimize">
+<code class="sig-name descname">--optimize</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-optimize" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Run OPTIMIZE TABLE afterwards on <a class="reference internal" href="#cmdoption-mariadb-archiver-source"><code class="xref std std-option docutils literal notranslate"><span class="pre">--source</span></code></a> and/or <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a>.</p>
 <p>Runs OPTIMIZE TABLE after finishing.  See <a class="reference internal" href="#cmdoption-mariadb-archiver-analyze"><code class="xref std std-option docutils literal notranslate"><span class="pre">--analyze</span></code></a> for the option syntax
@@ -749,8 +745,8 @@ TABLE.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-output-format">
-<span class="sig-name descname"><span class="pre">--output-format</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-output-format" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-output-format">
+<code class="sig-name descname">--output-format</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-output-format" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Used with <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a> to specify the output format.</p>
 <dl>
@@ -764,16 +760,16 @@ csv : Dump rows using ‘,’ as separator and optionally enclosing fields by �
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-password">
-<span class="sig-name descname"><span class="pre">--password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
 If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-pid">
-<span class="sig-name descname"><span class="pre">--pid</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-pid" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create the given PID file.  The tool won’t start if the PID file already
 exists and the PID it contains is different than the current PID.  However,
@@ -783,8 +779,8 @@ removed automatically when the tool exits.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-plugin">
-<span class="sig-name descname"><span class="pre">--plugin</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-plugin" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-plugin">
+<code class="sig-name descname">--plugin</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-plugin" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Perl module name to use as a generic plugin.</p>
 <p>Specify the Perl module name of a general-purpose plugin.  It is currently used
@@ -799,15 +795,15 @@ collected by the archiving job, and the time the whole job started.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-port">
-<span class="sig-name descname"><span class="pre">--port</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-port" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-primary-key-only">
-<span class="sig-name descname"><span class="pre">--primary-key-only</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-primary-key-only" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-primary-key-only">
+<code class="sig-name descname">--primary-key-only</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-primary-key-only" title="Permalink to this definition">¶</a></dt>
 <dd><p>Primary key columns only.</p>
 <p>A shortcut for specifying <a class="reference internal" href="#cmdoption-mariadb-archiver-columns"><code class="xref std std-option docutils literal notranslate"><span class="pre">--columns</span></code></a> with the primary key columns.  This is
 an efficiency if you just want to purge rows; it avoids fetching the entire row,
@@ -816,16 +812,16 @@ when only the primary key columns are needed for <code class="docutils literal n
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-progress">
-<span class="sig-name descname"><span class="pre">--progress</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-progress" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-progress">
+<code class="sig-name descname">--progress</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
 <p>Print progress information every X rows.</p>
 <p>Prints current time, elapsed time, and rows archived every X rows.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-purge">
-<span class="sig-name descname"><span class="pre">--purge</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-purge" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-purge">
+<code class="sig-name descname">--purge</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-purge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Purge instead of archiving; allows omitting <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a>.</p>
 <p>Allows archiving without a <a class="reference internal" href="#cmdoption-mariadb-archiver-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file</span></code></a> or <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a> argument, which is
 effectively a purge since the rows are just deleted.</p>
@@ -835,8 +831,8 @@ from the server for no reason.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-quick-delete">
-<span class="sig-name descname"><span class="pre">--quick-delete</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-quick-delete" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-quick-delete">
+<code class="sig-name descname">--quick-delete</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-quick-delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds the QUICK modifier to DELETE statements.</p>
 <p>See <a class="reference external" href="https://mariadb.com/kb/en/library/delete/">https://mariadb.com/kb/en/library/delete/</a> for details.  As stated in the
 documentation, in some cases it may be faster to use DELETE QUICK followed by
@@ -844,8 +840,8 @@ OPTIMIZE TABLE.  You can use <a class="reference internal" href="#cmdoption-mari
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-quiet">
-<span class="sig-name descname"><span class="pre">--quiet</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-quiet" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-quiet">
+<code class="sig-name descname">--quiet</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-quiet" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -q</p>
 <p>Do not print any output, such as for <a class="reference internal" href="#cmdoption-mariadb-archiver-statistics"><code class="xref std std-option docutils literal notranslate"><span class="pre">--statistics</span></code></a>.</p>
 <p>Suppresses normal output, including the output of <a class="reference internal" href="#cmdoption-mariadb-archiver-statistics"><code class="xref std std-option docutils literal notranslate"><span class="pre">--statistics</span></code></a>, but doesn’t
@@ -853,14 +849,14 @@ suppress the output from <a class="reference internal" href="#cmdoption-mariadb-
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-replace">
-<span class="sig-name descname"><span class="pre">--replace</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-replace" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-replace">
+<code class="sig-name descname">--replace</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-replace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Causes INSERTs into <a class="reference internal" href="#cmdoption-mariadb-archiver-dest"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dest</span></code></a> to be written as REPLACE.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-retries">
-<span class="sig-name descname"><span class="pre">--retries</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-retries" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-retries">
+<code class="sig-name descname">--retries</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-retries" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 1</p>
 <p>Number of retries per timeout or deadlock.</p>
 <p>Specifies the number of times <strong class="program">mariadb-archiver</strong> should retry when there is an
@@ -878,16 +874,16 @@ storage engines other than InnoDB.  Request that feature if you need it.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-run-time">
-<span class="sig-name descname"><span class="pre">--run-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-run-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-run-time">
+<code class="sig-name descname">--run-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-run-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time</p>
 <p>Time to run before exiting.</p>
 <p>Optional suffix s=seconds, m=minutes, h=hours, d=days; if no suffix, s is used.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-no-safe-auto-increment">
-<span class="sig-name descname"><span class="pre">--[no]safe-auto-increment</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-no-safe-auto-increment" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-no-safe-auto-increment">
+<code class="sig-name descname">--[no]safe-auto-increment</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-no-safe-auto-increment" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Do not archive row with max AUTO_INCREMENT.</p>
 <p>Adds an extra WHERE clause to prevent <strong class="program">mariadb-archiver</strong> from removing the newest
@@ -900,8 +896,8 @@ as of the beginning of the archive or purge job.  If new rows are inserted while
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-sentinel">
-<span class="sig-name descname"><span class="pre">--sentinel</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-sentinel" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-sentinel">
+<code class="sig-name descname">--sentinel</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-sentinel" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: /tmp/mariadb-archiver-sentinel</p>
 <p>Exit if this file exists.</p>
 <p>The presence of the file specified by <a class="reference internal" href="#cmdoption-mariadb-archiver-sentinel"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sentinel</span></code></a> will cause <strong class="program">mariadb-archiver</strong> to
@@ -911,8 +907,8 @@ might find this handy to stop cron jobs gracefully if necessary.  See also
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-slave-user">
-<span class="sig-name descname"><span class="pre">--slave-user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-slave-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-slave-user">
+<code class="sig-name descname">--slave-user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-slave-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the user to be used to connect to the slaves.
 This parameter allows you to have a different user with less privileges on the
@@ -920,8 +916,8 @@ slaves but that user must exist on all slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-slave-password">
-<span class="sig-name descname"><span class="pre">--slave-password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-slave-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-slave-password">
+<code class="sig-name descname">--slave-password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-slave-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the password to be used to connect to the slaves.
 It can be used with –slave-user and the password for the user must be the same
@@ -929,8 +925,8 @@ on all slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-set-vars">
-<span class="sig-name descname"><span class="pre">--set-vars</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-set-vars" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-set-vars">
+<code class="sig-name descname">--set-vars</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-set-vars" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Set the MariaDB variables in this comma-separated list of <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> pairs.</p>
 <p>By default, the tool sets:</p>
@@ -944,21 +940,21 @@ value of <code class="docutils literal notranslate"><span class="pre">10000</spa
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-share-lock">
-<span class="sig-name descname"><span class="pre">--share-lock</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-share-lock" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-share-lock">
+<code class="sig-name descname">--share-lock</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-share-lock" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds the LOCK IN SHARE MODE modifier to SELECT statements.</p>
 <p>See <a class="reference external" href="http://dev.mysql.com/doc/en/innodb-locking-reads.html">http://dev.mysql.com/doc/en/innodb-locking-reads.html</a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-skip-foreign-key-checks">
-<span class="sig-name descname"><span class="pre">--skip-foreign-key-checks</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-skip-foreign-key-checks" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-skip-foreign-key-checks">
+<code class="sig-name descname">--skip-foreign-key-checks</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-skip-foreign-key-checks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disables foreign key checks with SET FOREIGN_KEY_CHECKS=0.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-sleep">
-<span class="sig-name descname"><span class="pre">--sleep</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-sleep" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-sleep">
+<code class="sig-name descname">--sleep</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-sleep" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
 <p>Sleep time between fetches.</p>
 <p>Specifies how long to sleep between SELECT statements.  Default is not to
@@ -969,8 +965,8 @@ sleeping.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-sleep-coef">
-<span class="sig-name descname"><span class="pre">--sleep-coef</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-sleep-coef" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-sleep-coef">
+<code class="sig-name descname">--sleep-coef</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-sleep-coef" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float</p>
 <p>Calculate <a class="reference internal" href="#cmdoption-mariadb-archiver-sleep"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sleep</span></code></a> as a multiple of the last SELECT time.</p>
 <p>If this option is specified, <strong class="program">mariadb-archiver</strong> will sleep for the query time of the
@@ -981,15 +977,15 @@ are taking.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-socket">
-<span class="sig-name descname"><span class="pre">--socket</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-socket" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-source">
-<span class="sig-name descname"><span class="pre">--source</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-source" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-source">
+<code class="sig-name descname">--source</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-source" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN</p>
 <p>DSN specifying the table to archive from (required).  This argument is a DSN.
 See DSN OPTIONS for the syntax.  Most options control how <strong class="program">mariadb-archiver</strong>
@@ -1038,8 +1034,8 @@ is meant to connect to <a class="reference internal" href="#cmdoption-mariadb-ar
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-statistics">
-<span class="sig-name descname"><span class="pre">--statistics</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-statistics" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-statistics">
+<code class="sig-name descname">--statistics</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-statistics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect and print timing statistics.</p>
 <p>Causes <strong class="program">mariadb-archiver</strong> to collect timing statistics about what it does.  These
 statistics are available to the plugin specified by <a class="reference internal" href="#cmdoption-mariadb-archiver-plugin"><code class="xref std std-option docutils literal notranslate"><span class="pre">--plugin</span></code></a></p>
@@ -1073,8 +1069,8 @@ on reasonably new Perl releases.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-stop">
-<span class="sig-name descname"><span class="pre">--stop</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-stop" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-stop">
+<code class="sig-name descname">--stop</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stop running instances by creating the sentinel file.</p>
 <p>Causes <strong class="program">mariadb-archiver</strong> to create the sentinel file specified by <a class="reference internal" href="#cmdoption-mariadb-archiver-sentinel"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sentinel</span></code></a> and
 exit.  This should have the effect of stopping all running instances which are
@@ -1082,8 +1078,8 @@ watching the same sentinel file.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-txn-size">
-<span class="sig-name descname"><span class="pre">--txn-size</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-txn-size" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-txn-size">
+<code class="sig-name descname">--txn-size</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-txn-size" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 1</p>
 <p>Number of rows per transaction.</p>
 <p>Specifies the size, in number of rows, of each transaction. Zero disables
@@ -1105,21 +1101,21 @@ want to disable transactions so <strong class="program">mariadb-archiver</strong
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-user">
-<span class="sig-name descname"><span class="pre">--user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-version">
-<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-version" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-where">
-<span class="sig-name descname"><span class="pre">--where</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-where" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-where">
+<code class="sig-name descname">--where</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-where" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>WHERE clause to limit which rows to archive (required).</p>
 <p>Specifies a WHERE clause to limit which rows are archived.  Do not include the
@@ -1133,8 +1129,8 @@ interpreting it.  For example:</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-archiver-why-quit">
-<span class="sig-name descname"><span class="pre">--why-quit</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-archiver-why-quit" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-archiver-why-quit">
+<code class="sig-name descname">--why-quit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-archiver-why-quit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print reason for exiting unless rows exhausted.</p>
 <p>Causes <strong class="program">mariadb-archiver</strong> to print a message if it exits for any reason other than
 running out of rows to archive.  This can be useful if you have a cron job with
@@ -1146,8 +1142,8 @@ the reason for exiting even when it’s just because there are no more rows.</p>
 <strong class="program">mariadb-archiver</strong> in a <code class="docutils literal notranslate"><span class="pre">cron</span></code> job and get an email if there’s an abnormal exit.</p>
 </dd></dl>
 
-</section>
-<section id="dsn-options">
+</div>
+<div class="section" id="dsn-options">
 <h2>DSN OPTIONS<a class="headerlink" href="#dsn-options" title="Permalink to this headline">¶</a></h2>
 <p>These DSN options are used to create a DSN.  Each option is given like
 <code class="docutils literal notranslate"><span class="pre">option=value</span></code>.  The options are case-sensitive, so P and p are not the
@@ -1264,8 +1260,8 @@ If password contains commas they must be escaped with a backslash: “exam,ple�
 <div><p>dsn: user; copy: yes</p>
 <p>User for login if not current user.</p>
 </div></blockquote>
-</section>
-<section id="extending">
+</div>
+<div class="section" id="extending">
 <h2>EXTENDING<a class="headerlink" href="#extending" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-archiver</strong> is extensible by plugging in external Perl modules to handle some
 logic and/or actions.  You can specify a module for both the <a class="reference internal" href="#cmdoption-mariadb-archiver-source"><code class="xref std std-option docutils literal notranslate"><span class="pre">--source</span></code></a> and
@@ -1418,8 +1414,8 @@ sub after_finish  <span class="o">{}</span> <span class="c1"># Take no action</s
 <span class="m">1</span><span class="p">;</span>
 </pre></div>
 </div>
-</section>
-<section id="environment">
+</div>
+<div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
 <p>The environment variable <code class="docutils literal notranslate"><span class="pre">PTDEBUG</span></code> enables verbose debugging output to STDERR.
 To enable debugging and capture all output to a file, run the tool like:</p>
@@ -1428,30 +1424,30 @@ To enable debugging and capture all output to a file, run the tool like:</p>
 </div>
 <p>Be careful: debugging output is voluminous and can generate several megabytes
 of output.</p>
-</section>
-<section id="system-requirements">
+</div>
+<div class="section" id="system-requirements">
 <h2>SYSTEM REQUIREMENTS<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>You need Perl, DBI, DBD::mysql, and some core packages that ought to be
 installed in any reasonably new version of Perl.</p>
-</section>
-<section id="authors">
+</div>
+<div class="section" id="authors">
 <h2>AUTHORS<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Cole Busby, Baron Schwartz</p>
-</section>
-<section id="acknowledgments">
+</div>
+<div class="section" id="acknowledgments">
 <h2>ACKNOWLEDGMENTS<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
 <p>Andrew O’Brien</p>
-</section>
-<section id="about-this-mariadb-tool">
+</div>
+<div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
 Percona Toolkit’s pt-archiver in August, 2019. Percona Toolkit was forked from two
 projects in June, 2011: Maatkit and Aspersa.  Those projects were created by
 Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
-</section>
-<section id="copyright-license-and-warranty">
+</div>
+<div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
-<p>This program is copyright 2019-2021 MariaDB Corporation and/or its affiliates,
+<p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
 <p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
@@ -1464,12 +1460,12 @@ licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA  02111-1307  USA.</p>
-</section>
-<section id="version">
+</div>
+<div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-archiver</strong> 6.0.1rc</p>
-</section>
-</section>
+<p><strong class="program">mariadb-archiver</strong> 6.0.2.1</p>
+</div>
+</div>
 
 
           </div>
@@ -1545,7 +1541,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 

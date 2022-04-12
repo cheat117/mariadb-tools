@@ -23,24 +23,20 @@
     </style>
     <title>mariadb-backup-manager &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,13 +164,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="mariadb-backup-manager">
+  <div class="section" id="mariadb-backup-manager">
 <h1><strong class="program">mariadb-backup-manager</strong><a class="headerlink" href="#mariadb-backup-manager" title="Permalink to this headline">¶</a></h1>
-<section id="name">
+<div class="section" id="name">
 <h2>NAME<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p>MariaDB Backup Manager - a backup-tool-agnostic backup &amp; restore script</p>
-</section>
-<section id="description">
+</div>
+<div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>Backup manager is a script that supports several different backup tools and
 allows you to manage and/or schedule any of them to your liking.</p>
@@ -186,12 +182,10 @@ allows you to manage and/or schedule any of them to your liking.</p>
 <li><p>mysqldump (logical backup, either all schemas or selected schemas)</p></li>
 <li><p>binlogs (backup of binary logs)</p></li>
 </ul>
-<p>Backup manager uses a configuration file called <em>backup_manager.cnf</em> and located
+<p>Backup manager uses a configuration file called <em>mariadb-backup-manager.cnf</em> and located
 in <em>/etc/mariadb</em>. You can generate a template file (with comments) by running
 the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager build-config
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager build-config</em></p>
 <p>The tool will create the config file for you, that will need to be adjusted
 according to your configuration.</p>
 <p>Backups are saved to a specific folder as indicated by the <em>target_directory</em> option.
@@ -210,8 +204,8 @@ keep backups for the specified number of days. If you have abundant disk space f
 backups you may enable the <em>smart_purge</em> option, this will apply a smart retention
 and keep full and incremental backups for last 7 days, weekly full backups for
 last month, and monthly full backups for up to <em>smart_purge_months</em> months.</p>
-</section>
-<section id="privileges-required-by-backup-manager">
+</div>
+<div class="section" id="privileges-required-by-backup-manager">
 <h2>PRIVILEGES REQUIRED BY BACKUP MANAGER<a class="headerlink" href="#privileges-required-by-backup-manager" title="Permalink to this headline">¶</a></h2>
 <p>Backup manager will need to be run as root in most cases. This is especially a
 requirement when using a binary backup tool that needs to read the tablespace files.
@@ -220,70 +214,46 @@ having the following grants:</p>
 <p><em>GRANT SELECT, RELOAD, PROCESS, LOCK TABLES, REPLICATION CLIENT ON *.*</em></p>
 <p>The password for the dedicated backup user must be specified in the configuration
 file, which should have mode 600 to avoid people on the system to be able to read it.</p>
-</section>
-<section id="taking-backups">
+</div>
+<div class="section" id="taking-backups">
 <h2>TAKING BACKUPS<a class="headerlink" href="#taking-backups" title="Permalink to this headline">¶</a></h2>
 <p>To manually perform a backup, just run:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager backup &lt;backup_tool&gt; &lt;level&gt;
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager backup &lt;backup_tool&gt; &lt;level&gt;</em></p>
 <p>where <em>backup_tool</em> is one of the supported backup tools (see above) and <em>level</em> is
 either <code class="docutils literal notranslate"><span class="pre">full</span></code> or <code class="docutils literal notranslate"><span class="pre">incr</span></code>. Please be aware that only binary backups support incremental
 backups.</p>
 <p>To backup binary logs for the server, just run the following</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager backup binlogs
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager backup binlogs</em></p>
 <p>The above requires that you have run at least one full backup in order to work. After
 that, it will keep track of which binlogs have been already backed up and only
 save the new ones on every invocation.</p>
-</section>
-<section id="browsing-backups">
+</div>
+<div class="section" id="browsing-backups">
 <h2>BROWSING BACKUPS<a class="headerlink" href="#browsing-backups" title="Permalink to this headline">¶</a></h2>
 <p>To browse the inventory of available backups, and see their &lt;backup_id&gt;,  you can run:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager inventory pretty* <span class="o">(</span>can be abbreviated *inv pretty*
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager inventory pretty</em> (can be abbreviated <em>inv pretty</em>)</p>
 <p>If you omit the <em>pretty</em> option, script will show more inventory details including
 compression and encryption used by each backup, actual paths to files, etcetera.</p>
 <p>You can see the point in time of each backup piece and binlogs related information
 by running:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager list binlogs
-</pre></div>
+<p><em>mariadb-backup-manager list binlogs</em></p>
 </div>
-</section>
-<section id="restoring-backups">
+<div class="section" id="restoring-backups">
 <h2>RESTORING BACKUPS<a class="headerlink" href="#restoring-backups" title="Permalink to this headline">¶</a></h2>
 <p>To perform a restore, just run:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager restore &lt;backup_id&gt; &lt;target_dir&gt;
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager restore &lt;backup_id&gt; &lt;target_dir&gt;</em></p>
 <p>Make sure you have enough disk space on the <em>target_dir</em> filesystem first!
 These are the possible restore options:</p>
 <ul class="simple">
-<li><p>classic restore to a destination folder:</p></li>
+<li><p>classic restore to a destination folder:
+<em>mariadb-backup-manager restore &lt;backup_id&gt; &lt;target_dir&gt;</em></p></li>
+<li><p>performing an automatic restore test:
+<em>mariadb-backup-manager restore test</em></p></li>
+<li><p>streaming a restore to stdout (notice the final “-“):
+<em>mariadb-backup-manager restore &lt;backup_id&gt; -</em></p></li>
+<li><p>restoring to a specified point in time:
+<em>mariadb-backup-manager restore &lt;backup_id&gt; &lt;target_dir&gt; &lt;point-in-time&gt;</em></p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager restore &lt;backup_id&gt; &lt;target_dir&gt;
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>performing an automatic restore test:</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager restore <span class="nb">test</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>streaming a restore to stdout (notice the final “-“):</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager restore &lt;backup_id&gt; -
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>restoring to a specified point in time:</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager restore &lt;backup_id&gt; &lt;target_dir&gt; &lt;point-in-time&gt;
-</pre></div>
-</div>
 <p>This script supports performing an automatic restore test, that can be run regularly
 from crontab to ensure that the backup can actually be restored without issues; it
 will create a folder, extract the backup in it, prepare it, check the successful
@@ -293,9 +263,7 @@ working for binary backups.</p>
 <em>target_dir</em>, this can be used to stream the restore to another server via ssh.
 When this option is used only the full backup is restored, even if there are available
 incrementals.  Example of streaming-restore a mariabackup:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager restore &lt;backup_id&gt; - <span class="p">|</span> ssh anotherhost * *mbstream -x ...
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager restore &lt;backup_id&gt; - | ssh anotherhost mbstream -x …</em></p>
 <p>You can restore to a specific point in time if you are taking backups of binary logs.
 The requested point in time can be specified either as <em>file:position</em> or as a timestamp
 in the usual <code class="docutils literal notranslate"><span class="pre">YY-MM-DD</span> <span class="pre">HH:MM:SS</span></code> format (in this case, please <strong>specify it between quotes</strong>
@@ -303,69 +271,55 @@ to prevent the shell from eating the whitespace).</p>
 <p>The result of a restore of a binary backup to a folder will be a prepared datadir
 that can be used to start a MariaDB server (remember to change ownership of the files
 before starting). When restoring a logical backup taken with mysqldump, you need
-to pipe the output of :program:<a href="#id1"><span class="problematic" id="id2">`</span></a>mariadb-backup-manager to the mysql command line client using the
+to pipe the output of mariadb-backup-manager to the mysql command line client using the
 appropriate options. When restoring a logical backup taken with mydumper, you are
 left with a manual task due to the way this backup tool works; just use myloader
 and give <em>target_dir</em> as source directory.</p>
 <p>Binlogs backups aren’t meant to be restored individually, so you should use the
 point in time restore functionality instead. However, these are stored in a compressed
 tar format and can be extracted manually if need be.</p>
-</section>
-<section id="partial-backups">
+</div>
+<div class="section" id="partial-backups">
 <h2>PARTIAL BACKUPS<a class="headerlink" href="#partial-backups" title="Permalink to this headline">¶</a></h2>
 <p>When using mysqldump as the backup tool it is possible to either dump the entire database, or
 alternatively perform a dump of selected schemas.</p>
 <ul class="simple">
 <li><p>to dump all schemas:</p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager backup mysqldump
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager backup mysqldump</em></p>
 <ul class="simple">
 <li><p>to dump <em>schema1</em> and <em>schema2</em> only:</p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager backup mysqldump schema1,schema2
-</pre></div>
+<p><em>mariadb-backup-manager backup mysqldump schema1,schema2</em></p>
 </div>
-</section>
-<section id="purging-backups">
+<div class="section" id="purging-backups">
 <h2>PURGING BACKUPS<a class="headerlink" href="#purging-backups" title="Permalink to this headline">¶</a></h2>
 <p>To purge old backups, just run one of the following:</p>
 <ul class="simple">
 <li><p>to purge any expired backup based on the configured retention:</p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager purge
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager purge</em></p>
 <ul class="simple">
 <li><p>to purge the specified <em>backup_id</em> only:</p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager purge &lt;backup_id&gt;
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager purge &lt;backup_id&gt;</em></p>
 <p>To see what would be purged by the configured retention without actually purging
 anything, you can run:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager purge dry-run
-</pre></div>
+<p><em>mariadb-backup-manager purge dry-run</em></p>
 </div>
-</section>
-<section id="logging">
+<div class="section" id="logging">
 <h2>LOGGING<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
 <p>To see logfiles for a specific backup id just run the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager logs &lt;backup_id&gt;
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager logs &lt;backup_id&gt;</em></p>
 <p>If the backup is still running this command will automatically tail the log end, so it can
 be used to watch progress.</p>
-</section>
-<section id="building-a-slave-server">
+</div>
+<div class="section" id="building-a-slave-server">
 <h2>BUILDING A SLAVE SERVER<a class="headerlink" href="#building-a-slave-server" title="Permalink to this headline">¶</a></h2>
 <p>You can use backup manager to automatically build another slave server, including replication
 setup (new slave will have same master as backup server).
 The syntax is as follows:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mariadb-backup-manager build-slave &lt;target_server&gt; &lt;target_directory&gt;
-</pre></div>
-</div>
+<p><em>mariadb-backup-manager build-slave &lt;target_server&gt; &lt;target_directory&gt;</em></p>
 <p>The new slave will be build using the most recent available binary full backup.
 <em>target_server</em> must be the hostname or IP address of a running server and <em>target_directory</em>
 the data directory on such server, which should be empty. Additionally, for the entire
@@ -381,8 +335,8 @@ automatically. For this last thing to succeed, you need to make sure that the ba
 has the SUPER privilege.  If the replication setup fails, backup manager is smart enough to
 stop there and ask you to fix the grants, then only this last step will need to be repeated
 without the need to stream the backup over again.</p>
-</section>
-<section id="notifications">
+</div>
+<div class="section" id="notifications">
 <h2>NOTIFICATIONS<a class="headerlink" href="#notifications" title="Permalink to this headline">¶</a></h2>
 <p>Backup manager can notify by email both on successful and failed backups.
 If <em>failure_notify</em> is defined in configuration file, the specified email(s) will be
@@ -390,14 +344,14 @@ notified on failures of both full and incremental backups.  If <em>success_notif
 the specified email(s) will be notified on successful full backups.
 <em>notify_label</em> option can be used to customize the email subject to include server details,
 should you have multiple backup servers running.</p>
-</section>
-<section id="calling-out-urls">
+</div>
+<div class="section" id="calling-out-urls">
 <h2>CALLING OUT URLS<a class="headerlink" href="#calling-out-urls" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to call external URLs before and after each backup session, eg. to disable
 monitoring of the backup server. See options <em>callout_url_before</em> and <em>callout_url_after</em>
 in configuration file.</p>
-</section>
-<section id="backup-encryption">
+</div>
+<div class="section" id="backup-encryption">
 <h2>BACKUP ENCRYPTION<a class="headerlink" href="#backup-encryption" title="Permalink to this headline">¶</a></h2>
 <p>The script autogenerates an encryption key and exports it into the environment with the name
 “enc_key”, so that it can be picked up by openssl (or whatever encryptor is chosen).
@@ -419,36 +373,29 @@ server, passing the encryption key via the ssh environment.</p>
 <li><p>Pick a server which can reach the backup server via a ssh connection.</p></li>
 <li><p>On this server edit <em>/etc/ssh/sshd_config</em> and add <em>AcceptEnv=enc_key</em> to the configuration,
 then save the change and restart the sshd service.</p></li>
-<li><p>Create a random key and save it to a file, eg:</p></li>
+<li><p>Create a random key and save it to a file, eg:
+<em>openssl rand -base64 32 &gt; /etc/backup.key</em></p></li>
+<li><p>Run the secure backup by connecting via ssh to the backup server:
+<em>enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server *
+*/usr/local/sbin/mariadb-backup-manager backup mariabackup full</em></p></li>
 </ol>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openssl rand -base64 <span class="m">32</span> &gt; /etc/backup.key
-</pre></div>
-</div>
-<ol class="arabic simple" start="4">
-<li><p>Run the secure backup by connecting via ssh to the backup server:</p></li>
-</ol>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">enc_key</span><span class="o">=</span><span class="k">$(</span>cat /etc/backup.key<span class="k">)</span> ssh -oSendEnv<span class="o">=</span>enc_key backup_server
-/usr/local/sbin/mariadb-backup-manager backup mariabackup full
-</pre></div>
-</div>
-<p>Example of restoring an encrypted backup (assumes key is still in the above file):
-.. code-block:: shell</p>
+<p>Example of restoring an encrypted backup (assumes key is still in the above file):</p>
 <blockquote>
-<div><p>/enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server
-/usr/local/sbin/mariadb-backup-manager restore &lt;backup_id&gt; &lt;target_dir&gt;</p>
+<div><p><em>enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server *
+*/usr/local/sbin/mariadb-backup-manager restore &lt;backup_id&gt; &lt;target_dir&gt;</em></p>
 </div></blockquote>
-</section>
-<section id="author">
+</div>
+<div class="section" id="author">
 <h2>AUTHOR<a class="headerlink" href="#author" title="Permalink to this headline">¶</a></h2>
 <p>Rick Pizzi &lt;<a class="reference external" href="mailto:rick&#46;pizzi&#37;&#52;&#48;mariadb&#46;com">rick<span>&#46;</span>pizzi<span>&#64;</span>mariadb<span>&#46;</span>com</a>&gt;</p>
-</section>
-<section id="about-this-mariadb-tool">
+</div>
+<div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools.</p>
-</section>
-<section id="copyright-license-and-warranty">
+</div>
+<div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
-<p>This program is copyright 2019-2021 MariaDB Corporation and/or its affiliates.
+<p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates.
 THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -460,12 +407,12 @@ licenses.
 You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA  02111-1307  USA.</p>
-</section>
-<section id="version">
+</div>
+<div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p>mariadb-backup-manager v6.0.1rc</p>
-</section>
-</section>
+<p><strong class="program">mariadb-backup-manager</strong> 6.0.2.1</p>
+</div>
+</div>
 
 
           </div>
@@ -537,7 +484,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -559,3 +506,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
+

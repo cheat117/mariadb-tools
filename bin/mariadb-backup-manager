@@ -2568,7 +2568,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.
 
 =head1 VERSION
 
-mariadb-backup-manager 6.0.2
+mariadb-backup-manager 6.0.2.1
 
 
 =cut

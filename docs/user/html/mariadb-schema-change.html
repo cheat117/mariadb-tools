@@ -23,24 +23,20 @@
     </style>
     <title>mariadb-schema-change &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,15 +164,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="mariadb-schema-change">
+  <div class="section" id="mariadb-schema-change">
 <h1><strong class="program">mariadb-schema-change</strong><a class="headerlink" href="#mariadb-schema-change" title="Permalink to this headline">¶</a></h1>
-<section id="name">
+<div class="section" id="name">
 <h2>NAME<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-schema-change</strong> - ALTER tables without locking them.</p>
-</section>
-<section id="synopsis">
+</div>
+<div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<section id="usage">
+<div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">schema</span><span class="o">-</span><span class="n">change</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="n">DSN</span>
 </pre></div>
@@ -193,9 +189,9 @@ non-blocking fashion because it is already an InnoDB table:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-schema-change --alter <span class="s2">&quot;ENGINE=InnoDB&quot;</span> <span class="nv">D</span><span class="o">=</span>sakila,t<span class="o">=</span>actor
 </pre></div>
 </div>
-</section>
-</section>
-<section id="risks">
+</div>
+</div>
+<div class="section" id="risks">
 <h2>RISKS<a class="headerlink" href="#risks" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-schema-change</strong> is mature, proven in the real world, and well tested,
 but all database tools can pose a risk to the system and the database
@@ -206,8 +202,8 @@ server.  Before using this tool, please:</p>
 <li><p>Test the tool on a non-production server</p></li>
 <li><p>Backup your production server and verify the backups</p></li>
 </ul>
-</section>
-<section id="description">
+</div>
+<div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-schema-change</strong> emulates the way that MariaDB alters tables internally,
 but it works on a copy of the table you wish to alter. This means that the
@@ -260,8 +256,8 @@ values can be changed by specifying <a class="reference internal" href="#cmdopti
 unless you specify <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter-foreign-keys-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter-foreign-keys-method</span></code></a>.</p></li>
 <li><p>The tool cannot alter MyISAM tables on “Galera” nodes.</p></li>
 </ul>
-</section>
-<section id="mariadb-galera-cluster">
+</div>
+<div class="section" id="mariadb-galera-cluster">
 <h2>MariaDB Galera Cluster<a class="headerlink" href="#mariadb-galera-cluster" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-schema-change</strong> works with Galera Cluster 5.5.28
 and newer, but there are two limitations: only InnoDB tables can be altered,
@@ -271,8 +267,8 @@ is MyISAM or is being converted to MyISAM (<code class="docutils literal notrans
 <code class="docutils literal notranslate"><span class="pre">wsrep_OSU_method</span></code> is not <code class="docutils literal notranslate"><span class="pre">TOI</span></code>.  There is no way to disable these checks.</p>
 <p>The tools ignores MariaDB 10.2+ <code class="docutils literal notranslate"><span class="pre">GENERATED</span></code> columns since the value for those columns
 is generated according to the expresion used to compute column values.</p>
-</section>
-<section id="output">
+</div>
+<div class="section" id="output">
 <h2>OUTPUT<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>The tool prints information about its activities to STDOUT so that you can see
 what it is doing.  During the data copy phase, it prints <a class="reference internal" href="#cmdoption-mariadb-schema-change-progress"><code class="xref std std-option docutils literal notranslate"><span class="pre">--progress</span></code></a>
@@ -285,15 +281,15 @@ is printed at the end, like:</p>
 <span class="c1"># INSERT     1</span>
 </pre></div>
 </div>
-</section>
-<section id="options">
+</div>
+<div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change-execute"><code class="xref std std-option docutils literal notranslate"><span class="pre">--execute</span></code></a> are mutually exclusive.</p>
 <p>This tool accepts additional command-line arguments.  Refer to the
 “SYNOPSIS” and usage information for details.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-alter">
-<span class="sig-name descname"><span class="pre">--alter</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-alter" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-alter">
+<code class="sig-name descname">--alter</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-alter" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>The schema modification, without the ALTER TABLE keywords. You can perform
 multiple modifications to the table by specifying them with commas. Please refer
@@ -346,8 +342,8 @@ from MyISAM to InnoDB!</strong></p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-alter-foreign-keys-method">
-<span class="sig-name descname"><span class="pre">--alter-foreign-keys-method</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-alter-foreign-keys-method" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-alter-foreign-keys-method">
+<code class="sig-name descname">--alter-foreign-keys-method</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-alter-foreign-keys-method" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>How to modify foreign keys so they reference the new table.  Foreign keys that
 reference the table to be altered must be treated specially to ensure that they
@@ -415,8 +411,8 @@ tool’s built-in functionality if desired.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-analyze-before-swap">
-<span class="sig-name descname"><span class="pre">--[no]analyze-before-swap</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-analyze-before-swap" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-analyze-before-swap">
+<code class="sig-name descname">--[no]analyze-before-swap</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-analyze-before-swap" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Execute ANALYZE TABLE on the new table before swapping with the old one.
 By default, this happens only when running MariaDB 5.6 and newer, and
@@ -431,14 +427,14 @@ the server very busy, this can cause an outage.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-ask-pass">
-<span class="sig-name descname"><span class="pre">--ask-pass</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-ask-pass" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-channel">
-<span class="sig-name descname"><span class="pre">--channel</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-channel" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-channel">
+<code class="sig-name descname">--channel</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-channel" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Channel name used when connected to a server using replication channels.
 Suppose you have two masters, master_a at port 12345, master_b at port 1236 and
@@ -450,8 +446,8 @@ the channel name to use in the SHOW SLAVE STATUS command.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-charset">
-<span class="sig-name descname"><span class="pre">--charset</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-charset" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-charset">
+<code class="sig-name descname">--charset</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -A; type: string</p>
 <p>Default character set.  If the value is utf8, sets Perl’s binmode on
 STDOUT to utf8, passes the mysql_enable_utf8 option to DBD::mysql, and runs SET
@@ -460,8 +456,8 @@ without the utf8 layer, and runs SET NAMES after connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-check-alter">
-<span class="sig-name descname"><span class="pre">--[no]check-alter</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-alter" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-check-alter">
+<code class="sig-name descname">--[no]check-alter</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-alter" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Parses the <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter</span></code></a> specified and tries to warn of possible unintended
 behavior. Currently, it checks for:</p>
@@ -488,8 +484,8 @@ for its triggers.  You should first run the tool with <a class="reference intern
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-check-foreign-keys">
-<span class="sig-name descname"><span class="pre">--[no]check-foreign-keys</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-foreign-keys" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-check-foreign-keys">
+<code class="sig-name descname">--[no]check-foreign-keys</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-foreign-keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Check for self-referencing foreign keys. Currently self referencing FKs are
 not full supported, so, to prevent errors, this program won’t run if the table
@@ -498,15 +494,15 @@ FK checks.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-check-interval">
-<span class="sig-name descname"><span class="pre">--check-interval</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-check-interval" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-check-interval">
+<code class="sig-name descname">--check-interval</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-check-interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; default: 1</p>
 <p>Sleep time between checks for <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-lag</span></code></a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-check-plan">
-<span class="sig-name descname"><span class="pre">--[no]check-plan</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-plan" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-check-plan">
+<code class="sig-name descname">--[no]check-plan</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-plan" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Check query execution plans for safety. By default, this option causes
 the tool to run EXPLAIN before running queries that are meant to access
@@ -535,8 +531,8 @@ small, because the tool may take a very long time to complete if you do.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-check-replication-filters">
-<span class="sig-name descname"><span class="pre">--[no]check-replication-filters</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-replication-filters" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-check-replication-filters">
+<code class="sig-name descname">--[no]check-replication-filters</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-replication-filters" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Abort if any replication filter is set on any server.  The tool looks for
 server options that filter replication, such as binlog_ignore_db and
@@ -548,8 +544,8 @@ replication rules, see <a class="reference external" href="http://dev.mysql.com/
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-check-slave-lag">
-<span class="sig-name descname"><span class="pre">--check-slave-lag</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-check-slave-lag" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-check-slave-lag">
+<code class="sig-name descname">--check-slave-lag</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-check-slave-lag" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Pause the data copy until this replica’s lag is less than <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-lag</span></code></a>.  The
 value is a DSN that inherits properties from the the connection options
@@ -561,8 +557,8 @@ option instead of this option.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-chunk-index">
-<span class="sig-name descname"><span class="pre">--chunk-index</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-index" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-chunk-index">
+<code class="sig-name descname">--chunk-index</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-index" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Prefer this index for chunking tables.  By default, the tool chooses the most
 appropriate index for chunking.  This option lets you specify the index that you
@@ -573,8 +569,8 @@ index could cause bad performance.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-chunk-index-columns">
-<span class="sig-name descname"><span class="pre">--chunk-index-columns</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-index-columns" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-chunk-index-columns">
+<code class="sig-name descname">--chunk-index-columns</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-index-columns" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
 <p>Use only this many left-most columns of a <a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-index"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-index</span></code></a>.  This works
 only for compound indexes, and is useful in cases where a bug in the MariaDB
@@ -587,8 +583,8 @@ N columns of the index is a workaround for the bug in some cases.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-chunk-size">
-<span class="sig-name descname"><span class="pre">--chunk-size</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-size" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-chunk-size">
+<code class="sig-name descname">--chunk-size</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-size" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: size; default: 1000</p>
 <p>Number of rows to select for each chunk copied.  Allowable suffixes are
 k, M, G.</p>
@@ -607,8 +603,8 @@ clause that matches only 1,000 of the values, and that chunk will be at least
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-chunk-size-limit">
-<span class="sig-name descname"><span class="pre">--chunk-size-limit</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-size-limit" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-chunk-size-limit">
+<code class="sig-name descname">--chunk-size-limit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-size-limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float; default: 4.0</p>
 <p>Do not copy chunks this much larger than the desired chunk size.</p>
 <p>When a table has no unique indexes, chunk sizes can be inaccurate.  This option
@@ -626,8 +622,8 @@ details.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-chunk-time">
-<span class="sig-name descname"><span class="pre">--chunk-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-chunk-time">
+<code class="sig-name descname">--chunk-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float; default: 0.5</p>
 <p>Adjust the chunk size dynamically so each data-copy query takes this long to
 execute.  The tool tracks the copy rate (rows per second) and adjusts the chunk
@@ -642,16 +638,16 @@ it at the default.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-config">
-<span class="sig-name descname"><span class="pre">--config</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-config" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Read this comma-separated list of config files; if specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-critical-load">
-<span class="sig-name descname"><span class="pre">--critical-load</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-critical-load" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-critical-load">
+<code class="sig-name descname">--critical-load</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-critical-load" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: Threads_running=50</p>
 <p>Examine SHOW GLOBAL STATUS after every chunk, and abort if the load is too high.
 The option accepts a comma-separated list of MariaDB status variables and
@@ -669,15 +665,15 @@ operation should be canceled immediately.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-database">
-<span class="sig-name descname"><span class="pre">--database</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-database" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-database">
+<code class="sig-name descname">--database</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-database" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -D; type: string</p>
 <p>Connect to this database.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-default-engine">
-<span class="sig-name descname"><span class="pre">--default-engine</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-default-engine" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-default-engine">
+<code class="sig-name descname">--default-engine</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-default-engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove <code class="docutils literal notranslate"><span class="pre">ENGINE</span></code> from the new table.</p>
 <p>By default the new table is created with the same table options as
 the original table, so if the original table uses InnoDB, then the new
@@ -688,8 +684,8 @@ created with the system’s default engine.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-data-dir">
-<span class="sig-name descname"><span class="pre">--data-dir</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-data-dir" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-data-dir">
+<code class="sig-name descname">--data-dir</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-data-dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create the new table on a different partition using the DATA DIRECTORY feature.
 Only available on 5.6+. This parameter is ignored if it is used at the same time
@@ -697,24 +693,24 @@ than remove-data-dir.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-remove-data-dir">
-<span class="sig-name descname"><span class="pre">--remove-data-dir</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-remove-data-dir" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-remove-data-dir">
+<code class="sig-name descname">--remove-data-dir</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-remove-data-dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: no</p>
 <p>If the original table was created using the DATA DIRECTORY feature, remove it and create
 the new table in MariaDB default directory without creating a new isl file.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-defaults-file">
-<span class="sig-name descname"><span class="pre">--defaults-file</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-defaults-file" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read mysql options from the given file.  You must give an absolute
 pathname.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-drop-new-table">
-<span class="sig-name descname"><span class="pre">--[no]drop-new-table</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-new-table" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-drop-new-table">
+<code class="sig-name descname">--[no]drop-new-table</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-new-table" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Drop the new table if copying the original table fails.</p>
 <p>Specifying <code class="docutils literal notranslate"><span class="pre">--no-drop-new-table</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-swap-tables</span></code> leaves the new,
@@ -725,8 +721,8 @@ altered copy of the table without modifying the original table.  See
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-drop-old-table">
-<span class="sig-name descname"><span class="pre">--[no]drop-old-table</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-old-table" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-drop-old-table">
+<code class="sig-name descname">--[no]drop-old-table</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-old-table" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Drop the original table after renaming it. After the original table has been
 successfully renamed to let the new table take its place, and if there are no
@@ -736,23 +732,23 @@ the tool leaves the original table in place.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-drop-triggers">
-<span class="sig-name descname"><span class="pre">--[no]drop-triggers</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-triggers" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-drop-triggers">
+<code class="sig-name descname">--[no]drop-triggers</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-triggers" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Drop triggers on the old table.  <code class="docutils literal notranslate"><span class="pre">--no-drop-triggers</span></code> forces
 <code class="docutils literal notranslate"><span class="pre">--no-drop-old-table</span></code>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-dry-run">
-<span class="sig-name descname"><span class="pre">--dry-run</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-dry-run" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-dry-run">
+<code class="sig-name descname">--dry-run</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-dry-run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and alter the new table, but do not create triggers, copy data, or
 replace the original table.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-execute">
-<span class="sig-name descname"><span class="pre">--execute</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-execute" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-execute">
+<code class="sig-name descname">--execute</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Indicate that you have read the documentation and want to alter the table.  You
 must specify this option to alter the table. If you do not, then the tool will
 only perform some safety checks and exit.  This helps ensure that you have read the
@@ -761,8 +757,8 @@ documentation, then do not specify this option.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-check-unique-key-change">
-<span class="sig-name descname"><span class="pre">--[no]check-unique-key-change</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-unique-key-change" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-check-unique-key-change">
+<code class="sig-name descname">--[no]check-unique-key-change</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-unique-key-change" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Avoid <strong class="program">mariadb-schema-change</strong> to run if the specified statement for <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter</span></code></a> is
 trying to add an unique index.
@@ -797,14 +793,14 @@ duplicate rows and this data will be lost.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-force">
-<span class="sig-name descname"><span class="pre">--force</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-force" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-force">
+<code class="sig-name descname">--force</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-force" title="Permalink to this definition">¶</a></dt>
 <dd><p>This options bypasses confirmation in case of using alter-foreign-keys-method = none , which might break foreign key constraints.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-force-concat-enums">
-<span class="sig-name descname"><span class="pre">--force-concat-enums</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-force-concat-enums" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-force-concat-enums">
+<code class="sig-name descname">--force-concat-enums</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-force-concat-enums" title="Permalink to this definition">¶</a></dt>
 <dd><p>The NibbleIterator in <strong class="program">mariadb-schema-change</strong> can detect indexes having ENUM fields and
 if the items it has are sorted or not. According to documentation at
 <a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/enum.html">https://dev.mysql.com/doc/refman/5.7/en/enum.html</a>:</p>
@@ -826,21 +822,21 @@ with usorted items, it is necessary to specify the <code class="docutils literal
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-help">
-<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-help" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-host">
-<span class="sig-name descname"><span class="pre">--host</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-host" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Connect to host.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-max-flow-ctl">
-<span class="sig-name descname"><span class="pre">--max-flow-ctl</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-flow-ctl" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-max-flow-ctl">
+<code class="sig-name descname">--max-flow-ctl</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-flow-ctl" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float</p>
 <p>Somewhat similar to –max-lag but for PXC clusters.
 Check average time cluster spent pausing for Flow Control and make tool pause if
@@ -852,8 +848,8 @@ This option is available for PXC versions 5.6 or higher.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-max-lag">
-<span class="sig-name descname"><span class="pre">--max-lag</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-lag" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-max-lag">
+<code class="sig-name descname">--max-lag</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-lag" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; default: 1s</p>
 <p>Pause the data copy until all replicas’ lag is less than this value.  After each
 data-copy query (each chunk), the tool looks at the replication lag of
@@ -872,8 +868,8 @@ interval.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-max-load">
-<span class="sig-name descname"><span class="pre">--max-load</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-load" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-max-load">
+<code class="sig-name descname">--max-load</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-load" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: Threads_running=25</p>
 <p>Examine SHOW GLOBAL STATUS after every chunk, and pause if any status variables
 are higher than their thresholds.  The option accepts a comma-separated list of
@@ -898,8 +894,8 @@ you notice queueing, it is best to decrease the chunk time.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-preserve-triggers">
-<span class="sig-name descname"><span class="pre">--preserve-triggers</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-preserve-triggers" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-preserve-triggers">
+<code class="sig-name descname">--preserve-triggers</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-preserve-triggers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Preserves old triggers when specified.
 As of MariaDB 10.2.3, it is possible to define multiple triggers for a given
 table that have the same trigger event and action time. This allows us to
@@ -948,8 +944,8 @@ on the original table and will be duplicated on the new table
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-new-table-name">
-<span class="sig-name descname"><span class="pre">--new-table-name</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-new-table-name" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-new-table-name">
+<code class="sig-name descname">--new-table-name</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-new-table-name" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: %T_new</p>
 <p>New table name before it is swapped.  <code class="docutils literal notranslate"><span class="pre">%T</span></code> is replaced with the original
 table name.  When the default is used, the tool prefixes the name with up
@@ -959,8 +955,8 @@ exist.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-null-to-not-null">
-<span class="sig-name descname"><span class="pre">--null-to-not-null</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-null-to-not-null" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-null-to-not-null">
+<code class="sig-name descname">--null-to-not-null</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-null-to-not-null" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows MODIFYing a column that allows NULL values to one that doesn’t allow
 them. The rows which contain NULL values will be converted to the defined
 default value. If no explicit DEFAULT value is given MariaDB will assign a default
@@ -968,31 +964,31 @@ value based on datatype, e.g. 0 for number datatypes, ‘’ for string datatype
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-only-same-schema-fks">
-<span class="sig-name descname"><span class="pre">--only-same-schema-fks</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-only-same-schema-fks" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-only-same-schema-fks">
+<code class="sig-name descname">--only-same-schema-fks</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-only-same-schema-fks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check foreigns keys only on tables on the same schema than the original table.
 This option is dangerous since if you have FKs refenrencing tables in other
 schemas, they won’t be detected.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-password">
-<span class="sig-name descname"><span class="pre">--password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
 If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-pause-file">
-<span class="sig-name descname"><span class="pre">--pause-file</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-pause-file" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-pause-file">
+<code class="sig-name descname">--pause-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-pause-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Execution will be paused while the file specified by this param exists.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-pid">
-<span class="sig-name descname"><span class="pre">--pid</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-pid" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create the given PID file.  The tool won’t start if the PID file already
 exists and the PID it contains is different than the current PID.  However,
@@ -1002,8 +998,8 @@ removed automatically when the tool exits.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-plugin">
-<span class="sig-name descname"><span class="pre">--plugin</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-plugin" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-plugin">
+<code class="sig-name descname">--plugin</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-plugin" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Perl module file that defines a <code class="docutils literal notranslate"><span class="pre">pt_online_schema_change_plugin</span></code> class.
 A plugin allows you to write a Perl module that can hook into many parts
@@ -1014,23 +1010,23 @@ documentation.  Please contact MariaDB if you have questions or need help.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-port">
-<span class="sig-name descname"><span class="pre">--port</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-port" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-print">
-<span class="sig-name descname"><span class="pre">--print</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-print" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-print">
+<code class="sig-name descname">--print</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-print" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print SQL statements to STDOUT.  Specifying this option allows you to see most
 of the statements that the tool executes. You can use this option with
 <a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a>, for example.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-progress">
-<span class="sig-name descname"><span class="pre">--progress</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-progress" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-progress">
+<code class="sig-name descname">--progress</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: time,30</p>
 <p>Print progress reports to STDERR while copying rows.  The value is a
 comma-separated list with two parts.  The first part can be percentage, time, or
@@ -1039,24 +1035,24 @@ percentage, seconds, or number of iterations.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-quiet">
-<span class="sig-name descname"><span class="pre">--quiet</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-quiet" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-quiet">
+<code class="sig-name descname">--quiet</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-quiet" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -q</p>
 <p>Do not print messages to STDOUT (disables <a class="reference internal" href="#cmdoption-mariadb-schema-change-progress"><code class="xref std std-option docutils literal notranslate"><span class="pre">--progress</span></code></a>).
 Errors and warnings are still printed to STDERR.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-recurse">
-<span class="sig-name descname"><span class="pre">--recurse</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-recurse" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-recurse">
+<code class="sig-name descname">--recurse</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-recurse" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
 <p>Number of levels to recurse in the hierarchy when discovering replicas.
 Default is infinite.  See also <a class="reference internal" href="#cmdoption-mariadb-schema-change-recursion-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--recursion-method</span></code></a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-recursion-method">
-<span class="sig-name descname"><span class="pre">--recursion-method</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-recursion-method" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-recursion-method">
+<code class="sig-name descname">--recursion-method</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-recursion-method" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: processlist,hosts</p>
 <p>Preferred recursion method for discovering replicas.  Possible methods are:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>METHOD       <span class="nv">USES</span>
@@ -1104,8 +1100,8 @@ name change metadata version in the table cache will also change you may start r
 If you do not use server-side prepared statements your application should not be affected.</p>
 </div></blockquote>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-skip-check-slave-lag">
-<span class="sig-name descname"><span class="pre">--skip-check-slave-lag</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-skip-check-slave-lag" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-skip-check-slave-lag">
+<code class="sig-name descname">--skip-check-slave-lag</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-skip-check-slave-lag" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN; repeatable: yes</p>
 <p>DSN to skip when checking slave lag. It can be used multiple times.
 Example: –skip-check-slave-lag h=127.0.0.1,P=12345 –skip-check-slave-lag h=127.0.0.1,P=12346
@@ -1114,8 +1110,8 @@ for this parameter you need to specify the full IP address.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-slave-user">
-<span class="sig-name descname"><span class="pre">--slave-user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-slave-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-slave-user">
+<code class="sig-name descname">--slave-user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-slave-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the user to be used to connect to the slaves.
 This parameter allows you to have a different user with less privileges on the
@@ -1123,8 +1119,8 @@ slaves but that user must exist on all slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-slave-password">
-<span class="sig-name descname"><span class="pre">--slave-password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-slave-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-slave-password">
+<code class="sig-name descname">--slave-password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-slave-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the password to be used to connect to the slaves.
 It can be used with –slave-user and the password for the user must be the same
@@ -1132,8 +1128,8 @@ on all slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-set-vars">
-<span class="sig-name descname"><span class="pre">--set-vars</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-set-vars" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-set-vars">
+<code class="sig-name descname">--set-vars</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-set-vars" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Set the MariaDB variables in this comma-separated list of <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> pairs.</p>
 <p>By default, the tool sets:</p>
@@ -1156,8 +1152,8 @@ to be able to parse the quotes and commas.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-sleep">
-<span class="sig-name descname"><span class="pre">--sleep</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-sleep" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-sleep">
+<code class="sig-name descname">--sleep</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-sleep" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float; default: 0</p>
 <p>How long to sleep (in seconds) after copying each chunk. This option is useful
 when throttling by <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-lag</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-load"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-load</span></code></a> are not possible.
@@ -1166,22 +1162,22 @@ a very long time to copy large tables.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-socket">
-<span class="sig-name descname"><span class="pre">--socket</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-socket" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-statistics">
-<span class="sig-name descname"><span class="pre">--statistics</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-statistics" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-statistics">
+<code class="sig-name descname">--statistics</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-statistics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print statistics about internal counters.  This is useful to see how
 many warnings were suppressed compared to the number of INSERT.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-no-swap-tables">
-<span class="sig-name descname"><span class="pre">--[no]swap-tables</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-swap-tables" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-no-swap-tables">
+<code class="sig-name descname">--[no]swap-tables</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-swap-tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Swap the original table and the new, altered table.  This step completes the
 online schema change process by making the table with the new schema take the
@@ -1193,8 +1189,8 @@ intended to run a more realistic –dry-run.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-tries">
-<span class="sig-name descname"><span class="pre">--tries</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-tries" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-tries">
+<code class="sig-name descname">--tries</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-tries" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array</p>
 <p>How many times to try critical operations.  If certain operations fail due
 to non-fatal, recoverable errors, the tool waits and tries the operation
@@ -1247,20 +1243,20 @@ reconnect.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-user">
-<span class="sig-name descname"><span class="pre">--user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-schema-change-version">
-<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-schema-change-version" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-schema-change-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
-</section>
-<section id="plugin">
+</div>
+<div class="section" id="plugin">
 <h2>PLUGIN<a class="headerlink" href="#plugin" title="Permalink to this headline">¶</a></h2>
 <p>The file specified by <a class="reference internal" href="#cmdoption-mariadb-schema-change-plugin"><code class="xref std std-option docutils literal notranslate"><span class="pre">--plugin</span></code></a> must define a class (i.e. a package)
 called <code class="docutils literal notranslate"><span class="pre">pt_online_schema_change_plugin</span></code> with a <code class="docutils literal notranslate"><span class="pre">new()</span></code> subroutine.
@@ -1443,8 +1439,8 @@ sub after_alter_new_table <span class="o">{</span>
 </div>
 <p>You could use this with <a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a> to check how the table will look before and after.</p>
 <p>Please contact MariaDB if you have questions or need help.</p>
-</section>
-<section id="dsn-options">
+</div>
+<div class="section" id="dsn-options">
 <h2>DSN OPTIONS<a class="headerlink" href="#dsn-options" title="Permalink to this headline">¶</a></h2>
 <p>These DSN options are used to create a DSN.  Each option is given like
 <code class="docutils literal notranslate"><span class="pre">option=value</span></code>.  The options are case-sensitive, so P and p are not the
@@ -1515,8 +1511,8 @@ If password contains commas they must be escaped with a backslash: “exam,ple�
 <div><p>dsn: user; copy: yes</p>
 <p>User for login if not current user.</p>
 </div></blockquote>
-</section>
-<section id="environment">
+</div>
+<div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
 <p>The environment variable <code class="docutils literal notranslate"><span class="pre">PTDEBUG</span></code> enables verbose debugging output to STDERR.
 To enable debugging and capture all output to a file, run the tool like:</p>
@@ -1525,8 +1521,8 @@ To enable debugging and capture all output to a file, run the tool like:</p>
 </div>
 <p>Be careful: debugging output is voluminous and can generate several megabytes
 of output.</p>
-</section>
-<section id="exit-status">
+</div>
+<div class="section" id="exit-status">
 <h2>EXIT STATUS<a class="headerlink" href="#exit-status" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">INVALID_PARAMETERS</span>        <span class="o">=</span> <span class="m">1</span>
 <span class="nv">UNSUPORTED_MYSQL_VERSION</span>  <span class="o">=</span> <span class="m">2</span>
@@ -1549,8 +1545,8 @@ of output.</p>
 <span class="nv">LOST_MYSQL_CONNECTION</span>     <span class="o">=</span> <span class="m">19</span>
 </pre></div>
 </div>
-</section>
-<section id="system-requirements">
+</div>
+<div class="section" id="system-requirements">
 <h2>SYSTEM REQUIREMENTS<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>You need Perl, DBI, DBD::mysql, and some core packages that ought to be
 installed in any reasonably new version of Perl.</p>
@@ -1560,12 +1556,12 @@ to make <strong class="program">mariadb-schema-change</strong> operate as expect
 global privileges, as well as SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER,
 and TRIGGER table privileges should be granted on server. Slave needs only
 REPLICATION SLAVE and REPLICATION CLIENT privileges.</p>
-</section>
-<section id="authors">
+</div>
+<div class="section" id="authors">
 <h2>AUTHORS<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Cole Busby, Daniel Nichter and Baron Schwartz</p>
-</section>
-<section id="acknowledgments">
+</div>
+<div class="section" id="acknowledgments">
 <h2>ACKNOWLEDGMENTS<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
 <p>The “online schema change” concept was first implemented by Shlomi Noach
 in his tool <code class="docutils literal notranslate"><span class="pre">oak-online-alter-table</span></code>, part of
@@ -1573,17 +1569,17 @@ in his tool <code class="docutils literal notranslate"><span class="pre">oak-onl
 another version called <code class="docutils literal notranslate"><span class="pre">OnlineSchemaChange.php</span></code> as explained by their blog
 post: <a class="reference external" href="http://tinyurl.com/32zeb86">http://tinyurl.com/32zeb86</a>. This tool is a hybrid of both approaches,
 with additional features and functionality not present in either.</p>
-</section>
-<section id="about-this-mariadb-tool">
+</div>
+<div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
 Percona Toolkit’s pt-online-schema-change in August, 2019. Percona Toolkit was
 forked from two projects in June, 2011: Maatkit and Aspersa.  Those projects
 were created by Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
-</section>
-<section id="copyright-license-and-warranty">
+</div>
+<div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
-<p>This program is copyright 2019-2021 MariaDB Corporation and/or its affiliates,
+<p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
 <p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
@@ -1596,12 +1592,12 @@ licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA  02111-1307  USA.</p>
-</section>
-<section id="version">
+</div>
+<div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-schema-change</strong> 6.0.1rc</p>
-</section>
-</section>
+<p><strong class="program">mariadb-schema-change</strong> 6.0.2.1</p>
+</div>
+</div>
 
 
           </div>
@@ -1676,7 +1672,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 

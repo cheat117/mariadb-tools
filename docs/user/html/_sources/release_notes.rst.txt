@@ -1,4 +1,8 @@
+v6.0.2.1 released 2022-04-11
+============================
 
- * Added new tool
- * resolved CentOS7 discovery for epel-release requirement
- * squashed bugs
+
+Changelog
+---------
+
+

@@ -756,7 +756,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.
 
 =head1 VERSION
 
-mariadb-status-diff 6.0.2
+mariadb-status-diff 6.0.2.1
 
 =cut
 

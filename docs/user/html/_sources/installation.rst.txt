@@ -26,18 +26,28 @@ It is recommended to install MariaDB software from official repositories:
    `MariaDB Enterprise Documentation
    <https://mariadb.com/docs/deploy/installation/#install-repository>`_.
 
+#. Ensure Pre-Requisties are installed and configured:
+   
+   +---------------+------------------------------------------------------------------------------------------------------------------------+
+   | OS            | Requirement                                                                                                            |
+   +---------------+------------------------------------------------------------------------------------------------------------------------+
+   | CentOS/RHEL 7 | ``epel-release`` repository installed and enabled.                                                                     |
+   +---------------+------------------------------------------------------------------------------------------------------------------------+
+   | CentOS 8      | ``powertools`` repository installed and enabled.                                                                       |
+   +---------------+------------------------------------------------------------------------------------------------------------------------+
+   | RHEL 8        | ``codeready-builder-for-rhel-8-x86_64-rpmscodeready-builder-for-rhel-8-x86_64-rpms`` repository installed and enabled. |
+   +---------------+------------------------------------------------------------------------------------------------------------------------+
+
 #. Install MariaDB Tools using the corresponding package manager:
 
    * For Debian or Ubuntu::
-.. code-block:: shell
 
-      sudo apt-get install MariaDB-Tools
+      sudo apt-get install mariadb-tools
 
    * For RHEL or CentOS::
-.. code-block:: shell
 
-      sudo yum install MariaDB-Tools
-      sudo dnf install MariaDB-Tools
+      sudo yum install mariadb-tools
+      sudo dnf install mariadb-tools
 
 Alternative Install Methods
 ===========================

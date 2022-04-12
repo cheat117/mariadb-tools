@@ -23,24 +23,20 @@
     </style>
     <title>mariadb-query-digest &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,15 +164,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="mariadb-query-digest">
+  <div class="section" id="mariadb-query-digest">
 <h1><strong class="program">mariadb-query-digest</strong><a class="headerlink" href="#mariadb-query-digest" title="Permalink to this headline">¶</a></h1>
-<section id="name">
+<div class="section" id="name">
 <h2>NAME<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-query-digest</strong> - Analyze MariaDB queries from logs, processlist, and tcpdump.</p>
-</section>
-<section id="synopsis">
+</div>
+<div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<section id="usage">
+<div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">query</span><span class="o">-</span><span class="n">digest</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="n">FILES</span><span class="p">]</span> <span class="p">[</span><span class="n">DSN</span><span class="p">]</span>
 </pre></div>
@@ -205,9 +201,9 @@ mariadb-query-digest --type tcpdump mariadb.tcp.txt
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-query-digest --review <span class="nv">h</span><span class="o">=</span>host2 --no-report slow.log
 </pre></div>
 </div>
-</section>
-</section>
-<section id="risks">
+</div>
+</div>
+<div class="section" id="risks">
 <h2>RISKS<a class="headerlink" href="#risks" title="Permalink to this headline">¶</a></h2>
 <p>MariaDB Tools is mature, proven in the real world, and well tested,
 but all database tools can pose a risk to the system and the database
@@ -218,8 +214,8 @@ server.  Before using this tool, please:</p>
 <li><p>Test the tool on a non-production server</p></li>
 <li><p>Backup your production server and verify the backups</p></li>
 </ul>
-</section>
-<section id="description">
+</div>
+<div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-query-digest</strong> is a sophisticated but easy to use tool for analyzing
 MariaDB queries.  It can analyze queries from MariaDB slow, general, and binary
@@ -240,8 +236,8 @@ query metrics (query time, lock time, etc.) for each unique query are
 saved to database.  Each time the tool is ran with <a class="reference internal" href="#cmdoption-mariadb-query-digest-history"><code class="xref std std-option docutils literal notranslate"><span class="pre">--history</span></code></a>, the
 more historical data is saved which can be used to trend and analyze
 query performance over time.</p>
-</section>
-<section id="attributes">
+</div>
+<div class="section" id="attributes">
 <h2>ATTRIBUTES<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-query-digest</strong> works on events, which are a collection of key-value pairs
 called attributes.  You’ll recognize most of the attributes right away:
@@ -268,8 +264,8 @@ automatically appears in the output:</p>
 </div>
 <p>Attributes created this way can be specified for <a class="reference internal" href="#cmdoption-mariadb-query-digest-order-by"><code class="xref std std-option docutils literal notranslate"><span class="pre">--order-by</span></code></a> or any
 option that requires an attribute.</p>
-</section>
-<section id="output">
+</div>
+<div class="section" id="output">
 <h2>OUTPUT<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>The default <a class="reference internal" href="#cmdoption-mariadb-query-digest-output"><code class="xref std std-option docutils literal notranslate"><span class="pre">--output</span></code></a> is a query analysis report.  The <a class="reference internal" href="#cmdoption-mariadb-query-digest-no-report"><code class="xref std std-option docutils literal notranslate"><span class="pre">--[no]report</span></code></a>
 option controls whether or not this report is printed.  Sometimes you may
@@ -412,8 +408,8 @@ above, and something like the following:</p>
 </pre></div>
 </div>
 <p>See also <a class="reference internal" href="#cmdoption-mariadb-query-digest-report-format"><code class="xref std std-option docutils literal notranslate"><span class="pre">--report-format</span></code></a>.</p>
-</section>
-<section id="query-review">
+</div>
+<div class="section" id="query-review">
 <h2>QUERY REVIEW<a class="headerlink" href="#query-review" title="Permalink to this headline">¶</a></h2>
 <p>A query <a class="reference internal" href="#cmdoption-mariadb-query-digest-review"><code class="xref std std-option docutils literal notranslate"><span class="pre">--review</span></code></a> is the process of storing all the query fingerprints
 analyzed.  This has several benefits:</p>
@@ -456,8 +452,8 @@ graph.  For example,</p>
 your comments integrated right into the report.</p>
 </li>
 </ul>
-</section>
-<section id="fingerprints">
+</div>
+<div class="section" id="fingerprints">
 <h2>FINGERPRINTS<a class="headerlink" href="#fingerprints" title="Permalink to this headline">¶</a></h2>
 <p>A query fingerprint is the abstracted form of a query, which makes it possible
 to group similar queries together.  Abstracting a query removes literal values,
@@ -519,20 +515,20 @@ values (e.g. users_2009 and users_2010 will fingerprint identically).</p></li>
 placeholder, regardless of cardinality.</p></li>
 <li><p>Collapse multiple identical UNION queries into a single one.</p></li>
 </ul>
-</section>
-<section id="options">
+</div>
+<div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>This tool accepts additional command-line arguments.  Refer to the
 “SYNOPSIS” and usage information for details.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-ask-pass">
-<span class="sig-name descname"><span class="pre">--ask-pass</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-ask-pass" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-attribute-aliases">
-<span class="sig-name descname"><span class="pre">--attribute-aliases</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-attribute-aliases" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-attribute-aliases">
+<code class="sig-name descname">--attribute-aliases</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-attribute-aliases" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: db|Schema</p>
 <p>List of attribute|alias,etc.</p>
 <p>Certain attributes have multiple names, like db and Schema.  If an event does
@@ -545,8 +541,8 @@ be report lines for both db and Schema.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-attribute-value-limit">
-<span class="sig-name descname"><span class="pre">--attribute-value-limit</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-attribute-value-limit" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-attribute-value-limit">
+<code class="sig-name descname">--attribute-value-limit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-attribute-value-limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 0</p>
 <p>A sanity limit for attribute values.</p>
 <p>This option deals with bugs in slow logging functionality that causes large
@@ -556,8 +552,8 @@ Disabled by default.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-charset">
-<span class="sig-name descname"><span class="pre">--charset</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-charset" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-charset">
+<code class="sig-name descname">--charset</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -A; type: string</p>
 <p>Default character set.  If the value is utf8, sets Perl’s binmode on
 STDOUT to utf8, passes the mysql_enable_utf8 option to DBD::mysql, and
@@ -567,16 +563,16 @@ connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-config">
-<span class="sig-name descname"><span class="pre">--config</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-config" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Read this comma-separated list of config files; if specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-no-continue-on-error">
-<span class="sig-name descname"><span class="pre">--[no]continue-on-error</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-continue-on-error" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-no-continue-on-error">
+<code class="sig-name descname">--[no]continue-on-error</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-continue-on-error" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Continue parsing even if there is an error.  The tool will not continue
 forever: it stops once any process causes 100 errors, in which case there
@@ -584,8 +580,8 @@ is probably a bug in the tool or the input is invalid.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-no-create-history-table">
-<span class="sig-name descname"><span class="pre">--[no]create-history-table</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-create-history-table" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-no-create-history-table">
+<code class="sig-name descname">--[no]create-history-table</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-create-history-table" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Create the <a class="reference internal" href="#cmdoption-mariadb-query-digest-history"><code class="xref std std-option docutils literal notranslate"><span class="pre">--history</span></code></a> table if it does not exist.</p>
 <p>This option causes the table specified by <a class="reference internal" href="#cmdoption-mariadb-query-digest-history"><code class="xref std std-option docutils literal notranslate"><span class="pre">--history</span></code></a> to be created
@@ -593,8 +589,8 @@ with the default structure shown in the documentation for <a class="reference in
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-no-create-review-table">
-<span class="sig-name descname"><span class="pre">--[no]create-review-table</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-create-review-table" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-no-create-review-table">
+<code class="sig-name descname">--[no]create-review-table</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-create-review-table" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Create the <a class="reference internal" href="#cmdoption-mariadb-query-digest-review"><code class="xref std std-option docutils literal notranslate"><span class="pre">--review</span></code></a> table if it does not exist.</p>
 <p>This option causes the table specified by <a class="reference internal" href="#cmdoption-mariadb-query-digest-review"><code class="xref std std-option docutils literal notranslate"><span class="pre">--review</span></code></a> to be created
@@ -602,29 +598,29 @@ with the default structure shown in the documentation for <a class="reference in
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-daemonize">
-<span class="sig-name descname"><span class="pre">--daemonize</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-daemonize" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-daemonize">
+<code class="sig-name descname">--daemonize</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-daemonize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fork to the background and detach from the shell.  POSIX
 operating systems only.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-database">
-<span class="sig-name descname"><span class="pre">--database</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-database" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-database">
+<code class="sig-name descname">--database</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-database" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -D; type: string</p>
 <p>Connect to this database.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-defaults-file">
-<span class="sig-name descname"><span class="pre">--defaults-file</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-defaults-file" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read mariadb options from the given file.  You must give an absolute pathname.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-embedded-attributes">
-<span class="sig-name descname"><span class="pre">--embedded-attributes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-embedded-attributes" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-embedded-attributes">
+<code class="sig-name descname">--embedded-attributes</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-embedded-attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array</p>
 <p>Two Perl regex patterns to capture pseudo-attributes embedded in queries.</p>
 <p>Embedded attributes might be special attribute-value pairs that you’ve hidden
@@ -655,8 +651,8 @@ the pattern will break.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-expected-range">
-<span class="sig-name descname"><span class="pre">--expected-range</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-expected-range" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-expected-range">
+<code class="sig-name descname">--expected-range</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-expected-range" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: 5,10</p>
 <p>Explain items when there are more or fewer than expected.</p>
 <p>Defines the number of items expected to be seen in the report given by
@@ -666,8 +662,8 @@ included.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-explain">
-<span class="sig-name descname"><span class="pre">--explain</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-explain" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-explain">
+<code class="sig-name descname">--explain</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-explain" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN</p>
 <p>Run EXPLAIN for the sample query with this DSN and print results.</p>
 <p>This works only when <a class="reference internal" href="#cmdoption-mariadb-query-digest-group-by"><code class="xref std std-option docutils literal notranslate"><span class="pre">--group-by</span></code></a> includes fingerprint.  It causes
@@ -683,8 +679,8 @@ which appears at the end of each event report in vertical style
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-filter">
-<span class="sig-name descname"><span class="pre">--filter</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-filter" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-filter">
+<code class="sig-name descname">--filter</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Discard events for which this Perl code doesn’t return true.</p>
 <p>This option is a string of Perl code or a file containing Perl code that gets
@@ -761,8 +757,8 @@ things, like create new attributes.  See “ATTRIBUTES” for an example.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-group-by">
-<span class="sig-name descname"><span class="pre">--group-by</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-group-by" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-group-by">
+<code class="sig-name descname">--group-by</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-group-by" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: fingerprint</p>
 <p>Which attribute of the events to group by.</p>
 <p>In general, you can group queries into classes based on any attribute of the
@@ -800,14 +796,14 @@ into a suggestion of what they do, such as <code class="docutils literal notrans
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-help">
-<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-help" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-history">
-<span class="sig-name descname"><span class="pre">--history</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-history" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-history">
+<code class="sig-name descname">--history</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-history" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN</p>
 <p>Save metrics for each query class in the given table.  <strong class="program">mariadb-query-digest</strong> saves
 query metrics (query time, lock time, etc.) to this table so you can see how
@@ -949,23 +945,23 @@ This causes the checksum field in the history table will have a different value 
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-host">
-<span class="sig-name descname"><span class="pre">--host</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-host" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Connect to host.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-ignore-attributes">
-<span class="sig-name descname"><span class="pre">--ignore-attributes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-ignore-attributes" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-ignore-attributes">
+<code class="sig-name descname">--ignore-attributes</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-ignore-attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: arg, cmd, insert_id, ip, port, Thread_id, timestamp, exptime, flags, key, res, val, server_id, offset, end_log_pos, Xid</p>
 <p>Do not aggregate these attributes.  Some attributes are not query metrics
 but metadata which doesn’t need to be (or can’t be) aggregated.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-inherit-attributes">
-<span class="sig-name descname"><span class="pre">--inherit-attributes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-inherit-attributes" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-inherit-attributes">
+<code class="sig-name descname">--inherit-attributes</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-inherit-attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: db,ts</p>
 <p>If missing, inherit these attributes from the last event that had them.</p>
 <p>This option sets which attributes are inherited or carried forward to events
@@ -975,15 +971,15 @@ to “foo”, but the next event doesn’t have the db attribute, then it inheri
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-interval">
-<span class="sig-name descname"><span class="pre">--interval</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-interval" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-interval">
+<code class="sig-name descname">--interval</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float; default: .1</p>
 <p>How frequently to poll the processlist, in seconds.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-iterations">
-<span class="sig-name descname"><span class="pre">--iterations</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-iterations" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-iterations">
+<code class="sig-name descname">--iterations</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-iterations" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 1</p>
 <p>How many times to iterate through the collect-and-report cycle.  If 0, iterate
 to infinity.  Each iteration runs for <a class="reference internal" href="#cmdoption-mariadb-query-digest-run-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--run-time</span></code></a> amount of time.  An
@@ -995,8 +991,8 @@ information.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-limit">
-<span class="sig-name descname"><span class="pre">--limit</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-limit" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-limit">
+<code class="sig-name descname">--limit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: 95%:20</p>
 <p>Limit output to the given percentage or count.</p>
 <p>If the argument is an integer, report only the top N worst queries.  If the
@@ -1011,29 +1007,29 @@ default is the top 95%.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-log">
-<span class="sig-name descname"><span class="pre">--log</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-log" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-log">
+<code class="sig-name descname">--log</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-log" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Print all output to this file when daemonized.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-max-hostname-length">
-<span class="sig-name descname"><span class="pre">--max-hostname-length</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-max-hostname-length" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-max-hostname-length">
+<code class="sig-name descname">--max-hostname-length</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-max-hostname-length" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 10</p>
 <p>Trim host names in reports to this length. 0=Do not trim host names.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-max-line-length">
-<span class="sig-name descname"><span class="pre">--max-line-length</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-max-line-length" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-max-line-length">
+<code class="sig-name descname">--max-line-length</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-max-line-length" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 74</p>
 <p>Trim lines to this length. 0=Do not trim lines.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-order-by">
-<span class="sig-name descname"><span class="pre">--order-by</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-order-by" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-order-by">
+<code class="sig-name descname">--order-by</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-order-by" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: Query_time:sum</p>
 <p>Sort events by this attribute and aggregate function.</p>
 <p>This is a comma-separated list of order-by expressions, one for each
@@ -1069,8 +1065,8 @@ with <a class="reference internal" href="#cmdoption-mariadb-query-digest-filter"
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-outliers">
-<span class="sig-name descname"><span class="pre">--outliers</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-outliers" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-outliers">
+<code class="sig-name descname">--outliers</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-outliers" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: Query_time:1:10</p>
 <p>Report outliers by attribute:percentile:count.</p>
 <p>The syntax of this option is a comma-separated list of colon-delimited strings.
@@ -1088,8 +1084,8 @@ seconds and which are seen at least 5 times, use the following argument:</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-output">
-<span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-output" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-output">
+<code class="sig-name descname">--output</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-output" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: report</p>
 <p>How to format and print the query analysis results.  Accepted values are:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>VALUE          <span class="nv">FORMAT</span>
@@ -1109,16 +1105,16 @@ so the data structure may change in future versions.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-password">
-<span class="sig-name descname"><span class="pre">--password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
 If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-pid">
-<span class="sig-name descname"><span class="pre">--pid</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-pid" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create the given PID file.  The tool won’t start if the PID file already
 exists and the PID it contains is different than the current PID.  However,
@@ -1128,15 +1124,15 @@ removed automatically when the tool exits.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-port">
-<span class="sig-name descname"><span class="pre">--port</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-port" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-preserve-embedded-numbers">
-<span class="sig-name descname"><span class="pre">--preserve-embedded-numbers</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-preserve-embedded-numbers" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-preserve-embedded-numbers">
+<code class="sig-name descname">--preserve-embedded-numbers</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-preserve-embedded-numbers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Preserve numbers in database/table names when fingerprinting queries.
 The standar fingeprint method replaces numbers in db/tables names, making
 a query like ‘SELECT * FROM db1.table2’ to be figerprinted as ‘SELECT * FROM db?.table?’.
@@ -1145,16 +1141,16 @@ This option changes that behaviour and the fingerprint will become
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-processlist">
-<span class="sig-name descname"><span class="pre">--processlist</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-processlist" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-processlist">
+<code class="sig-name descname">--processlist</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-processlist" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN</p>
 <p>Poll this DSN’s processlist for queries, with <a class="reference internal" href="#cmdoption-mariadb-query-digest-interval"><code class="xref std std-option docutils literal notranslate"><span class="pre">--interval</span></code></a> sleep between.</p>
 <p>If the connection fails, <strong class="program">mariadb-query-digest</strong> tries to reopen it once per second.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-progress">
-<span class="sig-name descname"><span class="pre">--progress</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-progress" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-progress">
+<code class="sig-name descname">--progress</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: time,30</p>
 <p>Print progress reports to STDERR.  The value is a comma-separated list with two
 parts.  The first part can be percentage, time, or iterations; the second part
@@ -1163,8 +1159,8 @@ number of iterations.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-read-timeout">
-<span class="sig-name descname"><span class="pre">--read-timeout</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-read-timeout" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-read-timeout">
+<code class="sig-name descname">--read-timeout</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-read-timeout" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; default: 0</p>
 <p>Wait this long for an event from the input; 0 to wait forever.</p>
 <p>This option sets the maximum time to wait for an event from the input.  It
@@ -1176,8 +1172,8 @@ input and prints its reports.  If <a class="reference internal" href="#cmdoption
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-no-report">
-<span class="sig-name descname"><span class="pre">--[no]report</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-report" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-no-report">
+<code class="sig-name descname">--[no]report</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-report" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Print query analysis reports for each <a class="reference internal" href="#cmdoption-mariadb-query-digest-group-by"><code class="xref std std-option docutils literal notranslate"><span class="pre">--group-by</span></code></a> attribute.  This is
 the standard slow log analysis functionality.  See “OUTPUT” for the
@@ -1188,16 +1184,16 @@ the tool to skip some expensive operations.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-report-all">
-<span class="sig-name descname"><span class="pre">--report-all</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-report-all" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-report-all">
+<code class="sig-name descname">--report-all</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-report-all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Report all queries, even ones that have been reviewed.  This only affects
 the <code class="docutils literal notranslate"><span class="pre">report</span></code> <a class="reference internal" href="#cmdoption-mariadb-query-digest-output"><code class="xref std std-option docutils literal notranslate"><span class="pre">--output</span></code></a> when using <a class="reference internal" href="#cmdoption-mariadb-query-digest-review"><code class="xref std std-option docutils literal notranslate"><span class="pre">--review</span></code></a>.  Otherwise, all
 queries are always printed.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-report-format">
-<span class="sig-name descname"><span class="pre">--report-format</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-report-format" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-report-format">
+<code class="sig-name descname">--report-format</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-report-format" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: rusage,date,hostname,files,header,profile,query_report,prepared</p>
 <p>Print these sections of the query analysis report.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SECTION      <span class="nv">PRINTS</span>
@@ -1219,8 +1215,8 @@ separated by blank lines.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-report-histogram">
-<span class="sig-name descname"><span class="pre">--report-histogram</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-report-histogram" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-report-histogram">
+<code class="sig-name descname">--report-histogram</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-report-histogram" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: Query_time</p>
 <p>Chart the distribution of this attribute’s values.</p>
 <p>The distribution chart is limited to time-based attributes, so charting
@@ -1241,8 +1237,8 @@ like:</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-resume">
-<span class="sig-name descname"><span class="pre">--resume</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-resume" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-resume">
+<code class="sig-name descname">--resume</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-resume" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>If specified, the tool writes the last file offset, if there is one,
 to the given filename. When ran again with the same value for this option,
@@ -1251,8 +1247,8 @@ in the log, and resumes parsing events from that point onward.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-review">
-<span class="sig-name descname"><span class="pre">--review</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-review" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-review">
+<code class="sig-name descname">--review</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-review" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN</p>
 <p>Save query classes for later review, and don’t report already reviewed classes.</p>
 <p>The default table is <code class="docutils literal notranslate"><span class="pre">mariadb_tools.query_review</span></code>.  Specify database
@@ -1296,8 +1292,8 @@ default).  It will not work otherwise.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-run-time">
-<span class="sig-name descname"><span class="pre">--run-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-run-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-run-time">
+<code class="sig-name descname">--run-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-run-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time</p>
 <p>How long to run for each <a class="reference internal" href="#cmdoption-mariadb-query-digest-iterations"><code class="xref std std-option docutils literal notranslate"><span class="pre">--iterations</span></code></a>.  The default is to run forever
 (you can interrupt with CTRL-C).  Because <a class="reference internal" href="#cmdoption-mariadb-query-digest-iterations"><code class="xref std std-option docutils literal notranslate"><span class="pre">--iterations</span></code></a> defaults to 1,
@@ -1310,8 +1306,8 @@ collect-and-report cycles.  For example, specifying <a class="reference internal
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-run-time-mode">
-<span class="sig-name descname"><span class="pre">--run-time-mode</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-run-time-mode" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-run-time-mode">
+<code class="sig-name descname">--run-time-mode</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-run-time-mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: clock</p>
 <p>Set what the value of <a class="reference internal" href="#cmdoption-mariadb-query-digest-run-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--run-time</span></code></a> operates on.  Following are the possible
 values for this option:</p>
@@ -1362,8 +1358,8 @@ get and report every interval in a log, specify <a class="reference internal" hr
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-sample">
-<span class="sig-name descname"><span class="pre">--sample</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-sample" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-sample">
+<code class="sig-name descname">--sample</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
 <p>Filter out all but the first N occurrences of each query.  The queries are
 filtered on the first value in <a class="reference internal" href="#cmdoption-mariadb-query-digest-group-by"><code class="xref std std-option docutils literal notranslate"><span class="pre">--group-by</span></code></a>, so by default, this will filter
@@ -1378,8 +1374,8 @@ queries.  A complete example:</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-slave-user">
-<span class="sig-name descname"><span class="pre">--slave-user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-slave-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-slave-user">
+<code class="sig-name descname">--slave-user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-slave-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the user to be used to connect to the slaves.
 This parameter allows you to have a different user with less privileges on the
@@ -1387,8 +1383,8 @@ slaves but that user must exist on all slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-slave-password">
-<span class="sig-name descname"><span class="pre">--slave-password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-slave-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-slave-password">
+<code class="sig-name descname">--slave-password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-slave-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the password to be used to connect to the slaves.
 It can be used with –slave-user and the password for the user must be the same
@@ -1396,8 +1392,8 @@ on all slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-set-vars">
-<span class="sig-name descname"><span class="pre">--set-vars</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-set-vars" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-set-vars">
+<code class="sig-name descname">--set-vars</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-set-vars" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Set the MariaDB variables in this comma-separated list of <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> pairs.</p>
 <p>By default, the tool sets:</p>
@@ -1410,8 +1406,8 @@ example, specifying <code class="docutils literal notranslate"><span class="pre"
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-show-all">
-<span class="sig-name descname"><span class="pre">--show-all</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-show-all" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-show-all">
+<code class="sig-name descname">--show-all</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-show-all" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Hash</p>
 <p>Show all values for these attributes.</p>
 <p>By default <strong class="program">mariadb-query-digest</strong> only shows as many of an attribute’s value that
@@ -1422,8 +1418,8 @@ can be specified, comma-separated.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-since">
-<span class="sig-name descname"><span class="pre">--since</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-since" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-since">
+<code class="sig-name descname">--since</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-since" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Parse only queries newer than this value (parse queries since this date).</p>
 <p>This option allows you to ignore queries older than a certain value and parse
@@ -1457,15 +1453,15 @@ are actually new enough.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-socket">
-<span class="sig-name descname"><span class="pre">--socket</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-socket" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-timeline">
-<span class="sig-name descname"><span class="pre">--timeline</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-timeline" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-timeline">
+<code class="sig-name descname">--timeline</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-timeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show a timeline of events.</p>
 <p>This option makes <strong class="program">mariadb-query-digest</strong> print another kind of report: a timeline of
 the events.  Each query is still grouped and aggregate into classes according to
@@ -1491,8 +1487,8 @@ will be printed at the end before the response-time profile
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-type">
-<span class="sig-name descname"><span class="pre">--type</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-type" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-type">
+<code class="sig-name descname">--type</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-type" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: slowlog</p>
 <p>The type of input to parse.  The permitted types are</p>
 <p>binlog</p>
@@ -1589,8 +1585,8 @@ for example.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-until">
-<span class="sig-name descname"><span class="pre">--until</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-until" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-until">
+<code class="sig-name descname">--until</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-until" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Parse only queries older than this value (parse queries until this date).</p>
 <p>This option allows you to ignore queries newer than a certain value and parse
@@ -1602,15 +1598,15 @@ all subsequent queries are ignored.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-user">
-<span class="sig-name descname"><span class="pre">--user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-variations">
-<span class="sig-name descname"><span class="pre">--variations</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-variations" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-variations">
+<code class="sig-name descname">--variations</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-variations" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Report the number of variations in these attributes’ values.</p>
 <p>Variations show how many distinct values an attribute had within a class.
@@ -1630,14 +1626,14 @@ distinct checksums are treated as equal.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-version">
-<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-version" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-no-vertical-format">
-<span class="sig-name descname"><span class="pre">--[no]vertical-format</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-vertical-format" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-no-vertical-format">
+<code class="sig-name descname">--[no]vertical-format</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-no-vertical-format" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Output a trailing “G” in the reported SQL queries.</p>
 <p>This makes the mariadb client display the result using vertical format.
@@ -1645,8 +1641,8 @@ Non-native MariaDB clients like phpMyAdmin do not support this.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-query-digest-watch-server">
-<span class="sig-name descname"><span class="pre">--watch-server</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-query-digest-watch-server" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-query-digest-watch-server">
+<code class="sig-name descname">--watch-server</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-query-digest-watch-server" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>This option tells <strong class="program">mariadb-query-digest</strong> which server IP address and port (like
 “10.0.0.1:3306”) to watch when parsing tcpdump (for <a class="reference internal" href="#cmdoption-mariadb-query-digest-type"><code class="xref std std-option docutils literal notranslate"><span class="pre">--type</span></code></a> tcpdump);
@@ -1661,8 +1657,8 @@ option for each.  At present <strong class="program">mariadb-query-digest</stron
 port 3306 and also be told to watch a server on a non-standard port.</p>
 </dd></dl>
 
-</section>
-<section id="dsn-options">
+</div>
+<div class="section" id="dsn-options">
 <h2>DSN OPTIONS<a class="headerlink" href="#dsn-options" title="Permalink to this headline">¶</a></h2>
 <p>These DSN options are used to create a DSN.  Each option is given like
 <code class="docutils literal notranslate"><span class="pre">option=value</span></code>.  The options are case-sensitive, so P and p are not the
@@ -1732,8 +1728,8 @@ If password contains commas they must be escaped with a backslash: “exam,ple�
 <div><p>dsn: user; copy: yes</p>
 <p>User for login if not current user.</p>
 </div></blockquote>
-</section>
-<section id="environment">
+</div>
+<div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
 <p>The environment variable <code class="docutils literal notranslate"><span class="pre">PTDEBUG</span></code> enables verbose debugging output to STDERR.
 To enable debugging and capture all output to a file, run the tool like:</p>
@@ -1742,13 +1738,13 @@ To enable debugging and capture all output to a file, run the tool like:</p>
 </div>
 <p>Be careful: debugging output is voluminous and can generate several megabytes
 of output.</p>
-</section>
-<section id="system-requirements">
+</div>
+<div class="section" id="system-requirements">
 <h2>SYSTEM REQUIREMENTS<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>You need Perl, DBI, DBD::mysql, and some core packages that ought to be
 installed in any reasonably new version of Perl.</p>
-</section>
-<section id="attributes-reference">
+</div>
+<div class="section" id="attributes-reference">
 <h2>ATTRIBUTES REFERENCE<a class="headerlink" href="#attributes-reference" title="Permalink to this headline">¶</a></h2>
 <p>Events may have the following attributes.  If writing a <a class="reference internal" href="#cmdoption-mariadb-query-digest-filter"><code class="xref std std-option docutils literal notranslate"><span class="pre">--filter</span></code></a>,
 be sure to check that an attribute is defined in each event before
@@ -1782,8 +1778,8 @@ using it, else the filter code may crash the tool with a
 <span class="o">}</span><span class="p">;</span>
 </pre></div>
 </div>
-</section>
-<section id="common">
+</div>
+<div class="section" id="common">
 <h2>COMMON<a class="headerlink" href="#common" title="Permalink to this headline">¶</a></h2>
 <p>These attribute are common to all input <a class="reference internal" href="#cmdoption-mariadb-query-digest-type"><code class="xref std std-option docutils literal notranslate"><span class="pre">--type</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-query-digest-processlist"><code class="xref std std-option docutils literal notranslate"><span class="pre">--processlist</span></code></a>,
 except where noted.</p>
@@ -1826,14 +1822,14 @@ except for <a class="reference internal" href="#cmdoption-mariadb-query-digest-p
 <blockquote>
 <div><p>The timestamp of when the query ended.</p>
 </div></blockquote>
-</section>
-<section id="slow-general-and-binary-logs">
+</div>
+<div class="section" id="slow-general-and-binary-logs">
 <h2>SLOW, GENERAL, AND BINARY LOGS<a class="headerlink" href="#slow-general-and-binary-logs" title="Permalink to this headline">¶</a></h2>
 <p>Events have all available attributes from the log file.  Therefore, you only
 need to look at the log file to see which events are available, but remember:
 not all events have the same attributes.</p>
-</section>
-<section id="tcpdump">
+</div>
+<div class="section" id="tcpdump">
 <h2>TCPDUMP<a class="headerlink" href="#tcpdump" title="Permalink to this headline">¶</a></h2>
 <p>These attributes are available when parsing <a class="reference internal" href="#cmdoption-mariadb-query-digest-type"><code class="xref std std-option docutils literal notranslate"><span class="pre">--type</span></code></a> tcpdump.</p>
 <p>Error_no</p>
@@ -1860,27 +1856,27 @@ not all events have the same attributes.</p>
 <blockquote>
 <div><p>The number of warnings, as otherwise shown by <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">WARNINGS</span></code>.</p>
 </div></blockquote>
-</section>
-<section id="processlist">
+</div>
+<div class="section" id="processlist">
 <h2>PROCESSLIST<a class="headerlink" href="#processlist" title="Permalink to this headline">¶</a></h2>
 <p>If using <a class="reference internal" href="#cmdoption-mariadb-query-digest-processlist"><code class="xref std std-option docutils literal notranslate"><span class="pre">--processlist</span></code></a>, an <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute is available for
 the process ID, in addition to the common attributes.</p>
-</section>
-<section id="authors">
+</div>
+<div class="section" id="authors">
 <h2>AUTHORS<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Cole Busby, Baron Schwartz, Daniel Nichter, and Brian Fraser</p>
-</section>
-<section id="about-this-mariadb-tool">
+</div>
+<div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
 Percona Toolkit’s pt-query-digest in November, 2019.  Percona Toolkit was
 forked from two projects in June, 2011: Maatkit and Aspersa.  Those projects
 were created by Baron Schwartz and primarily developed by him and Daniel
 Nichter.</p>
-</section>
-<section id="copyright-license-and-warranty">
+</div>
+<div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
-<p>This program is copyright 2019-2021 MariaDB Corporation and/or its affiliates,
+<p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
 <p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
@@ -1893,12 +1889,12 @@ licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA  02111-1307  USA.</p>
-</section>
-<section id="version">
+</div>
+<div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-query-digest</strong> 6.0.1rc</p>
-</section>
-</section>
+<p><strong class="program">mariadb-query-digest</strong> 6.0.2.1</p>
+</div>
+</div>
 
 
           </div>
@@ -1977,7 +1973,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 

@@ -23,24 +23,20 @@
     </style>
     <title>DSN (DATA SOURCE NAME) SPECIFICATIONS &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,7 +164,7 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="dsn-data-source-name-specifications">
+  <div class="section" id="dsn-data-source-name-specifications">
 <h1>DSN (DATA SOURCE NAME) SPECIFICATIONS<a class="headerlink" href="#dsn-data-source-name-specifications" title="Permalink to this headline">¶</a></h1>
 <p>MariaDB Tools use DSNs to specify how to create a DBD connection to
 a MariaDB server.  A DSN is a comma-separated string of <code class="docutils literal notranslate"><span class="pre">key=value</span></code> parts, like:</p>
@@ -184,7 +180,7 @@ create a DSN automatically, behind the scenes.</p>
 provide defaults for all DSNs that do not specify the option’s corresponding
 key part.  For example, if DSN <code class="docutils literal notranslate"><span class="pre">h=host1</span></code> and option <code class="docutils literal notranslate"><span class="pre">--port=12345</span></code> are
 specified, then the tool automatically adds <code class="docutils literal notranslate"><span class="pre">P=12345</span></code> to DSN.</p>
-<section id="escaping-values">
+<div class="section" id="escaping-values">
 <h2>ESCAPING VALUES<a class="headerlink" href="#escaping-values" title="Permalink to this headline">¶</a></h2>
 <p>DSNs are usually specified on the command line, so shell quoting and escaping
 must be taken into account.  Special characters, like asterisk (<code class="docutils literal notranslate"><span class="pre">\*</span></code>), need
@@ -196,8 +192,8 @@ the escape character for most shells, two backslashes are required to pass
 a literal backslash.  For example, if the username is literally <code class="docutils literal notranslate"><span class="pre">my,name</span></code>,
 it must be specified as <code class="docutils literal notranslate"><span class="pre">my\\,name</span></code> on most shells.  This applies to DSNs
 and DSN-related options like <code class="docutils literal notranslate"><span class="pre">--user</span></code>.</p>
-</section>
-<section id="key-parts">
+</div>
+<div class="section" id="key-parts">
 <h2>KEY PARTS<a class="headerlink" href="#key-parts" title="Permalink to this headline">¶</a></h2>
 <p>Many of the tools add more parts to DSNs for special purposes, and sometimes
 override parts to make them do something slightly different.  However, all the
@@ -279,15 +275,15 @@ ignores the port.</p>
 <blockquote>
 <div><p>MariaDB username to use when connecting, if not current system user.</p>
 </div></blockquote>
-</section>
-<section id="bareword">
+</div>
+<div class="section" id="bareword">
 <h2>BAREWORD<a class="headerlink" href="#bareword" title="Permalink to this headline">¶</a></h2>
 <p>Many of the tools will let you specify a DSN as a single word, without any
 <code class="docutils literal notranslate"><span class="pre">key=value</span></code> syntax.  This is called a ‘bareword’.  How this is handled is
 tool-specific, but it is usually interpreted as the “h” part.  The tool’s
 <code class="docutils literal notranslate"><span class="pre">--help</span></code> output will tell you the behavior for that tool.</p>
-</section>
-<section id="propagation">
+</div>
+<div class="section" id="propagation">
 <h2>PROPAGATION<a class="headerlink" href="#propagation" title="Permalink to this headline">¶</a></h2>
 <p>Many tools will let you propagate values from one DSN to the next, so you don’t
 have to specify all the parts for each DSN.  For example, if you want to specify
@@ -296,8 +292,8 @@ a username and password for each DSN, you can connect to three hosts as follows:
 </pre></div>
 </div>
 <p>This is tool-specific.</p>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -356,7 +352,7 @@ a username and password for each DSN, you can connect to three hosts as follows:
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 

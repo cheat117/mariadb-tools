@@ -23,24 +23,20 @@
     </style>
     <title>mariadb-iostat &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,15 +164,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="mariadb-iostat">
+  <div class="section" id="mariadb-iostat">
 <h1><strong class="program">mariadb-iostat</strong><a class="headerlink" href="#mariadb-iostat" title="Permalink to this headline">¶</a></h1>
-<section id="name">
+<div class="section" id="name">
 <h2>NAME<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-iostat</strong> - An interactive I/O monitoring tool for GNU/Linux.</p>
-</section>
-<section id="synopsis">
+</div>
+<div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<section id="usage">
+<div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">iostat</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="n">FILES</span><span class="p">]</span>
 </pre></div>
@@ -184,9 +180,9 @@
 <p><strong class="program">mariadb-iostat</strong> prints disk I/O statistics for GNU/Linux.  It is somewhat similar
 to iostat, but it is interactive and more detailed.  It can analyze samples
 gathered from another machine.</p>
-</section>
-</section>
-<section id="risks">
+</div>
+</div>
+<div class="section" id="risks">
 <h2>RISKS<a class="headerlink" href="#risks" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-iostat</strong> is mature, proven in the real world, and well tested,
 but all database tools can pose a risk to the system and the database
@@ -196,8 +192,8 @@ server.  Before using this tool, please:</p>
 <li><p>Test the tool on a non-production server</p></li>
 <li><p>Backup your production server and verify the backups</p></li>
 </ul>
-</section>
-<section id="description">
+</div>
+<div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>The <strong class="program">mariadb-iostat</strong> tool is similar to iostat, but has some advantages. It prints
 read and write statistics separately, and has more columns. It is menu-driven
@@ -222,8 +218,8 @@ contents every time you change an option.</p>
 <p>The program doesn’t print information about every block device on the system. It
 hides devices that it has never observed to have any activity.  You can enable
 and disable this by pressing the ‘i’ key.</p>
-</section>
-<section id="output">
+</div>
+<div class="section" id="output">
 <h2>OUTPUT<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>In the rest of this documentation, we will try to clarify the distinction
 between block devices (/dev/sda1, for example), which the kernel presents to the
@@ -489,8 +485,8 @@ versus service time for reads and writes in aggregate.</p>
 the portion of time during which there was at least one active request, not as a
 percentage, which is why we chose to avoid this confusing term.</p>
 </div></blockquote>
-</section>
-<section id="collecting-data">
+</div>
+<div class="section" id="collecting-data">
 <h2>COLLECTING DATA<a class="headerlink" href="#collecting-data" title="Permalink to this headline">¶</a></h2>
 <p>It is straightforward to gather a sample of data for this tool.  Files should
 have this format, with a timestamp line preceding each sample of statistics:</p>
@@ -514,8 +510,8 @@ the following:</p>
 <span class="k">done</span>
 </pre></div>
 </div>
-</section>
-<section id="kernel-documentation">
+</div>
+<div class="section" id="kernel-documentation">
 <h2>KERNEL DOCUMENTATION<a class="headerlink" href="#kernel-documentation" title="Permalink to this headline">¶</a></h2>
 <p>This documentation supplements <a class="reference external" href="http://www.kernel.org/doc/Documentation/iostats.txt">the official
 documentation</a> on the
@@ -563,36 +559,36 @@ increments by 2, not 3.</p></li>
 it counts double when two I/Os overlap.  In our previous example, this field
 would increment by 3, not 2.</p></li>
 </ol>
-</section>
-<section id="options">
+</div>
+<div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>This tool accepts additional command-line arguments.  Refer to the
 “SYNOPSIS” and usage information for details.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-columns-regex">
-<span class="sig-name descname"><span class="pre">--columns-regex</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-columns-regex" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-columns-regex">
+<code class="sig-name descname">--columns-regex</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-columns-regex" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: .</p>
 <p>Print columns that match this Perl regex.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-config">
-<span class="sig-name descname"><span class="pre">--config</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-config" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Read this comma-separated list of config files; if specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-devices-regex">
-<span class="sig-name descname"><span class="pre">--devices-regex</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-devices-regex" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-devices-regex">
+<code class="sig-name descname">--devices-regex</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-devices-regex" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Print devices that match this Perl regex.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-group-by">
-<span class="sig-name descname"><span class="pre">--group-by</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-group-by" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-group-by">
+<code class="sig-name descname">--group-by</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-group-by" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: all</p>
 <p>Group-by mode: disk, sample, or all.  In <strong>disk</strong> mode, each line of output
 shows one disk device, with the statistics computed since the tool started.  In
@@ -602,8 +598,8 @@ and one disk device.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-headers">
-<span class="sig-name descname"><span class="pre">--headers</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-headers" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-headers">
+<code class="sig-name descname">--headers</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-headers" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Hash; default: group,scroll</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">group</span></code> is present, each sample will be separated by a blank line, unless
 the sample is only one line.  If <code class="docutils literal notranslate"><span class="pre">scroll</span></code> is present, the tool will print the
@@ -612,14 +608,14 @@ you can press the space bar, or the enter key, to reprint headers at will.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-help">
-<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-help" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-interval">
-<span class="sig-name descname"><span class="pre">--interval</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-interval" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-interval">
+<code class="sig-name descname">--interval</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 1</p>
 <p>When in interactive mode, wait N seconds before printing to the screen.
 Also, how often the tool should sample <em>/proc/diskstats</em>.</p>
@@ -643,47 +639,47 @@ sample will be only 7 seconds long, not 10 seconds.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-iterations">
-<span class="sig-name descname"><span class="pre">--iterations</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-iterations" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-iterations">
+<code class="sig-name descname">--iterations</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-iterations" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
 <p>When in interactive mode, stop after N samples.  Run forever by default.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-sample-time">
-<span class="sig-name descname"><span class="pre">--sample-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-sample-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-sample-time">
+<code class="sig-name descname">--sample-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-sample-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 1</p>
 <p>In –group-by sample mode, include N seconds of samples per group.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-save-samples">
-<span class="sig-name descname"><span class="pre">--save-samples</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-save-samples" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-save-samples">
+<code class="sig-name descname">--save-samples</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-save-samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>File to save diskstats samples in; these can be used for later analysis.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-show-inactive">
-<span class="sig-name descname"><span class="pre">--show-inactive</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-show-inactive" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-show-inactive">
+<code class="sig-name descname">--show-inactive</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-show-inactive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show inactive devices.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-show-timestamps">
-<span class="sig-name descname"><span class="pre">--show-timestamps</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-show-timestamps" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-show-timestamps">
+<code class="sig-name descname">--show-timestamps</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-show-timestamps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show a ‘HH:MM:SS’ timestamp in the <code class="docutils literal notranslate"><span class="pre">#ts</span></code> column.  If multiple timestamps are
 aggregated into one line, the first timestamp is shown.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-iostat-version">
-<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-iostat-version" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-iostat-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-iostat-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
-</section>
-<section id="environment">
+</div>
+<div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
 <p>The environment variable <code class="docutils literal notranslate"><span class="pre">PTDEBUG</span></code> enables verbose debugging output to STDERR.
 To enable debugging and capture all output to a file, run the tool like:</p>
@@ -692,26 +688,26 @@ To enable debugging and capture all output to a file, run the tool like:</p>
 </div>
 <p>Be careful: debugging output is voluminous and can generate several megabytes
 of output.</p>
-</section>
-<section id="system-requirements">
+</div>
+<div class="section" id="system-requirements">
 <h2>SYSTEM REQUIREMENTS<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>This tool requires Perl v5.8.0 or newer and the <em>/proc</em> filesystem, unless
 reading from files.</p>
-</section>
-<section id="authors">
+</div>
+<div class="section" id="authors">
 <h2>AUTHORS<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Cole Busby,Baron Schwartz, Brian Fraser, and Daniel Nichter</p>
-</section>
-<section id="about-this-mariadb-tool">
+</div>
+<div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
 Percona Toolkit’s pt-diskstat in August, 2019. Percona Toolkit was forked from two
 projects in June, 2011: Maatkit and Aspersa.  Those projects were created by
 Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
-</section>
-<section id="copyright-license-and-warranty">
+</div>
+<div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
-<p>This program is copyright 2019-2021 MariaDB Corporation and/or its affiliates,
+<p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
 <p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
@@ -724,12 +720,12 @@ licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA  02111-1307  USA.</p>
-</section>
-<section id="version">
+</div>
+<div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-iostat</strong> 6.0.1rc</p>
-</section>
-</section>
+<p><strong class="program">mariadb-iostat</strong> 6.0.2.1</p>
+</div>
+</div>
 
 
           </div>
@@ -801,7 +797,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 

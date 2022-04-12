@@ -23,24 +23,20 @@
     </style>
     <title>mariadb-kill &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,15 +164,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="mariadb-kill">
+  <div class="section" id="mariadb-kill">
 <h1><strong class="program">mariadb-kill</strong><a class="headerlink" href="#mariadb-kill" title="Permalink to this headline">¶</a></h1>
-<section id="name">
+<div class="section" id="name">
 <h2>NAME<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-kill</strong> - Kill MariaDB queries that match certain criteria.</p>
-</section>
-<section id="synopsis">
+</div>
+<div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<section id="usage">
+<div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">kill</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="n">DSN</span><span class="p">]</span>
 </pre></div>
@@ -206,9 +202,9 @@ or more FILE which contains the output of SHOW PROCESSLIST.  If FILE is -,
 mariadb-kill --test-matching proclist.txt --busy-time <span class="m">60</span> --print
 </pre></div>
 </div>
-</section>
-</section>
-<section id="risks">
+</div>
+</div>
+<div class="section" id="risks">
 <h2>RISKS<a class="headerlink" href="#risks" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-kill</strong> is mature, proven in the real world, and well tested,
 but all database tools can pose a risk to the system and the database
@@ -219,8 +215,8 @@ server.  Before using this tool, please:</p>
 <li><p>Test the tool on a non-production server</p></li>
 <li><p>Backup your production server and verify the backups</p></li>
 </ul>
-</section>
-<section id="description">
+</div>
+<div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-kill</strong> captures queries from SHOW PROCESSLIST, filters them, and then either
 kills or prints them.  This is also known as a “slow query sniper” in some
@@ -247,8 +243,8 @@ for more details.</p>
 <p>Usually you need to specify at least one <code class="docutils literal notranslate"><span class="pre">--match</span></code> option, else no
 queries will match.  Or, you can specify <a class="reference internal" href="#cmdoption-mariadb-kill-match-all"><code class="xref std std-option docutils literal notranslate"><span class="pre">--match-all</span></code></a> to match all queries
 that aren’t ignored by an <code class="docutils literal notranslate"><span class="pre">--ignore</span></code> option.</p>
-</section>
-<section id="group-match-and-kill">
+</div>
+<div class="section" id="group-match-and-kill">
 <h2>GROUP, MATCH AND KILL<a class="headerlink" href="#group-match-and-kill" title="Permalink to this headline">¶</a></h2>
 <p>Queries pass through several steps to determine which exactly will be killed
 (or printed–whatever action is specified).  Understanding these steps will
@@ -283,8 +279,8 @@ Execute, you need to use “–kill-busy-commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--busy-time <span class="m">114</span> --kill-busy-commands <span class="s1">&#39;Query|Execute&#39;</span>
 </pre></div>
 </div>
-</section>
-<section id="output">
+</div>
+<div class="section" id="output">
 <h2>OUTPUT<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>If only <a class="reference internal" href="#cmdoption-mariadb-kill-kill"><code class="xref std std-option docutils literal notranslate"><span class="pre">--kill</span></code></a> is given, then there is no output.  If only
 <a class="reference internal" href="#cmdoption-mariadb-kill-print"><code class="xref std std-option docutils literal notranslate"><span class="pre">--print</span></code></a> is given, then a timestamped KILL statement if printed
@@ -299,8 +295,8 @@ killed and a line for each like the one above is printed.</p>
 <p>Any command executed by <a class="reference internal" href="#cmdoption-mariadb-kill-execute-command"><code class="xref std std-option docutils literal notranslate"><span class="pre">--execute-command</span></code></a> is responsible for its own
 output and logging.  After being executed, <strong class="program">mariadb-kill</strong> has no control or interaction
 with the command.</p>
-</section>
-<section id="options">
+</div>
+<div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>Specify at least one of <a class="reference internal" href="#cmdoption-mariadb-kill-kill"><code class="xref std std-option docutils literal notranslate"><span class="pre">--kill</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-kill-kill-query"><code class="xref std std-option docutils literal notranslate"><span class="pre">--kill-query</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-kill-print"><code class="xref std std-option docutils literal notranslate"><span class="pre">--print</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-kill-execute-command"><code class="xref std std-option docutils literal notranslate"><span class="pre">--execute-command</span></code></a> or <a class="reference internal" href="#cmdoption-mariadb-kill-stop"><code class="xref std std-option docutils literal notranslate"><span class="pre">--stop</span></code></a>.</p>
 <p><a class="reference internal" href="#cmdoption-mariadb-kill-any-busy-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--any-busy-time</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-kill-each-busy-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--each-busy-time</span></code></a> are mutually exclusive.</p>
@@ -309,14 +305,14 @@ with the command.</p>
 <p>This tool accepts additional command-line arguments.  Refer to the
 “SYNOPSIS” and usage information for details.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-ask-pass">
-<span class="sig-name descname"><span class="pre">--ask-pass</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-ask-pass" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-charset">
-<span class="sig-name descname"><span class="pre">--charset</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-charset" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-charset">
+<code class="sig-name descname">--charset</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -A; type: string</p>
 <p>Default character set.  If the value is utf8, sets Perl’s binmode on
 STDOUT to utf8, passes the mysql_enable_utf8 option to DBD::mysql, and runs SET
@@ -325,46 +321,46 @@ without the utf8 layer, and runs SET NAMES after connecting to MariaDB.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-config">
-<span class="sig-name descname"><span class="pre">--config</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-config" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Read this comma-separated list of config files; if specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-create-log-table">
-<span class="sig-name descname"><span class="pre">--create-log-table</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-create-log-table" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-create-log-table">
+<code class="sig-name descname">--create-log-table</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-create-log-table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the <a class="reference internal" href="#cmdoption-mariadb-kill-log-dsn"><code class="xref std std-option docutils literal notranslate"><span class="pre">--log-dsn</span></code></a> table if it does not exist.</p>
 <p>This option causes the table specified by <a class="reference internal" href="#cmdoption-mariadb-kill-log-dsn"><code class="xref std std-option docutils literal notranslate"><span class="pre">--log-dsn</span></code></a> to be created with the
 default structure shown in the documentation for that option.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-daemonize">
-<span class="sig-name descname"><span class="pre">--daemonize</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-daemonize" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-daemonize">
+<code class="sig-name descname">--daemonize</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-daemonize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fork to the background and detach from the shell.  POSIX operating systems
 only.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-database">
-<span class="sig-name descname"><span class="pre">--database</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-database" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-database">
+<code class="sig-name descname">--database</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-database" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -D; type: string</p>
 <p>The database to use for the connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-defaults-file">
-<span class="sig-name descname"><span class="pre">--defaults-file</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-defaults-file" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read MariaDB options from the given file.  You must give an absolute
 pathname.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-filter">
-<span class="sig-name descname"><span class="pre">--filter</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-filter" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-filter">
+<code class="sig-name descname">--filter</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Discard events for which this Perl code doesn’t return true.</p>
 <p>This option is a string of Perl code or a file containing Perl code that gets
@@ -402,8 +398,8 @@ code tries to do something wrong (like pattern match an undefined value).
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-group-by">
-<span class="sig-name descname"><span class="pre">--group-by</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-group-by" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-group-by">
+<code class="sig-name descname">--group-by</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-group-by" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Apply matches to each class of queries grouped by this SHOW PROCESSLIST column.
 In addition to the basic columns of SHOW PROCESSLIST (user, host, command,
@@ -424,21 +420,21 @@ killed for each class of queries that matches the match criteria.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-help">
-<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-help" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-host">
-<span class="sig-name descname"><span class="pre">--host</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-host" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string; default: localhost</p>
 <p>Connect to host.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-interval">
-<span class="sig-name descname"><span class="pre">--interval</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-interval" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-interval">
+<code class="sig-name descname">--interval</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time</p>
 <p>How often to check for queries to kill.  If <a class="reference internal" href="#cmdoption-mariadb-kill-busy-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--busy-time</span></code></a> is not given,
 then the default interval is 30 seconds.  Else the default is half as often
@@ -448,15 +444,15 @@ then the explicit <a class="reference internal" href="#cmdoption-mariadb-kill-in
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-log">
-<span class="sig-name descname"><span class="pre">--log</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-log" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-log">
+<code class="sig-name descname">--log</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-log" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Print all output to this file when daemonized.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-log-dsn">
-<span class="sig-name descname"><span class="pre">--log-dsn</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-log-dsn" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-log-dsn">
+<code class="sig-name descname">--log-dsn</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-log-dsn" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN</p>
 <p>Store each query killed in this DSN.</p>
 <p>The argument specifies a table to store all killed queries.  The DSN
@@ -487,16 +483,16 @@ MAGIC_create_log_table:</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-password">
-<span class="sig-name descname"><span class="pre">--password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
 If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-pid">
-<span class="sig-name descname"><span class="pre">--pid</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-pid" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create the given PID file.  The tool won’t start if the PID file already
 exists and the PID it contains is different than the current PID.  However,
@@ -506,15 +502,15 @@ removed automatically when the tool exits.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-port">
-<span class="sig-name descname"><span class="pre">--port</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-port" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-query-id">
-<span class="sig-name descname"><span class="pre">--query-id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-query-id" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-query-id">
+<code class="sig-name descname">--query-id</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-query-id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints an ID of the query that was just killed. This is
 equivalent to the “ID” output of pt-query-digest. This allows
 cross-referencing the output of both tools.</p>
@@ -528,8 +524,8 @@ See pt-query-digest for more information.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-rds">
-<span class="sig-name descname"><span class="pre">--rds</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-rds" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-rds">
+<code class="sig-name descname">--rds</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-rds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Denotes the instance in question is on Amazon RDS. By default <strong class="program">mariadb-kill</strong> runs
 the MariaDB command “kill” for <a class="reference internal" href="#cmdoption-mariadb-kill-kill"><code class="xref std std-option docutils literal notranslate"><span class="pre">--kill</span></code></a> and “kill query” <a class="reference internal" href="#cmdoption-mariadb-kill-kill-query"><code class="xref std std-option docutils literal notranslate"><span class="pre">--kill-query</span></code></a>.
 On RDS these two commands are not available and are replaced by function calls.
@@ -538,8 +534,8 @@ and <a class="reference internal" href="#cmdoption-mariadb-kill-kill-query"><cod
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-run-time">
-<span class="sig-name descname"><span class="pre">--run-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-run-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-run-time">
+<code class="sig-name descname">--run-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-run-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time</p>
 <p>How long to run before exiting.  By default <strong class="program">mariadb-kill</strong> runs forever, or until
 its process is killed or stopped by the creation of a <a class="reference internal" href="#cmdoption-mariadb-kill-sentinel"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sentinel</span></code></a> file.
@@ -548,8 +544,8 @@ and sleeps <a class="reference internal" href="#cmdoption-mariadb-kill-interval"
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-sentinel">
-<span class="sig-name descname"><span class="pre">--sentinel</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-sentinel" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-sentinel">
+<code class="sig-name descname">--sentinel</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-sentinel" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: /tmp/mariadb-kill-sentinel</p>
 <p>Exit if this file exists.</p>
 <p>The presence of the file specified by <a class="reference internal" href="#cmdoption-mariadb-kill-sentinel"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sentinel</span></code></a> will cause all
@@ -558,8 +554,8 @@ jobs gracefully if necessary.  See also <a class="reference internal" href="#cmd
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-slave-user">
-<span class="sig-name descname"><span class="pre">--slave-user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-slave-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-slave-user">
+<code class="sig-name descname">--slave-user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-slave-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the user to be used to connect to the slaves.
 This parameter allows you to have a different user with less privileges on the
@@ -567,8 +563,8 @@ slaves but that user must exist on all slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-slave-password">
-<span class="sig-name descname"><span class="pre">--slave-password</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-slave-password" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-slave-password">
+<code class="sig-name descname">--slave-password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-slave-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the password to be used to connect to the slaves.
 It can be used with –slave-user and the password for the user must be the same
@@ -576,8 +572,8 @@ on all slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-set-vars">
-<span class="sig-name descname"><span class="pre">--set-vars</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-set-vars" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-set-vars">
+<code class="sig-name descname">--set-vars</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-set-vars" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Set the MariaDB variables in this comma-separated list of <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> pairs.</p>
 <p>By default, the tool sets:</p>
@@ -590,15 +586,15 @@ example, specifying <code class="docutils literal notranslate"><span class="pre"
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-socket">
-<span class="sig-name descname"><span class="pre">--socket</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-socket" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-stop">
-<span class="sig-name descname"><span class="pre">--stop</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-stop" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-stop">
+<code class="sig-name descname">--stop</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stop running instances by creating the <a class="reference internal" href="#cmdoption-mariadb-kill-sentinel"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sentinel</span></code></a> file.</p>
 <p>Causes <strong class="program">mariadb-kill</strong> to create the sentinel file specified by <a class="reference internal" href="#cmdoption-mariadb-kill-sentinel"><code class="xref std std-option docutils literal notranslate"><span class="pre">--sentinel</span></code></a> and
 exit.  This should have the effect of stopping all running instances which are
@@ -606,28 +602,28 @@ watching the same sentinel file.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-no-strip-comments">
-<span class="sig-name descname"><span class="pre">--[no]strip-comments</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-no-strip-comments" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-no-strip-comments">
+<code class="sig-name descname">--[no]strip-comments</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-no-strip-comments" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Remove SQL comments from queries in the Info column of the PROCESSLIST.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-user">
-<span class="sig-name descname"><span class="pre">--user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-version">
-<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-version" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-victims">
-<span class="sig-name descname"><span class="pre">--victims</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-victims" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-victims">
+<code class="sig-name descname">--victims</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-victims" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: oldest</p>
 <p>Which of the matching queries in each class will be killed.  After classes
 have been matched/filtered, this option specifies which of the matching
@@ -654,8 +650,8 @@ query are killed so that it can complete and populate the cache.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-wait-after-kill">
-<span class="sig-name descname"><span class="pre">--wait-after-kill</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-wait-after-kill" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-wait-after-kill">
+<code class="sig-name descname">--wait-after-kill</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-wait-after-kill" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time</p>
 <p>Wait after killing a query, before looking for more to kill.  The purpose of
 this is to give blocked queries a chance to execute, so we don’t kill a query
@@ -664,16 +660,16 @@ afterwards.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-wait-before-kill">
-<span class="sig-name descname"><span class="pre">--wait-before-kill</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-wait-before-kill" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-wait-before-kill">
+<code class="sig-name descname">--wait-before-kill</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-wait-before-kill" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time</p>
 <p>Wait before killing a query.  The purpose of this is to give
 <a class="reference internal" href="#cmdoption-mariadb-kill-execute-command"><code class="xref std std-option docutils literal notranslate"><span class="pre">--execute-command</span></code></a> a chance to see the matching query and gather other
 MariaDB or system information before it’s killed.</p>
 </dd></dl>
 
-</section>
-<section id="query-matches">
+</div>
+<div class="section" id="query-matches">
 <h2>QUERY MATCHES<a class="headerlink" href="#query-matches" title="Permalink to this headline">¶</a></h2>
 <p>These options filter queries from their classes.  If a query does not
 match, it is removed from its class.  The <code class="docutils literal notranslate"><span class="pre">--ignore</span></code> options take precedence.
@@ -683,8 +679,8 @@ case-sensitive by default, but they can be made case-insensitive by specifying
 a regex pattern like <code class="docutils literal notranslate"><span class="pre">(?i-xsm:select)</span></code>.</p>
 <p>See also “GROUP, MATCH AND KILL”.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-busy-time">
-<span class="sig-name descname"><span class="pre">--busy-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-busy-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-busy-time">
+<code class="sig-name descname">--busy-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-busy-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; group: Query Matches</p>
 <p>Match queries that have been running for longer than this time.  The queries
 must be in Command=Query status.  This matches a query’s Time value as
@@ -692,8 +688,8 @@ reported by SHOW PROCESSLIST.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-idle-time">
-<span class="sig-name descname"><span class="pre">--idle-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-idle-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-idle-time">
+<code class="sig-name descname">--idle-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-idle-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; group: Query Matches</p>
 <p>Match queries that have been idle/sleeping for longer than this time.
 The queries must be in Command=Sleep status.  This matches a query’s Time
@@ -701,47 +697,47 @@ value as reported by SHOW PROCESSLIST.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-ignore-command">
-<span class="sig-name descname"><span class="pre">--ignore-command</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-command" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-ignore-command">
+<code class="sig-name descname">--ignore-command</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-command" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Ignore queries whose Command matches this Perl regex.</p>
 <p>See <a class="reference internal" href="#cmdoption-mariadb-kill-match-command"><code class="xref std std-option docutils literal notranslate"><span class="pre">--match-command</span></code></a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-ignore-db">
-<span class="sig-name descname"><span class="pre">--ignore-db</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-db" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-ignore-db">
+<code class="sig-name descname">--ignore-db</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-db" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Ignore queries whose db (database) matches this Perl regex.</p>
 <p>See <a class="reference internal" href="#cmdoption-mariadb-kill-match-db"><code class="xref std std-option docutils literal notranslate"><span class="pre">--match-db</span></code></a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-ignore-host">
-<span class="sig-name descname"><span class="pre">--ignore-host</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-host" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-ignore-host">
+<code class="sig-name descname">--ignore-host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Ignore queries whose Host matches this Perl regex.</p>
 <p>See <a class="reference internal" href="#cmdoption-mariadb-kill-match-host"><code class="xref std std-option docutils literal notranslate"><span class="pre">--match-host</span></code></a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-ignore-info">
-<span class="sig-name descname"><span class="pre">--ignore-info</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-info" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-ignore-info">
+<code class="sig-name descname">--ignore-info</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-info" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Ignore queries whose Info (query) matches this Perl regex.</p>
 <p>See <a class="reference internal" href="#cmdoption-mariadb-kill-match-info"><code class="xref std std-option docutils literal notranslate"><span class="pre">--match-info</span></code></a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-no-ignore-self">
-<span class="sig-name descname"><span class="pre">--[no]ignore-self</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-no-ignore-self" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-no-ignore-self">
+<code class="sig-name descname">--[no]ignore-self</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-no-ignore-self" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes; group: Query Matches</p>
 <p>Don’t kill <strong class="program">mariadb-kill</strong>’s own connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-ignore-state">
-<span class="sig-name descname"><span class="pre">--ignore-state</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-state" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-ignore-state">
+<code class="sig-name descname">--ignore-state</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-state" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches; default: Locked</p>
 <p>Ignore queries whose State matches this Perl regex.  The default is to keep
 threads from being killed if they are locked waiting for another thread.</p>
@@ -749,16 +745,16 @@ threads from being killed if they are locked waiting for another thread.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-ignore-user">
-<span class="sig-name descname"><span class="pre">--ignore-user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-ignore-user">
+<code class="sig-name descname">--ignore-user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-ignore-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Ignore queries whose user matches this Perl regex.</p>
 <p>See <a class="reference internal" href="#cmdoption-mariadb-kill-match-user"><code class="xref std std-option docutils literal notranslate"><span class="pre">--match-user</span></code></a>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-match-all">
-<span class="sig-name descname"><span class="pre">--match-all</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-match-all" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-match-all">
+<code class="sig-name descname">--match-all</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-match-all" title="Permalink to this definition">¶</a></dt>
 <dd><p>group: Query Matches</p>
 <p>Match all queries that are not ignored.  If no ignore options are specified,
 then every query matches (except replication threads, unless
@@ -774,8 +770,8 @@ will be killed.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-match-command">
-<span class="sig-name descname"><span class="pre">--match-command</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-match-command" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-match-command">
+<code class="sig-name descname">--match-command</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-match-command" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Match only queries whose Command matches this Perl regex.</p>
 <p>Common Command values are:</p>
@@ -800,23 +796,23 @@ list and description of Command values.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-match-db">
-<span class="sig-name descname"><span class="pre">--match-db</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-match-db" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-match-db">
+<code class="sig-name descname">--match-db</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-match-db" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Match only queries whose db (database) matches this Perl regex.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-match-host">
-<span class="sig-name descname"><span class="pre">--match-host</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-match-host" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-match-host">
+<code class="sig-name descname">--match-host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-match-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Match only queries whose Host matches this Perl regex.</p>
 <p>The Host value often time includes the port like “host:port”.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-match-info">
-<span class="sig-name descname"><span class="pre">--match-info</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-match-info" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-match-info">
+<code class="sig-name descname">--match-info</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-match-info" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Match only queries whose Info (query) matches this Perl regex.</p>
 <p>The Info column of the processlist shows the query that is being executed
@@ -824,8 +820,8 @@ or NULL if no query is being executed.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-match-state">
-<span class="sig-name descname"><span class="pre">--match-state</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-match-state" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-match-state">
+<code class="sig-name descname">--match-state</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-match-state" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Match only queries whose State matches this Perl regex.</p>
 <p>Common State values are:</p>
@@ -849,15 +845,15 @@ a full list and description of State values.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-match-user">
-<span class="sig-name descname"><span class="pre">--match-user</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-match-user" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-match-user">
+<code class="sig-name descname">--match-user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-match-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Query Matches</p>
 <p>Match only queries whose User matches this Perl regex.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-replication-threads">
-<span class="sig-name descname"><span class="pre">--replication-threads</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-replication-threads" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-replication-threads">
+<code class="sig-name descname">--replication-threads</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-replication-threads" title="Permalink to this definition">¶</a></dt>
 <dd><p>group: Query Matches</p>
 <p>Allow matching and killing replication threads.</p>
 <p>By default, matches do not apply to replication threads; i.e. replication
@@ -866,8 +862,8 @@ match (and potentially kill) replication threads on masters and slaves.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-test-matching">
-<span class="sig-name descname"><span class="pre">--test-matching</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-test-matching" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-test-matching">
+<code class="sig-name descname">--test-matching</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-test-matching" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; group: Query Matches</p>
 <p>Files with processlist snapshots to test matching options against.  Since
 the matching options can be complex, you can save snapshots of processlist
@@ -876,16 +872,16 @@ in files, then test matching options against queries in those files.</p>
 and <a class="reference internal" href="#cmdoption-mariadb-kill-no-ignore-self"><code class="xref std std-option docutils literal notranslate"><span class="pre">--[no]ignore-self</span></code></a>.</p>
 </dd></dl>
 
-</section>
-<section id="class-matches">
+</div>
+<div class="section" id="class-matches">
 <h2>CLASS MATCHES<a class="headerlink" href="#class-matches" title="Permalink to this headline">¶</a></h2>
 <p>These matches apply to entire query classes.  Classes are created by specifying
 the <a class="reference internal" href="#cmdoption-mariadb-kill-group-by"><code class="xref std std-option docutils literal notranslate"><span class="pre">--group-by</span></code></a> option, else all queries are members of a single, default
 class.</p>
 <p>See also “GROUP, MATCH AND KILL”.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-any-busy-time">
-<span class="sig-name descname"><span class="pre">--any-busy-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-any-busy-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-any-busy-time">
+<code class="sig-name descname">--any-busy-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-any-busy-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; group: Class Matches</p>
 <p>Match query class if any query has been running for longer than this time.
 “Longer than” means that if you specify <code class="docutils literal notranslate"><span class="pre">10</span></code>, for example, the class will
@@ -895,8 +891,8 @@ than 10 seconds.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-each-busy-time">
-<span class="sig-name descname"><span class="pre">--each-busy-time</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-each-busy-time" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-each-busy-time">
+<code class="sig-name descname">--each-busy-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-each-busy-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; group: Class Matches</p>
 <p>Match query class if each query has been running for longer than this time.
 “Longer than” means that if you specify <code class="docutils literal notranslate"><span class="pre">10</span></code>, for example, the class will
@@ -907,8 +903,8 @@ longer than the specified time) and <a class="reference internal" href="#cmdopti
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-query-count">
-<span class="sig-name descname"><span class="pre">--query-count</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-query-count" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-query-count">
+<code class="sig-name descname">--query-count</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-query-count" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; group: Class Matches</p>
 <p>Match query class if it has at least this many queries.  When queries are
 grouped into classes by specifying <a class="reference internal" href="#cmdoption-mariadb-kill-group-by"><code class="xref std std-option docutils literal notranslate"><span class="pre">--group-by</span></code></a>, this option causes matches
@@ -918,14 +914,14 @@ are at least this many queries in the entire SHOW PROCESSLIST.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-verbose">
-<span class="sig-name descname"><span class="pre">--verbose</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-verbose" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-verbose">
+<code class="sig-name descname">--verbose</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-verbose" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -v</p>
 <p>Print information to STDOUT about what is being done.</p>
 </dd></dl>
 
-</section>
-<section id="actions">
+</div>
+<div class="section" id="actions">
 <h2>ACTIONS<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h2>
 <p>These actions are taken for every matching query from all classes.
 The actions are taken in this order: <a class="reference internal" href="#cmdoption-mariadb-kill-print"><code class="xref std std-option docutils literal notranslate"><span class="pre">--print</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-kill-execute-command"><code class="xref std std-option docutils literal notranslate"><span class="pre">--execute-command</span></code></a>,
@@ -935,8 +931,8 @@ to see the output of <a class="reference internal" href="#cmdoption-mariadb-kill
 not pass any information to <a class="reference internal" href="#cmdoption-mariadb-kill-execute-command"><code class="xref std std-option docutils literal notranslate"><span class="pre">--execute-command</span></code></a>.</p>
 <p>See also “GROUP, MATCH AND KILL”.</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-execute-command">
-<span class="sig-name descname"><span class="pre">--execute-command</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-execute-command" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-execute-command">
+<code class="sig-name descname">--execute-command</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-execute-command" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; group: Actions</p>
 <p>Execute this command when a query matches.</p>
 <p>After the command is executed, <strong class="program">mariadb-kill</strong> has no control over it, so the command
@@ -948,8 +944,8 @@ passed to the command.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-kill">
-<span class="sig-name descname"><span class="pre">--kill</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-kill" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-kill">
+<code class="sig-name descname">--kill</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-kill" title="Permalink to this definition">¶</a></dt>
 <dd><p>group: Actions</p>
 <p>Kill the connection for matching queries.</p>
 <p>This option makes <strong class="program">mariadb-kill</strong> kill the connections (a.k.a. processes, threads) that
@@ -961,8 +957,8 @@ that <strong class="program">mariadb-kill</strong> matched and killed a query.</
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-kill-busy-commands">
-<span class="sig-name descname"><span class="pre">--kill-busy-commands</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-kill-busy-commands" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-kill-busy-commands">
+<code class="sig-name descname">--kill-busy-commands</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-kill-busy-commands" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: Query</p>
 <p>group: Actions</p>
 <p>Comma sepatated list of commands that will be watched/killed if they ran for
@@ -975,8 +971,8 @@ stamente execution.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-kill-query">
-<span class="sig-name descname"><span class="pre">--kill-query</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-kill-query" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-kill-query">
+<code class="sig-name descname">--kill-query</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-kill-query" title="Permalink to this definition">¶</a></dt>
 <dd><p>group: Actions</p>
 <p>Kill matching queries.</p>
 <p>This option makes <strong class="program">mariadb-kill</strong> kill matching queries.  This requires MariaDB 5.0 or
@@ -985,8 +981,8 @@ this option only kills the query, not its connection.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-mariadb-kill-print">
-<span class="sig-name descname"><span class="pre">--print</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mariadb-kill-print" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-mariadb-kill-print">
+<code class="sig-name descname">--print</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-kill-print" title="Permalink to this definition">¶</a></dt>
 <dd><p>group: Actions</p>
 <p>Print a KILL statement for matching queries; does not actually kill queries.</p>
 <p>If you just want to see which queries match and would be killed without
@@ -994,8 +990,8 @@ actually killing them, specify <a class="reference internal" href="#cmdoption-ma
 matching queries, specify both <a class="reference internal" href="#cmdoption-mariadb-kill-kill"><code class="xref std std-option docutils literal notranslate"><span class="pre">--kill</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-kill-print"><code class="xref std std-option docutils literal notranslate"><span class="pre">--print</span></code></a>.</p>
 </dd></dl>
 
-</section>
-<section id="dsn-options">
+</div>
+<div class="section" id="dsn-options">
 <h2>DSN OPTIONS<a class="headerlink" href="#dsn-options" title="Permalink to this headline">¶</a></h2>
 <p>These DSN options are used to create a DSN.  Each option is given like
 <code class="docutils literal notranslate"><span class="pre">option=value</span></code>.  The options are case-sensitive, so P and p are not the
@@ -1065,8 +1061,8 @@ If password contains commas they must be escaped with a backslash: “exam,ple�
 <blockquote>
 <div><p>Table to log actions in, if passed through –log-dsn.</p>
 </div></blockquote>
-</section>
-<section id="environment">
+</div>
+<div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
 <p>The environment variable <code class="docutils literal notranslate"><span class="pre">PTDEBUG</span></code> enables verbose debugging output to STDERR.
 To enable debugging and capture all output to a file, run the tool like:</p>
@@ -1075,26 +1071,26 @@ To enable debugging and capture all output to a file, run the tool like:</p>
 </div>
 <p>Be careful: debugging output is voluminous and can generate several megabytes
 of output.</p>
-</section>
-<section id="system-requirements">
+</div>
+<div class="section" id="system-requirements">
 <h2>SYSTEM REQUIREMENTS<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>You need Perl, DBI, DBD::mysql, and some core packages that ought to be
 installed in any reasonably new version of Perl.</p>
-</section>
-<section id="authors">
+</div>
+<div class="section" id="authors">
 <h2>AUTHORS<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Cole Busby, Baron Schwartz and Daniel Nichter</p>
-</section>
-<section id="about-this-mariadb-tool">
+</div>
+<div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
 Percona Toolkit’s pt-stalk in August, 2019. Percona Toolkit was forked from two
 projects in June, 2011: Maatkit and Aspersa.  Those projects were created by
 Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
-</section>
-<section id="copyright-license-and-warranty">
+</div>
+<div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
-<p>This program is copyright 2019-2021 MariaDB Corporation and/or its affiliates,
+<p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
 <p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
@@ -1107,12 +1103,12 @@ licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA  02111-1307  USA.</p>
-</section>
-<section id="version">
+</div>
+<div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-kill</strong> 6.0.1rc</p>
-</section>
-</section>
+<p><strong class="program">mariadb-kill</strong> 6.0.2.1</p>
+</div>
+</div>
 
 
           </div>
@@ -1187,7 +1183,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
