@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-align-output" href="mariadb-align-output.html" />
     <link rel="prev" title="MariaDB Tools Documentation" href="index.html" /> 
@@ -166,58 +168,59 @@
 <span id="install"></span><h1>Installing MariaDB Tools<a class="headerlink" href="#installing-mariadb-tools" title="Permalink to this headline">¶</a></h1>
 <p>MariaDB provides packages for most popular 64-bit Linux distributions via the <a class="reference external" href="https://mariadb.com/kb/en/mariadb-package-repository-setup-and-usage/">MariaDB-Tools Repository</a>:</p>
 <ul class="simple">
-<li>Debian 9 (&#8220;stretch&#8221;)</li>
-<li>Debian 10 (&#8220;buster&#8221;)</li>
-<li>Debian 11 (&#8220;bullseye&#8221;)</li>
-<li>Ubuntu 18.04 LTS (Bionic Beaver)</li>
-<li>Ubuntu 20.04 LTS (Focal Fossa)</li>
-<li>Ubuntu 21.04 (Hirsute Hippo)</li>
-<li>Ubuntu 21.10 (Impish Indri)</li>
-<li>Red Hat Enterprise Linux or CentOS 7</li>
-<li>Red Hat Enterprise Linux or CentOS 8</li>
+<li><p>Debian 9 (“stretch”)</p></li>
+<li><p>Debian 10 (“buster”)</p></li>
+<li><p>Debian 11 (“bullseye”)</p></li>
+<li><p>Ubuntu 18.04 LTS (Bionic Beaver)</p></li>
+<li><p>Ubuntu 20.04 LTS (Focal Fossa)</p></li>
+<li><p>Ubuntu 21.04 (Hirsute Hippo)</p></li>
+<li><p>Ubuntu 21.10 (Impish Indri)</p></li>
+<li><p>Red Hat Enterprise Linux or CentOS 7</p></li>
+<li><p>Red Hat Enterprise Linux or CentOS 8</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">MariaDB Tools should work on other DEB-based and RPM-based systems
+<p class="admonition-title">Note</p>
+<p>MariaDB Tools should work on other DEB-based and RPM-based systems
 (for example, Oracle Linux and Amazon Linux AMI),
 but it is tested only on those listed above.</p>
 </div>
 <p>It is recommended to install MariaDB software from official repositories:</p>
 <ol class="arabic">
-<li><p class="first">Configure repositories as described in
-<a class="reference external" href="https://mariadb.com/docs/deploy/installation/#install-repository">MariaDB Enterprise Documentation</a>.</p>
-</li>
-<li><p class="first">Ensure Pre-Requisties are installed and configured:</p>
-<table border="1" class="docutils">
+<li><p>Configure repositories as described in
+<a class="reference external" href="https://mariadb.com/docs/deploy/installation/#install-repository">MariaDB Enterprise Documentation</a>.</p></li>
+<li><p>Ensure Pre-Requisties are installed and configured:</p>
+<table class="docutils align-default">
 <colgroup>
-<col width="11%" />
-<col width="89%" />
+<col style="width: 11%" />
+<col style="width: 89%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>OS</td>
-<td>Requirement</td>
+<tbody>
+<tr class="row-odd"><td><p>OS</p></td>
+<td><p>Requirement</p></td>
 </tr>
-<tr class="row-even"><td>CentOS/RHEL 7</td>
-<td><tt class="docutils literal"><span class="pre">epel-release</span></tt> repository installed and enabled.</td>
+<tr class="row-even"><td><p>CentOS/RHEL 7</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">epel-release</span></code> repository installed and enabled.</p></td>
 </tr>
-<tr class="row-odd"><td>CentOS 8</td>
-<td><tt class="docutils literal"><span class="pre">powertools</span></tt> repository installed and enabled.</td>
+<tr class="row-odd"><td><p>CentOS 8</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">powertools</span></code> repository installed and enabled.</p></td>
 </tr>
-<tr class="row-even"><td>RHEL 8</td>
-<td><tt class="docutils literal"><span class="pre">codeready-builder-for-rhel-8-x86_64-rpmscodeready-builder-for-rhel-8-x86_64-rpms</span></tt> repository installed and enabled.</td>
+<tr class="row-even"><td><p>RHEL 8</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">codeready-builder-for-rhel-8-x86_64-rpmscodeready-builder-for-rhel-8-x86_64-rpms</span></code> repository installed and enabled.</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p class="first">Install MariaDB Tools using the corresponding package manager:</p>
+<li><p>Install MariaDB Tools using the corresponding package manager:</p>
 <ul>
-<li><p class="first">For Debian or Ubuntu:</p>
-<div class="highlight-python"><pre>sudo apt-get install mariadb-tools</pre>
+<li><p>For Debian or Ubuntu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">mariadb</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
 </div>
 </li>
-<li><p class="first">For RHEL or CentOS:</p>
-<div class="highlight-python"><pre>sudo yum install mariadb-tools
-sudo dnf install mariadb-tools</pre>
+<li><p>For RHEL or CentOS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">mariadb</span><span class="o">-</span><span class="n">tools</span>
+<span class="n">sudo</span> <span class="n">dnf</span> <span class="n">install</span> <span class="n">mariadb</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
 </div>
 </li>
 </ul>
@@ -227,12 +230,13 @@ sudo dnf install mariadb-tools</pre>
 <h2>Alternative Install Methods<a class="headerlink" href="#alternative-install-methods" title="Permalink to this headline">¶</a></h2>
 <p>You can also download the packages from the
 <a class="reference external" href="https://customers.mariadb.com">MariaDB Customer Portal</a>
-and install it using tools like <tt class="docutils literal"><span class="pre">dpkg</span></tt> and <tt class="docutils literal"><span class="pre">rpm</span></tt>,
+and install it using tools like <code class="docutils literal notranslate"><span class="pre">dpkg</span></code> and <code class="docutils literal notranslate"><span class="pre">rpm</span></code>,
 depending on your system.</p>
 <p>If you want to download a specific tool, use the following address:
 <a class="reference external" href="http://tools.mariadb.com/get">http://tools.mariadb.com/get</a></p>
-<p>For example, to download the <tt class="docutils literal"><span class="pre">mariadb-summary</span></tt> tool, run:</p>
-<div class="highlight-python"><pre>wget tools.mariadb.com/get/mariadb-summary</pre>
+<p>For example, to download the <code class="docutils literal notranslate"><span class="pre">mariadb-summary</span></code> tool, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">tools</span><span class="o">.</span><span class="n">mariadb</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">get</span><span class="o">/</span><span class="n">mariadb</span><span class="o">-</span><span class="n">summary</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -291,7 +295,7 @@ depending on your system.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 

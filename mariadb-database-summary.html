@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-index-checker" href="mariadb-index-checker.html" />
     <link rel="prev" title="mariadb-config-diff" href="mariadb-config-diff.html" /> 
@@ -172,7 +174,7 @@
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mariadb</span><span class="o">-</span><span class="n">database</span><span class="o">-</span><span class="n">summary</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">database</span><span class="o">-</span><span class="n">summary</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><strong class="program">mariadb-database-summary</strong> conveniently summarizes the status and configuration of a
@@ -188,10 +190,10 @@ well on any modern UNIX systems.</p>
 but all database tools can pose a risk to the system and the database
 server.  Before using this tool, please:</p>
 <ul class="simple">
-<li>Read the tool&#8217;s documentation</li>
-<li>Review the tool&#8217;s known &#8220;BUGS&#8221;</li>
-<li>Test the tool on a non-production server</li>
-<li>Backup your production server and verify the backups</li>
+<li><p>Read the tool’s documentation</p></li>
+<li><p>Review the tool’s known “BUGS”</p></li>
+<li><p>Test the tool on a non-production server</p></li>
+<li><p>Backup your production server and verify the backups</p></li>
 </ul>
 </div>
 <div class="section" id="description">
@@ -202,11 +204,11 @@ into files in a temporary directory, and then formats them neatly with awk
 and other scripting languages.</p>
 <p>To use, simply execute it.  Optionally add a double dash and then the same
 command-line options you would use to connect to MariaDB, such as the following:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mariadb-database-summary --user<span class="o">=</span>root
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-database-summary --user<span class="o">=</span>root
 </pre></div>
 </div>
 <p>The tool interacts minimally with the server upon which it runs.  It assumes
-that you&#8217;ll run it on the same server you&#8217;re inspecting, and therefore it
+that you’ll run it on the same server you’re inspecting, and therefore it
 assumes that it will be able to find the my.cnf configuration file, for example.
 However, it should degrade gracefully if this is not the case.  Note, however,
 that its output does not indicate which information comes from the MariaDB
@@ -225,63 +227,63 @@ larger increments as the input grows.  It begins by rounding to the nearest 5,
 then the nearest 10, nearest 25, and then repeats by a factor of 10 larger
 (50, 100, 250), and so on, as the input grows.</p>
 <p>The following is a sample of the report that the tool produces:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># MariaDB Server Summary Report ##############################</span>
-              System <span class="nb">time</span> | 2012-03-30 18:46:05 UTC
-                            <span class="o">(</span><span class="nb">local </span>TZ: EDT -0400<span class="o">)</span>
-<span class="c"># Instances ##################################################</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># MariaDB Server Summary Report ##############################</span>
+              System <span class="nb">time</span> <span class="p">|</span> <span class="m">2012</span>-03-30 <span class="m">18</span>:46:05 UTC
+                            <span class="o">(</span><span class="nb">local</span> TZ: EDT -0400<span class="o">)</span>
+<span class="c1"># Instances ##################################################</span>
   Port  Data Directory             Nice OOM <span class="nv">Socket</span>
   <span class="o">=====</span> <span class="o">==========================</span> <span class="o">====</span> <span class="o">===</span> <span class="o">======</span>
-  12345 /tmp/12345/data            0    0   /tmp/12345.sock
-  12346 /tmp/12346/data            0    0   /tmp/12346.sock
-  12347 /tmp/12347/data            0    0   /tmp/12347.sock
+  <span class="m">12345</span> /tmp/12345/data            <span class="m">0</span>    <span class="m">0</span>   /tmp/12345.sock
+  <span class="m">12346</span> /tmp/12346/data            <span class="m">0</span>    <span class="m">0</span>   /tmp/12346.sock
+  <span class="m">12347</span> /tmp/12347/data            <span class="m">0</span>    <span class="m">0</span>   /tmp/12347.sock
 </pre></div>
 </div>
 <p>The first two sections show which server the report was generated on and which
 MariaDB instances are running on the server. This is detected from the output of
-<tt class="docutils literal"><span class="pre">ps</span></tt> and does not always detect all instances and parameters, but often works
+<code class="docutils literal notranslate"><span class="pre">ps</span></code> and does not always detect all instances and parameters, but often works
 well.  From this point forward, the report will be focused on a single MariaDB
 instance, although several instances may appear in the above paragraph.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Report On Port 12345 #######################################</span>
-                     User | msandbox@%
-                     Time | 2012-03-30 14:46:05 <span class="o">(</span>EDT<span class="o">)</span>
-                 Hostname | localhost.localdomain
-                  Version | 10.4.7-MariaDB-1:10.4.7+maria~bionic
-                 Built On | linux2.6 i686
-                  Started | 2012-03-28 23:33 <span class="o">(</span>up 1+15:12:09<span class="o">)</span>
-                Databases | 4
-                  Datadir | /tmp/12345/data/
-                Processes | 2 connected, 2 running
-              Replication | Is not a slave, has 1 slaves connected
-                  Pidfile | /tmp/12345/data/12345.pid <span class="o">(</span>exists<span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Report On Port 12345 #######################################</span>
+                     User <span class="p">|</span> msandbox@%
+                     Time <span class="p">|</span> <span class="m">2012</span>-03-30 <span class="m">14</span>:46:05 <span class="o">(</span>EDT<span class="o">)</span>
+                 Hostname <span class="p">|</span> localhost.localdomain
+                  Version <span class="p">|</span> <span class="m">10</span>.4.7-MariaDB-1:10.4.7+maria~bionic
+                 Built On <span class="p">|</span> linux2.6 i686
+                  Started <span class="p">|</span> <span class="m">2012</span>-03-28 <span class="m">23</span>:33 <span class="o">(</span>up <span class="m">1</span>+15:12:09<span class="o">)</span>
+                Databases <span class="p">|</span> <span class="m">4</span>
+                  Datadir <span class="p">|</span> /tmp/12345/data/
+                Processes <span class="p">|</span> <span class="m">2</span> connected, <span class="m">2</span> running
+              Replication <span class="p">|</span> Is not a slave, has <span class="m">1</span> slaves connected
+                  Pidfile <span class="p">|</span> /tmp/12345/data/12345.pid <span class="o">(</span>exists<span class="o">)</span>
 </pre></div>
 </div>
 <p>This section is a quick summary of the MariaDB instance: version, uptime, and
 other very basic parameters. The Time output is generated from the MariaDB server,
 unlike the system date and time printed earlier, so you can see whether the
 database and operating system times match.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Processlist ################################################</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Processlist ################################################</span>
 
   Command                        COUNT<span class="o">(</span>*<span class="o">)</span> Working SUM<span class="o">(</span>Time<span class="o">)</span> MAX<span class="o">(</span>Time<span class="o">)</span>
   ------------------------------ -------- ------- --------- ---------
-  Binlog Dump                           1       1    150000    150000
-  Query                                 1       1         0         0
+  Binlog Dump                           <span class="m">1</span>       <span class="m">1</span>    <span class="m">150000</span>    <span class="m">150000</span>
+  Query                                 <span class="m">1</span>       <span class="m">1</span>         <span class="m">0</span>         <span class="m">0</span>
 
   User                           COUNT<span class="o">(</span>*<span class="o">)</span> Working SUM<span class="o">(</span>Time<span class="o">)</span> MAX<span class="o">(</span>Time<span class="o">)</span>
   ------------------------------ -------- ------- --------- ---------
-  msandbox                              2       2    150000    150000
+  msandbox                              <span class="m">2</span>       <span class="m">2</span>    <span class="m">150000</span>    <span class="m">150000</span>
 
   Host                           COUNT<span class="o">(</span>*<span class="o">)</span> Working SUM<span class="o">(</span>Time<span class="o">)</span> MAX<span class="o">(</span>Time<span class="o">)</span>
   ------------------------------ -------- ------- --------- ---------
-  localhost                             2       2    150000    150000
+  localhost                             <span class="m">2</span>       <span class="m">2</span>    <span class="m">150000</span>    <span class="m">150000</span>
 
   db                             COUNT<span class="o">(</span>*<span class="o">)</span> Working SUM<span class="o">(</span>Time<span class="o">)</span> MAX<span class="o">(</span>Time<span class="o">)</span>
   ------------------------------ -------- ------- --------- ---------
-  NULL                                  2       2    150000    150000
+  NULL                                  <span class="m">2</span>       <span class="m">2</span>    <span class="m">150000</span>    <span class="m">150000</span>
 
   State                          COUNT<span class="o">(</span>*<span class="o">)</span> Working SUM<span class="o">(</span>Time<span class="o">)</span> MAX<span class="o">(</span>Time<span class="o">)</span>
   ------------------------------ -------- ------- --------- ---------
-  Master has sent all binlog to         1       1    150000    150000
-  NULL                                  1       1         0         0
+  Master has sent all binlog to         <span class="m">1</span>       <span class="m">1</span>    <span class="m">150000</span>    <span class="m">150000</span>
+  NULL                                  <span class="m">1</span>       <span class="m">1</span>         <span class="m">0</span>         <span class="m">0</span>
 </pre></div>
 </div>
 <p>This section is a summary of the output from SHOW PROCESSLIST. Each sub-section
@@ -294,16 +296,16 @@ is executing Binlog Dump.</p>
 <p>The columns are the number of rows included, the number that are not in Sleep
 status, the sum of the Time column, and the maximum Time column. The numbers are
 fuzzy-rounded.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Status Counters (Wait 10 Seconds) ##########################</span>
-Variable                            Per day  Per second     10 secs
-Binlog_cache_disk_use                     4
-Binlog_cache_use                         80
-Bytes_received                     15000000         175         200
-Bytes_sent                         15000000         175        2000
-Com_admin_commands                        1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Status Counters (Wait 10 Seconds) ##########################</span>
+Variable                            Per day  Per second     <span class="m">10</span> secs
+Binlog_cache_disk_use                     <span class="m">4</span>
+Binlog_cache_use                         <span class="m">80</span>
+Bytes_received                     <span class="m">15000000</span>         <span class="m">175</span>         <span class="m">200</span>
+Bytes_sent                         <span class="m">15000000</span>         <span class="m">175</span>        <span class="m">2000</span>
+Com_admin_commands                        <span class="m">1</span>
 ...................<span class="o">(</span>many lines omitted<span class="o">)</span>............................
-Threads_created                          40                       1
-Uptime                                90000           1           1
+Threads_created                          <span class="m">40</span>                       <span class="m">1</span>
+Uptime                                <span class="m">90000</span>           <span class="m">1</span>           <span class="m">1</span>
 </pre></div>
 </div>
 <p>This section shows selected counters from two snapshots of SHOW GLOBAL STATUS,
@@ -313,7 +315,7 @@ as the Threads_running status variable, which represents a current value, rather
 than an accumulated number over time.</p>
 <p>The first column is the variable name, and the second column is the counter from
 the first snapshot divided by 86400 (the number of seconds in a day), so you can
-see the magnitude of the counter&#8217;s change per day. 86400 fuzzy-rounds to 90000,
+see the magnitude of the counter’s change per day. 86400 fuzzy-rounds to 90000,
 so the Uptime counter should always be about 90000.</p>
 <p>The third column is the value from the first snapshot, divided by Uptime and
 then fuzzy-rounded, so it represents approximately how quickly the counter is
@@ -322,61 +324,61 @@ growing per-second over the uptime of the server.</p>
 snapshot, divided by the difference in uptime and then fuzzy-rounded. Therefore,
 it shows how quickly the counter is growing per second at the time the report
 was generated.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Table cache ################################################</span>
-                     Size | 400
-                    Usage | 15%
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Table cache ################################################</span>
+                     Size <span class="p">|</span> <span class="m">400</span>
+                    Usage <span class="p">|</span> <span class="m">15</span>%
 </pre></div>
 </div>
 <p>This section shows the size of the table cache, followed by the percentage of
 the table cache in use. The usage is fuzzy-rounded.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Key MariaDB Server features ################################</span>
-      Table &amp; Index Stats | Not Supported
-     Multiple I/O Threads | Enabled
-     Corruption Resilient | Not Supported
-      Durable Replication | Not Supported
-     Import InnoDB Tables | Not Supported
-     Fast Server Restarts | Not Supported
-         Enhanced Logging | Not Supported
-     Replica Perf Logging | Not Supported
-      Response Time Hist. | Not Supported
-          Smooth Flushing | Not Supported
-      HandlerSocket NoSQL | Not Supported
-           Fast Hash UDFs | Unknown
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Key MariaDB Server features ################################</span>
+      Table <span class="p">&amp;</span> Index Stats <span class="p">|</span> Not Supported
+     Multiple I/O Threads <span class="p">|</span> Enabled
+     Corruption Resilient <span class="p">|</span> Not Supported
+      Durable Replication <span class="p">|</span> Not Supported
+     Import InnoDB Tables <span class="p">|</span> Not Supported
+     Fast Server Restarts <span class="p">|</span> Not Supported
+         Enhanced Logging <span class="p">|</span> Not Supported
+     Replica Perf Logging <span class="p">|</span> Not Supported
+      Response Time Hist. <span class="p">|</span> Not Supported
+          Smooth Flushing <span class="p">|</span> Not Supported
+      HandlerSocket NoSQL <span class="p">|</span> Not Supported
+           Fast Hash UDFs <span class="p">|</span> Unknown
 </pre></div>
 </div>
 <p>This section shows features that are available in MariaDB Server and whether
 they are enabled or not.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Plugins ####################################################</span>
-       InnoDB compression | ACTIVE
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plugins ####################################################</span>
+       InnoDB compression <span class="p">|</span> ACTIVE
 </pre></div>
 </div>
 <p>This feature shows specific plugins and whether they are enabled.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Query cache ################################################</span>
-         query_cache_type | ON
-                     Size | 0.0
-                    Usage | 0%
-         HitToInsertRatio | 0%
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Query cache ################################################</span>
+         query_cache_type <span class="p">|</span> ON
+                     Size <span class="p">|</span> <span class="m">0</span>.0
+                    Usage <span class="p">|</span> <span class="m">0</span>%
+         HitToInsertRatio <span class="p">|</span> <span class="m">0</span>%
 </pre></div>
 </div>
 <p>This section shows whether the query cache is enabled and its size, followed by
 the percentage of the cache in use and the hit-to-insert ratio. The latter two
 are fuzzy-rounded.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Schema #####################################################</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Schema #####################################################</span>
 
   Database           Tables Views SPs Trigs Funcs   FKs Partn
-  mysql                  24
-  performance_schema     17
-  sakila                 16     7   3     6     3    22
+  mysql                  <span class="m">24</span>
+  performance_schema     <span class="m">17</span>
+  sakila                 <span class="m">16</span>     <span class="m">7</span>   <span class="m">3</span>     <span class="m">6</span>     <span class="m">3</span>    <span class="m">22</span>
 
   Database           MyISAM CSV PERFORMANCE_SCHEMA InnoDB
-  mysql                  22   2
-  performance_schema                            17
-  sakila                  8                            15
+  mysql                  <span class="m">22</span>   <span class="m">2</span>
+  performance_schema                            <span class="m">17</span>
+  sakila                  <span class="m">8</span>                            <span class="m">15</span>
 
   Database           BTREE FULLTEXT
-  mysql                 31
+  mysql                 <span class="m">31</span>
   performance_schema
-  sakila                63        1
+  sakila                <span class="m">63</span>        <span class="m">1</span>
 
                        c   t   s   e   l   d   i   t   m   v   s
                        h   i   e   n   o   a   n   i   e   a   m
@@ -389,14 +391,14 @@ are fuzzy-rounded.</p>
                            p                           x
                                                        t
   <span class="nv">Database</span>           <span class="o">===</span> <span class="o">===</span> <span class="o">===</span> <span class="o">===</span> <span class="o">===</span> <span class="o">===</span> <span class="o">===</span> <span class="o">===</span> <span class="o">===</span> <span class="o">===</span> <span class="o">===</span>
-  mysql               61  10   6  78   5   4  26   3   4   5   3
-  performance_schema               5          16          33
-  sakila               1  15   1   3       4   3  19      42  26
+  mysql               <span class="m">61</span>  <span class="m">10</span>   <span class="m">6</span>  <span class="m">78</span>   <span class="m">5</span>   <span class="m">4</span>  <span class="m">26</span>   <span class="m">3</span>   <span class="m">4</span>   <span class="m">5</span>   <span class="m">3</span>
+  performance_schema               <span class="m">5</span>          <span class="m">16</span>          <span class="m">33</span>
+  sakila               <span class="m">1</span>  <span class="m">15</span>   <span class="m">1</span>   <span class="m">3</span>       <span class="m">4</span>   <span class="m">3</span>  <span class="m">19</span>      <span class="m">42</span>  <span class="m">26</span>
 </pre></div>
 </div>
-<p>If you specify <a class="reference internal" href="#cmdoption-mariadb-database-summary--databases"><em class="xref std std-option">--databases</em></a> or <a class="reference internal" href="#cmdoption-mariadb-database-summary--all-databases"><em class="xref std std-option">--all-databases</em></a>, the tool will print
+<p>If you specify <a class="reference internal" href="#cmdoption-mariadb-database-summary-databases"><code class="xref std std-option docutils literal notranslate"><span class="pre">--databases</span></code></a> or <a class="reference internal" href="#cmdoption-mariadb-database-summary-all-databases"><code class="xref std std-option docutils literal notranslate"><span class="pre">--all-databases</span></code></a>, the tool will print
 the above section. This summarizes the number and type of objects in the
-databases. It is generated by running <tt class="docutils literal"><span class="pre">mariadb-dump</span> <span class="pre">--no-data</span></tt>, not by querying
+databases. It is generated by running <code class="docutils literal notranslate"><span class="pre">mariadb-dump</span> <span class="pre">--no-data</span></code>, not by querying
 the INFORMATION_SCHEMA, which can freeze a busy server.</p>
 <p>The first sub-report in the section is the count of objects by type in each
 database: tables, views, and so on. The second one shows how many tables use
@@ -405,142 +407,142 @@ of each type of indexes in each database.</p>
 <p>The last section shows the number of columns of various data types in each
 database. For compact display, the column headers are formatted vertically, so
 you need to read downwards from the top. In this example, the first column is
-<tt class="docutils literal"><span class="pre">char</span></tt> and the second column is <tt class="docutils literal"><span class="pre">timestamp</span></tt>. This example is truncated so it
+<code class="docutils literal notranslate"><span class="pre">char</span></code> and the second column is <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>. This example is truncated so it
 does not wrap on a terminal.</p>
 <p>All of the numbers in this portion of the output are exact, not fuzzy-rounded.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Noteworthy Technologies ####################################</span>
-       Full Text Indexing | Yes
-         Geospatial Types | No
-             Foreign Keys | Yes
-             Partitioning | No
-       InnoDB Compression | Yes
-                      SSL | No
-     Explicit LOCK TABLES | No
-           Delayed Insert | No
-          XA Transactions | No
-      ColumnStore Cluster | No
-      Prepared Statements | No
- Prepared statement count | 0
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Noteworthy Technologies ####################################</span>
+       Full Text Indexing <span class="p">|</span> Yes
+         Geospatial Types <span class="p">|</span> No
+             Foreign Keys <span class="p">|</span> Yes
+             Partitioning <span class="p">|</span> No
+       InnoDB Compression <span class="p">|</span> Yes
+                      SSL <span class="p">|</span> No
+     Explicit LOCK TABLES <span class="p">|</span> No
+           Delayed Insert <span class="p">|</span> No
+          XA Transactions <span class="p">|</span> No
+      ColumnStore Cluster <span class="p">|</span> No
+      Prepared Statements <span class="p">|</span> No
+ Prepared statement count <span class="p">|</span> <span class="m">0</span>
 </pre></div>
 </div>
 <p>This section shows some specific technologies used on this server. Some of them
 are detected from the schema dump performed for the previous sections; others
 can be detected by looking at SHOW GLOBAL STATUS.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># InnoDB #####################################################</span>
-                  Version | 1.1.8
-         Buffer Pool Size | 16.0M
-         Buffer Pool Fill | 100%
-        Buffer Pool Dirty | 0%
-           File Per Table | OFF
-                Page Size | 16k
-            Log File Size | 2 * 5.0M <span class="o">=</span> 10.0M
-          Log Buffer Size | 8M
-             Flush Method |
-      Flush Log At Commit | 1
-               XA Support | ON
-                Checksums | ON
-              Doublewrite | ON
-          R/W I/O Threads | 4 4
-             I/O Capacity | 200
-       Thread Concurrency | 0
-      Concurrency Tickets | 500
-       Commit Concurrency | 0
-      Txn Isolation Level | REPEATABLE-READ
-        Adaptive Flushing | ON
-      Adaptive Checkpoint |
-           Checkpoint Age | 0
-             InnoDB Queue | 0 queries inside InnoDB, 0 queries in queue
-       Oldest Transaction | 0 Seconds
-         History List Len | 209
-               Read Views | 1
-         Undo Log Entries | 1 transactions, 1 total undo, 1 max undo
-        Pending I/O Reads | 0 buf pool reads, 0 normal AIO,
-                            0 ibuf AIO, 0 preads
-       Pending I/O Writes | 0 buf pool <span class="o">(</span>0 LRU, 0 flush list, 0 page<span class="o">)</span>;
-                            0 AIO, 0 sync, 0 log IO <span class="o">(</span>0 log, 0 chkp<span class="o">)</span>;
-                            0 pwrites
-      Pending I/O Flushes | 0 buf pool, 0 log
-       Transaction States | 1xnot started
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># InnoDB #####################################################</span>
+                  Version <span class="p">|</span> <span class="m">1</span>.1.8
+         Buffer Pool Size <span class="p">|</span> <span class="m">16</span>.0M
+         Buffer Pool Fill <span class="p">|</span> <span class="m">100</span>%
+        Buffer Pool Dirty <span class="p">|</span> <span class="m">0</span>%
+           File Per Table <span class="p">|</span> OFF
+                Page Size <span class="p">|</span> 16k
+            Log File Size <span class="p">|</span> <span class="m">2</span> * <span class="m">5</span>.0M <span class="o">=</span> <span class="m">10</span>.0M
+          Log Buffer Size <span class="p">|</span> 8M
+             Flush Method <span class="p">|</span>
+      Flush Log At Commit <span class="p">|</span> <span class="m">1</span>
+               XA Support <span class="p">|</span> ON
+                Checksums <span class="p">|</span> ON
+              Doublewrite <span class="p">|</span> ON
+          R/W I/O Threads <span class="p">|</span> <span class="m">4</span> <span class="m">4</span>
+             I/O Capacity <span class="p">|</span> <span class="m">200</span>
+       Thread Concurrency <span class="p">|</span> <span class="m">0</span>
+      Concurrency Tickets <span class="p">|</span> <span class="m">500</span>
+       Commit Concurrency <span class="p">|</span> <span class="m">0</span>
+      Txn Isolation Level <span class="p">|</span> REPEATABLE-READ
+        Adaptive Flushing <span class="p">|</span> ON
+      Adaptive Checkpoint <span class="p">|</span>
+           Checkpoint Age <span class="p">|</span> <span class="m">0</span>
+             InnoDB Queue <span class="p">|</span> <span class="m">0</span> queries inside InnoDB, <span class="m">0</span> queries in queue
+       Oldest Transaction <span class="p">|</span> <span class="m">0</span> Seconds
+         History List Len <span class="p">|</span> <span class="m">209</span>
+               Read Views <span class="p">|</span> <span class="m">1</span>
+         Undo Log Entries <span class="p">|</span> <span class="m">1</span> transactions, <span class="m">1</span> total undo, <span class="m">1</span> max undo
+        Pending I/O Reads <span class="p">|</span> <span class="m">0</span> buf pool reads, <span class="m">0</span> normal AIO,
+                            <span class="m">0</span> ibuf AIO, <span class="m">0</span> preads
+       Pending I/O Writes <span class="p">|</span> <span class="m">0</span> buf pool <span class="o">(</span><span class="m">0</span> LRU, <span class="m">0</span> flush list, <span class="m">0</span> page<span class="o">)</span><span class="p">;</span>
+                            <span class="m">0</span> AIO, <span class="m">0</span> sync, <span class="m">0</span> log IO <span class="o">(</span><span class="m">0</span> log, <span class="m">0</span> chkp<span class="o">)</span><span class="p">;</span>
+                            <span class="m">0</span> pwrites
+      Pending I/O Flushes <span class="p">|</span> <span class="m">0</span> buf pool, <span class="m">0</span> log
+       Transaction States <span class="p">|</span> 1xnot started
 </pre></div>
 </div>
 <p>This section shows important configuration variables for the InnoDB storage
 engine. The buffer pool fill percent and dirty percent are fuzzy-rounded. The
 last few lines are derived from the output of SHOW INNODB STATUS. It is likely
 that this output will change in the future to become more useful.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># MyISAM #####################################################</span>
-                Key Cache | 16.0M
-                 Pct Used | 10%
-                Unflushed | 0%
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># MyISAM #####################################################</span>
+                Key Cache <span class="p">|</span> <span class="m">16</span>.0M
+                 Pct Used <span class="p">|</span> <span class="m">10</span>%
+                Unflushed <span class="p">|</span> <span class="m">0</span>%
 </pre></div>
 </div>
 <p>This section shows the size of the MyISAM key cache, followed by the percentage
 of the cache in use and percentage unflushed (fuzzy-rounded).</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Aria #######################################################</span>
-        Page Cache Buffer | 16.0M
-                 Pct Used | 10%
-                Unflushed | 0%
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aria #######################################################</span>
+        Page Cache Buffer <span class="p">|</span> <span class="m">16</span>.0M
+                 Pct Used <span class="p">|</span> <span class="m">10</span>%
+                Unflushed <span class="p">|</span> <span class="m">0</span>%
 </pre></div>
 </div>
 <p>This section shows the size of the Aria page cache, followed by the percentage
 of the cache in use and percentage unflushed (fuzzy-rounded).</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Security ###################################################</span>
-                    Users | 2 users, 0 anon, 0 w/o pw, 0 old pw
-            Old Passwords | OFF
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Security ###################################################</span>
+                    Users <span class="p">|</span> <span class="m">2</span> users, <span class="m">0</span> anon, <span class="m">0</span> w/o pw, <span class="m">0</span> old pw
+            Old Passwords <span class="p">|</span> OFF
 </pre></div>
 </div>
 <p>This section is generated from queries to tables in the mysql system database.
 It shows how many users exist, and various potential security risks such as
 old-style passwords and users without passwords.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Binary Logging #############################################</span>
-                  Binlogs | 1
-               Zero-Sized | 0
-               Total Size | 21.8M
-            binlog_format | STATEMENT
-         expire_logs_days | 0
-              sync_binlog | 0
-                server_id | 12345
-             binlog_do_db |
-         binlog_ignore_db |
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Binary Logging #############################################</span>
+                  Binlogs <span class="p">|</span> <span class="m">1</span>
+               Zero-Sized <span class="p">|</span> <span class="m">0</span>
+               Total Size <span class="p">|</span> <span class="m">21</span>.8M
+            binlog_format <span class="p">|</span> STATEMENT
+         expire_logs_days <span class="p">|</span> <span class="m">0</span>
+              sync_binlog <span class="p">|</span> <span class="m">0</span>
+                server_id <span class="p">|</span> <span class="m">12345</span>
+             binlog_do_db <span class="p">|</span>
+         binlog_ignore_db <span class="p">|</span>
 </pre></div>
 </div>
 <p>This section shows configuration and status of the binary logs. If there are
 zero-sized binary logs, then it is possible that the binlog index is out of sync
 with the binary logs that actually exist on disk.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Noteworthy Variables #######################################</span>
-     Auto-Inc Incr/Offset | 1/1
-   default_storage_engine | InnoDB
-               flush_time | 0
-             init_connect |
-                init_file |
-                 sql_mode |
-         join_buffer_size | 128k
-         sort_buffer_size | 2M
-         read_buffer_size | 128k
-     read_rnd_buffer_size | 256k
-       bulk_insert_buffer | 0.00
-      max_heap_table_size | 16M
-           tmp_table_size | 16M
-       max_allowed_packet | 1M
-             thread_stack | 192k
-                      log | OFF
-                log_error | /tmp/12345/data/mysqld.log
-             log_warnings | 1
-         log_slow_queries | ON
-log_queries_not_using_indexes | OFF
-        log_slave_updates | ON
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Noteworthy Variables #######################################</span>
+     Auto-Inc Incr/Offset <span class="p">|</span> <span class="m">1</span>/1
+   default_storage_engine <span class="p">|</span> InnoDB
+               flush_time <span class="p">|</span> <span class="m">0</span>
+             init_connect <span class="p">|</span>
+                init_file <span class="p">|</span>
+                 sql_mode <span class="p">|</span>
+         join_buffer_size <span class="p">|</span> 128k
+         sort_buffer_size <span class="p">|</span> 2M
+         read_buffer_size <span class="p">|</span> 128k
+     read_rnd_buffer_size <span class="p">|</span> 256k
+       bulk_insert_buffer <span class="p">|</span> <span class="m">0</span>.00
+      max_heap_table_size <span class="p">|</span> 16M
+           tmp_table_size <span class="p">|</span> 16M
+       max_allowed_packet <span class="p">|</span> 1M
+             thread_stack <span class="p">|</span> 192k
+                      log <span class="p">|</span> OFF
+                log_error <span class="p">|</span> /tmp/12345/data/mysqld.log
+             log_warnings <span class="p">|</span> <span class="m">1</span>
+         log_slow_queries <span class="p">|</span> ON
+log_queries_not_using_indexes <span class="p">|</span> OFF
+        log_slave_updates <span class="p">|</span> ON
 </pre></div>
 </div>
 <p>This section shows several noteworthy server configuration variables that might
 be important to know about when working with this server.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Configuration File #########################################</span>
-              Config File | /tmp/12345/my.sandbox.cnf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuration File #########################################</span>
+              Config File <span class="p">|</span> /tmp/12345/my.sandbox.cnf
 <span class="o">[</span>client<span class="o">]</span>
 <span class="nv">user</span>                                <span class="o">=</span> msandbox
 <span class="nv">password</span>                            <span class="o">=</span> msandbox
-<span class="nv">port</span>                                <span class="o">=</span> 12345
+<span class="nv">port</span>                                <span class="o">=</span> <span class="m">12345</span>
 <span class="nv">socket</span>                              <span class="o">=</span> /tmp/12345/mysql_sandbox12345.sock
 <span class="o">[</span>mysqld<span class="o">]</span>
-<span class="nv">port</span>                                <span class="o">=</span> 12345
+<span class="nv">port</span>                                <span class="o">=</span> <span class="m">12345</span>
 <span class="nv">socket</span>                              <span class="o">=</span> /tmp/12345/mysql_sandbox12345.sock
 pid-file                            <span class="o">=</span> /tmp/12345/data/mysql_sandbox12345.pid
 <span class="nv">basedir</span>                             <span class="o">=</span> /home/baron/5.5.20
@@ -554,12 +556,12 @@ pid-file                            <span class="o">=</span> /tmp/12345/data/mys
 log-bin                             <span class="o">=</span> mariadb-bin
 <span class="nv">relay_log</span>                           <span class="o">=</span> mariadb-relay-bin
 log_slave_updates
-server-id                           <span class="o">=</span> 12345
-report-host                         <span class="o">=</span> 127.0.0.1
-report-port                         <span class="o">=</span> 12345
+server-id                           <span class="o">=</span> <span class="m">12345</span>
+report-host                         <span class="o">=</span> <span class="m">127</span>.0.0.1
+report-port                         <span class="o">=</span> <span class="m">12345</span>
 log-error                           <span class="o">=</span> mysqld.log
-<span class="nv">innodb_lock_wait_timeout</span>            <span class="o">=</span> 3
-<span class="c"># The End ####################################################</span>
+<span class="nv">innodb_lock_wait_timeout</span>            <span class="o">=</span> <span class="m">3</span>
+<span class="c1"># The End ####################################################</span>
 </pre></div>
 </div>
 <p>This section shows a pretty-printed version of the my.cnf file, with comments
@@ -567,124 +569,124 @@ removed and with whitespace added to align things for easy reading. The tool
 tries to detect the my.cnf file by looking at the output of ps, and if it does
 not find the location of the file there, it tries common locations until it
 finds a file. Note that this file might not actually correspond with the server
-from which the report was generated. This can happen when the tool isn&#8217;t run on
-the same server it&#8217;s reporting on, or when detecting the location of the
+from which the report was generated. This can happen when the tool isn’t run on
+the same server it’s reporting on, or when detecting the location of the
 configuration file fails.</p>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p>All options after &#8211; are passed to <tt class="docutils literal"><span class="pre">mariadb</span></tt>.</p>
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--all-databases">
-<tt class="descname">--all-databases</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--all-databases" title="Permalink to this definition">¶</a></dt>
-<dd><p>mariadb-dump and summarize all databases.  See <a class="reference internal" href="#cmdoption-mariadb-database-summary--databases"><em class="xref std std-option">--databases</em></a>.</p>
+<p>All options after – are passed to <code class="docutils literal notranslate"><span class="pre">mariadb</span></code>.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-all-databases">
+<code class="sig-name descname">--all-databases</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-all-databases" title="Permalink to this definition">¶</a></dt>
+<dd><p>mariadb-dump and summarize all databases.  See <a class="reference internal" href="#cmdoption-mariadb-database-summary-databases"><code class="xref std std-option docutils literal notranslate"><span class="pre">--databases</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--ask-pass">
-<tt class="descname">--ask-pass</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--ask-pass" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--config">
-<tt class="descname">--config</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--config" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Read this comma-separated list of config files.  If specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--databases">
-<tt class="descname">--databases</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--databases" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-databases">
+<code class="sig-name descname">--databases</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-databases" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>mariadb-dump and summarize this comma-separated list of databases.  Specify
-<a class="reference internal" href="#cmdoption-mariadb-database-summary--all-databases"><em class="xref std std-option">--all-databases</em></a> instead if you want to dump and summary all databases.</p>
+<a class="reference internal" href="#cmdoption-mariadb-database-summary-all-databases"><code class="xref std std-option docutils literal notranslate"><span class="pre">--all-databases</span></code></a> instead if you want to dump and summary all databases.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--defaults-file">
-<tt class="descname">--defaults-file</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--defaults-file" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read mariadb options from the given file.  You must give an absolute
 pathname.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--help">
-<tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--help" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print help and exit.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--host">
-<tt class="descname">--host</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--host" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Host to connect to.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--list-encrypted-tables">
-<tt class="descname">--list-encrypted-tables</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--list-encrypted-tables" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-list-encrypted-tables">
+<code class="sig-name descname">--list-encrypted-tables</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-list-encrypted-tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: false</p>
 <p>Include a list of the encrypted tables in all databases. This can cause slowdowns since
 querying Information Schema tables can be slow.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--password">
-<tt class="descname">--password</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--password" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
-If password contains commas they must be escaped with a backslash: &#8220;exam,ple&#8221;</p>
+If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--port">
-<tt class="descname">--port</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--port" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--read-samples">
-<tt class="descname">--read-samples</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--read-samples" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-read-samples">
+<code class="sig-name descname">--read-samples</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-read-samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create a report from the files found in this directory.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--save-samples">
-<tt class="descname">--save-samples</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--save-samples" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-save-samples">
+<code class="sig-name descname">--save-samples</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-save-samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Save the data files used to generate the summary in this directory.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--sleep">
-<tt class="descname">--sleep</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--sleep" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-sleep">
+<code class="sig-name descname">--sleep</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-sleep" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 10</p>
 <p>Seconds to sleep when gathering status counters.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--socket">
-<tt class="descname">--socket</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--socket" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--user">
-<tt class="descname">--user</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--user" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-database-summary--version">
-<tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-database-summary--version" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print tool&#8217;s version and exit.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-database-summary-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-database-summary-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print tool’s version and exit.</p>
 </dd></dl>
 
 </div>
@@ -705,7 +707,7 @@ On BSD systems, it may require a mounted procfs.</p>
 <div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
-Percona Toolkit&#8217;s pt-mysql-summary in August, 2019. Percona Toolkit was forked
+Percona Toolkit’s pt-mysql-summary in August, 2019. Percona Toolkit was forked
 from two projects in June, 2011: Maatkit and Aspersa.  Those projects were
 created by Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 </div>
@@ -713,13 +715,13 @@ created by Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
 <p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
-<p>THIS PROGRAM IS PROVIDED &#8220;AS IS&#8221; AND WITHOUT ANY EXPRESS OR IMPLIED
+<p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
 <p>This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
-systems, you can issue `man perlgpl&#8217; or `man perlartistic&#8217; to read these
+systems, you can issue `man perlgpl’ or `man perlartistic’ to read these
 licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -727,7 +729,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </div>
 <div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-database-summary</strong> 6.0.2</p>
+<p><strong class="program">mariadb-database-summary</strong> 6.0.2.1</p>
 </div>
 </div>
 
@@ -799,7 +801,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -821,5 +823,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
-
 

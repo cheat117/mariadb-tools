@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-system-summary" href="mariadb-system-summary.html" />
     <link rel="prev" title="mariadb-status-diff" href="mariadb-status-diff.html" /> 
@@ -172,7 +174,7 @@
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mariadb</span><span class="o">-</span><span class="n">summary</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">summary</span>
 </pre></div>
 </div>
 <p><strong class="program">mariadb-summary</strong> conveniently summarizes the status and configuration of
@@ -187,9 +189,9 @@ losing the formatting. This tool works well on many types of Unix systems.</p>
 but all database tools can pose a risk to the system and the database
 server.  Before using this tool, please:</p>
 <ul class="simple">
-<li>Read the tool&#8217;s documentation</li>
-<li>Test the tool on a non-production server</li>
-<li>Backup your production server and verify the backups</li>
+<li><p>Read the tool’s documentation</p></li>
+<li><p>Test the tool on a non-production server</p></li>
+<li><p>Backup your production server and verify the backups</p></li>
 </ul>
 </div>
 <div class="section" id="description">
@@ -207,254 +209,254 @@ details.</p>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--all-databases">
-<tt class="descname">--all-databases</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--all-databases" title="Permalink to this definition">¶</a></dt>
-<dd><p>mariadb-dump and summarize all databases.  See <a class="reference internal" href="#cmdoption-mariadb-summary--databases"><em class="xref std std-option">--databases</em></a>.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-all-databases">
+<code class="sig-name descname">--all-databases</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-all-databases" title="Permalink to this definition">¶</a></dt>
+<dd><p>mariadb-dump and summarize all databases.  See <a class="reference internal" href="#cmdoption-mariadb-summary-databases"><code class="xref std std-option docutils literal notranslate"><span class="pre">--databases</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--ask-pass">
-<tt class="descname">--ask-pass</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--ask-pass" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--config">
-<tt class="descname">--config</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--config" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Read this comma-separated list of config files.  If specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--databases">
-<tt class="descname">--databases</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--databases" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-databases">
+<code class="sig-name descname">--databases</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-databases" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>mariadb-dump and summarize this comma-separated list of databases.  Specify
-<a class="reference internal" href="#cmdoption-mariadb-summary--all-databases"><em class="xref std std-option">--all-databases</em></a> instead if you want to dump and summary all databases.</p>
+<a class="reference internal" href="#cmdoption-mariadb-summary-all-databases"><code class="xref std std-option docutils literal notranslate"><span class="pre">--all-databases</span></code></a> instead if you want to dump and summary all databases.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--defaults-file">
-<tt class="descname">--defaults-file</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--defaults-file" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read mariadb options from the given file.  You must give an absolute
 pathname.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--debug">
-<tt class="descname">--debug</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--debug" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-debug">
+<code class="sig-name descname">--debug</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-debug" title="Permalink to this definition">¶</a></dt>
 <dd><p>Development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--help">
-<tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--help" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print help and exit.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--host">
-<tt class="descname">--host</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--host" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Host to connect to.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--password">
-<tt class="descname">--password</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--password" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
-If password contains commas they must be escaped with a backslash: &#8220;exam,ple&#8221;</p>
+If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--port">
-<tt class="descname">--port</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--port" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--read-samples">
-<tt class="descname">--read-samples</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--read-samples" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-read-samples">
+<code class="sig-name descname">--read-samples</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-read-samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create a report from the files in this directory.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--save-samples">
-<tt class="descname">--save-samples</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--save-samples" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-save-samples">
+<code class="sig-name descname">--save-samples</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-save-samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Save the collected data in this directory.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--sleep">
-<tt class="descname">--sleep</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--sleep" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-sleep">
+<code class="sig-name descname">--sleep</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-sleep" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 5</p>
 <p>How long to sleep when gathering samples from vmstat.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--socket">
-<tt class="descname">--socket</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--socket" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--summarize-mounts">
-<tt class="descname">--summarize-mounts</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--summarize-mounts" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-summarize-mounts">
+<code class="sig-name descname">--summarize-mounts</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-summarize-mounts" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes; negatable: yes</p>
 <p>Report on mounted filesystems and disk usage.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--summarize-network">
-<tt class="descname">--summarize-network</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--summarize-network" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-summarize-network">
+<code class="sig-name descname">--summarize-network</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-summarize-network" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes; negatable: yes</p>
 <p>Report on network controllers and configuration.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--summarize-processes">
-<tt class="descname">--summarize-processes</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--summarize-processes" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-summarize-processes">
+<code class="sig-name descname">--summarize-processes</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-summarize-processes" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes; negatable: yes</p>
-<p>Report on top processes and <tt class="docutils literal"><span class="pre">vmstat</span></tt> output.</p>
+<p>Report on top processes and <code class="docutils literal notranslate"><span class="pre">vmstat</span></code> output.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support">
-<tt class="descname">--support</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support">
+<code class="sig-name descname">--support</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: integer; default: -1</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-annotation">
-<tt class="descname">--support-annotation</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-annotation" title="Permalink to this definition">¶</a></dt>
-<dd><p>type: string; default: &#8220;&#8221;</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-annotation">
+<code class="sig-name descname">--support-annotation</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>type: string; default: “”</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-checkall">
-<tt class="descname">--support-checkall</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-checkall" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-checkall">
+<code class="sig-name descname">--support-checkall</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-checkall" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: true</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-env">
-<tt class="descname">--support-env</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-env" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-env">
+<code class="sig-name descname">--support-env</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-env" title="Permalink to this definition">¶</a></dt>
 <dd><p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-innodb-mutex">
-<tt class="descname">--support-innodb-mutex</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-innodb-mutex" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-innodb-mutex">
+<code class="sig-name descname">--support-innodb-mutex</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-innodb-mutex" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: true</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-limit">
-<tt class="descname">--support-limit</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-limit" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-limit">
+<code class="sig-name descname">--support-limit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: integer; default: 10000</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-memory">
-<tt class="descname">--support-memory</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-memory" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-memory">
+<code class="sig-name descname">--support-memory</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: true</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-metrics">
-<tt class="descname">--support-metrics</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-metrics" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-metrics">
+<code class="sig-name descname">--support-metrics</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-metrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: integer; default: -1</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-mounts">
-<tt class="descname">--support-mounts</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-mounts" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-mounts">
+<code class="sig-name descname">--support-mounts</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-mounts" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: true</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-not-root">
-<tt class="descname">--support-not-root</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-not-root" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-not-root">
+<code class="sig-name descname">--support-not-root</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-not-root" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: false</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-output-dir">
-<tt class="descname">--support-output-dir</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-output-dir" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-output-dir">
+<code class="sig-name descname">--support-output-dir</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-output-dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string;</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-pid">
-<tt class="descname">--support-pid</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-pid" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-pid">
+<code class="sig-name descname">--support-pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: integer</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-process-list">
-<tt class="descname">--support-process-list</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-process-list" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-process-list">
+<code class="sig-name descname">--support-process-list</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-process-list" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: true</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-replica-status">
-<tt class="descname">--support-replica-status</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-replica-status" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-replica-status">
+<code class="sig-name descname">--support-replica-status</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-replica-status" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: false</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-sky">
-<tt class="descname">--support-sky</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-sky" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-sky">
+<code class="sig-name descname">--support-sky</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-sky" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: false</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-variables">
-<tt class="descname">--support-variables</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-variables" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-variables">
+<code class="sig-name descname">--support-variables</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-variables" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: true</p>
 <p>Option intended for development use only.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--support-tar-result">
-<tt class="descname">--support-tar-result</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--support-tar-result" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-support-tar-result">
+<code class="sig-name descname">--support-tar-result</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-support-tar-result" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: boolean; default: true</p>
 <p>Option intended for development use only.`</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--user">
-<tt class="descname">--user</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--user" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-summary--version">
-<tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-summary--version" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print tool&#8217;s version and exit.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-summary-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-summary-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print tool’s version and exit.</p>
 </dd></dl>
 
 </div>
@@ -481,13 +483,13 @@ were created by Baron Schwartz and primarily developed by him and Daniel Nichter
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
 <p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
-<p>THIS PROGRAM IS PROVIDED &#8220;AS IS&#8221; AND WITHOUT ANY EXPRESS OR IMPLIED
+<p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
 <p>This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
-systems, you can issue `man perlgpl&#8217; or `man perlartistic&#8217; to read these
+systems, you can issue `man perlgpl’ or `man perlartistic’ to read these
 licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -495,7 +497,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </div>
 <div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-summary</strong> 6.0.2</p>
+<p><strong class="program">mariadb-summary</strong> 6.0.2.1</p>
 </div>
 </div>
 
@@ -567,7 +569,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -589,5 +591,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
-
 

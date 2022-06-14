@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-config-diff" href="mariadb-config-diff.html" />
     <link rel="prev" title="mariadb-archiver" href="mariadb-archiver.html" /> 
@@ -174,11 +176,11 @@
 allows you to manage and/or schedule any of them to your liking.</p>
 <p>Backup manager currently supports the following backup tools:</p>
 <ul class="simple">
-<li>mariabackup (binary backup)</li>
-<li>xtrabackup (binary backup)</li>
-<li>mydumper (logical backup)</li>
-<li>mysqldump (logical backup, either all schemas or selected schemas)</li>
-<li>binlogs (backup of binary logs)</li>
+<li><p>mariabackup (binary backup)</p></li>
+<li><p>xtrabackup (binary backup)</p></li>
+<li><p>mydumper (logical backup)</p></li>
+<li><p>mysqldump (logical backup, either all schemas or selected schemas)</p></li>
+<li><p>binlogs (backup of binary logs)</p></li>
 </ul>
 <p>Backup manager uses a configuration file called <em>backup_manager.cnf</em> and located
 in <em>/etc/mariadb</em>. You can generate a template file (with comments) by running
@@ -218,7 +220,7 @@ file, which should have mode 600 to avoid people on the system to be able to rea
 <p>To manually perform a backup, just run:</p>
 <p><em>backup_manager backup &lt;backup_tool&gt; &lt;level&gt;</em></p>
 <p>where <em>backup_tool</em> is one of the supported backup tools (see above) and <em>level</em> is
-either <tt class="docutils literal"><span class="pre">full</span></tt> or <tt class="docutils literal"><span class="pre">incr</span></tt>. Please be aware that only binary backups support incremental
+either <code class="docutils literal notranslate"><span class="pre">full</span></code> or <code class="docutils literal notranslate"><span class="pre">incr</span></code>. Please be aware that only binary backups support incremental
 backups.</p>
 <p>To backup binary logs for the server, just run the following</p>
 <p><em>backup_manager backup binlogs</em></p>
@@ -243,14 +245,14 @@ by running:</p>
 <p>Make sure you have enough disk space on the <em>target_dir</em> filesystem first!
 These are the possible restore options:</p>
 <ul class="simple">
-<li>classic restore to a destination folder:
-<em>backup_manager restore &lt;backup_id&gt; &lt;target_dir&gt;</em></li>
-<li>performing an automatic restore test:
-<em>backup_manager restore test</em></li>
-<li>streaming a restore to stdout (notice the final &#8220;-&#8221;):
-<em>backup_manager restore &lt;backup_id&gt; -</em></li>
-<li>restoring to a specified point in time:
-<em>backup_manager restore &lt;backup_id&gt; &lt;target_dir&gt; &lt;point-in-time&gt;</em></li>
+<li><p>classic restore to a destination folder:
+<em>backup_manager restore &lt;backup_id&gt; &lt;target_dir&gt;</em></p></li>
+<li><p>performing an automatic restore test:
+<em>backup_manager restore test</em></p></li>
+<li><p>streaming a restore to stdout (notice the final “-“):
+<em>backup_manager restore &lt;backup_id&gt; -</em></p></li>
+<li><p>restoring to a specified point in time:
+<em>backup_manager restore &lt;backup_id&gt; &lt;target_dir&gt; &lt;point-in-time&gt;</em></p></li>
 </ul>
 <p>This script supports performing an automatic restore test, that can be run regularly
 from crontab to ensure that the backup can actually be restored without issues; it
@@ -261,10 +263,10 @@ working for binary backups.</p>
 <em>target_dir</em>, this can be used to stream the restore to another server via ssh.
 When this option is used only the full backup is restored, even if there are available
 incrementals.  Example of streaming-restore a mariabackup:</p>
-<p><em>backup_manager restore &lt;backup_id&gt; - | ssh anotherhost mbstream -x ...</em></p>
+<p><em>backup_manager restore &lt;backup_id&gt; - | ssh anotherhost mbstream -x …</em></p>
 <p>You can restore to a specific point in time if you are taking backups of binary logs.
 The requested point in time can be specified either as <em>file:position</em> or as a timestamp
-in the usual <tt class="docutils literal"><span class="pre">YY-MM-DD</span> <span class="pre">HH:MM:SS</span></tt> format (in this case, please <strong>specify it between quotes</strong>
+in the usual <code class="docutils literal notranslate"><span class="pre">YY-MM-DD</span> <span class="pre">HH:MM:SS</span></code> format (in this case, please <strong>specify it between quotes</strong>
 to prevent the shell from eating the whitespace).</p>
 <p>The result of a restore of a binary backup to a folder will be a prepared datadir
 that can be used to start a MariaDB server (remember to change ownership of the files
@@ -273,7 +275,7 @@ to pipe the output of backup_manager to the mysql command line client using the
 appropriate options. When restoring a logical backup taken with mydumper, you are
 left with a manual task due to the way this backup tool works; just use myloader
 and give <em>target_dir</em> as source directory.</p>
-<p>Binlogs backups aren&#8217;t meant to be restored individually, so you should use the
+<p>Binlogs backups aren’t meant to be restored individually, so you should use the
 point in time restore functionality instead. However, these are stored in a compressed
 tar format and can be extracted manually if need be.</p>
 </div>
@@ -282,11 +284,11 @@ tar format and can be extracted manually if need be.</p>
 <p>When using mysqldump as the backup tool it is possible to either dump the entire database, or
 alternatively perform a dump of selected schemas.</p>
 <ul class="simple">
-<li>to dump all schemas:</li>
+<li><p>to dump all schemas:</p></li>
 </ul>
 <p><em>backup_manager backup mysqldump</em></p>
 <ul class="simple">
-<li>to dump <em>schema1</em> and <em>schema2</em> only:</li>
+<li><p>to dump <em>schema1</em> and <em>schema2</em> only:</p></li>
 </ul>
 <p><em>backup_manager backup mysqldump schema1,schema2</em></p>
 </div>
@@ -294,11 +296,11 @@ alternatively perform a dump of selected schemas.</p>
 <h2>PURGING BACKUPS<a class="headerlink" href="#purging-backups" title="Permalink to this headline">¶</a></h2>
 <p>To purge old backups, just run one of the following:</p>
 <ul class="simple">
-<li>to purge any expired backup based on the configured retention:</li>
+<li><p>to purge any expired backup based on the configured retention:</p></li>
 </ul>
 <p><em>backup_manager purge</em></p>
 <ul class="simple">
-<li>to purge the specified <em>backup_id</em> only:</li>
+<li><p>to purge the specified <em>backup_id</em> only:</p></li>
 </ul>
 <p><em>backup_manager purge &lt;backup_id&gt;</em></p>
 <p>To see what would be purged by the configured retention without actually purging
@@ -352,7 +354,7 @@ in configuration file.</p>
 <div class="section" id="backup-encryption">
 <h2>BACKUP ENCRYPTION<a class="headerlink" href="#backup-encryption" title="Permalink to this headline">¶</a></h2>
 <p>The script autogenerates an encryption key and exports it into the environment with the name
-&#8220;enc_key&#8221;, so that it can be picked up by openssl (or whatever encryptor is chosen).
+“enc_key”, so that it can be picked up by openssl (or whatever encryptor is chosen).
 The key is saved in the inventory and automatically used when restoring the backup.</p>
 <p>It is therefore important that the backup manager inventory (a sqlite3 database located in
 /etc/mariadb) is not accidentally deleted, otherwise your encrypted backups will instantly
@@ -368,19 +370,20 @@ inventory.</p>
 server, passing the encryption key via the ssh environment.</p>
 <p>Example:</p>
 <ol class="arabic simple">
-<li>Pick a server which can reach the backup server via a ssh connection.</li>
-<li>On this server edit <em>/etc/ssh/sshd_config</em> and add <em>AcceptEnv=enc_key</em> to the configuration,
-then save the change and restart the sshd service.</li>
-<li>Create a random key and save it to a file, eg:
-<em>openssl rand -base64 32 &gt; /etc/backup.key</em></li>
-<li>Run the secure backup by connecting via ssh to the backup server:
+<li><p>Pick a server which can reach the backup server via a ssh connection.</p></li>
+<li><p>On this server edit <em>/etc/ssh/sshd_config</em> and add <em>AcceptEnv=enc_key</em> to the configuration,
+then save the change and restart the sshd service.</p></li>
+<li><p>Create a random key and save it to a file, eg:
+<em>openssl rand -base64 32 &gt; /etc/backup.key</em></p></li>
+<li><p>Run the secure backup by connecting via ssh to the backup server:
 <em>enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server *
-*/usr/local/sbin/backup_manager backup mariabackup full</em></li>
+*/usr/local/sbin/backup_manager backup mariabackup full</em></p></li>
 </ol>
 <p>Example of restoring an encrypted backup (assumes key is still in the above file):</p>
 <blockquote>
-<div><em>enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server *
-*/usr/local/sbin/backup_manager restore &lt;backup_id&gt; &lt;target_dir&gt;</em></div></blockquote>
+<div><p><em>enc_key=$(cat /etc/backup.key) ssh -oSendEnv=enc_key backup_server *
+*/usr/local/sbin/backup_manager restore &lt;backup_id&gt; &lt;target_dir&gt;</em></p>
+</div></blockquote>
 </div>
 <div class="section" id="author">
 <h2>AUTHOR<a class="headerlink" href="#author" title="Permalink to this headline">¶</a></h2>
@@ -393,13 +396,13 @@ then save the change and restart the sshd service.</li>
 <div class="section" id="copyright-license-and-warranty">
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
 <p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates.
-THIS PROGRAM IS PROVIDED &#8220;AS IS&#8221; AND WITHOUT ANY EXPRESS OR IMPLIED
+THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
-systems, you can issue `man perlgpl&#8217; or `man perlartistic&#8217; to read these
+systems, you can issue `man perlgpl’ or `man perlartistic’ to read these
 licenses.
 You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -407,7 +410,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </div>
 <div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-backup-manager</strong> 6.0.2</p>
+<p><strong class="program">mariadb-backup-manager</strong> 6.0.2.1</p>
 </div>
 </div>
 
@@ -481,7 +484,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -503,5 +506,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
-
 

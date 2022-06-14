@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-database-summary" href="mariadb-database-summary.html" />
     <link rel="prev" title="mariadb-backup-manager" href="mariadb-backup-manager.html" /> 
@@ -172,21 +174,22 @@
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>mariadb-config-diff [OPTIONS] CONFIG CONFIG [CONFIG...]</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">diff</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="n">CONFIG</span> <span class="n">CONFIG</span> <span class="p">[</span><span class="n">CONFIG</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
 </div>
 <p><strong class="program">mariadb-config-diff</strong> diffs MySQL configuration files and server variables.
 CONFIG can be a filename or a DSN.  At least two CONFIG sources must be given.
 Like standard Unix diff, there is no output if there are no differences.</p>
 <p>Diff host1 config from SHOW VARIABLES against host2:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mariadb-config-diff <span class="nv">h</span><span class="o">=</span>host1 <span class="nv">h</span><span class="o">=</span>host2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-config-diff <span class="nv">h</span><span class="o">=</span>host1 <span class="nv">h</span><span class="o">=</span>host2
 </pre></div>
 </div>
 <p>Diff config from [mysqld] section in my.cnf against host1 config:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mariadb-config-diff /etc/my.cnf <span class="nv">h</span><span class="o">=</span>host1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-config-diff /etc/my.cnf <span class="nv">h</span><span class="o">=</span>host1
 </pre></div>
 </div>
 <p>Diff the [mysqld] section of two option files:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mariadb-config-diff /etc/my-small.cnf /etc/my-large.cnf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-config-diff /etc/my-small.cnf /etc/my-large.cnf
 </pre></div>
 </div>
 </div>
@@ -197,10 +200,10 @@ Like standard Unix diff, there is no output if there are no differences.</p>
 but all database tools can pose a risk to the system and the database
 server.  Before using this tool, please:</p>
 <ul class="simple">
-<li>Read the tool&#8217;s documentation</li>
-<li>Review the tool&#8217;s known &#8220;BUGS&#8221;</li>
-<li>Test the tool on a non-production server</li>
-<li>Backup your production server and verify the backups</li>
+<li><p>Read the tool’s documentation</p></li>
+<li><p>Review the tool’s known “BUGS”</p></li>
+<li><p>Test the tool on a non-production server</p></li>
+<li><p>Backup your production server and verify the backups</p></li>
 </ul>
 </div>
 <div class="section" id="description">
@@ -208,11 +211,11 @@ server.  Before using this tool, please:</p>
 <p><strong class="program">mariadb-config-diff</strong> diffs MySQL configurations by examining the values of server
 system variables from two or more CONFIG sources specified on the command
 line.  A CONFIG source can be a DSN or a filename containing the output of
-<tt class="docutils literal"><span class="pre">mysqld</span> <span class="pre">--help</span> <span class="pre">--verbose</span></tt>, <tt class="docutils literal"><span class="pre">my_print_defaults</span></tt>, <tt class="docutils literal"><span class="pre">SHOW</span> <span class="pre">VARIABLES</span></tt>, or
+<code class="docutils literal notranslate"><span class="pre">mysqld</span> <span class="pre">--help</span> <span class="pre">--verbose</span></code>, <code class="docutils literal notranslate"><span class="pre">my_print_defaults</span></code>, <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">VARIABLES</span></code>, or
 an option file (e.g. my.cnf).</p>
 <p>For each DSN CONFIG, <strong class="program">mariadb-config-diff</strong> connects to MySQL and gets variables
-and values by executing <tt class="docutils literal"><span class="pre">SHOW</span> <span class="pre">/*!40103</span> <span class="pre">GLOBAL*/</span> <span class="pre">VARIABLES</span></tt>.  This is
-an &#8220;active config&#8221; because it shows what server values MySQL is
+and values by executing <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">/*!40103</span> <span class="pre">GLOBAL*/</span> <span class="pre">VARIABLES</span></code>.  This is
+an “active config” because it shows what server values MySQL is
 actively (currently) running with.</p>
 <p>Only variables that all CONFIG sources have are compared because if a
 variable is not present then we cannot know or safely guess its value.
@@ -226,19 +229,20 @@ Only values of the variables present in both configs are compared.</p>
 <h2>OUTPUT<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>There is no output when there are no differences.  When there are differences,
 <strong class="program">mariadb-config-diff</strong> prints a report to STDOUT that looks similar to the following:</p>
-<div class="highlight-bash"><div class="highlight"><pre>2 config differences
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">2</span> config differences
 Variable                  my.master.cnf   my.slave.cnf
 <span class="o">=========================</span> <span class="o">===============</span> <span class="o">===============</span>
 datadir                   /tmp/12345/data /tmp/12346/data
-port                      12345           12346
+port                      <span class="m">12345</span>           <span class="m">12346</span>
 </pre></div>
 </div>
 <p>Comparing MySQL variables is difficult because there are many variations and
 subtleties across the many versions and distributions of MySQL.  When a
 comparison fails, the tool prints a warning to STDERR, such as the following:</p>
-<div class="highlight-bash"><pre>Comparing log_error values (mysqld.log, /tmp/12345/data/mysqld.log)
-caused an error: Argument "/tmp/12345/data/mysqld.log" isn't numeric
-in numeric eq (==) at ./mariadb-config-diff line 2311.</pre>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Comparing log_error values (mysqld.log, /tmp/12345/data/mysqld.log)
+caused an error: Argument &quot;/tmp/12345/data/mysqld.log&quot; isn&#39;t numeric
+in numeric eq (==) at ./mariadb-config-diff line 2311.
+</pre></div>
 </div>
 <p>Please report these warnings so the comparison functions can be improved.</p>
 </div>
@@ -250,149 +254,149 @@ in numeric eq (==) at ./mariadb-config-diff line 2311.</pre>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>This tool accepts additional command-line arguments.  Refer to the
-&#8220;SYNOPSIS&#8221; and usage information for details.</p>
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--ask-pass">
-<tt class="descname">--ask-pass</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--ask-pass" title="Permalink to this definition">¶</a></dt>
+“SYNOPSIS” and usage information for details.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MySQL.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--charset">
-<tt class="descname">--charset</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--charset" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-charset">
+<code class="sig-name descname">--charset</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -A; type: string</p>
-<p>Default character set.  If the value is utf8, sets Perl&#8217;s binmode on
+<p>Default character set.  If the value is utf8, sets Perl’s binmode on
 STDOUT to utf8, passes the mysql_enable_utf8 option to DBD::mysql, and
 runs SET NAMES UTF8 after connecting to MySQL.  Any other value sets
 binmode on STDOUT without the utf8 layer, and runs SET NAMES after
 connecting to MySQL.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--config">
-<tt class="descname">--config</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--config" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Read this comma-separated list of config files; if specified, this must be the
 first option on the command line.  (This option does not specify a CONFIG;
-it&#8217;s equivalent to <tt class="docutils literal"><span class="pre">--defaults-file</span></tt>.)</p>
+it’s equivalent to <code class="docutils literal notranslate"><span class="pre">--defaults-file</span></code>.)</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--database">
-<tt class="descname">--database</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--database" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-database">
+<code class="sig-name descname">--database</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-database" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -D; type: string</p>
 <p>Connect to this database.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--defaults-file">
-<tt class="descname">--defaults-file</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--defaults-file" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read mysql options from the given file.  You must give an absolute
 pathname.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--help">
-<tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--help" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--host">
-<tt class="descname">--host</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--host" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Connect to host.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--[no]ignore-case">
-<tt class="descname">--[no]ignore-case</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--[no]ignore-case" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-no-ignore-case">
+<code class="sig-name descname">--[no]ignore-case</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-no-ignore-case" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Compare the variables case-insensitively.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--ignore-variables">
-<tt class="descname">--ignore-variables</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--ignore-variables" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-ignore-variables">
+<code class="sig-name descname">--ignore-variables</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-ignore-variables" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array</p>
 <p>Ignore, do not compare, these variables.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--password">
-<tt class="descname">--password</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--password" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--pid">
-<tt class="descname">--pid</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--pid" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
-<p>Create the given PID file.  The tool won&#8217;t start if the PID file already
+<p>Create the given PID file.  The tool won’t start if the PID file already
 exists and the PID it contains is different than the current PID.  However,
 if the PID file exists and the PID it contains is no longer running, the
 tool will overwrite the PID file with the current PID.  The PID file is
 removed automatically when the tool exits.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--port">
-<tt class="descname">--port</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--port" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--[no]report">
-<tt class="descname">--[no]report</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--[no]report" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-no-report">
+<code class="sig-name descname">--[no]report</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-no-report" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Print the MySQL config diff report to STDOUT.  If you just want to check
-if the given configs are different or not by examining the tool&#8217;s exit
-status, then specify <tt class="docutils literal"><span class="pre">--no-report</span></tt> to suppress the report.</p>
+if the given configs are different or not by examining the tool’s exit
+status, then specify <code class="docutils literal notranslate"><span class="pre">--no-report</span></code> to suppress the report.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--report-width">
-<tt class="descname">--report-width</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--report-width" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-report-width">
+<code class="sig-name descname">--report-width</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-report-width" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int; default: 78</p>
 <p>Truncate report lines to this many characters.  Since some variable values can
 be long, or when comparing multiple configs, it may help to increase the
 report width so values are not truncated beyond readability.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--set-vars">
-<tt class="descname">--set-vars</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--set-vars" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-set-vars">
+<code class="sig-name descname">--set-vars</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-set-vars" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
-<p>Set the MySQL variables in this comma-separated list of <tt class="docutils literal"><span class="pre">variable=value</span></tt> pairs.</p>
+<p>Set the MySQL variables in this comma-separated list of <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> pairs.</p>
 <p>By default, the tool sets:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">wait_timeout</span><span class="o">=</span>10000
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">wait_timeout</span><span class="o">=</span><span class="m">10000</span>
 </pre></div>
 </div>
 <p>Variables specified on the command line override these defaults.  For
-example, specifying <tt class="docutils literal"><span class="pre">--set-vars</span> <span class="pre">wait_timeout=500</span></tt> overrides the defaultvalue of <tt class="docutils literal"><span class="pre">10000</span></tt>.</p>
+example, specifying <code class="docutils literal notranslate"><span class="pre">--set-vars</span> <span class="pre">wait_timeout=500</span></code> overrides the defaultvalue of <code class="docutils literal notranslate"><span class="pre">10000</span></code>.</p>
 <p>The tool prints a warning and continues if a variable cannot be set.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--socket">
-<tt class="descname">--socket</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--socket" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--user">
-<tt class="descname">--user</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--user" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>MySQL user if not current user.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-config-diff--version">
-<tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-config-diff--version" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-config-diff-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-config-diff-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
@@ -400,62 +404,62 @@ example, specifying <tt class="docutils literal"><span class="pre">--set-vars</s
 <div class="section" id="dsn-options">
 <h2>DSN OPTIONS<a class="headerlink" href="#dsn-options" title="Permalink to this headline">¶</a></h2>
 <p>These DSN options are used to create a DSN.  Each option is given like
-<tt class="docutils literal"><span class="pre">option=value</span></tt>.  The options are case-sensitive, so P and p are not the
-same option.  There cannot be whitespace before or after the <tt class="docutils literal"><span class="pre">=</span></tt> and
+<code class="docutils literal notranslate"><span class="pre">option=value</span></code>.  The options are case-sensitive, so P and p are not the
+same option.  There cannot be whitespace before or after the <code class="docutils literal notranslate"><span class="pre">=</span></code> and
 if the value contains whitespace it must be quoted.  DSN options are
 comma-separated.  See the mariadb-tools manpage for full details.</p>
 <ul class="simple">
-<li>A</li>
+<li><p>A</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: charset; copy: yes</p>
 <p>Default character set.</p>
 </div></blockquote>
 <ul class="simple">
-<li>D</li>
+<li><p>D</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: database; copy: yes</p>
 <p>Default database.</p>
 </div></blockquote>
 <ul class="simple">
-<li>F</li>
+<li><p>F</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: mysql_read_default_file; copy: yes</p>
 <p>Only read default options from the given file</p>
 </div></blockquote>
 <ul class="simple">
-<li>h</li>
+<li><p>h</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: host; copy: yes</p>
 <p>Connect to host.</p>
 </div></blockquote>
 <ul class="simple">
-<li>p</li>
+<li><p>p</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: password; copy: yes</p>
 <p>Password to use when connecting.
-If password contains commas they must be escaped with a backslash: &#8220;exam,ple&#8221;</p>
+If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </div></blockquote>
 <ul class="simple">
-<li>P</li>
+<li><p>P</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: port; copy: yes</p>
 <p>Port number to use for connection.</p>
 </div></blockquote>
 <ul class="simple">
-<li>S</li>
+<li><p>S</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: mysql_socket; copy: yes</p>
 <p>Socket file to use for connection.</p>
 </div></blockquote>
 <ul class="simple">
-<li>u</li>
+<li><p>u</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: user; copy: yes</p>
@@ -464,7 +468,7 @@ If password contains commas they must be escaped with a backslash: &#8220;exam,p
 </div>
 <div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
-<p>This tool doesn&#8217;t require any environment variables for usability.</p>
+<p>This tool doesn’t require any environment variables for usability.</p>
 </div>
 <div class="section" id="system-requirements">
 <h2>SYSTEM REQUIREMENTS<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
@@ -476,14 +480,14 @@ installed in any reasonably new version of Perl.</p>
 <p>Please report bugs at <a class="reference external" href="https://jira.mariadb.org/projects/TOOLS">https://jira.mariadb.org/projects/TOOLS</a>.
 Include the following information in your bug report:</p>
 <ul class="simple">
-<li>Complete command-line used to run the tool</li>
-<li>Tool <a class="reference internal" href="#cmdoption-mariadb-config-diff--version"><em class="xref std std-option">--version</em></a></li>
-<li>MariaDB version of all servers involved</li>
-<li>Output from the tool including STDERR</li>
-<li>Input files (log/dump/config files, etc.)</li>
+<li><p>Complete command-line used to run the tool</p></li>
+<li><p>Tool <a class="reference internal" href="#cmdoption-mariadb-config-diff-version"><code class="xref std std-option docutils literal notranslate"><span class="pre">--version</span></code></a></p></li>
+<li><p>MariaDB version of all servers involved</p></li>
+<li><p>Output from the tool including STDERR</p></li>
+<li><p>Input files (log/dump/config files, etc.)</p></li>
 </ul>
-<p>If possible, include debugging output by running the tool with <tt class="docutils literal"><span class="pre">PTDEBUG</span></tt>;
-see &#8220;ENVIRONMENT&#8221;.</p>
+<p>If possible, include debugging output by running the tool with <code class="docutils literal notranslate"><span class="pre">PTDEBUG</span></code>;
+see “ENVIRONMENT”.</p>
 </div>
 <div class="section" id="authors">
 <h2>AUTHORS<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
@@ -492,7 +496,7 @@ see &#8220;ENVIRONMENT&#8221;.</p>
 <div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
-Percona Toolkit&#8217;s <strong class="program">mariadb-config-diff</strong> in August, 2019. Percona Toolkit was forked from two
+Percona Toolkit’s <strong class="program">mariadb-config-diff</strong> in August, 2019. Percona Toolkit was forked from two
 projects in June, 2011: Maatkit and Aspersa.  Those projects were created by
 Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 </div>
@@ -500,13 +504,13 @@ Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
 <p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2019 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
-<p>THIS PROGRAM IS PROVIDED &#8220;AS IS&#8221; AND WITHOUT ANY EXPRESS OR IMPLIED
+<p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
 <p>This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
-systems, you can issue `man perlgpl&#8217; or `man perlartistic&#8217; to read these
+systems, you can issue `man perlgpl’ or `man perlartistic’ to read these
 licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -514,7 +518,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </div>
 <div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-config-diff</strong> 6.0.2</p>
+<p><strong class="program">mariadb-config-diff</strong> 6.0.2.1</p>
 </div>
 </div>
 
@@ -589,7 +593,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -611,5 +615,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
-
 

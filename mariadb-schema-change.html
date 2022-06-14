@@ -30,8 +30,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '6.0.2',
+        URL_ROOT:    './',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="MariaDB Tools Documentation" href="index.html" />
     <link rel="next" title="mariadb-stacktrace" href="mariadb-stacktrace.html" />
     <link rel="prev" title="mariadb-query-digest" href="mariadb-query-digest.html" /> 
@@ -172,18 +174,19 @@
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>mariadb-schema-change [OPTIONS] DSN</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span><span class="o">-</span><span class="n">schema</span><span class="o">-</span><span class="n">change</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="n">DSN</span>
+</pre></div>
 </div>
-<p><strong class="program">mariadb-schema-change</strong> alters a table&#8217;s structure without blocking reads or
+<p><strong class="program">mariadb-schema-change</strong> alters a table’s structure without blocking reads or
 writes.  Specify the database and table in the DSN. Do not use this tool before
 reading its documentation and checking your backups carefully.</p>
 <p>Add a column to sakila.actor:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mariadb-schema-change --alter <span class="s2">&quot;ADD COLUMN c1 INT&quot;</span> <span class="nv">D</span><span class="o">=</span>sakila,t<span class="o">=</span>actor
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-schema-change --alter <span class="s2">&quot;ADD COLUMN c1 INT&quot;</span> <span class="nv">D</span><span class="o">=</span>sakila,t<span class="o">=</span>actor
 </pre></div>
 </div>
 <p>Change sakila.actor to InnoDB, effectively performing OPTIMIZE TABLE in a
 non-blocking fashion because it is already an InnoDB table:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mariadb-schema-change --alter <span class="s2">&quot;ENGINE=InnoDB&quot;</span> <span class="nv">D</span><span class="o">=</span>sakila,t<span class="o">=</span>actor
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mariadb-schema-change --alter <span class="s2">&quot;ENGINE=InnoDB&quot;</span> <span class="nv">D</span><span class="o">=</span>sakila,t<span class="o">=</span>actor
 </pre></div>
 </div>
 </div>
@@ -194,10 +197,10 @@ non-blocking fashion because it is already an InnoDB table:</p>
 but all database tools can pose a risk to the system and the database
 server.  Before using this tool, please:</p>
 <ul class="simple">
-<li>Read the tool&#8217;s documentation</li>
-<li>Review the tool&#8217;s known &#8220;BUGS&#8221;</li>
-<li>Test the tool on a non-production server</li>
-<li>Backup your production server and verify the backups</li>
+<li><p>Read the tool’s documentation</p></li>
+<li><p>Review the tool’s known “BUGS”</p></li>
+<li><p>Test the tool on a non-production server</p></li>
+<li><p>Backup your production server and verify the backups</p></li>
 </ul>
 </div>
 <div class="section" id="description">
@@ -212,81 +215,81 @@ new table. When the copy is complete, it moves away the original table and
 replaces it with the new one.  By default, it also drops the original table.</p>
 <p>The data copy process is performed in small chunks of data, which are varied to
 attempt to make them execute in a specific amount of time (see
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--chunk-time"><em class="xref std std-option">--chunk-time</em></a>).  This process is very similar to how other tools, such as
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-time</span></code></a>).  This process is very similar to how other tools, such as
 pt-table-checksum, work.  Any modifications to data in the original tables
 during the copy will be reflected in the new table, because the tool creates
 triggers on the original table to update the corresponding rows in the new
 table.  The use of triggers means that the tool will not work if any triggers
 are already defined on the table.</p>
 <p>When the tool finishes copying data into the new table, it uses an atomic
-<tt class="docutils literal"><span class="pre">RENAME</span> <span class="pre">TABLE</span></tt> operation to simultaneously rename the original and new tables.
+<code class="docutils literal notranslate"><span class="pre">RENAME</span> <span class="pre">TABLE</span></code> operation to simultaneously rename the original and new tables.
 After this is complete, the tool drops the original table.</p>
-<p>Foreign keys complicate the tool&#8217;s operation and introduce additional risk.  The
+<p>Foreign keys complicate the tool’s operation and introduce additional risk.  The
 technique of atomically renaming the original and new tables does not work when
 foreign keys refer to the table. The tool must update foreign keys to refer to
 the new table after the schema change is complete. The tool supports two methods
 for accomplishing this. You can read more about this in the documentation for
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--alter-foreign-keys-method"><em class="xref std std-option">--alter-foreign-keys-method</em></a>.</p>
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-alter-foreign-keys-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter-foreign-keys-method</span></code></a>.</p>
 <p>Foreign keys also cause some side effects. The final table will have the same
 foreign keys and indexes as the original table (unless you specify differently
 in your ALTER statement), but the names of the objects may be changed slightly
 to avoid object name collisions in MariaDB and InnoDB.</p>
 <p>For safety, the tool does not modify the table unless you specify the
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--execute"><em class="xref std std-option">--execute</em></a> option, which is not enabled by default.  The tool supports a
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-execute"><code class="xref std std-option docutils literal notranslate"><span class="pre">--execute</span></code></a> option, which is not enabled by default.  The tool supports a
 variety of other measures to prevent unwanted load or other problems, including
 automatically detecting replicas, connecting to them, and using the following
 safety checks:</p>
 <ul class="simple">
-<li>In most cases the tool will refuse to operate unless a PRIMARY KEY or UNIQUE INDEX is
-present in the table. See <a class="reference internal" href="#cmdoption-mariadb-schema-change--alter"><em class="xref std std-option">--alter</em></a> for details.</li>
-<li>The tool refuses to operate if it detects replication filters. See
-<em class="xref std std-option">--[no]check-replication-filters</em> for details.</li>
-<li>The tool pauses the data copy operation if it observes any replicas that are
-delayed in replication. See <a class="reference internal" href="#cmdoption-mariadb-schema-change--max-lag"><em class="xref std std-option">--max-lag</em></a> for details.</li>
-<li>The tool pauses or aborts its operation if it detects too much load on the
-server. See <a class="reference internal" href="#cmdoption-mariadb-schema-change--max-load"><em class="xref std std-option">--max-load</em></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change--critical-load"><em class="xref std std-option">--critical-load</em></a> for details.</li>
-<li>The tool sets <tt class="docutils literal"><span class="pre">innodb_lock_wait_timeout=1</span></tt> and (for MariaDB 5.5 and newer)
-<tt class="docutils literal"><span class="pre">lock_wait_timeout=60</span></tt> so that it is more likely to be the victim of any
+<li><p>In most cases the tool will refuse to operate unless a PRIMARY KEY or UNIQUE INDEX is
+present in the table. See <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter</span></code></a> for details.</p></li>
+<li><p>The tool refuses to operate if it detects replication filters. See
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-no-check-replication-filters"><code class="xref std std-option docutils literal notranslate"><span class="pre">--[no]check-replication-filters</span></code></a> for details.</p></li>
+<li><p>The tool pauses the data copy operation if it observes any replicas that are
+delayed in replication. See <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-lag</span></code></a> for details.</p></li>
+<li><p>The tool pauses or aborts its operation if it detects too much load on the
+server. See <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-load"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-load</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change-critical-load"><code class="xref std std-option docutils literal notranslate"><span class="pre">--critical-load</span></code></a> for details.</p></li>
+<li><p>The tool sets <code class="docutils literal notranslate"><span class="pre">innodb_lock_wait_timeout=1</span></code> and (for MariaDB 5.5 and newer)
+<code class="docutils literal notranslate"><span class="pre">lock_wait_timeout=60</span></code> so that it is more likely to be the victim of any
 lock contention, and less likely to disrupt other transactions.  These
-values can be changed by specifying <a class="reference internal" href="#cmdoption-mariadb-schema-change--set-vars"><em class="xref std std-option">--set-vars</em></a>.</li>
-<li>The tool refuses to alter the table if foreign key constraints reference it,
-unless you specify <a class="reference internal" href="#cmdoption-mariadb-schema-change--alter-foreign-keys-method"><em class="xref std std-option">--alter-foreign-keys-method</em></a>.</li>
-<li>The tool cannot alter MyISAM tables on &#8220;Galera&#8221; nodes.</li>
+values can be changed by specifying <a class="reference internal" href="#cmdoption-mariadb-schema-change-set-vars"><code class="xref std std-option docutils literal notranslate"><span class="pre">--set-vars</span></code></a>.</p></li>
+<li><p>The tool refuses to alter the table if foreign key constraints reference it,
+unless you specify <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter-foreign-keys-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter-foreign-keys-method</span></code></a>.</p></li>
+<li><p>The tool cannot alter MyISAM tables on “Galera” nodes.</p></li>
 </ul>
 </div>
 <div class="section" id="mariadb-galera-cluster">
 <h2>MariaDB Galera Cluster<a class="headerlink" href="#mariadb-galera-cluster" title="Permalink to this headline">¶</a></h2>
 <p><strong class="program">mariadb-schema-change</strong> works with Galera Cluster 5.5.28
 and newer, but there are two limitations: only InnoDB tables can be altered,
-and <tt class="docutils literal"><span class="pre">wsrep_OSU_method</span></tt> must be set to <tt class="docutils literal"><span class="pre">TOI</span></tt> (total order isolation).
+and <code class="docutils literal notranslate"><span class="pre">wsrep_OSU_method</span></code> must be set to <code class="docutils literal notranslate"><span class="pre">TOI</span></code> (total order isolation).
 The tool exits with an error if the host is a cluster node and the table
-is MyISAM or is being converted to MyISAM (<tt class="docutils literal"><span class="pre">ENGINE=MyISAM</span></tt>), or if
-<tt class="docutils literal"><span class="pre">wsrep_OSU_method</span></tt> is not <tt class="docutils literal"><span class="pre">TOI</span></tt>.  There is no way to disable these checks.</p>
-<p>The tools ignores MariaDB 10.2+ <tt class="docutils literal"><span class="pre">GENERATED</span></tt> columns since the value for those columns
+is MyISAM or is being converted to MyISAM (<code class="docutils literal notranslate"><span class="pre">ENGINE=MyISAM</span></code>), or if
+<code class="docutils literal notranslate"><span class="pre">wsrep_OSU_method</span></code> is not <code class="docutils literal notranslate"><span class="pre">TOI</span></code>.  There is no way to disable these checks.</p>
+<p>The tools ignores MariaDB 10.2+ <code class="docutils literal notranslate"><span class="pre">GENERATED</span></code> columns since the value for those columns
 is generated according to the expresion used to compute column values.</p>
 </div>
 <div class="section" id="output">
 <h2>OUTPUT<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>The tool prints information about its activities to STDOUT so that you can see
-what it is doing.  During the data copy phase, it prints <a class="reference internal" href="#cmdoption-mariadb-schema-change--progress"><em class="xref std std-option">--progress</em></a>
+what it is doing.  During the data copy phase, it prints <a class="reference internal" href="#cmdoption-mariadb-schema-change-progress"><code class="xref std std-option docutils literal notranslate"><span class="pre">--progress</span></code></a>
 reports to STDERR.  You can get additional information by specifying
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--print"><em class="xref std std-option">--print</em></a>.</p>
-<p>If <a class="reference internal" href="#cmdoption-mariadb-schema-change--statistics"><em class="xref std std-option">--statistics</em></a> is specified, a report of various internal event counts
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-print"><code class="xref std std-option docutils literal notranslate"><span class="pre">--print</span></code></a>.</p>
+<p>If <a class="reference internal" href="#cmdoption-mariadb-schema-change-statistics"><code class="xref std std-option docutils literal notranslate"><span class="pre">--statistics</span></code></a> is specified, a report of various internal event counts
 is printed at the end, like:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># Event  Count</span>
-<span class="c"># ====== =====</span>
-<span class="c"># INSERT     1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Event  Count</span>
+<span class="c1"># ====== =====</span>
+<span class="c1"># INSERT     1</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="#cmdoption-mariadb-schema-change--dry-run"><em class="xref std std-option">--dry-run</em></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change--execute"><em class="xref std std-option">--execute</em></a> are mutually exclusive.</p>
+<p><a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change-execute"><code class="xref std std-option docutils literal notranslate"><span class="pre">--execute</span></code></a> are mutually exclusive.</p>
 <p>This tool accepts additional command-line arguments.  Refer to the
-&#8220;SYNOPSIS&#8221; and usage information for details.</p>
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--alter">
-<tt class="descname">--alter</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--alter" title="Permalink to this definition">¶</a></dt>
+“SYNOPSIS” and usage information for details.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-alter">
+<code class="sig-name descname">--alter</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-alter" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>The schema modification, without the ALTER TABLE keywords. You can perform
 multiple modifications to the table by specifying them with commas. Please refer
@@ -294,37 +297,34 @@ to the MariaDB manual for the syntax of ALTER TABLE.</p>
 <p>The following limitations apply which, if attempted, will cause the tool
 to fail in unpredictable ways:</p>
 <ul>
-<li><p class="first">In almost all cases a PRIMARY KEY or UNIQUE INDEX needs to be present in the table.
+<li><p>In almost all cases a PRIMARY KEY or UNIQUE INDEX needs to be present in the table.
 This is necessary because the tool creates a DELETE trigger to keep the new table
 updated while the process is running.</p>
 <p>A notable exception is when a PRIMARY KEY or UNIQUE INDEX is being created from
 <strong>existing columns</strong> as part of the ALTER clause; in that case it will use these
 column(s) for the DELETE trigger.</p>
 </li>
-<li><p class="first">The <tt class="docutils literal"><span class="pre">RENAME</span></tt> clause cannot be used to rename the table.</p>
-</li>
-<li><p class="first">Columns cannot be renamed by dropping and re-adding with the new name.
-The tool will not copy the original column&#8217;s data to the new column.</p>
-</li>
-<li><p class="first">If you add a column without a default value and make it NOT NULL, the tool
+<li><p>The <code class="docutils literal notranslate"><span class="pre">RENAME</span></code> clause cannot be used to rename the table.</p></li>
+<li><p>Columns cannot be renamed by dropping and re-adding with the new name.
+The tool will not copy the original column’s data to the new column.</p></li>
+<li><p>If you add a column without a default value and make it NOT NULL, the tool
 will fail, as it will not try to guess a default value for you; You must
-specify the default.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">DROP</span> <span class="pre">FOREIGN</span> <span class="pre">KEY</span> <span class="pre">constraint_name</span></tt> requires specifying <tt class="docutils literal"><span class="pre">_constraint_name</span></tt>
-rather than the real <tt class="docutils literal"><span class="pre">constraint_name</span></tt>.  Due to a limitation in MariaDB,
+specify the default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">FOREIGN</span> <span class="pre">KEY</span> <span class="pre">constraint_name</span></code> requires specifying <code class="docutils literal notranslate"><span class="pre">_constraint_name</span></code>
+rather than the real <code class="docutils literal notranslate"><span class="pre">constraint_name</span></code>.  Due to a limitation in MariaDB,
 <strong class="program">mariadb-schema-change</strong> adds a leading underscore to foreign key constraint
 names when creating the new table.  For example, to drop this constraint:</p>
-<div class="highlight-bash"><div class="highlight"><pre>CONSTRAINT <span class="sb">`</span>fk_foo<span class="sb">`</span> FOREIGN KEY <span class="o">(</span><span class="sb">`</span>foo_id<span class="sb">`</span><span class="o">)</span> REFERENCES <span class="sb">`</span>bar<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>foo_id<span class="sb">`</span><span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CONSTRAINT <span class="sb">`</span>fk_foo<span class="sb">`</span> FOREIGN KEY <span class="o">(</span><span class="sb">`</span>foo_id<span class="sb">`</span><span class="o">)</span> REFERENCES <span class="sb">`</span>bar<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>foo_id<span class="sb">`</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>You must specify <tt class="docutils literal"><span class="pre">--alter</span> <span class="pre">&quot;DROP</span> <span class="pre">FOREIGN</span> <span class="pre">KEY</span> <span class="pre">_fk_foo&quot;</span></tt>.</p>
+<p>You must specify <code class="docutils literal notranslate"><span class="pre">--alter</span> <span class="pre">&quot;DROP</span> <span class="pre">FOREIGN</span> <span class="pre">KEY</span> <span class="pre">_fk_foo&quot;</span></code>.</p>
 </li>
-<li><p class="first">The tool does not use <tt class="docutils literal"><span class="pre">LOCK</span> <span class="pre">IN</span> <span class="pre">SHARE</span> <span class="pre">MODE</span></tt> with MariaDB 5.0 because it can
+<li><p>The tool does not use <code class="docutils literal notranslate"><span class="pre">LOCK</span> <span class="pre">IN</span> <span class="pre">SHARE</span> <span class="pre">MODE</span></code> with MariaDB 5.0 because it can
 cause a slave error which breaks replication:</p>
-<div class="highlight-bash"><div class="highlight"><pre>Query caused different errors on master and slave. Error on master:
-<span class="s1">&#39;Deadlock found when trying to get lock; try restarting transaction&#39;</span> <span class="o">(</span>1213<span class="o">)</span>,
-Error on slave: <span class="s1">&#39;no error&#39;</span> <span class="o">(</span>0<span class="o">)</span>. Default database: <span class="s1">&#39;pt_osc&#39;</span>.
-Query: <span class="s1">&#39;INSERT INTO pt_osc.t (id, c) VALUES (&#39;</span>730<span class="s1">&#39;, &#39;</span>new row<span class="s1">&#39;)&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Query caused different errors on master and slave. Error on master:
+<span class="s1">&#39;Deadlock found when trying to get lock; try restarting transaction&#39;</span> <span class="o">(</span><span class="m">1213</span><span class="o">)</span>,
+Error on slave: <span class="s1">&#39;no error&#39;</span> <span class="o">(</span><span class="m">0</span><span class="o">)</span>. Default database: <span class="s1">&#39;pt_osc&#39;</span>.
+Query: <span class="s1">&#39;INSERT INTO pt_osc.t (id, c) VALUES (&#39;</span><span class="m">730</span><span class="s1">&#39;, &#39;</span>new row<span class="s1">&#39;)&#39;</span>
 </pre></div>
 </div>
 <p>The error happens when converting a MyISAM table to InnoDB because MyISAM
@@ -332,7 +332,7 @@ is non-transactional but InnoDB is transactional.  MariaDB 5.1 and newer
 handle this case correctly, but testing reproduces the error 5% of the time
 with MariaDB 5.0.</p>
 <p>This is a MariaDB bug, similar to <a class="reference external" href="http://bugs.mysql.com/bug.php?id=45694">http://bugs.mysql.com/bug.php?id=45694</a>,
-but there is no fix or workaround in MariaDB 5.0.  Without <tt class="docutils literal"><span class="pre">LOCK</span> <span class="pre">IN</span> <span class="pre">SHARE</span> <span class="pre">MODE</span></tt>,
+but there is no fix or workaround in MariaDB 5.0.  Without <code class="docutils literal notranslate"><span class="pre">LOCK</span> <span class="pre">IN</span> <span class="pre">SHARE</span> <span class="pre">MODE</span></code>,
 tests pass 100% of the time, so the risk of data loss or breaking replication
 should be negligible.</p>
 <p><strong>Be sure to verify the new table if using MariaDB 5.0 and converting
@@ -341,33 +341,34 @@ from MyISAM to InnoDB!</strong></p>
 </ul>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--alter-foreign-keys-method">
-<tt class="descname">--alter-foreign-keys-method</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--alter-foreign-keys-method" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-alter-foreign-keys-method">
+<code class="sig-name descname">--alter-foreign-keys-method</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-alter-foreign-keys-method" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>How to modify foreign keys so they reference the new table.  Foreign keys that
 reference the table to be altered must be treated specially to ensure that they
 continue to reference the correct table. When the tool renames the original
-table to let the new one take its place, the foreign keys &#8220;follow&#8221; the renamed
+table to let the new one take its place, the foreign keys “follow” the renamed
 table, and must be changed to reference the new table instead.</p>
-<p>The tool supports two techniques to achieve this. It automatically finds &#8220;child
-tables&#8221; that reference the table to be altered.</p>
+<p>The tool supports two techniques to achieve this. It automatically finds “child
+tables” that reference the table to be altered.</p>
 <p>auto</p>
 <blockquote>
-<div>Automatically determine which method is best.  The tool uses
-<tt class="docutils literal"><span class="pre">rebuild_constraints</span></tt> if possible (see the description of that method for
-details), and if not, then it uses <tt class="docutils literal"><span class="pre">drop_swap</span></tt>.</div></blockquote>
+<div><p>Automatically determine which method is best.  The tool uses
+<code class="docutils literal notranslate"><span class="pre">rebuild_constraints</span></code> if possible (see the description of that method for
+details), and if not, then it uses <code class="docutils literal notranslate"><span class="pre">drop_swap</span></code>.</p>
+</div></blockquote>
 <p>rebuild_constraints</p>
 <blockquote>
-<div><p>This method uses <tt class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></tt> to drop and re-add foreign key constraints that
+<div><p>This method uses <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> to drop and re-add foreign key constraints that
 reference the new table.  This is the preferred technique, unless one or more of
-the &#8220;child&#8221; tables is so large that the <tt class="docutils literal"><span class="pre">ALTER</span></tt> would take too long.  The tool
+the “child” tables is so large that the <code class="docutils literal notranslate"><span class="pre">ALTER</span></code> would take too long.  The tool
 determines that by comparing the number of rows in the child table to the rate
 at which the tool is able to copy rows from the old table to the new table. If
 the tool estimates that the child table can be altered in less time than the
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--chunk-time"><em class="xref std std-option">--chunk-time</em></a>, then it will use this technique.  For purposes of estimating
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-time</span></code></a>, then it will use this technique.  For purposes of estimating
 the time required to alter the child table, the tool multiplies the row-copying
-rate by <a class="reference internal" href="#cmdoption-mariadb-schema-change--chunk-size-limit"><em class="xref std std-option">--chunk-size-limit</em></a>, because MariaDB&#8217;s <tt class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></tt> is typically
+rate by <a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-size-limit"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-size-limit</span></code></a>, because MariaDB’s <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> is typically
 much faster than the external process of copying rows.</p>
 <p>Due to a limitation in MariaDB, foreign keys will not have the same names after
 the ALTER that they did prior to it. The tool has to rename the foreign key
@@ -378,7 +379,7 @@ cases, MariaDB also automatically renames indexes required for the foreign key.<
 <blockquote>
 <div><p>Disable foreign key checks (FOREIGN_KEY_CHECKS=0), then drop the original table
 before renaming the new table into its place. This is different from the normal
-method of swapping the old and new table, which uses an atomic <tt class="docutils literal"><span class="pre">RENAME</span></tt> that is
+method of swapping the old and new table, which uses an atomic <code class="docutils literal notranslate"><span class="pre">RENAME</span></code> that is
 undetectable to client applications.</p>
 <p>This method is faster and does not block, but it is riskier for two reasons.
 First, for a short time between dropping the original table and renaming the
@@ -386,18 +387,18 @@ temporary table, the table to be altered simply does not exist, and queries
 against it will result in an error.  Secondly, if there is an error and the new
 table cannot be renamed into the place of the old one, then it is too late to
 abort, because the old table is gone permanently.</p>
-<p>This method forces <tt class="docutils literal"><span class="pre">--no-swap-tables</span></tt> and <tt class="docutils literal"><span class="pre">--no-drop-old-table</span></tt>.</p>
+<p>This method forces <code class="docutils literal notranslate"><span class="pre">--no-swap-tables</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-drop-old-table</span></code>.</p>
 </div></blockquote>
 <p>none</p>
 <blockquote>
-<div><p>This method is like <tt class="docutils literal"><span class="pre">drop_swap</span></tt> without the &#8220;swap&#8221;.  Any foreign keys that
+<div><p>This method is like <code class="docutils literal notranslate"><span class="pre">drop_swap</span></code> without the “swap”.  Any foreign keys that
 referenced the original table will now reference a nonexistent table. This will
-typically cause foreign key violations that are visible in <tt class="docutils literal"><span class="pre">SHOW</span> <span class="pre">ENGINE</span> <span class="pre">INNODB</span>
-<span class="pre">STATUS</span></tt>, similar to the following:</p>
-<div class="highlight-bash"><div class="highlight"><pre>Trying to add to index <span class="sb">`</span>idx_fk_staff_id<span class="sb">`</span> tuple:
-DATA TUPLE: 2 fields;
-0: len 1; hex 05; asc  ;;
-1: len 4; hex 80000001; asc     ;;
+typically cause foreign key violations that are visible in <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">ENGINE</span> <span class="pre">INNODB</span>
+<span class="pre">STATUS</span></code>, similar to the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Trying to add to index <span class="sb">`</span>idx_fk_staff_id<span class="sb">`</span> tuple:
+DATA TUPLE: <span class="m">2</span> fields<span class="p">;</span>
+<span class="m">0</span>: len <span class="m">1</span><span class="p">;</span> hex <span class="m">05</span><span class="p">;</span> asc  <span class="p">;;</span>
+<span class="m">1</span>: len <span class="m">4</span><span class="p">;</span> hex <span class="m">80000001</span><span class="p">;</span> asc     <span class="p">;;</span>
 But the parent table <span class="sb">`</span>sakila<span class="sb">`</span>.<span class="sb">`</span>staff_old<span class="sb">`</span>
 or its .ibd file does not currently exist!
 </pre></div>
@@ -405,18 +406,18 @@ or its .ibd file does not currently exist!
 <p>This is because the original table (in this case, sakila.staff) was renamed to
 sakila.staff_old and then dropped. This method of handling foreign key
 constraints is provided so that the database administrator can disable the
-tool&#8217;s built-in functionality if desired.</p>
+tool’s built-in functionality if desired.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]analyze-before-swap">
-<tt class="descname">--[no]analyze-before-swap</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]analyze-before-swap" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-analyze-before-swap">
+<code class="sig-name descname">--[no]analyze-before-swap</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-analyze-before-swap" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Execute ANALYZE TABLE on the new table before swapping with the old one.
 By default, this happens only when running MariaDB 5.6 and newer, and
-<tt class="docutils literal"><span class="pre">innodb_stats_persistent</span></tt> is enabled. Specify the option explicitly to enable
-or disable it regardless of MariaDB version and <tt class="docutils literal"><span class="pre">innodb_stats_persistent</span></tt>.</p>
+<code class="docutils literal notranslate"><span class="pre">innodb_stats_persistent</span></code> is enabled. Specify the option explicitly to enable
+or disable it regardless of MariaDB version and <code class="docutils literal notranslate"><span class="pre">innodb_stats_persistent</span></code>.</p>
 <p>This circumvents a potentially serious issue related to InnoDB optimizer
 statistics. If the table being alerted is busy and the tool completes quickly,
 the new table will not have optimizer statistics after being swapped. This can
@@ -425,81 +426,83 @@ statistics are updated (usually after 10 seconds). If the table is large and
 the server very busy, this can cause an outage.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--ask-pass">
-<tt class="descname">--ask-pass</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--ask-pass" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-ask-pass">
+<code class="sig-name descname">--ask-pass</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-ask-pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prompt for a password when connecting to MariaDB.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--channel">
-<tt class="descname">--channel</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--channel" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-channel">
+<code class="sig-name descname">--channel</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-channel" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Channel name used when connected to a server using replication channels.
 Suppose you have two masters, master_a at port 12345, master_b at port 1236 and
 a slave connected to both masters using channels chan_master_a and chan_master_b.
 If you want to run pt-table-sync to synchronize the slave against master_a, pt-table-sync
-won&#8217;t be able to determine what&#8217;s the correct master since SHOW SLAVE STATUS
-will return 2 rows. In this case, you can use &#8211;channel=chan_master_a to specify
+won’t be able to determine what’s the correct master since SHOW SLAVE STATUS
+will return 2 rows. In this case, you can use –channel=chan_master_a to specify
 the channel name to use in the SHOW SLAVE STATUS command.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--charset">
-<tt class="descname">--charset</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--charset" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-charset">
+<code class="sig-name descname">--charset</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -A; type: string</p>
-<p>Default character set.  If the value is utf8, sets Perl&#8217;s binmode on
+<p>Default character set.  If the value is utf8, sets Perl’s binmode on
 STDOUT to utf8, passes the mysql_enable_utf8 option to DBD::mysql, and runs SET
 NAMES UTF8 after connecting to MariaDB.  Any other value sets binmode on STDOUT
 without the utf8 layer, and runs SET NAMES after connecting to MariaDB.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]check-alter">
-<tt class="descname">--[no]check-alter</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]check-alter" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-check-alter">
+<code class="sig-name descname">--[no]check-alter</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-alter" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
-<p>Parses the <a class="reference internal" href="#cmdoption-mariadb-schema-change--alter"><em class="xref std std-option">--alter</em></a> specified and tries to warn of possible unintended
+<p>Parses the <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter</span></code></a> specified and tries to warn of possible unintended
 behavior. Currently, it checks for:</p>
 <p>Column renames</p>
 <blockquote>
-<div>In previous versions of the tool, renaming a column with
-<tt class="docutils literal"><span class="pre">CHANGE</span> <span class="pre">COLUMN</span> <span class="pre">name</span> <span class="pre">new_name</span></tt> would lead to that column&#8217;s data being lost.
+<div><p>In previous versions of the tool, renaming a column with
+<code class="docutils literal notranslate"><span class="pre">CHANGE</span> <span class="pre">COLUMN</span> <span class="pre">name</span> <span class="pre">new_name</span></code> would lead to that column’s data being lost.
 The tool now parses the alter statement and tries to catch these cases, so
 the renamed columns should have the same data as the originals. However, the
 code that does this is not a full-blown SQL parser, so you should first
-run the tool with <a class="reference internal" href="#cmdoption-mariadb-schema-change--dry-run"><em class="xref std std-option">--dry-run</em></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change--print"><em class="xref std std-option">--print</em></a> and verify that it detects
-the renamed columns correctly.</div></blockquote>
+run the tool with <a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change-print"><code class="xref std std-option docutils literal notranslate"><span class="pre">--print</span></code></a> and verify that it detects
+the renamed columns correctly.</p>
+</div></blockquote>
 <p>DROP PRIMARY KEY</p>
 <blockquote>
-<div>If <a class="reference internal" href="#cmdoption-mariadb-schema-change--alter"><em class="xref std std-option">--alter</em></a> contain <tt class="docutils literal"><span class="pre">DROP</span> <span class="pre">PRIMARY</span> <span class="pre">KEY</span></tt> (case- and space-insensitive),
-a warning is printed and the tool exits unless <a class="reference internal" href="#cmdoption-mariadb-schema-change--dry-run"><em class="xref std std-option">--dry-run</em></a> is specified.
+<div><p>If <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter</span></code></a> contain <code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">PRIMARY</span> <span class="pre">KEY</span></code> (case- and space-insensitive),
+a warning is printed and the tool exits unless <a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a> is specified.
 Altering the primary key can be dangerous, but the tool can handle it.
-The tool&#8217;s triggers, particularly the DELETE trigger, are most affected by
+The tool’s triggers, particularly the DELETE trigger, are most affected by
 altering the primary key because the tool prefers to use the primary key
-for its triggers.  You should first run the tool with <a class="reference internal" href="#cmdoption-mariadb-schema-change--dry-run"><em class="xref std std-option">--dry-run</em></a> and
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--print"><em class="xref std std-option">--print</em></a> and verify that the triggers are correct.</div></blockquote>
+for its triggers.  You should first run the tool with <a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a> and
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-print"><code class="xref std std-option docutils literal notranslate"><span class="pre">--print</span></code></a> and verify that the triggers are correct.</p>
+</div></blockquote>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]check-foreign-keys">
-<tt class="descname">--[no]check-foreign-keys</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]check-foreign-keys" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-check-foreign-keys">
+<code class="sig-name descname">--[no]check-foreign-keys</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-foreign-keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Check for self-referencing foreign keys. Currently self referencing FKs are
-not full supported, so, to prevent errors, this program won&#8217;t run if the table
+not full supported, so, to prevent errors, this program won’t run if the table
 has self-referencing foreign keys. Use this parameter to disable self-referencing
 FK checks.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--check-interval">
-<tt class="descname">--check-interval</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--check-interval" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-check-interval">
+<code class="sig-name descname">--check-interval</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-check-interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; default: 1</p>
-<p>Sleep time between checks for <a class="reference internal" href="#cmdoption-mariadb-schema-change--max-lag"><em class="xref std std-option">--max-lag</em></a>.</p>
+<p>Sleep time between checks for <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-lag</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]check-plan">
-<tt class="descname">--[no]check-plan</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]check-plan" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-check-plan">
+<code class="sig-name descname">--[no]check-plan</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-plan" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Check query execution plans for safety. By default, this option causes
 the tool to run EXPLAIN before running queries that are meant to access
@@ -519,7 +522,7 @@ skipping chunks that have a worse execution plan than other chunks.</p>
 <p>The tool prints a warning the first time a chunk is skipped due to
 a bad execution plan in each table. Subsequent chunks are skipped silently,
 although you can see the count of skipped chunks in the SKIPPED column in
-the tool&#8217;s output.</p>
+the tool’s output.</p>
 <p>This option adds some setup work to each table and chunk. Although the work is
 not intrusive for MariaDB, it results in more round-trips to the server, which
 consumes time. Making chunks too small will cause the overhead to become
@@ -527,9 +530,9 @@ relatively larger. It is therefore recommended that you not make chunks too
 small, because the tool may take a very long time to complete if you do.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]check-replication-filters">
-<tt class="descname">--[no]check-replication-filters</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]check-replication-filters" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-check-replication-filters">
+<code class="sig-name descname">--[no]check-replication-filters</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-replication-filters" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Abort if any replication filter is set on any server.  The tool looks for
 server options that filter replication, such as binlog_ignore_db and
@@ -540,68 +543,68 @@ replicas, because it could cause replication to fail.  For more information on
 replication rules, see <a class="reference external" href="http://dev.mysql.com/doc/en/replication-rules.html">http://dev.mysql.com/doc/en/replication-rules.html</a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--check-slave-lag">
-<tt class="descname">--check-slave-lag</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--check-slave-lag" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-check-slave-lag">
+<code class="sig-name descname">--check-slave-lag</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-check-slave-lag" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
-<p>Pause the data copy until this replica&#8217;s lag is less than <a class="reference internal" href="#cmdoption-mariadb-schema-change--max-lag"><em class="xref std std-option">--max-lag</em></a>.  The
+<p>Pause the data copy until this replica’s lag is less than <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-lag</span></code></a>.  The
 value is a DSN that inherits properties from the the connection options
-(<a class="reference internal" href="#cmdoption-mariadb-schema-change--port"><em class="xref std std-option">--port</em></a>, <a class="reference internal" href="#cmdoption-mariadb-schema-change--user"><em class="xref std std-option">--user</em></a>, etc.).  This option overrides the normal behavior of
+(<a class="reference internal" href="#cmdoption-mariadb-schema-change-port"><code class="xref std std-option docutils literal notranslate"><span class="pre">--port</span></code></a>, <a class="reference internal" href="#cmdoption-mariadb-schema-change-user"><code class="xref std std-option docutils literal notranslate"><span class="pre">--user</span></code></a>, etc.).  This option overrides the normal behavior of
 finding and continually monitoring replication lag on ALL connected replicas.
-If you don&#8217;t want to monitor ALL replicas, but you want more than just one
-replica to be monitored, then use the DSN option to the <a class="reference internal" href="#cmdoption-mariadb-schema-change--recursion-method"><em class="xref std std-option">--recursion-method</em></a>
+If you don’t want to monitor ALL replicas, but you want more than just one
+replica to be monitored, then use the DSN option to the <a class="reference internal" href="#cmdoption-mariadb-schema-change-recursion-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--recursion-method</span></code></a>
 option instead of this option.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--chunk-index">
-<tt class="descname">--chunk-index</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--chunk-index" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-chunk-index">
+<code class="sig-name descname">--chunk-index</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-index" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Prefer this index for chunking tables.  By default, the tool chooses the most
 appropriate index for chunking.  This option lets you specify the index that you
-prefer.  If the index doesn&#8217;t exist, then the tool will fall back to its default
+prefer.  If the index doesn’t exist, then the tool will fall back to its default
 behavior of choosing an index.  The tool adds the index to the SQL statements in
-a <tt class="docutils literal"><span class="pre">FORCE</span> <span class="pre">INDEX</span></tt> clause.  Be careful when using this option; a poor choice of
+a <code class="docutils literal notranslate"><span class="pre">FORCE</span> <span class="pre">INDEX</span></code> clause.  Be careful when using this option; a poor choice of
 index could cause bad performance.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--chunk-index-columns">
-<tt class="descname">--chunk-index-columns</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--chunk-index-columns" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-chunk-index-columns">
+<code class="sig-name descname">--chunk-index-columns</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-index-columns" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
-<p>Use only this many left-most columns of a <a class="reference internal" href="#cmdoption-mariadb-schema-change--chunk-index"><em class="xref std std-option">--chunk-index</em></a>.  This works
+<p>Use only this many left-most columns of a <a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-index"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-index</span></code></a>.  This works
 only for compound indexes, and is useful in cases where a bug in the MariaDB
 query optimizer (planner) causes it to scan a large range of rows instead
 of using the index to locate starting and ending points precisely.  This
 problem sometimes occurs on indexes with many columns, such as 4 or more.
 If this happens, the tool might print a warning related to the
-<em class="xref std std-option">--[no]check-plan</em> option.  Instructing the tool to use only the first
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-no-check-plan"><code class="xref std std-option docutils literal notranslate"><span class="pre">--[no]check-plan</span></code></a> option.  Instructing the tool to use only the first
 N columns of the index is a workaround for the bug in some cases.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--chunk-size">
-<tt class="descname">--chunk-size</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--chunk-size" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-chunk-size">
+<code class="sig-name descname">--chunk-size</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-size" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: size; default: 1000</p>
 <p>Number of rows to select for each chunk copied.  Allowable suffixes are
 k, M, G.</p>
 <p>This option can override the default behavior, which is to adjust chunk size
-dynamically to try to make chunks run in exactly <a class="reference internal" href="#cmdoption-mariadb-schema-change--chunk-time"><em class="xref std std-option">--chunk-time</em></a> seconds.
-When this option isn&#8217;t set explicitly, its default value is used as a starting
-point, but after that, the tool ignores this option&#8217;s value.  If you set this
+dynamically to try to make chunks run in exactly <a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-time"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-time</span></code></a> seconds.
+When this option isn’t set explicitly, its default value is used as a starting
+point, but after that, the tool ignores this option’s value.  If you set this
 option explicitly, however, then it disables the dynamic adjustment behavior and
 tries to make all chunks exactly the specified number of rows.</p>
-<p>There is a subtlety: if the chunk index is not unique, then it&#8217;s possible that
+<p>There is a subtlety: if the chunk index is not unique, then it’s possible that
 chunks will be larger than desired. For example, if a table is chunked by an
 index that contains 10,000 of a given value, there is no way to write a WHERE
 clause that matches only 1,000 of the values, and that chunk will be at least
 10,000 rows large.  Such a chunk will probably be skipped because of
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--chunk-size-limit"><em class="xref std std-option">--chunk-size-limit</em></a>.</p>
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-size-limit"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-size-limit</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--chunk-size-limit">
-<tt class="descname">--chunk-size-limit</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--chunk-size-limit" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-chunk-size-limit">
+<code class="sig-name descname">--chunk-size-limit</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-size-limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float; default: 4.0</p>
 <p>Do not copy chunks this much larger than the desired chunk size.</p>
 <p>When a table has no unique indexes, chunk sizes can be inaccurate.  This option
@@ -609,50 +612,50 @@ specifies a maximum tolerable limit to the inaccuracy.  The tool uses &lt;EXPLAI
 to estimate how many rows are in the chunk.  If that estimate exceeds the
 desired chunk size times the limit, then the tool skips the chunk.</p>
 <p>The minimum value for this option is 1, which means that no chunk can be larger
-than <a class="reference internal" href="#cmdoption-mariadb-schema-change--chunk-size"><em class="xref std std-option">--chunk-size</em></a>.  You probably don&#8217;t want to specify 1, because rows
+than <a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-size"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-size</span></code></a>.  You probably don’t want to specify 1, because rows
 reported by EXPLAIN are estimates, which can be different from the real number
 of rows in the chunk.  You can disable oversized chunk checking by specifying a
 value of 0.</p>
 <p>The tool also uses this option to determine how to handle foreign keys that
-reference the table to be altered. See <a class="reference internal" href="#cmdoption-mariadb-schema-change--alter-foreign-keys-method"><em class="xref std std-option">--alter-foreign-keys-method</em></a> for
+reference the table to be altered. See <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter-foreign-keys-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter-foreign-keys-method</span></code></a> for
 details.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--chunk-time">
-<tt class="descname">--chunk-time</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--chunk-time" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-chunk-time">
+<code class="sig-name descname">--chunk-time</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-chunk-time" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float; default: 0.5</p>
 <p>Adjust the chunk size dynamically so each data-copy query takes this long to
 execute.  The tool tracks the copy rate (rows per second) and adjusts the chunk
 size after each data-copy query, so that the next query takes this amount of
 time (in seconds) to execute.  It keeps an exponentially decaying moving average
-of queries per second, so that if the server&#8217;s performance changes due to
+of queries per second, so that if the server’s performance changes due to
 changes in server load, the tool adapts quickly.</p>
-<p>If this option is set to zero, the chunk size doesn&#8217;t auto-adjust, so query
+<p>If this option is set to zero, the chunk size doesn’t auto-adjust, so query
 times will vary, but query chunk sizes will not. Another way to do the same
-thing is to specify a value for <a class="reference internal" href="#cmdoption-mariadb-schema-change--chunk-size"><em class="xref std std-option">--chunk-size</em></a> explicitly, instead of leaving
+thing is to specify a value for <a class="reference internal" href="#cmdoption-mariadb-schema-change-chunk-size"><code class="xref std std-option docutils literal notranslate"><span class="pre">--chunk-size</span></code></a> explicitly, instead of leaving
 it at the default.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--config">
-<tt class="descname">--config</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--config" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-config">
+<code class="sig-name descname">--config</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-config" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
 <p>Read this comma-separated list of config files; if specified, this must be the
 first option on the command line.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--critical-load">
-<tt class="descname">--critical-load</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--critical-load" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-critical-load">
+<code class="sig-name descname">--critical-load</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-critical-load" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: Threads_running=50</p>
 <p>Examine SHOW GLOBAL STATUS after every chunk, and abort if the load is too high.
 The option accepts a comma-separated list of MariaDB status variables and
-thresholds.  An optional <tt class="docutils literal"><span class="pre">=MAX_VALUE</span></tt> (or <tt class="docutils literal"><span class="pre">:MAX_VALUE</span></tt>) can follow each
+thresholds.  An optional <code class="docutils literal notranslate"><span class="pre">=MAX_VALUE</span></code> (or <code class="docutils literal notranslate"><span class="pre">:MAX_VALUE</span></code>) can follow each
 variable.  If not given, the tool determines a threshold by examining the
 current value at startup and doubling it.</p>
-<p>See <a class="reference internal" href="#cmdoption-mariadb-schema-change--max-load"><em class="xref std std-option">--max-load</em></a> for further details. These options work similarly, except
-that this option will abort the tool&#8217;s operation instead of pausing it, and the
+<p>See <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-load"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-load</span></code></a> for further details. These options work similarly, except
+that this option will abort the tool’s operation instead of pausing it, and the
 default value is computed differently if you specify no threshold.  The reason
 for this option is as a safety check in case the triggers on the original table
 add so much load to the server that it causes downtime.  There is probably no
@@ -661,91 +664,91 @@ single value of Threads_running that is wrong for every server, but a default of
 operation should be canceled immediately.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--database">
-<tt class="descname">--database</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--database" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-database">
+<code class="sig-name descname">--database</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-database" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -D; type: string</p>
 <p>Connect to this database.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--default-engine">
-<tt class="descname">--default-engine</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--default-engine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove <tt class="docutils literal"><span class="pre">ENGINE</span></tt> from the new table.</p>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-default-engine">
+<code class="sig-name descname">--default-engine</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-default-engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove <code class="docutils literal notranslate"><span class="pre">ENGINE</span></code> from the new table.</p>
 <p>By default the new table is created with the same table options as
 the original table, so if the original table uses InnoDB, then the new
 table will use InnoDB.  In certain cases involving replication, this may
 cause unintended changes on replicas which use a different engine for
 the same table.  Specifying this option causes the new table to be
-created with the system&#8217;s default engine.</p>
+created with the system’s default engine.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--data-dir">
-<tt class="descname">--data-dir</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--data-dir" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-data-dir">
+<code class="sig-name descname">--data-dir</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-data-dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Create the new table on a different partition using the DATA DIRECTORY feature.
 Only available on 5.6+. This parameter is ignored if it is used at the same time
 than remove-data-dir.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--remove-data-dir">
-<tt class="descname">--remove-data-dir</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--remove-data-dir" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-remove-data-dir">
+<code class="sig-name descname">--remove-data-dir</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-remove-data-dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: no</p>
 <p>If the original table was created using the DATA DIRECTORY feature, remove it and create
 the new table in MariaDB default directory without creating a new isl file.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--defaults-file">
-<tt class="descname">--defaults-file</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--defaults-file" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-defaults-file">
+<code class="sig-name descname">--defaults-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-defaults-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -F; type: string</p>
 <p>Only read mysql options from the given file.  You must give an absolute
 pathname.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]drop-new-table">
-<tt class="descname">--[no]drop-new-table</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]drop-new-table" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-drop-new-table">
+<code class="sig-name descname">--[no]drop-new-table</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-new-table" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Drop the new table if copying the original table fails.</p>
-<p>Specifying <tt class="docutils literal"><span class="pre">--no-drop-new-table</span></tt> and <tt class="docutils literal"><span class="pre">--no-swap-tables</span></tt> leaves the new,
+<p>Specifying <code class="docutils literal notranslate"><span class="pre">--no-drop-new-table</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-swap-tables</span></code> leaves the new,
 altered copy of the table without modifying the original table.  See
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--new-table-name"><em class="xref std std-option">--new-table-name</em></a>.</p>
-<p>&#8211;no-drop-new-table does not work with
-<tt class="docutils literal"><span class="pre">alter-foreign-keys-method</span> <span class="pre">drop_swap</span></tt>.</p>
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-new-table-name"><code class="xref std std-option docutils literal notranslate"><span class="pre">--new-table-name</span></code></a>.</p>
+<p>–no-drop-new-table does not work with
+<code class="docutils literal notranslate"><span class="pre">alter-foreign-keys-method</span> <span class="pre">drop_swap</span></code>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]drop-old-table">
-<tt class="descname">--[no]drop-old-table</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]drop-old-table" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-drop-old-table">
+<code class="sig-name descname">--[no]drop-old-table</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-old-table" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Drop the original table after renaming it. After the original table has been
 successfully renamed to let the new table take its place, and if there are no
 errors, the tool drops the original table by default. If there are any errors,
 the tool leaves the original table in place.</p>
-<p>If <tt class="docutils literal"><span class="pre">--no-swap-tables</span></tt> is specified, then there is no old table to drop.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">--no-swap-tables</span></code> is specified, then there is no old table to drop.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]drop-triggers">
-<tt class="descname">--[no]drop-triggers</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]drop-triggers" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-drop-triggers">
+<code class="sig-name descname">--[no]drop-triggers</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-drop-triggers" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
-<p>Drop triggers on the old table.  <tt class="docutils literal"><span class="pre">--no-drop-triggers</span></tt> forces
-<tt class="docutils literal"><span class="pre">--no-drop-old-table</span></tt>.</p>
+<p>Drop triggers on the old table.  <code class="docutils literal notranslate"><span class="pre">--no-drop-triggers</span></code> forces
+<code class="docutils literal notranslate"><span class="pre">--no-drop-old-table</span></code>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--dry-run">
-<tt class="descname">--dry-run</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--dry-run" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-dry-run">
+<code class="sig-name descname">--dry-run</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-dry-run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and alter the new table, but do not create triggers, copy data, or
 replace the original table.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--execute">
-<tt class="descname">--execute</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--execute" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-execute">
+<code class="sig-name descname">--execute</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Indicate that you have read the documentation and want to alter the table.  You
 must specify this option to alter the table. If you do not, then the tool will
 only perform some safety checks and exit.  This helps ensure that you have read the
@@ -753,17 +756,17 @@ documentation and understand how to use this tool.  If you have not read the
 documentation, then do not specify this option.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]check-unique-key-change">
-<tt class="descname">--[no]check-unique-key-change</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]check-unique-key-change" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-check-unique-key-change">
+<code class="sig-name descname">--[no]check-unique-key-change</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-check-unique-key-change" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
-<p>Avoid <strong class="program">mariadb-schema-change</strong> to run if the specified statement for <a class="reference internal" href="#cmdoption-mariadb-schema-change--alter"><em class="xref std std-option">--alter</em></a> is
+<p>Avoid <strong class="program">mariadb-schema-change</strong> to run if the specified statement for <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter</span></code></a> is
 trying to add an unique index.
-Since <strong class="program">mariadb-schema-change</strong> uses <tt class="docutils literal"><span class="pre">INSERT</span> <span class="pre">IGNORE</span></tt> to copy rows to the new table, if
+Since <strong class="program">mariadb-schema-change</strong> uses <code class="docutils literal notranslate"><span class="pre">INSERT</span> <span class="pre">IGNORE</span></code> to copy rows to the new table, if
 the row being written produces a duplicate key, it will fail silently and data will
 be lost.</p>
 <p>Example:</p>
-<div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">test</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">test</span><span class="p">;</span>
 <span class="n">USE</span> <span class="n">test</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">a</span><span class="o">`</span> <span class="p">(</span>
   <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -779,9 +782,9 @@ be lost.</p>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">a</span> <span class="k">values</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="k">NULL</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Using <strong class="program">mariadb-schema-change</strong> to add an unique index on the <tt class="docutils literal"><span class="pre">unique_id</span></tt> field, will cause some rows to
-be lost due to the use of <tt class="docutils literal"><span class="pre">INSERT</span> <span class="pre">IGNORE</span></tt> to copy rows from the source table.
-For this reason, <strong class="program">mariadb-schema-change</strong> will fail if it detects that the <a class="reference internal" href="#cmdoption-mariadb-schema-change--alter"><em class="xref std std-option">--alter</em></a> parameter is trying
+<p>Using <strong class="program">mariadb-schema-change</strong> to add an unique index on the <code class="docutils literal notranslate"><span class="pre">unique_id</span></code> field, will cause some rows to
+be lost due to the use of <code class="docutils literal notranslate"><span class="pre">INSERT</span> <span class="pre">IGNORE</span></code> to copy rows from the source table.
+For this reason, <strong class="program">mariadb-schema-change</strong> will fail if it detects that the <a class="reference internal" href="#cmdoption-mariadb-schema-change-alter"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter</span></code></a> parameter is trying
 to add an unique key and it will show an example query to run to detect if there are
 rows that will produce duplicated indexes.</p>
 <p>Even if you run the query and there are no rows that will produce duplicated indexes,
@@ -789,21 +792,21 @@ take into consideration that after running this query, changes can be made to th
 duplicate rows and this data will be lost.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--force">
-<tt class="descname">--force</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--force" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-force">
+<code class="sig-name descname">--force</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-force" title="Permalink to this definition">¶</a></dt>
 <dd><p>This options bypasses confirmation in case of using alter-foreign-keys-method = none , which might break foreign key constraints.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--force-concat-enums">
-<tt class="descname">--force-concat-enums</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--force-concat-enums" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-force-concat-enums">
+<code class="sig-name descname">--force-concat-enums</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-force-concat-enums" title="Permalink to this definition">¶</a></dt>
 <dd><p>The NibbleIterator in <strong class="program">mariadb-schema-change</strong> can detect indexes having ENUM fields and
 if the items it has are sorted or not. According to documentation at
 <a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/enum.html">https://dev.mysql.com/doc/refman/5.7/en/enum.html</a>:</p>
 <p>ENUM values are sorted based on their index numbers, which depend on the order in
 which the enumeration members were listed in the column specification.
-For example, &#8216;b&#8217; sorts before &#8216;a&#8217; for ENUM(&#8216;b&#8217;, &#8216;a&#8217;).
+For example, ‘b’ sorts before ‘a’ for ENUM(‘b’, ‘a’).
 The empty string sorts before nonempty strings, and NULL values sort before all other
 enumeration values.</p>
 <p>To prevent unexpected results when using the ORDER BY clause on an ENUM column,
@@ -815,27 +818,27 @@ ORDER BY CAST(col AS CHAR) or ORDER BY CONCAT(col).</p>
 since MariaDB cannot use the column directly and has to calculate the result of CONCAT
 for every row.
 To make this scenario vissible to the user, if there are indexes having ENUM fields
-with usorted items, it is necessary to specify the <tt class="docutils literal"><span class="pre">--force-concat-enums</span></tt> parameter.</p>
+with usorted items, it is necessary to specify the <code class="docutils literal notranslate"><span class="pre">--force-concat-enums</span></code> parameter.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--help">
-<tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--help" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-help">
+<code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show help and exit.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--host">
-<tt class="descname">--host</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--host" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-host">
+<code class="sig-name descname">--host</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-host" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -h; type: string</p>
 <p>Connect to host.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--max-flow-ctl">
-<tt class="descname">--max-flow-ctl</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--max-flow-ctl" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-max-flow-ctl">
+<code class="sig-name descname">--max-flow-ctl</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-flow-ctl" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float</p>
-<p>Somewhat similar to &#8211;max-lag but for PXC clusters.
+<p>Somewhat similar to –max-lag but for PXC clusters.
 Check average time cluster spent pausing for Flow Control and make tool pause if
 it goes over the percentage indicated in the option.
 A value of 0 would make the tool pause when <em>any</em> Flow Control activity is
@@ -844,18 +847,18 @@ Default is no Flow Control checking.
 This option is available for PXC versions 5.6 or higher.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--max-lag">
-<tt class="descname">--max-lag</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--max-lag" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-max-lag">
+<code class="sig-name descname">--max-lag</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-lag" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: time; default: 1s</p>
-<p>Pause the data copy until all replicas&#8217; lag is less than this value.  After each
+<p>Pause the data copy until all replicas’ lag is less than this value.  After each
 data-copy query (each chunk), the tool looks at the replication lag of
 all replicas to which it connects, using Seconds_Behind_Master. If any replica
 is lagging more than the value of this option, then the tool will sleep
-for <a class="reference internal" href="#cmdoption-mariadb-schema-change--check-interval"><em class="xref std std-option">--check-interval</em></a> seconds, then check all replicas again.  If you
-specify <a class="reference internal" href="#cmdoption-mariadb-schema-change--check-slave-lag"><em class="xref std std-option">--check-slave-lag</em></a>, then the tool only examines that server for
+for <a class="reference internal" href="#cmdoption-mariadb-schema-change-check-interval"><code class="xref std std-option docutils literal notranslate"><span class="pre">--check-interval</span></code></a> seconds, then check all replicas again.  If you
+specify <a class="reference internal" href="#cmdoption-mariadb-schema-change-check-slave-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--check-slave-lag</span></code></a>, then the tool only examines that server for
 lag, not all servers.  If you want to control exactly which servers the tool
-monitors, use the DSN value to <a class="reference internal" href="#cmdoption-mariadb-schema-change--recursion-method"><em class="xref std std-option">--recursion-method</em></a>.</p>
+monitors, use the DSN value to <a class="reference internal" href="#cmdoption-mariadb-schema-change-recursion-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--recursion-method</span></code></a>.</p>
 <p>The tool waits forever for replicas to stop lagging.  If any replica is
 stopped, the tool waits forever until the replica is started.  The data copy
 continues when all replicas are running and not lagging too much.</p>
@@ -864,21 +867,21 @@ prints a progress report immediately, then again at every progress report
 interval.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--max-load">
-<tt class="descname">--max-load</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--max-load" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-max-load">
+<code class="sig-name descname">--max-load</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-max-load" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array; default: Threads_running=25</p>
 <p>Examine SHOW GLOBAL STATUS after every chunk, and pause if any status variables
 are higher than their thresholds.  The option accepts a comma-separated list of
-MariaDB status variables.  An optional <tt class="docutils literal"><span class="pre">=MAX_VALUE</span></tt> (or <tt class="docutils literal"><span class="pre">:MAX_VALUE</span></tt>) can follow
+MariaDB status variables.  An optional <code class="docutils literal notranslate"><span class="pre">=MAX_VALUE</span></code> (or <code class="docutils literal notranslate"><span class="pre">:MAX_VALUE</span></code>) can follow
 each variable.  If not given, the tool determines a threshold by examining the
 current value and increasing it by 20%.</p>
 <p>For example, if you want the tool to pause when Threads_connected gets too high,
-you can specify &#8220;Threads_connected&#8221;, and the tool will check the current value
+you can specify “Threads_connected”, and the tool will check the current value
 when it starts working and add 20% to that value.  If the current value is 100,
 then the tool will pause when Threads_connected exceeds 120, and resume working
 when it is below 120 again.  If you want to specify an explicit threshold, such
-as 110, you can use either &#8220;Threads_connected:110&#8221; or &#8220;Threads_connected=110&#8221;.</p>
+as 110, you can use either “Threads_connected:110” or “Threads_connected=110”.</p>
 <p>The purpose of this option is to prevent the tool from adding too much load to
 the server. If the data-copy queries are intrusive, or if they cause lock waits,
 then other queries on the server will tend to block and queue. This will
@@ -890,9 +893,9 @@ however; it will only give the server a chance to recover from the queueing.  If
 you notice queueing, it is best to decrease the chunk time.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--preserve-triggers">
-<tt class="descname">--preserve-triggers</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--preserve-triggers" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-preserve-triggers">
+<code class="sig-name descname">--preserve-triggers</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-preserve-triggers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Preserves old triggers when specified.
 As of MariaDB 10.2.3, it is possible to define multiple triggers for a given
 table that have the same trigger event and action time. This allows us to
@@ -902,7 +905,7 @@ If this option is enabled, <strong class="program">mariadb-schema-change</strong
 existing triggers to the new table BEFORE start copying rows from the original
 table to ensure the old triggers can be applied after altering the table.</p>
 <p>Example.</p>
-<div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">test</span><span class="p">.</span><span class="n">t1</span> <span class="p">(</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">test</span><span class="p">.</span><span class="n">t1</span> <span class="p">(</span>
      <span class="n">id</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
      <span class="n">f1</span> <span class="nb">INT</span><span class="p">,</span>
      <span class="n">f2</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
@@ -921,109 +924,109 @@ table to ensure the old triggers can be applied after altering the table.</p>
      <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">test</span><span class="p">.</span><span class="n">log</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">NOW</span><span class="p">(),</span> <span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;updated row row with id &quot;</span><span class="p">,</span> <span class="k">OLD</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="ss">&quot; old f1:&quot;</span><span class="p">,</span> <span class="k">OLD</span><span class="p">.</span><span class="n">f1</span><span class="p">,</span> <span class="ss">&quot; new f1: &quot;</span><span class="p">,</span> <span class="k">NEW</span><span class="p">.</span><span class="n">f1</span> <span class="p">));</span>
 </pre></div>
 </div>
-<p>For this table and triggers combination, it is not possible to use &#8211;preserve-triggers
-with an &#8211;alter like this: <tt class="docutils literal"><span class="pre">&quot;DROP</span> <span class="pre">COLUMN</span> <span class="pre">f1&quot;</span></tt> since the trigger references the column
+<p>For this table and triggers combination, it is not possible to use –preserve-triggers
+with an –alter like this: <code class="docutils literal notranslate"><span class="pre">&quot;DROP</span> <span class="pre">COLUMN</span> <span class="pre">f1&quot;</span></code> since the trigger references the column
 being dropped and at would make the trigger to fail.</p>
 <p>After testing the triggers will work on the new table, the triggers are
 dropped from the new table until all rows have been copied and then they are
 re-applied.</p>
-<p>&#8211;preserve-triggers cannot be used with these other parameters, &#8211;no-drop-triggers,
-&#8211;no-drop-old-table and &#8211;no-swap-tables since &#8211;preserve-triggers implies that
+<p>–preserve-triggers cannot be used with these other parameters, –no-drop-triggers,
+–no-drop-old-table and –no-swap-tables since –preserve-triggers implies that
 the old triggers should be deleted and recreated in the new table.
 Since it is not possible to have more than one trigger with the same name, old triggers
 must be deleted in order to be able to recreate them into the new table.</p>
-<p>Using <tt class="docutils literal"><span class="pre">--preserve-triggers</span></tt> with <tt class="docutils literal"><span class="pre">--no-swap-tables</span></tt> will cause triggers to remain
+<p>Using <code class="docutils literal notranslate"><span class="pre">--preserve-triggers</span></code> with <code class="docutils literal notranslate"><span class="pre">--no-swap-tables</span></code> will cause triggers to remain
 defined for the original table.
-Please read the documentation for &#8211;swap-tables</p>
-<p>If both <tt class="docutils literal"><span class="pre">--no-swap-tables</span></tt> and <tt class="docutils literal"><span class="pre">--no-drop-new-table</span></tt> is set, the trigger will remain
+Please read the documentation for –swap-tables</p>
+<p>If both <code class="docutils literal notranslate"><span class="pre">--no-swap-tables</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-drop-new-table</span></code> is set, the trigger will remain
 on the original table and will be duplicated on the new table
 (the trigger will have a random suffix as no trigger names are unique).</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--new-table-name">
-<tt class="descname">--new-table-name</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--new-table-name" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-new-table-name">
+<code class="sig-name descname">--new-table-name</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-new-table-name" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string; default: %T_new</p>
-<p>New table name before it is swapped.  <tt class="docutils literal"><span class="pre">%T</span></tt> is replaced with the original
+<p>New table name before it is swapped.  <code class="docutils literal notranslate"><span class="pre">%T</span></code> is replaced with the original
 table name.  When the default is used, the tool prefixes the name with up
-to 10 <tt class="docutils literal"><span class="pre">_</span></tt> (underscore) to find a unique table name.  If a table name is
-specified, the tool does not prefix it with <tt class="docutils literal"><span class="pre">_</span></tt>, so the table must not
+to 10 <code class="docutils literal notranslate"><span class="pre">_</span></code> (underscore) to find a unique table name.  If a table name is
+specified, the tool does not prefix it with <code class="docutils literal notranslate"><span class="pre">_</span></code>, so the table must not
 exist.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--null-to-not-null">
-<tt class="descname">--null-to-not-null</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--null-to-not-null" title="Permalink to this definition">¶</a></dt>
-<dd><p>Allows MODIFYing a column that allows NULL values to one that doesn&#8217;t allow
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-null-to-not-null">
+<code class="sig-name descname">--null-to-not-null</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-null-to-not-null" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows MODIFYing a column that allows NULL values to one that doesn’t allow
 them. The rows which contain NULL values will be converted to the defined
 default value. If no explicit DEFAULT value is given MariaDB will assign a default
-value based on datatype, e.g. 0 for number datatypes, &#8216;&#8217; for string datatypes.</p>
+value based on datatype, e.g. 0 for number datatypes, ‘’ for string datatypes.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--only-same-schema-fks">
-<tt class="descname">--only-same-schema-fks</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--only-same-schema-fks" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-only-same-schema-fks">
+<code class="sig-name descname">--only-same-schema-fks</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-only-same-schema-fks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check foreigns keys only on tables on the same schema than the original table.
 This option is dangerous since if you have FKs refenrencing tables in other
-schemas, they won&#8217;t be detected.</p>
+schemas, they won’t be detected.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--password">
-<tt class="descname">--password</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--password" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-password">
+<code class="sig-name descname">--password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -p; type: string</p>
 <p>Password to use when connecting.
-If password contains commas they must be escaped with a backslash: &#8220;exam,ple&#8221;</p>
+If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--pause-file">
-<tt class="descname">--pause-file</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--pause-file" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-pause-file">
+<code class="sig-name descname">--pause-file</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-pause-file" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Execution will be paused while the file specified by this param exists.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--pid">
-<tt class="descname">--pid</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--pid" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-pid">
+<code class="sig-name descname">--pid</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
-<p>Create the given PID file.  The tool won&#8217;t start if the PID file already
+<p>Create the given PID file.  The tool won’t start if the PID file already
 exists and the PID it contains is different than the current PID.  However,
 if the PID file exists and the PID it contains is no longer running, the
 tool will overwrite the PID file with the current PID.  The PID file is
 removed automatically when the tool exits.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--plugin">
-<tt class="descname">--plugin</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--plugin" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-plugin">
+<code class="sig-name descname">--plugin</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-plugin" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
-<p>Perl module file that defines a <tt class="docutils literal"><span class="pre">pt_online_schema_change_plugin</span></tt> class.
+<p>Perl module file that defines a <code class="docutils literal notranslate"><span class="pre">pt_online_schema_change_plugin</span></code> class.
 A plugin allows you to write a Perl module that can hook into many parts
 of <strong class="program">mariadb-schema-change</strong>.  This requires a good knowledge of Perl and
 MariaDB tools conventions, which are beyond this scope of this
 documentation.  Please contact MariaDB if you have questions or need help.</p>
-<p>See &#8220;PLUGIN&#8221; for more information.</p>
+<p>See “PLUGIN” for more information.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--port">
-<tt class="descname">--port</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--port" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-port">
+<code class="sig-name descname">--port</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-port" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -P; type: int</p>
 <p>Port number to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--print">
-<tt class="descname">--print</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--print" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-print">
+<code class="sig-name descname">--print</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-print" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print SQL statements to STDOUT.  Specifying this option allows you to see most
 of the statements that the tool executes. You can use this option with
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--dry-run"><em class="xref std std-option">--dry-run</em></a>, for example.</p>
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a>, for example.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--progress">
-<tt class="descname">--progress</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--progress" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-progress">
+<code class="sig-name descname">--progress</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: time,30</p>
 <p>Print progress reports to STDERR while copying rows.  The value is a
 comma-separated list with two parts.  The first part can be percentage, time, or
@@ -1031,28 +1034,28 @@ iterations; the second part specifies how often an update should be printed, in
 percentage, seconds, or number of iterations.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--quiet">
-<tt class="descname">--quiet</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--quiet" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-quiet">
+<code class="sig-name descname">--quiet</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-quiet" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -q</p>
-<p>Do not print messages to STDOUT (disables <a class="reference internal" href="#cmdoption-mariadb-schema-change--progress"><em class="xref std std-option">--progress</em></a>).
+<p>Do not print messages to STDOUT (disables <a class="reference internal" href="#cmdoption-mariadb-schema-change-progress"><code class="xref std std-option docutils literal notranslate"><span class="pre">--progress</span></code></a>).
 Errors and warnings are still printed to STDERR.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--recurse">
-<tt class="descname">--recurse</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--recurse" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-recurse">
+<code class="sig-name descname">--recurse</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-recurse" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: int</p>
 <p>Number of levels to recurse in the hierarchy when discovering replicas.
-Default is infinite.  See also <a class="reference internal" href="#cmdoption-mariadb-schema-change--recursion-method"><em class="xref std std-option">--recursion-method</em></a>.</p>
+Default is infinite.  See also <a class="reference internal" href="#cmdoption-mariadb-schema-change-recursion-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--recursion-method</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--recursion-method">
-<tt class="descname">--recursion-method</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--recursion-method" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-recursion-method">
+<code class="sig-name descname">--recursion-method</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-recursion-method" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array; default: processlist,hosts</p>
 <p>Preferred recursion method for discovering replicas.  Possible methods are:</p>
-<div class="highlight-bash"><div class="highlight"><pre>METHOD       <span class="nv">USES</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>METHOD       <span class="nv">USES</span>
 <span class="o">===========</span>  <span class="o">==================</span>
 processlist  SHOW PROCESSLIST
 hosts        SHOW SLAVE HOSTS
@@ -1070,7 +1073,7 @@ report_port, etc.</p>
 <p>The dsn method is special: it specifies a table from which other DSN strings
 are read.  The specified DSN must specify a D and t, or a database-qualified
 t.  The DSN table should have the following structure:</p>
-<div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">dsns</span><span class="o">`</span> <span class="p">(</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">dsns</span><span class="o">`</span> <span class="p">(</span>
   <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
   <span class="o">`</span><span class="n">parent_id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
   <span class="o">`</span><span class="n">dsn</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -1079,154 +1082,155 @@ t.  The DSN table should have the following structure:</p>
 </pre></div>
 </div>
 <p>To make the tool monitor only the hosts 10.10.1.16 and 10.10.1.17 for
-replication lag, insert the values <tt class="docutils literal"><span class="pre">h=10.10.1.16</span></tt> and <tt class="docutils literal"><span class="pre">h=10.10.1.17</span></tt> into the
+replication lag, insert the values <code class="docutils literal notranslate"><span class="pre">h=10.10.1.16</span></code> and <code class="docutils literal notranslate"><span class="pre">h=10.10.1.17</span></code> into the
 table. Currently, the DSNs are ordered by id, but id and parent_id are otherwise
 ignored.</p>
 <p>You can change the list of hosts while OSC is executing:
 if you change the contents of the DSN table, OSC will pick it up very soon.</p>
 </dd></dl>
 
-<p>&#8211;reverse-triggers Copy the triggers added during the copy in reverse order. Commands in the new table will be
+<p>–reverse-triggers Copy the triggers added during the copy in reverse order. Commands in the new table will be
 reflected in the old table. You can use this as a safety feature, so that the old
-table continues to receive updates. This option requires <tt class="docutils literal"><span class="pre">--no-drop-old-table</span></tt>.</p>
+table continues to receive updates. This option requires <code class="docutils literal notranslate"><span class="pre">--no-drop-old-table</span></code>.</p>
 <blockquote>
-<div>Warning! This option creates reverse triggers on the new table before it starts copying.
+<div><p>Warning! This option creates reverse triggers on the new table before it starts copying.
 After new table is renamed to its original name triggers will continue working. But because the
 name change metadata version in the table cache will also change you may start receiving
-&#8220;Prepared statement needs to be re-prepared&#8221; errors. The workaround for this is to re-prepare statements.
-If you do not use server-side prepared statements your application should not be affected.</div></blockquote>
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--skip-check-slave-lag">
-<tt class="descname">--skip-check-slave-lag</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--skip-check-slave-lag" title="Permalink to this definition">¶</a></dt>
+“Prepared statement needs to be re-prepared” errors. The workaround for this is to re-prepare statements.
+If you do not use server-side prepared statements your application should not be affected.</p>
+</div></blockquote>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-skip-check-slave-lag">
+<code class="sig-name descname">--skip-check-slave-lag</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-skip-check-slave-lag" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: DSN; repeatable: yes</p>
 <p>DSN to skip when checking slave lag. It can be used multiple times.
-Example: &#8211;skip-check-slave-lag h=127.0.0.1,P=12345 &#8211;skip-check-slave-lag h=127.0.0.1,P=12346
+Example: –skip-check-slave-lag h=127.0.0.1,P=12345 –skip-check-slave-lag h=127.0.0.1,P=12346
 Plase take into consideration that even when for the MariaDB driver h=127.1 is equal to h=127.0.0.1,
 for this parameter you need to specify the full IP address.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--slave-user">
-<tt class="descname">--slave-user</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--slave-user" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-slave-user">
+<code class="sig-name descname">--slave-user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-slave-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the user to be used to connect to the slaves.
 This parameter allows you to have a different user with less privileges on the
 slaves but that user must exist on all slaves.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--slave-password">
-<tt class="descname">--slave-password</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--slave-password" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-slave-password">
+<code class="sig-name descname">--slave-password</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-slave-password" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: string</p>
 <p>Sets the password to be used to connect to the slaves.
-It can be used with &#8211;slave-user and the password for the user must be the same
+It can be used with –slave-user and the password for the user must be the same
 on all slaves.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--set-vars">
-<tt class="descname">--set-vars</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--set-vars" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-set-vars">
+<code class="sig-name descname">--set-vars</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-set-vars" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: Array</p>
-<p>Set the MariaDB variables in this comma-separated list of <tt class="docutils literal"><span class="pre">variable=value</span></tt> pairs.</p>
+<p>Set the MariaDB variables in this comma-separated list of <code class="docutils literal notranslate"><span class="pre">variable=value</span></code> pairs.</p>
 <p>By default, the tool sets:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">wait_timeout</span><span class="o">=</span>10000
-<span class="nv">innodb_lock_wait_timeout</span><span class="o">=</span>1
-<span class="nv">lock_wait_timeout</span><span class="o">=</span>60
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">wait_timeout</span><span class="o">=</span><span class="m">10000</span>
+<span class="nv">innodb_lock_wait_timeout</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">lock_wait_timeout</span><span class="o">=</span><span class="m">60</span>
 </pre></div>
 </div>
 <p>Variables specified on the command line override these defaults.  For
-example, specifying <tt class="docutils literal"><span class="pre">--set-vars</span> <span class="pre">wait_timeout=500</span></tt> overrides the default
-value of <tt class="docutils literal"><span class="pre">10000</span></tt>.</p>
+example, specifying <code class="docutils literal notranslate"><span class="pre">--set-vars</span> <span class="pre">wait_timeout=500</span></code> overrides the default
+value of <code class="docutils literal notranslate"><span class="pre">10000</span></code>.</p>
 <p>The tool prints a warning and continues if a variable cannot be set.</p>
-<p>Note that setting the <tt class="docutils literal"><span class="pre">sql_mode</span></tt> variable requires some tricky escapes
+<p>Note that setting the <code class="docutils literal notranslate"><span class="pre">sql_mode</span></code> variable requires some tricky escapes
 to be able to parse the quotes and commas.</p>
 <p>Example:</p>
-<div class="highlight-bash"><div class="highlight"><pre>--set-vars <span class="nv">sql_mode</span><span class="o">=</span><span class="se">\&#39;</span>STRICT_ALL_TABLES<span class="se">\\</span>,ALLOW_INVALID_DATES<span class="se">\&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--set-vars <span class="nv">sql_mode</span><span class="o">=</span><span class="se">\&#39;</span>STRICT_ALL_TABLES<span class="se">\\</span>,ALLOW_INVALID_DATES<span class="se">\&#39;</span>
 </pre></div>
 </div>
 <p>Note the single backslash for the quotes and double backslash for the comma.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--sleep">
-<tt class="descname">--sleep</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--sleep" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-sleep">
+<code class="sig-name descname">--sleep</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-sleep" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: float; default: 0</p>
 <p>How long to sleep (in seconds) after copying each chunk. This option is useful
-when throttling by <a class="reference internal" href="#cmdoption-mariadb-schema-change--max-lag"><em class="xref std std-option">--max-lag</em></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change--max-load"><em class="xref std std-option">--max-load</em></a> are not possible.
+when throttling by <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-lag"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-lag</span></code></a> and <a class="reference internal" href="#cmdoption-mariadb-schema-change-max-load"><code class="xref std std-option docutils literal notranslate"><span class="pre">--max-load</span></code></a> are not possible.
 A small, sub-second value should be used, like 0.1, else the tool could take
 a very long time to copy large tables.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--socket">
-<tt class="descname">--socket</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--socket" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-socket">
+<code class="sig-name descname">--socket</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -S; type: string</p>
 <p>Socket file to use for connection.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--statistics">
-<tt class="descname">--statistics</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--statistics" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-statistics">
+<code class="sig-name descname">--statistics</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-statistics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print statistics about internal counters.  This is useful to see how
 many warnings were suppressed compared to the number of INSERT.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--[no]swap-tables">
-<tt class="descname">--[no]swap-tables</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--[no]swap-tables" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-no-swap-tables">
+<code class="sig-name descname">--[no]swap-tables</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-no-swap-tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>default: yes</p>
 <p>Swap the original table and the new, altered table.  This step completes the
 online schema change process by making the table with the new schema take the
-place of the original table.  The original table becomes the &#8220;old table,&#8221; and
-the tool drops it unless you disable <em class="xref std std-option">--[no]drop-old-table</em>.</p>
-<p>Using <tt class="docutils literal"><span class="pre">--no-swap-tables</span></tt> will run the whole process, it will create the new
+place of the original table.  The original table becomes the “old table,” and
+the tool drops it unless you disable <a class="reference internal" href="#cmdoption-mariadb-schema-change-no-drop-old-table"><code class="xref std std-option docutils literal notranslate"><span class="pre">--[no]drop-old-table</span></code></a>.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">--no-swap-tables</span></code> will run the whole process, it will create the new
 table, it will copy all rows but at the end it will drop the new table. It is
-intended to run a more realistic &#8211;dry-run.</p>
+intended to run a more realistic –dry-run.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--tries">
-<tt class="descname">--tries</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--tries" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-tries">
+<code class="sig-name descname">--tries</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-tries" title="Permalink to this definition">¶</a></dt>
 <dd><p>type: array</p>
 <p>How many times to try critical operations.  If certain operations fail due
 to non-fatal, recoverable errors, the tool waits and tries the operation
 again.  These are the operations that are retried, with their default number
 of tries and wait time between tries (in seconds):</p>
-<div class="highlight-bash"><div class="highlight"><pre>OPERATION            TRIES   <span class="nv">WAIT</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>OPERATION            TRIES   <span class="nv">WAIT</span>
 <span class="o">===================</span>  <span class="o">=====</span>   <span class="o">====</span>
-create_triggers         10      1
-drop_triggers           10      1
-copy_rows               10   0.25
-swap_tables             10      1
-update_foreign_keys     10      1
-analyze_table           10      1
+create_triggers         <span class="m">10</span>      <span class="m">1</span>
+drop_triggers           <span class="m">10</span>      <span class="m">1</span>
+copy_rows               <span class="m">10</span>   <span class="m">0</span>.25
+swap_tables             <span class="m">10</span>      <span class="m">1</span>
+update_foreign_keys     <span class="m">10</span>      <span class="m">1</span>
+analyze_table           <span class="m">10</span>      <span class="m">1</span>
 </pre></div>
 </div>
 <p>To change the defaults, specify the new values like:</p>
-<div class="highlight-bash"><div class="highlight"><pre>--tries create_triggers:5:0.5,drop_triggers:5:0.5
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--tries create_triggers:5:0.5,drop_triggers:5:0.5
 </pre></div>
 </div>
-<p>That makes the tool try <tt class="docutils literal"><span class="pre">create_triggers</span></tt> and <tt class="docutils literal"><span class="pre">drop_triggers</span></tt> 5 times
+<p>That makes the tool try <code class="docutils literal notranslate"><span class="pre">create_triggers</span></code> and <code class="docutils literal notranslate"><span class="pre">drop_triggers</span></code> 5 times
 with a 0.5 second wait between tries.  So the format is:</p>
-<div class="highlight-bash"><div class="highlight"><pre>operation:tries:wait<span class="o">[</span>,operation:tries:wait<span class="o">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>operation:tries:wait<span class="o">[</span>,operation:tries:wait<span class="o">]</span>
 </pre></div>
 </div>
 <p>All three values must be specified.</p>
 <p>Note that most operations are affected only in MariaDB 5.5 and newer by
-<tt class="docutils literal"><span class="pre">lock_wait_timeout</span></tt> (see <a class="reference internal" href="#cmdoption-mariadb-schema-change--set-vars"><em class="xref std std-option">--set-vars</em></a>) because of metadata locks.
-The <tt class="docutils literal"><span class="pre">copy_rows</span></tt> operation is affected in any version of MariaDB by
-<tt class="docutils literal"><span class="pre">innodb_lock_wait_timeout</span></tt>.</p>
+<code class="docutils literal notranslate"><span class="pre">lock_wait_timeout</span></code> (see <a class="reference internal" href="#cmdoption-mariadb-schema-change-set-vars"><code class="xref std std-option docutils literal notranslate"><span class="pre">--set-vars</span></code></a>) because of metadata locks.
+The <code class="docutils literal notranslate"><span class="pre">copy_rows</span></code> operation is affected in any version of MariaDB by
+<code class="docutils literal notranslate"><span class="pre">innodb_lock_wait_timeout</span></code>.</p>
 <p>For creating and dropping triggers, the number of tries applies to each
-<tt class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TRIGGER</span></tt> and <tt class="docutils literal"><span class="pre">DROP</span> <span class="pre">TRIGGER</span></tt> statement for each trigger.
+<code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TRIGGER</span></code> and <code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">TRIGGER</span></code> statement for each trigger.
 For copying rows, the number of tries applies to each chunk, not the
 entire table.  For swapping tables, the number of tries usually applies
-once because there is usually only one <tt class="docutils literal"><span class="pre">RENAME</span> <span class="pre">TABLE</span></tt> statement.
+once because there is usually only one <code class="docutils literal notranslate"><span class="pre">RENAME</span> <span class="pre">TABLE</span></code> statement.
 For rebuilding foreign key constraints, the number of tries applies to
-each statement (<tt class="docutils literal"><span class="pre">ALTER</span></tt> statements for the <tt class="docutils literal"><span class="pre">rebuild_constraints</span></tt>
-<a class="reference internal" href="#cmdoption-mariadb-schema-change--alter-foreign-keys-method"><em class="xref std std-option">--alter-foreign-keys-method</em></a>; other statements for the <tt class="docutils literal"><span class="pre">drop_swap</span></tt>
+each statement (<code class="docutils literal notranslate"><span class="pre">ALTER</span></code> statements for the <code class="docutils literal notranslate"><span class="pre">rebuild_constraints</span></code>
+<a class="reference internal" href="#cmdoption-mariadb-schema-change-alter-foreign-keys-method"><code class="xref std std-option docutils literal notranslate"><span class="pre">--alter-foreign-keys-method</span></code></a>; other statements for the <code class="docutils literal notranslate"><span class="pre">drop_swap</span></code>
 method).</p>
 <p>The tool retries each operation if these errors occur:</p>
-<div class="highlight-bash"><div class="highlight"><pre>Lock <span class="nb">wait </span>timeout <span class="o">(</span>innodb_lock_wait_timeout and lock_wait_timeout<span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Lock <span class="nb">wait</span> timeout <span class="o">(</span>innodb_lock_wait_timeout and lock_wait_timeout<span class="o">)</span>
 Deadlock found
 Query is killed <span class="o">(</span>KILL QUERY &lt;thread_id&gt;<span class="o">)</span>
 Connection is killed <span class="o">(</span>KILL CONNECTION &lt;thread_id&gt;<span class="o">)</span>
@@ -1235,32 +1239,32 @@ Lost connection to MariaDB
 </div>
 <p>In the case of lost and killed connections, the tool will automatically
 reconnect.</p>
-<p>Failures and retries are recorded in the <a class="reference internal" href="#cmdoption-mariadb-schema-change--statistics"><em class="xref std std-option">--statistics</em></a>.</p>
+<p>Failures and retries are recorded in the <a class="reference internal" href="#cmdoption-mariadb-schema-change-statistics"><code class="xref std std-option docutils literal notranslate"><span class="pre">--statistics</span></code></a>.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--user">
-<tt class="descname">--user</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--user" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-user">
+<code class="sig-name descname">--user</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>short form: -u; type: string</p>
 <p>User for login if not current user.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cmdoption-mariadb-schema-change--version">
-<tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-mariadb-schema-change--version" title="Permalink to this definition">¶</a></dt>
+<dl class="std option">
+<dt id="cmdoption-mariadb-schema-change-version">
+<code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-mariadb-schema-change-version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show version and exit.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="plugin">
 <h2>PLUGIN<a class="headerlink" href="#plugin" title="Permalink to this headline">¶</a></h2>
-<p>The file specified by <a class="reference internal" href="#cmdoption-mariadb-schema-change--plugin"><em class="xref std std-option">--plugin</em></a> must define a class (i.e. a package)
-called <tt class="docutils literal"><span class="pre">pt_online_schema_change_plugin</span></tt> with a <tt class="docutils literal"><span class="pre">new()</span></tt> subroutine.
+<p>The file specified by <a class="reference internal" href="#cmdoption-mariadb-schema-change-plugin"><code class="xref std std-option docutils literal notranslate"><span class="pre">--plugin</span></code></a> must define a class (i.e. a package)
+called <code class="docutils literal notranslate"><span class="pre">pt_online_schema_change_plugin</span></code> with a <code class="docutils literal notranslate"><span class="pre">new()</span></code> subroutine.
 The tool will create an instance of this class and call any hooks that
-it defines.  No hooks are required, but a plugin isn&#8217;t very useful without
+it defines.  No hooks are required, but a plugin isn’t very useful without
 them.</p>
 <p>These hooks, in this order, are called if defined:</p>
-<div class="highlight-bash"><div class="highlight"><pre>init
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>init
 before_create_new_table
 after_create_new_table
 before_alter_new_table
@@ -1281,8 +1285,8 @@ get_slave_lag
 </pre></div>
 </div>
 <p>Each hook is passed different arguments.  To see which arguments are passed
-to a hook, search for the hook&#8217;s name in the tool&#8217;s source code, like:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># --plugin hook</span>
+to a hook, search for the hook’s name in the tool’s source code, like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># --plugin hook</span>
 <span class="k">if</span> <span class="o">(</span> <span class="nv">$plugin</span> <span class="o">&amp;&amp;</span> <span class="nv">$plugin</span>-&gt;can<span class="o">(</span><span class="s1">&#39;init&#39;</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
    <span class="nv">$plugin</span>-&gt;init<span class="o">(</span>
       <span class="nv">orig_tbl</span>       <span class="o">=</span>&gt; <span class="nv">$orig_tbl</span>,
@@ -1290,218 +1294,218 @@ to a hook, search for the hook&#8217;s name in the tool&#8217;s source code, lik
       <span class="nv">renamed_cols</span>   <span class="o">=</span>&gt; <span class="nv">$renamed_cols</span>,
       <span class="nv">slaves</span>         <span class="o">=</span>&gt; <span class="nv">$slaves</span>,
       <span class="nv">slave_lag_cxns</span> <span class="o">=</span>&gt; <span class="nv">$slave_lag_cxns</span>,
-   <span class="o">)</span>;
+   <span class="o">)</span><span class="p">;</span>
 <span class="o">}</span>
 </pre></div>
 </div>
-<p>The comment <tt class="docutils literal"><span class="pre">#</span> <span class="pre">--plugin</span> <span class="pre">hook</span></tt> precedes every hook call.</p>
-<p>Here&#8217;s a plugin file template for all hooks:</p>
-<div class="highlight-bash"><div class="highlight"><pre> package pt_online_schema_change_plugin;
+<p>The comment <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">--plugin</span> <span class="pre">hook</span></code> precedes every hook call.</p>
+<p>Here’s a plugin file template for all hooks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> package pt_online_schema_change_plugin<span class="p">;</span>
 
- use strict;
+ use strict<span class="p">;</span>
 
  sub new <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$class</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    my <span class="nv">$self</span> <span class="o">=</span> <span class="o">{</span> %args <span class="o">}</span>;
-    <span class="k">return </span>bless <span class="nv">$self</span>, <span class="nv">$class</span>;
+    my <span class="o">(</span><span class="nv">$class</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    my <span class="nv">$self</span> <span class="o">=</span> <span class="o">{</span> %args <span class="o">}</span><span class="p">;</span>
+    <span class="k">return</span> bless <span class="nv">$self</span>, <span class="nv">$class</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub init <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN init\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN init\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_create_new_table <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_create_new_table\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_create_new_table\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub after_create_new_table <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN after_create_new_table\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN after_create_new_table\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_alter_new_table <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_alter_new_table\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_alter_new_table\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub after_alter_new_table <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN after_alter_new_table\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN after_alter_new_table\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_create_triggers <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_create_triggers\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_create_triggers\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
 sub after_create_triggers <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN after_create_triggers\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN after_create_triggers\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_copy_rows <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_copy_rows\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_copy_rows\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub after_copy_rows <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN after_copy_rows\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN after_copy_rows\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_swap_tables <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_swap_tables\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_swap_tables\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub after_swap_tables <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN after_swap_tables\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN after_swap_tables\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_update_foreign_keys <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_update_foreign_keys\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_update_foreign_keys\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub after_update_foreign_keys <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN after_update_foreign_keys\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN after_update_foreign_keys\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_drop_old_table <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_drop_old_table\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_drop_old_table\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub after_drop_old_table <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN after_drop_old_table\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN after_drop_old_table\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_drop_triggers <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_drop_triggers\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_drop_triggers\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub before_exit <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN before_exit\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN before_exit\n&quot;</span><span class="p">;</span>
  <span class="o">}</span>
 
  sub get_slave_lag <span class="o">{</span>
-    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-    print <span class="s2">&quot;PLUGIN get_slave_lag\n&quot;</span>;
+    my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+    print <span class="s2">&quot;PLUGIN get_slave_lag\n&quot;</span><span class="p">;</span>
 
-    <span class="k">return </span>sub <span class="o">{</span> <span class="k">return </span>0; <span class="o">}</span>;
+    <span class="k">return</span> sub <span class="o">{</span> <span class="k">return</span> <span class="m">0</span><span class="p">;</span> <span class="o">}</span><span class="p">;</span>
  <span class="o">}</span>
 
- 1;
+ <span class="m">1</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Notice that <tt class="docutils literal"><span class="pre">get_slave_lag</span></tt> must return a function reference;
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">get_slave_lag</span></code> must return a function reference;
 ideally one that returns actual slave lag, not simply zero like in the example.</p>
-<p>Here&#8217;s an example that actually does something:</p>
-<div class="highlight-bash"><div class="highlight"><pre>package pt_online_schema_change_plugin;
+<p>Here’s an example that actually does something:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>package pt_online_schema_change_plugin<span class="p">;</span>
 
-use strict;
+use strict<span class="p">;</span>
 
 sub new <span class="o">{</span>
-   my <span class="o">(</span><span class="nv">$class</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-   my <span class="nv">$self</span> <span class="o">=</span> <span class="o">{</span> %args <span class="o">}</span>;
-   <span class="k">return </span>bless <span class="nv">$self</span>, <span class="nv">$class</span>;
+   my <span class="o">(</span><span class="nv">$class</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+   my <span class="nv">$self</span> <span class="o">=</span> <span class="o">{</span> %args <span class="o">}</span><span class="p">;</span>
+   <span class="k">return</span> bless <span class="nv">$self</span>, <span class="nv">$class</span><span class="p">;</span>
 <span class="o">}</span>
 
 sub after_create_new_table <span class="o">{</span>
-   my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-   my <span class="nv">$new_tbl</span> <span class="o">=</span> <span class="nv">$args</span><span class="o">{</span>new_tbl<span class="o">}</span>;
-   my <span class="nv">$dbh</span>     <span class="o">=</span> <span class="nv">$self</span>-&gt;<span class="o">{</span>cxn<span class="o">}</span>-&gt;dbh;
-   my <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$dbh</span>-&gt;selectrow_arrayref<span class="o">(</span><span class="s2">&quot;SHOW CREATE TABLE $new_tbl-&gt;{name}&quot;</span><span class="o">)</span>;
-   warn <span class="s2">&quot;after_create_new_table: $row-&gt;[1]\n\n&quot;</span>;
+   my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+   my <span class="nv">$new_tbl</span> <span class="o">=</span> <span class="nv">$args</span><span class="o">{</span>new_tbl<span class="o">}</span><span class="p">;</span>
+   my <span class="nv">$dbh</span>     <span class="o">=</span> <span class="nv">$self</span>-&gt;<span class="o">{</span>cxn<span class="o">}</span>-&gt;dbh<span class="p">;</span>
+   my <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$dbh</span>-&gt;selectrow_arrayref<span class="o">(</span><span class="s2">&quot;SHOW CREATE TABLE </span><span class="nv">$new_tbl</span><span class="s2">-&gt;{name}&quot;</span><span class="o">)</span><span class="p">;</span>
+   warn <span class="s2">&quot;after_create_new_table: </span><span class="nv">$row</span><span class="s2">-&gt;[1]\n\n&quot;</span><span class="p">;</span>
 <span class="o">}</span>
 
 sub after_alter_new_table <span class="o">{</span>
-   my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_;
-   my <span class="nv">$new_tbl</span> <span class="o">=</span> <span class="nv">$args</span><span class="o">{</span>new_tbl<span class="o">}</span>;
-   my <span class="nv">$dbh</span>     <span class="o">=</span> <span class="nv">$self</span>-&gt;<span class="o">{</span>cxn<span class="o">}</span>-&gt;dbh;
-   my <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$dbh</span>-&gt;selectrow_arrayref<span class="o">(</span><span class="s2">&quot;SHOW CREATE TABLE $new_tbl-&gt;{name}&quot;</span><span class="o">)</span>;
-   warn <span class="s2">&quot;after_alter_new_table: $row-&gt;[1]\n\n&quot;</span>;
+   my <span class="o">(</span><span class="nv">$self</span>, %args<span class="o">)</span> <span class="o">=</span> @_<span class="p">;</span>
+   my <span class="nv">$new_tbl</span> <span class="o">=</span> <span class="nv">$args</span><span class="o">{</span>new_tbl<span class="o">}</span><span class="p">;</span>
+   my <span class="nv">$dbh</span>     <span class="o">=</span> <span class="nv">$self</span>-&gt;<span class="o">{</span>cxn<span class="o">}</span>-&gt;dbh<span class="p">;</span>
+   my <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$dbh</span>-&gt;selectrow_arrayref<span class="o">(</span><span class="s2">&quot;SHOW CREATE TABLE </span><span class="nv">$new_tbl</span><span class="s2">-&gt;{name}&quot;</span><span class="o">)</span><span class="p">;</span>
+   warn <span class="s2">&quot;after_alter_new_table: </span><span class="nv">$row</span><span class="s2">-&gt;[1]\n\n&quot;</span><span class="p">;</span>
 <span class="o">}</span>
 
-1;
+<span class="m">1</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>You could use this with <a class="reference internal" href="#cmdoption-mariadb-schema-change--dry-run"><em class="xref std std-option">--dry-run</em></a> to check how the table will look before and after.</p>
+<p>You could use this with <a class="reference internal" href="#cmdoption-mariadb-schema-change-dry-run"><code class="xref std std-option docutils literal notranslate"><span class="pre">--dry-run</span></code></a> to check how the table will look before and after.</p>
 <p>Please contact MariaDB if you have questions or need help.</p>
 </div>
 <div class="section" id="dsn-options">
 <h2>DSN OPTIONS<a class="headerlink" href="#dsn-options" title="Permalink to this headline">¶</a></h2>
 <p>These DSN options are used to create a DSN.  Each option is given like
-<tt class="docutils literal"><span class="pre">option=value</span></tt>.  The options are case-sensitive, so P and p are not the
-same option.  There cannot be whitespace before or after the <tt class="docutils literal"><span class="pre">=</span></tt> and
+<code class="docutils literal notranslate"><span class="pre">option=value</span></code>.  The options are case-sensitive, so P and p are not the
+same option.  There cannot be whitespace before or after the <code class="docutils literal notranslate"><span class="pre">=</span></code> and
 if the value contains whitespace it must be quoted.  DSN options are
 comma-separated.  See the mariadb-tools manpage for full details.</p>
 <ul class="simple">
-<li>A</li>
+<li><p>A</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: charset; copy: yes</p>
 <p>Default character set.</p>
 </div></blockquote>
 <ul class="simple">
-<li>D</li>
+<li><p>D</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: database; copy: no</p>
 <p>Database for the old and new table.</p>
 </div></blockquote>
 <ul class="simple">
-<li>F</li>
+<li><p>F</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: mysql_read_default_file; copy: yes</p>
 <p>Only read default options from the given file</p>
 </div></blockquote>
 <ul class="simple">
-<li>h</li>
+<li><p>h</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: host; copy: yes</p>
 <p>Connect to host.</p>
 </div></blockquote>
 <ul class="simple">
-<li>p</li>
+<li><p>p</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: password; copy: yes</p>
 <p>Password to use when connecting.
-If password contains commas they must be escaped with a backslash: &#8220;exam,ple&#8221;</p>
+If password contains commas they must be escaped with a backslash: “exam,ple”</p>
 </div></blockquote>
 <ul class="simple">
-<li>P</li>
+<li><p>P</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: port; copy: yes</p>
 <p>Port number to use for connection.</p>
 </div></blockquote>
 <ul class="simple">
-<li>S</li>
+<li><p>S</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: mysql_socket; copy: yes</p>
 <p>Socket file to use for connection.</p>
 </div></blockquote>
 <ul class="simple">
-<li>t</li>
+<li><p>t</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: table; copy: no</p>
 <p>Table to alter.</p>
 </div></blockquote>
 <ul class="simple">
-<li>u</li>
+<li><p>u</p></li>
 </ul>
 <blockquote>
 <div><p>dsn: user; copy: yes</p>
@@ -1510,9 +1514,9 @@ If password contains commas they must be escaped with a backslash: &#8220;exam,p
 </div>
 <div class="section" id="environment">
 <h2>ENVIRONMENT<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
-<p>The environment variable <tt class="docutils literal"><span class="pre">PTDEBUG</span></tt> enables verbose debugging output to STDERR.
+<p>The environment variable <code class="docutils literal notranslate"><span class="pre">PTDEBUG</span></code> enables verbose debugging output to STDERR.
 To enable debugging and capture all output to a file, run the tool like:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">PTDEBUG</span><span class="o">=</span>1 mariadb-schema-change ... &gt; FILE 2&gt;&amp;1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">PTDEBUG</span><span class="o">=</span><span class="m">1</span> mariadb-schema-change ... &gt; FILE <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 </pre></div>
 </div>
 <p>Be careful: debugging output is voluminous and can generate several megabytes
@@ -1520,25 +1524,25 @@ of output.</p>
 </div>
 <div class="section" id="exit-status">
 <h2>EXIT STATUS<a class="headerlink" href="#exit-status" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">INVALID_PARAMETERS</span>        <span class="o">=</span> 1
-<span class="nv">UNSUPORTED_MYSQL_VERSION</span>  <span class="o">=</span> 2
-<span class="nv">NO_MINIMUM_REQUIREMENTS</span>   <span class="o">=</span> 3
-<span class="nv">NO_PRIMARY_OR_UNIQUE_KEY</span>  <span class="o">=</span> 4
-<span class="nv">INVALID_PLUGIN_FILE</span>       <span class="o">=</span> 5
-<span class="nv">INVALID_ALTER_FK_METHOD</span>   <span class="o">=</span> 6
-<span class="nv">INVALID_KEY_SIZE</span>          <span class="o">=</span> 7
-<span class="nv">CANNOT_DETERMINE_KEY_SIZE</span> <span class="o">=</span> 9
-<span class="nv">NOT_SAFE_TO_ASCEND</span>        <span class="o">=</span> 9
-<span class="nv">ERROR_CREATING_NEW_TABLE</span>  <span class="o">=</span> 10
-<span class="nv">ERROR_ALTERING_TABLE</span>      <span class="o">=</span> 11
-<span class="nv">ERROR_CREATING_TRIGGERS</span>   <span class="o">=</span> 12
-<span class="nv">ERROR_RESTORING_TRIGGERS</span>  <span class="o">=</span> 13
-<span class="nv">ERROR_SWAPPING_TABLES</span>     <span class="o">=</span> 14
-<span class="nv">ERROR_UPDATING_FKS</span>        <span class="o">=</span> 15
-<span class="nv">ERROR_DROPPING_OLD_TABLE</span>  <span class="o">=</span> 16
-<span class="nv">UNSUPORTED_OPERATION</span>      <span class="o">=</span> 17
-<span class="nv">MYSQL_CONNECTION_ERROR</span>    <span class="o">=</span> 18
-<span class="nv">LOST_MYSQL_CONNECTION</span>     <span class="o">=</span> 19
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">INVALID_PARAMETERS</span>        <span class="o">=</span> <span class="m">1</span>
+<span class="nv">UNSUPORTED_MYSQL_VERSION</span>  <span class="o">=</span> <span class="m">2</span>
+<span class="nv">NO_MINIMUM_REQUIREMENTS</span>   <span class="o">=</span> <span class="m">3</span>
+<span class="nv">NO_PRIMARY_OR_UNIQUE_KEY</span>  <span class="o">=</span> <span class="m">4</span>
+<span class="nv">INVALID_PLUGIN_FILE</span>       <span class="o">=</span> <span class="m">5</span>
+<span class="nv">INVALID_ALTER_FK_METHOD</span>   <span class="o">=</span> <span class="m">6</span>
+<span class="nv">INVALID_KEY_SIZE</span>          <span class="o">=</span> <span class="m">7</span>
+<span class="nv">CANNOT_DETERMINE_KEY_SIZE</span> <span class="o">=</span> <span class="m">9</span>
+<span class="nv">NOT_SAFE_TO_ASCEND</span>        <span class="o">=</span> <span class="m">9</span>
+<span class="nv">ERROR_CREATING_NEW_TABLE</span>  <span class="o">=</span> <span class="m">10</span>
+<span class="nv">ERROR_ALTERING_TABLE</span>      <span class="o">=</span> <span class="m">11</span>
+<span class="nv">ERROR_CREATING_TRIGGERS</span>   <span class="o">=</span> <span class="m">12</span>
+<span class="nv">ERROR_RESTORING_TRIGGERS</span>  <span class="o">=</span> <span class="m">13</span>
+<span class="nv">ERROR_SWAPPING_TABLES</span>     <span class="o">=</span> <span class="m">14</span>
+<span class="nv">ERROR_UPDATING_FKS</span>        <span class="o">=</span> <span class="m">15</span>
+<span class="nv">ERROR_DROPPING_OLD_TABLE</span>  <span class="o">=</span> <span class="m">16</span>
+<span class="nv">UNSUPORTED_OPERATION</span>      <span class="o">=</span> <span class="m">17</span>
+<span class="nv">MYSQL_CONNECTION_ERROR</span>    <span class="o">=</span> <span class="m">18</span>
+<span class="nv">LOST_MYSQL_CONNECTION</span>     <span class="o">=</span> <span class="m">19</span>
 </pre></div>
 </div>
 </div>
@@ -1559,17 +1563,17 @@ REPLICATION SLAVE and REPLICATION CLIENT privileges.</p>
 </div>
 <div class="section" id="acknowledgments">
 <h2>ACKNOWLEDGMENTS<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
-<p>The &#8220;online schema change&#8221; concept was first implemented by Shlomi Noach
-in his tool <tt class="docutils literal"><span class="pre">oak-online-alter-table</span></tt>, part of
+<p>The “online schema change” concept was first implemented by Shlomi Noach
+in his tool <code class="docutils literal notranslate"><span class="pre">oak-online-alter-table</span></code>, part of
 <a class="reference external" href="http://code.google.com/p/openarkkit/">http://code.google.com/p/openarkkit/</a>.  Engineers at Facebook then built
-another version called <tt class="docutils literal"><span class="pre">OnlineSchemaChange.php</span></tt> as explained by their blog
+another version called <code class="docutils literal notranslate"><span class="pre">OnlineSchemaChange.php</span></code> as explained by their blog
 post: <a class="reference external" href="http://tinyurl.com/32zeb86">http://tinyurl.com/32zeb86</a>. This tool is a hybrid of both approaches,
 with additional features and functionality not present in either.</p>
 </div>
 <div class="section" id="about-this-mariadb-tool">
 <h2>ABOUT THIS MARIADB TOOL<a class="headerlink" href="#about-this-mariadb-tool" title="Permalink to this headline">¶</a></h2>
 <p>This tool is part of MariaDB client tools. This MariaDB Tool was forked from
-Percona Toolkit&#8217;s pt-online-schema-change in August, 2019. Percona Toolkit was
+Percona Toolkit’s pt-online-schema-change in August, 2019. Percona Toolkit was
 forked from two projects in June, 2011: Maatkit and Aspersa.  Those projects
 were created by Baron Schwartz and primarily developed by him and Daniel Nichter.</p>
 </div>
@@ -1577,13 +1581,13 @@ were created by Baron Schwartz and primarily developed by him and Daniel Nichter
 <h2>COPYRIGHT, LICENSE, AND WARRANTY<a class="headerlink" href="#copyright-license-and-warranty" title="Permalink to this headline">¶</a></h2>
 <p>This program is copyright 2019-2022 MariaDB Corporation and/or its affiliates,
 2011-2018 Percona LLC and/or its affiliates, 2010-2011 Baron Schwartz.</p>
-<p>THIS PROGRAM IS PROVIDED &#8220;AS IS&#8221; AND WITHOUT ANY EXPRESS OR IMPLIED
+<p>THIS PROGRAM IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
 <p>This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
-systems, you can issue `man perlgpl&#8217; or `man perlartistic&#8217; to read these
+systems, you can issue `man perlgpl’ or `man perlartistic’ to read these
 licenses.</p>
 <p>You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
@@ -1591,7 +1595,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </div>
 <div class="section" id="version">
 <h2>VERSION<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
-<p><strong class="program">mariadb-schema-change</strong> 6.0.2</p>
+<p><strong class="program">mariadb-schema-change</strong> 6.0.2.1</p>
 </div>
 </div>
 
@@ -1668,7 +1672,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
@@ -1690,5 +1694,4 @@ Place, Suite 330, Boston, MA  02111-1307  USA.</p>
 </footer>
 </body>
 </html>
-
 

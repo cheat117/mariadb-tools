@@ -23,24 +23,20 @@
     </style>
     <title>CONFIGURATION FILES &mdash; MariaDB Tools Documentation</title>
 
-    <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '6.0.1rc',
+        VERSION:     '6.0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -168,7 +164,7 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <section id="configuration-files">
+  <div class="section" id="configuration-files">
 <h1>CONFIGURATION FILES<a class="headerlink" href="#configuration-files" title="Permalink to this headline">¶</a></h1>
 <p>MariaDB Tools can read options from configuration files.  The
 configuration file syntax is simple and direct, and bears some resemblances
@@ -177,7 +173,7 @@ the same conventions.</p>
 <p>Internally, what actually happens is that the lines are read from the file and
 then added as command-line options and arguments to the tool, so just
 think of the configuration files as a way to write your command lines.</p>
-<section id="syntax">
+<div class="section" id="syntax">
 <h2>SYNTAX<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <p>The syntax of the configuration files is as follows:</p>
 <p>*</p>
@@ -214,8 +210,8 @@ deleted during processing.</p>
 further lines are interpreted as additional arguments (not options) to the
 program.</p>
 </div></blockquote>
-</section>
-<section id="example">
+</div>
+<div class="section" id="example">
 <h2>EXAMPLE<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This config file for mariadb-stat,</p>
 <div class="highlight-perl notranslate"><div class="highlight"><pre><span></span><span class="c1"># Config for mariadb-stat</span>
@@ -230,8 +226,8 @@ program.</p>
 </pre></div>
 </div>
 <p>Options after <code class="docutils literal notranslate"><span class="pre">--</span></code> are passed literally to mariadb and mariadb-admin.</p>
-</section>
-<section id="read-order">
+</div>
+<div class="section" id="read-order">
 <h2>READ ORDER<a class="headerlink" href="#read-order" title="Permalink to this headline">¶</a></h2>
 <p>The tools read several configuration files in order:</p>
 <ol class="arabic simple">
@@ -250,8 +246,8 @@ where <code class="docutils literal notranslate"><span class="pre">TOOL</span></
 after the specific tool you’re using, so you can add options that apply
 only to that tool.</p></li>
 </ol>
-</section>
-<section id="specifying">
+</div>
+<div class="section" id="specifying">
 <h2>SPECIFYING<a class="headerlink" href="#specifying" title="Permalink to this headline">¶</a></h2>
 <p>There is a special <code class="docutils literal notranslate"><span class="pre">--config</span></code> option, which lets you specify which
 configuration files MariaDB Tools should read.  You specify a
@@ -266,8 +262,8 @@ you must specify the option and the path to the file separated by whitespace
 </div>
 <p>If you don’t want any configuration files at all, specify <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">''</span></code> to
 provide an empty list of files.</p>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -326,7 +322,7 @@ provide an empty list of files.</p>
     </div>
     <!-- div class="footer">
         &copy; Copyright 2021, MariaDB Corporation and/or its affiliates.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.2.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.4.3.
     </div -->
   </div>
 
