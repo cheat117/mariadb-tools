@@ -8,7 +8,7 @@
 
 # begin 
 
-VERSION="6.0.3" # based off of 3.3.5
+VERSION="6.0.2.2" # based off of 3.3.5
 CONFIGDIR=/etc/mariadb
 CONFIGNAME=backup_manager.cnf
 CONFIGFILE=$CONFIGDIR/$CONFIGNAME
@@ -2568,7 +2568,7 @@ Place, Suite 330, Boston, MA  02111-1307  USA.
 
 =head1 VERSION
 
-mariadb-backup-manager 6.0.2.1
+mariadb-backup-manager 6.0.2.2
 
 
 =cut

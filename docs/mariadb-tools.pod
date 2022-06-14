@@ -474,6 +474,6 @@ Place, Suite 330, Boston, MA  02111-1307  USA.
 
 =head1 VERSION
 
-MariaDB Tools v6.0.2.1 released 2022-04-11
+MariaDB Tools v6.0.2.2 released 2022-05-13
 
 =cut
