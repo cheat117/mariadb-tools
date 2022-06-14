@@ -13,7 +13,7 @@ Before creating bug reports, please check this list as you might find out that y
 - Describe the exact steps which reproduce the problem, including as many details as possible. Provide examples of the command you used and include context information like language, OS and database versions.
 Describe the obtained results and the expected results and, if it is possible, provide examples.
 
-## Submiting fixes
+## Submitting fixes
 ### Create an Issue
 If you find a bug, the first step is to create an issue. Whatever the problem is, you’re likely not the only one experiencing it. Others will find your issue helpful, and other developers might help you find the cause and discuss the best solution for it.
 
@@ -41,7 +41,7 @@ If you fixed a bug or added a new feature – awesome! Open a pull request with 
 Once you’ve opened a pull request, a discussion will start around your proposed changes. Other contributors and users may chime in, but ultimately the decision is made by the maintainers. You may be asked to make some changes to your pull request, if so, add more commits to your branch and push them – they’ll automatically go into the existing pull request.
 
 # Licensing
-Along with the pull request, include a message indicating that the submited code is your own creation and it can be distributed under the BSD licence. 
+Along with the pull request, include a message indicating that the submitted code is your own creation and it can be distributed under the BSD licence. 
   
   
 # Setting up the development environment
