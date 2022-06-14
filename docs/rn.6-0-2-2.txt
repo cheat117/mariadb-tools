@@ -1,0 +1,6 @@
+v6.0.2.2 released 2022-05-13
+==========================
+
+6.0.2 introduced new tools, improvements to backup-manager and more!
+6.0.2.1 resolved a compilation error in summary
+6.0.2.2 resolves a compilation error in schema-change, summary

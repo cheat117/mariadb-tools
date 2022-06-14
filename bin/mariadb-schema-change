@@ -4376,10 +4376,11 @@ sub _find_slaves_by_hosts {
    my ( $self, $dsn_parser, $dbh, $dsn ) = @_;
 
    my @slaves;
-   if ( $o->get('sky') ) {
-      my $sql = 'SHOW SLAVE HOSTS -- maxscale route to master'; # Perl is using binary mode, so no semicolon needed - CB - 2022
+   my $sql;
+   if ( $self->o->get('sky') ) {
+      $sql = 'SHOW SLAVE HOSTS -- maxscale route to master'; # Perl is using binary mode, so no semicolon needed - CB - 2022
    }else{
-      my $sql = 'SHOW SLAVE HOSTS';
+      $sql = 'SHOW SLAVE HOSTS';
    }
    PTDEBUG && _d($dbh, $sql);
    @slaves = @{$dbh->selectall_arrayref($sql, { Slice => {} })};
@@ -12783,6 +12784,6 @@ Place, Suite 330, Boston, MA  02111-1307  USA.
 
 =head1 VERSION
 
-mariadb-schema-change 6.0.2.1
+mariadb-schema-change 6.0.2.2
 
 =cut
