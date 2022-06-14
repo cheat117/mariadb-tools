@@ -40,3 +40,8 @@ inc/
 
 # Mac
 .DS_Store
+
+# Development
+.idea
+release/
+tmp/
