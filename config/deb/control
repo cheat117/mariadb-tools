@@ -13,7 +13,8 @@ Package: mariadb-tools
 Architecture: amd64
 Depends: ${perl:Depends}, libdbi-perl (>= 1.13), libdbd-mysql | libdbd-mysql-perl | libdbd-mysql-5.1-perl, 
     libterm-readkey-perl (>=2.10), libio-socket-ssl-perl, libdatetime-perl, libdatetime-format-strptime-perl,
-    mariadb-client, curl, sqlite3, openssl, pigz
+    curl, sqlite3, openssl, pigz
+Recommends: mariadb-client
 Description: Advanced MariaDB and system command-line tools
  MariaDB Tools is a collection of advanced command-line tools used by
  MariaDB Corporation (https://www.mariadb.com/) support staff to perform a variety of
