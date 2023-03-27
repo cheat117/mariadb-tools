@@ -4377,11 +4377,11 @@ sub _find_slaves_by_hosts {
 
    my @slaves;
    my $sql;
-   if ( $self->o->get('sky') ) {
-      $sql = 'SHOW SLAVE HOSTS -- maxscale route to master'; # Perl is using binary mode, so no semicolon needed - CB - 2022
-   }else{
-      $sql = 'SHOW SLAVE HOSTS';
-   }
+#    if ( $self->o->get('sky') ) {
+#       $sql = 'SHOW SLAVE HOSTS -- maxscale route to master'; # Perl is using binary mode, so no semicolon needed - CB - 2022
+#    }else{
+   $sql = 'SHOW SLAVE HOSTS';
+#    }
    PTDEBUG && _d($dbh, $sql);
    @slaves = @{$dbh->selectall_arrayref($sql, { Slice => {} })};
 
